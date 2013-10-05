@@ -6,6 +6,7 @@
 #include <stack>
 #include <iostream>
 #include <vector>
+#include <math.h>   
 
 using namespace std;
 
@@ -116,7 +117,11 @@ class scanner_t {
 	// error message and exit for mismatch
 	void mismatch_error(token_type c);
         
+        void tokenizeString();
+        void scanNumber(string num);
+        
         vector<string> strTokens;
+        vector<token_type>tokens;
         int tokenPosition=0;
         int lineNumber=1;
 
@@ -145,6 +150,8 @@ void scanner_t::eat_token(token_type c)
 	// if we are supposed to eat token c, and it does not match
 	// what we are supposed to be reading from file, then it is a
 	// mismatch error ( call - mismatch_error(c) )
+    
+    
 
 	// WRITEME: cut this bogus stuff out and implement eat_token
 	if ( rand()%10 < 8 ) bogo_token = T_plus;
@@ -169,12 +176,7 @@ scanner_t::scanner_t()
             strTokens.push_back(token);
             token.clear();
         }
-        
-//        else if( c==','){
-//            token+=c;
-//            strTokens.push_back(token);
-//            token.clear();
-//        }
+
         else if(c=='('){
             token+=c;
             strTokens.push_back(token);
@@ -191,6 +193,47 @@ scanner_t::scanner_t()
     }
     for(int i=0;i<strTokens.size();i++)
         printf("strTokens: %s \n", strTokens.at(i).c_str());
+    
+    tokenizeString();
+    
+}
+void scanner_t::tokenizeString(){
+    for(int i=0;i<strTokens.size();i++){
+           if(strTokens.at(i) ==  "+" ) tokens.push_back(T_plus);
+           else if(strTokens.at(i) ==  "-" ) tokens.push_back(T_minus);
+           else if(strTokens.at(i) ==  "*" ) tokens.push_back(T_times);
+           else if(strTokens.at(i) ==  "/" ) tokens.push_back(T_div);
+           else if(strTokens.at(i) ==  "," ) tokens.push_back(T_comma);
+           else if(strTokens.at(i) ==  "(" ) tokens.push_back(T_openparen);
+           else if(strTokens.at(i) ==  ")" ) tokens.push_back(T_closeparen);
+           //its a number or error
+           else scanNumber(strTokens.at(i));       
+       
+    }
+}
+void scanner_t::scanNumber(string num){
+    int numDecimals = 0;
+    
+    if(num[0] != '0' && num[0] != '1' && num[0] != '2' && num[0] != '3' &&
+       num[0] != '4' && num[0] != '5' && num[0] != '6' && num[0] != '7' &&
+       num[0] != '8' && num[0] != '9'){
+        scan_error(num[0]);
+    }
+   
+    for(int i=1;i<num.length();i++){
+       if(num[i] != '0' && num[i] != '1' && num[i] != '2' && num[i] != '3' &&
+          num[i] != '4' && num[i] != '5' && num[i] != '6' && num[i] != '7' &&
+          num[i] != '8' && num[i] != '9' && num[i] != '.')
+           scan_error(num[i]);
+       if(num[i] == '.')
+           numDecimals++;
+       if(numDecimals > 1)
+           scan_error(num[i]);
+    }
+    //check decimal is 0-2^31-1
+   float f = atof(num.c_str());
+   if(f < 0 || f > (pow(2,31) -1) )
+        scan_error(num[0]);
 }
 
 int scanner_t::get_line()
