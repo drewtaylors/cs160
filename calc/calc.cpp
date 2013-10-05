@@ -4,6 +4,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <stack>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -19,7 +21,7 @@ typedef enum {
 	T_plus,			// 2: +
 	T_minus,		// 3: -
 	T_times,		// 4: *
-    T_div,      	// 5: /
+        T_div,      	// 5: /
 	T_comma,	    // 6: ,
 	T_openparen,	// 7: (
 	T_closeparen 	// 8: )
@@ -113,6 +115,10 @@ class scanner_t {
 	void scan_error(char x);
 	// error message and exit for mismatch
 	void mismatch_error(token_type c);
+        
+        vector<string> strTokens;
+        int tokenPosition=0;
+        int lineNumber=1;
 
 };
 
@@ -122,6 +128,14 @@ token_type scanner_t::next_token()
 	// at the next token and return it to the parser.  It should _not_
 	// actually consume a token - you should be able to call next_token()
 	// multiple times without actually reading any more tokens in
+  
+    if(strTokens.size() == 0){
+        return T_eof;
+    }
+   
+        
+  
+
 	if ( bogo_token!=T_plus && bogo_token!=T_eof ) return T_plus;
 	else return bogo_token;
 }
@@ -140,7 +154,43 @@ void scanner_t::eat_token(token_type c)
 
 scanner_t::scanner_t()
 {
-	// WRITEME
+        // WRITEME
+   
+    char c;
+    string token;
+
+    while ( (c = getchar()) != EOF ){
+        if(c==')'){
+            if(!token.empty()){
+                strTokens.push_back(token);
+                token.clear();
+            }
+            token+=c;
+            strTokens.push_back(token);
+            token.clear();
+        }
+        
+        else if( c==','){
+            token+=c;
+            strTokens.push_back(token);
+            token.clear();
+        }
+        else if(c=='('){
+            token+=c;
+            strTokens.push_back(token);
+            token.clear();
+         }
+         else if(c!= '\n' && c!=' ' && c!='(' && c!=')' && c!=','){
+             token+=c;
+        }
+       
+         else if(c== ' '){
+            strTokens.push_back(token);
+            token.clear();
+        }
+    }
+    for(int i=0;i<strTokens.size();i++)
+        printf("strTokens: %s \n", strTokens.at(i).c_str());
 }
 
 int scanner_t::get_line()
@@ -400,9 +450,9 @@ void parser_t::List()
 
 int main(int argc, char* argv[])
 {
-
 	// just scanner
 	if (argc > 1) {
+                //If strcmp returns zero than equal
 		if (strcmp(argv[1], "-s") == 0) {
 			scanner_t scanner;
 			token_type tok = scanner.next_token();
