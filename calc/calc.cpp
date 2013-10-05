@@ -160,7 +160,7 @@ scanner_t::scanner_t()
     string token;
 
     while ( (c = getchar()) != EOF ){
-        if(c==')'){
+        if(c==')' ||c==','){
             if(!token.empty()){
                 strTokens.push_back(token);
                 token.clear();
@@ -170,11 +170,11 @@ scanner_t::scanner_t()
             token.clear();
         }
         
-        else if( c==','){
-            token+=c;
-            strTokens.push_back(token);
-            token.clear();
-        }
+//        else if( c==','){
+//            token+=c;
+//            strTokens.push_back(token);
+//            token.clear();
+//        }
         else if(c=='('){
             token+=c;
             strTokens.push_back(token);
