@@ -138,11 +138,8 @@ token_type scanner_t::next_token()
         return T_eof;
     }
    
-        
-  
-
-	if ( bogo_token!=T_plus && bogo_token!=T_eof ) return T_plus;
-	else return bogo_token;
+    return tokens.at(tokenPosition);
+   
 }
 
 void scanner_t::eat_token(token_type c)
@@ -150,12 +147,13 @@ void scanner_t::eat_token(token_type c)
 	// if we are supposed to eat token c, and it does not match
 	// what we are supposed to be reading from file, then it is a
 	// mismatch error ( call - mismatch_error(c) )
+    if(tokens.at(tokenPosition) == T_comma)
+        lineNumber++;
     
-    
-
-	// WRITEME: cut this bogus stuff out and implement eat_token
-	if ( rand()%10 < 8 ) bogo_token = T_plus;
-	else bogo_token = T_eof;
+    if(c != tokens.at(tokenPosition))
+        mismatch_error(c);
+    else
+        tokenPosition++;
 
 }
 
@@ -191,8 +189,9 @@ scanner_t::scanner_t()
             token.clear();
         }
     }
-    for(int i=0;i<strTokens.size();i++)
-        printf("strTokens: %s \n", strTokens.at(i).c_str());
+    strTokens.push_back("EOF");
+//    for(int i=0;i<strTokens.size();i++)
+//        printf("strTokens: %s \n", strTokens.at(i).c_str());
     
     tokenizeString();
     
@@ -206,6 +205,7 @@ void scanner_t::tokenizeString(){
            else if(strTokens.at(i) ==  "," ) tokens.push_back(T_comma);
            else if(strTokens.at(i) ==  "(" ) tokens.push_back(T_openparen);
            else if(strTokens.at(i) ==  ")" ) tokens.push_back(T_closeparen);
+           else if(strTokens.at(i) ==  "EOF")tokens.push_back(T_eof);
            //its a number or error
            else scanNumber(strTokens.at(i));       
     }
@@ -242,6 +242,7 @@ void scanner_t::scanNumber(string num){
 int scanner_t::get_line()
 {
 	// WRITEME
+    return lineNumber;
 }
 
 void scanner_t::scan_error (char x)
