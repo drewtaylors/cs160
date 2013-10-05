@@ -208,8 +208,10 @@ void scanner_t::tokenizeString(){
            else if(strTokens.at(i) ==  ")" ) tokens.push_back(T_closeparen);
            //its a number or error
            else scanNumber(strTokens.at(i));       
-       
     }
+//    for(int i=0;i<tokens.size();i++)
+//        printf("Tokens: %s \n", token_to_string(tokens.at(i)));
+    
 }
 void scanner_t::scanNumber(string num){
     int numDecimals = 0;
@@ -234,6 +236,7 @@ void scanner_t::scanNumber(string num){
    float f = atof(num.c_str());
    if(f < 0 || f > (pow(2,31) -1) )
         scan_error(num[0]);
+   tokens.push_back(T_num);
 }
 
 int scanner_t::get_line()
