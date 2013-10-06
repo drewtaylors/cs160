@@ -2,16 +2,22 @@ digraph G { page="8.5,11"; size="7.5, 10"
 	"List_1" [label="List"]
 	"num_2" [label="num",style=filled,fillcolor=powderblue]
 	"List_1" -> "num_2"
-	"List_3" [label="List"]
-	"List_1" -> "List_3"
-	"+_4" [label="+",style=filled,fillcolor=powderblue]
-	"List_3" -> "+_4"
-	"List_5" [label="List"]
-	"List_3" -> "List_5"
-	"num_6" [label="num",style=filled,fillcolor=powderblue]
-	"List_5" -> "num_6"
-	"List_7" [label="List"]
-	"List_5" -> "List_7"
-	"e_8" [label="e"]
-	"List_7" -> "e_8"
+	"+_3" [label="+",style=filled,fillcolor=powderblue]
+	"List_1" -> "+_3"
+	"Expr_4" [label="Expr"]
+	"List_1" -> "Expr_4"
+	"(_5" [label="(",style=filled,fillcolor=powderblue]
+	"Expr_4" -> "(_5"
+	"List_6" [label="List"]
+	"Expr_4" -> "List_6"
+	"num_7" [label="num",style=filled,fillcolor=powderblue]
+	"List_6" -> "num_7"
+	"+_8" [label="+",style=filled,fillcolor=powderblue]
+	"List_6" -> "+_8"
+	"Expr_9" [label="Expr"]
+	"List_6" -> "Expr_9"
+	"num_10" [label="num",style=filled,fillcolor=powderblue]
+	"Expr_9" -> "num_10"
+	")_11" [label=")",style=filled,fillcolor=powderblue]
+	"Expr_4" -> ")_11"
 };

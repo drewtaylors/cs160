@@ -1,0 +1,11 @@
+typedef enum {
+	T_eof = 0,		// 0: end of file
+	T_num,			// 1: numbers
+	T_plus,			// 2: +
+	T_minus,		// 3: -
+	T_times,		// 4: *
+        T_div,      	// 5: /
+	T_comma,	    // 6: ,
+	T_openparen,	// 7: (
+	T_closeparen 	// 8: )
+} token_type;

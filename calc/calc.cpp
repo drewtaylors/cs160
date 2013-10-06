@@ -78,7 +78,8 @@ char* nonterm_to_string(nonterm_type nt)
 		  case epsilon: strncpy(buffer,"e",MAX_SYMBOL_NAME_SIZE); break;
 		  case NT_List: strncpy(buffer,"List",MAX_SYMBOL_NAME_SIZE); break;
 		  // WRITEME: add the other nonterminals you need here
-		  default: strncpy(buffer,"unknown_nonterm",MAX_SYMBOL_NAME_SIZE); break;
+                  case NT_Expr: strncpy(buffer,"Expr",MAX_SYMBOL_NAME_SIZE); break;
+                default: strncpy(buffer,"unknown_nonterm",MAX_SYMBOL_NAME_SIZE); break;
 		}
 	return buffer;
 }
@@ -421,6 +422,7 @@ class parser_t {
 	void syntax_error(nonterm_type);
 
 	void List();
+        void Expr();
 	// WRITEME: fill this out with the rest of the
 	// recursive decent stuff (more methods)
 
@@ -482,7 +484,10 @@ void parser_t::List()
 	{
         case T_num:
             eat_token(T_num);
-            List();
+            if(scanner.next_token() == T_plus){
+                eat_token(T_plus);
+                Expr();
+            }else syntax_error(NT_List);
             break;
         case T_plus:
             eat_token(T_plus);
@@ -500,7 +505,26 @@ void parser_t::List()
 	//stucture that is tracking it for drawing the parse tree
 	parsetree.pop();
 }
-
+void parser_t::Expr(){
+   parsetree.push(NT_Expr);
+    switch( scanner.next_token() ){
+       case T_openparen : 
+           eat_token(T_openparen);
+           List();
+           eat_token(T_closeparen);
+           break;
+       case T_num:
+           eat_token(T_num);
+           break;
+       case T_eof:
+            parsetree.drawepsilon();
+            break;
+        default:
+            syntax_error(NT_List);
+            break;
+   }
+    parsetree.pop();
+}
 // WRITEME: you will need to put the rest of the procedures here
 
 
