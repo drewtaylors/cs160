@@ -1,3 +1,17 @@
 digraph G { page="8.5,11"; size="7.5, 10"
 	"List_1" [label="List"]
-syntax error: found num in parsing List - line 1
+	"num_2" [label="num",style=filled,fillcolor=powderblue]
+	"List_1" -> "num_2"
+	"List_3" [label="List"]
+	"List_1" -> "List_3"
+	"+_4" [label="+",style=filled,fillcolor=powderblue]
+	"List_3" -> "+_4"
+	"List_5" [label="List"]
+	"List_3" -> "List_5"
+	"num_6" [label="num",style=filled,fillcolor=powderblue]
+	"List_5" -> "num_6"
+	"List_7" [label="List"]
+	"List_5" -> "List_7"
+	"e_8" [label="e"]
+	"List_7" -> "e_8"
+};

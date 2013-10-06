@@ -1,70 +1,17 @@
-strTokens: 5 
-strTokens: , 
-strTokens: 2.0 
-strTokens: , 
-strTokens: 5 
-strTokens: + 
-strTokens: 1 
-strTokens: , 
-strTokens: 3 
-strTokens: * 
-strTokens: 5 
-strTokens: , 
-strTokens: 5 
-strTokens: + 
-strTokens: ( 
-strTokens: 6 
-strTokens: ) 
-strTokens: , 
-strTokens: 5 
-strTokens: + 
-strTokens: ( 
-strTokens: 4 
-strTokens: - 
-strTokens: 6 
-strTokens: ) 
-strTokens: , 
-strTokens: 5 
-strTokens: + 
-strTokens: 3 
-strTokens: * 
-strTokens: 2 
-strTokens: , 
-strTokens: 5 
-strTokens: - 
-strTokens: 4 
-strTokens: - 
-strTokens: 6 
-strTokens: , 
-strTokens: 5 
-strTokens: - 
-strTokens: ( 
-strTokens: 4 
-strTokens: / 
-strTokens: 6 
-strTokens: ) 
-strTokens: , 
-strTokens: 5 
-strTokens: / 
-strTokens: 2 
-strTokens: * 
-strTokens: 3 
-strTokens: , 
-strTokens: 5 
-strTokens: + 
-strTokens: 1.3456 
-strTokens: , 
-strTokens: 3 
-strTokens: * 
-strTokens: 2.57 
-strTokens: , 
-strTokens: 2 
-strTokens: / 
-strTokens: 2 
-strTokens: , 
-strTokens: EOF 
 digraph G { page="8.5,11"; size="7.5, 10"
 	"List_1" [label="List"]
-	"+_2" [label="+",style=filled,fillcolor=powderblue]
-	"List_1" -> "+_2"
-syntax error: found num expecting + - line 1
+	"num_2" [label="num",style=filled,fillcolor=powderblue]
+	"List_1" -> "num_2"
+	"List_3" [label="List"]
+	"List_1" -> "List_3"
+	"+_4" [label="+",style=filled,fillcolor=powderblue]
+	"List_3" -> "+_4"
+	"List_5" [label="List"]
+	"List_3" -> "List_5"
+	"num_6" [label="num",style=filled,fillcolor=powderblue]
+	"List_5" -> "num_6"
+	"List_7" [label="List"]
+	"List_5" -> "List_7"
+	"e_8" [label="e"]
+	"List_7" -> "e_8"
+};

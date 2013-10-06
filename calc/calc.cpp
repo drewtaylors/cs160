@@ -186,12 +186,15 @@ scanner_t::scanner_t()
             strTokens.push_back(token);
             token.clear();
         }
-        else if(c!='\n'&&c!=' '&&c!=EOF){
-            token+=c;
-            strTokens.push_back(token);
-            token.clear();
+        else if(c!='\n' && c!=' ' && c!=EOF){
+               if(c=='+'||c=='-'||c=='*'|| c=='/'||c==','||c=='('||c==')'){
+                token+=c;
+                strTokens.push_back(token);
+                token.clear();
+               }
+               else scan_error(c);
         }
-        
+        //else not a valid char
     }
     strTokens.push_back("EOF");
 //    for(int i=0;i<strTokens.size();i++)
@@ -478,7 +481,8 @@ void parser_t::List()
 	switch( scanner.next_token() )
 	{
         case T_num:
-            eat_token(T_plus);
+            eat_token(T_num);
+            List();
             break;
         case T_plus:
             eat_token(T_plus);
