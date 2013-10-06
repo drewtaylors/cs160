@@ -160,39 +160,43 @@ void scanner_t::eat_token(token_type c)
 scanner_t::scanner_t()
 {
         // WRITEME
-   
+    
     char c;
     string token;
 
     while ( (c = getchar()) != EOF ){
-        if(c==')' ||c==','){
-            if(!token.empty()){
-                strTokens.push_back(token);
-                token.clear();
+        if(c=='0' || c=='1' || c=='2' || c=='3' || c=='4' || c=='5' ||
+           c=='6' || c=='7' || c=='8' || c=='9'){
+            token+=c;
+            int endOfNumber=0;
+            while ( endOfNumber != 1){
+                c = getchar();
+                if( !(c=='0' || c=='1' || c=='2' || c=='3' || c=='4' || c=='5' ||
+                     c=='6' || c=='7' || c=='8' || c=='9' || c=='.') ){
+                    endOfNumber=1;
+                }
+                else
+                    token+=c;
             }
+            strTokens.push_back(token);
+            token.clear();
+        }
+        if(c==','){
             token+=c;
             strTokens.push_back(token);
             token.clear();
         }
-
-        else if(c=='('){
+        else if(c!='\n'&&c!=' '&&c!=EOF){
             token+=c;
             strTokens.push_back(token);
             token.clear();
-         }
-         else if(c!= '\n' && c!=' ' && c!='(' && c!=')' && c!=','){
-             token+=c;
         }
-       
-         else if(c== ' '){
-            strTokens.push_back(token);
-            token.clear();
-        }
+        
     }
     strTokens.push_back("EOF");
 //    for(int i=0;i<strTokens.size();i++)
 //        printf("strTokens: %s \n", strTokens.at(i).c_str());
-    
+//    
     tokenizeString();
     
 }
@@ -473,17 +477,20 @@ void parser_t::List()
 
 	switch( scanner.next_token() )
 	{
-		case T_plus:
-			eat_token(T_plus);
-			List();
-			break;
-		case T_eof:
-			parsetree.drawepsilon();
-			break;
-		default:
-			syntax_error(NT_List);
-			break;
-	}
+        case T_num:
+            eat_token(T_plus);
+            break;
+        case T_plus:
+            eat_token(T_plus);
+            List();
+            break;
+        case T_eof:
+            parsetree.drawepsilon();
+            break;
+        default:
+            syntax_error(NT_List);
+            break;
+    }
 
 	//now that we are done with List, we can pop it from the data
 	//stucture that is tracking it for drawing the parse tree

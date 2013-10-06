@@ -63,4 +63,8 @@ strTokens: /
 strTokens: 2 
 strTokens: , 
 strTokens: EOF 
-num,num,num+num,num*num,num+(num),num+(num-num),num+num*num,num-num-num,num-(num/num),num/num*num,num+num,num*num,num/num,eof
+digraph G { page="8.5,11"; size="7.5, 10"
+	"List_1" [label="List"]
+	"+_2" [label="+",style=filled,fillcolor=powderblue]
+	"List_1" -> "+_2"
+syntax error: found num expecting + - line 1

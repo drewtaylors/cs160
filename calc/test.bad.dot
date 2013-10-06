@@ -1,0 +1,3 @@
+digraph G { page="8.5,11"; size="7.5, 10"
+	"List_1" [label="List"]
+syntax error: found num in parsing List - line 1
