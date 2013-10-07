@@ -4,6 +4,7 @@
     <df root="." name="calc">
       <in>calc.cpp</in>
       <in>lex.yy.c</in>
+      <in>tokenTypes.txt</in>
       <in>y.tab.c</in>
       <in>y.tab.h</in>
     </df>
@@ -40,6 +41,8 @@
       <item path="calc.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="lex.yy.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="tokenTypes.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="y.tab.c" ex="false" tool="0" flavor2="0">
       </item>

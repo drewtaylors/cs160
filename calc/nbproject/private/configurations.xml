@@ -4,6 +4,7 @@
     <df root="." name="calc">
       <in>calc.cpp</in>
       <in>lex.yy.c</in>
+      <in>tokenTypes.txt</in>
       <in>y.tab.c</in>
       <in>y.tab.h</in>
     </df>

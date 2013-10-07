@@ -493,9 +493,14 @@ void parser_t::List()
             eat_token(T_plus);
             List();
             break;
-        case T_eof:
+        case T_comma:
+            eat_token(T_comma);
             parsetree.drawepsilon();
             break;
+        case T_eof:
+            //
+            break
+                
         default:
             syntax_error(NT_List);
             break;
