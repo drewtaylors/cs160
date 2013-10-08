@@ -59,7 +59,9 @@ char* token_to_string(token_type c) {
 typedef enum {
 	epsilon = 100,
 	NT_List,
-	NT_Expr
+        NT_F,
+        NT_R,
+        NT_Z
 	// WRITEME: add symbolic names for your non-terminals here
 } nonterm_type;
 
@@ -77,8 +79,10 @@ char* nonterm_to_string(nonterm_type nt)
 	switch( nt ) {
 		  case epsilon: strncpy(buffer,"e",MAX_SYMBOL_NAME_SIZE); break;
 		  case NT_List: strncpy(buffer,"List",MAX_SYMBOL_NAME_SIZE); break;
-		  // WRITEME: add the other nonterminals you need here
-                  case NT_Expr: strncpy(buffer,"Expr",MAX_SYMBOL_NAME_SIZE); break;
+
+                  case NT_F: strncpy(buffer,"F",MAX_SYMBOL_NAME_SIZE); break;
+                  case NT_R: strncpy(buffer,"R",MAX_SYMBOL_NAME_SIZE); break;
+                  case NT_Z: strncpy(buffer,"Z",MAX_SYMBOL_NAME_SIZE); break;
                 default: strncpy(buffer,"unknown_nonterm",MAX_SYMBOL_NAME_SIZE); break;
 		}
 	return buffer;
@@ -422,7 +426,9 @@ class parser_t {
 	void syntax_error(nonterm_type);
 
 	void List();
-        void Expr();
+        void F();
+        void R();
+        void Z();
 	// WRITEME: fill this out with the rest of the
 	// recursive decent stuff (more methods)
 
@@ -479,55 +485,88 @@ void parser_t::List()
 	//parse tree, and should in should have no effect the actual
 	//parsing of the data
 	parsetree.push(NT_List);
-
+            printf("list\n");
+            switch( scanner.next_token() )
+            {
+            case T_eof:
+                eat_token(T_eof);
+                break;
+            default:
+               F();
+               R();
+               break;
+            }
+            
+    //now that we are done with List, we can pop it from the data
+    //stucture that is tracking it for drawing the parse tree
+    parsetree.pop();
+}
+void parser_t::F(){
+   parsetree.push(NT_F);
+    printf("F\n");
 	switch( scanner.next_token() )
 	{
         case T_num:
             eat_token(T_num);
-            if(scanner.next_token() == T_plus){
-                eat_token(T_plus);
-                Expr();
-            }else syntax_error(NT_List);
+            break;
+        case T_openparen:
+            eat_token(T_openparen);
+            List();
+            if(scanner.next_token() == T_closeparen)
+                eat_token(T_closeparen);
+            break;
+        default:
+            syntax_error(NT_F);
+            break;
+        }
+    parsetree.pop();
+}
+void parser_t::R() {
+    parsetree.push(NT_R);
+    printf("R\n");
+    switch (scanner.next_token()) {
+        case T_comma:
+            Z();
+            break;
+        case T_times:
+            Z();
+            break;
+        case T_div:
+            Z();
+            break;
+        case T_closeparen:
+            Z();
             break;
         case T_plus:
             eat_token(T_plus);
-            List();
-            break;
-        case T_comma:
-            eat_token(T_comma);
-            parsetree.drawepsilon();
-            break;
-        case T_eof:
-            //
-            break
-                
+            F();
+            R();
+        case T_minus:
+            eat_token(T_minus);
+            F();
+            R();
         default:
-            syntax_error(NT_List);
+            syntax_error(NT_R);
             break;
     }
-
-	//now that we are done with List, we can pop it from the data
-	//stucture that is tracking it for drawing the parse tree
-	parsetree.pop();
+    parsetree.pop();
 }
-void parser_t::Expr(){
-   parsetree.push(NT_Expr);
-    switch( scanner.next_token() ){
-       case T_openparen : 
-           eat_token(T_openparen);
-           List();
-           eat_token(T_closeparen);
-           break;
-       case T_num:
-           eat_token(T_num);
-           break;
-       case T_eof:
+
+void parser_t::Z() {
+    parsetree.push(NT_Z);
+    printf("Z\n");
+    switch (scanner.next_token()) {
+        case T_comma:
+            eat_token(T_comma);
+            List();
+            break;
+        case T_closeparen:
             parsetree.drawepsilon();
             break;
         default:
-            syntax_error(NT_List);
+            syntax_error(NT_Z);
             break;
-   }
+    }
     parsetree.pop();
 }
 // WRITEME: you will need to put the rest of the procedures here

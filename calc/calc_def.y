@@ -8,8 +8,9 @@
 
 %%
 
-S    : F R {printf("parsed expresion\n");}
-        ;
+S    :    F R {printf("parsed expresion\n");}
+       | 'A'
+       ;
 
 R    :    '+' F R 
         | '-' F R
@@ -18,7 +19,8 @@ R    :    '+' F R
 
 Z    :    '*' F R
         | '/' F R
-        | 'e'
+        | 
+        | ',' S
         ;
 
 F    :  | 'n' 

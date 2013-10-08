@@ -1,23 +1,12 @@
 digraph G { page="8.5,11"; size="7.5, 10"
 	"List_1" [label="List"]
-	"num_2" [label="num",style=filled,fillcolor=powderblue]
-	"List_1" -> "num_2"
-	"+_3" [label="+",style=filled,fillcolor=powderblue]
-	"List_1" -> "+_3"
-	"Expr_4" [label="Expr"]
-	"List_1" -> "Expr_4"
-	"(_5" [label="(",style=filled,fillcolor=powderblue]
-	"Expr_4" -> "(_5"
-	"List_6" [label="List"]
-	"Expr_4" -> "List_6"
-	"num_7" [label="num",style=filled,fillcolor=powderblue]
-	"List_6" -> "num_7"
-	"+_8" [label="+",style=filled,fillcolor=powderblue]
-	"List_6" -> "+_8"
-	"Expr_9" [label="Expr"]
-	"List_6" -> "Expr_9"
-	"num_10" [label="num",style=filled,fillcolor=powderblue]
-	"Expr_9" -> "num_10"
-	")_11" [label=")",style=filled,fillcolor=powderblue]
-	"Expr_4" -> ")_11"
-};
+list
+	"F_2" [label="F"]
+	"List_1" -> "F_2"
+F
+	"num_3" [label="num",style=filled,fillcolor=powderblue]
+	"F_2" -> "num_3"
+	"R_4" [label="R"]
+	"List_1" -> "R_4"
+R
+syntax error: found + in parsing R - line 1

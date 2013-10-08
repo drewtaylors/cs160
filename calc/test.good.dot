@@ -1,23 +1,49 @@
 digraph G { page="8.5,11"; size="7.5, 10"
 	"List_1" [label="List"]
-	"num_2" [label="num",style=filled,fillcolor=powderblue]
-	"List_1" -> "num_2"
-	"+_3" [label="+",style=filled,fillcolor=powderblue]
-	"List_1" -> "+_3"
-	"Expr_4" [label="Expr"]
-	"List_1" -> "Expr_4"
-	"(_5" [label="(",style=filled,fillcolor=powderblue]
-	"Expr_4" -> "(_5"
-	"List_6" [label="List"]
-	"Expr_4" -> "List_6"
+list
+	"F_2" [label="F"]
+	"List_1" -> "F_2"
+F
+	"num_3" [label="num",style=filled,fillcolor=powderblue]
+	"F_2" -> "num_3"
+	"R_4" [label="R"]
+	"List_1" -> "R_4"
+R
+	"+_5" [label="+",style=filled,fillcolor=powderblue]
+	"R_4" -> "+_5"
+	"F_6" [label="F"]
+	"R_4" -> "F_6"
+F
 	"num_7" [label="num",style=filled,fillcolor=powderblue]
-	"List_6" -> "num_7"
-	"+_8" [label="+",style=filled,fillcolor=powderblue]
-	"List_6" -> "+_8"
-	"Expr_9" [label="Expr"]
-	"List_6" -> "Expr_9"
-	"num_10" [label="num",style=filled,fillcolor=powderblue]
-	"Expr_9" -> "num_10"
-	")_11" [label=")",style=filled,fillcolor=powderblue]
-	"Expr_4" -> ")_11"
-};
+	"F_6" -> "num_7"
+	"R_8" [label="R"]
+	"R_4" -> "R_8"
+R
+	"Z_9" [label="Z"]
+	"R_8" -> "Z_9"
+Z
+	",_10" [label=",",style=filled,fillcolor=powderblue]
+	"Z_9" -> ",_10"
+	"List_11" [label="List"]
+	"Z_9" -> "List_11"
+list
+	"F_12" [label="F"]
+	"List_11" -> "F_12"
+F
+	"num_13" [label="num",style=filled,fillcolor=powderblue]
+	"F_12" -> "num_13"
+	"R_14" [label="R"]
+	"List_11" -> "R_14"
+R
+	"Z_15" [label="Z"]
+	"R_14" -> "Z_15"
+Z
+	",_16" [label=",",style=filled,fillcolor=powderblue]
+	"Z_15" -> ",_16"
+	"List_17" [label="List"]
+	"Z_15" -> "List_17"
+list
+	"eof_18" [label="eof",style=filled,fillcolor=powderblue]
+	"List_17" -> "eof_18"
+	"-_19" [label="-",style=filled,fillcolor=powderblue]
+	"R_4" -> "-_19"
