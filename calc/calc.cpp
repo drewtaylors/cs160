@@ -485,46 +485,44 @@ void parser_t::List()
 	//parse tree, and should in should have no effect the actual
 	//parsing of the data
 	parsetree.push(NT_List);
-            printf("list\n");
-            switch( scanner.next_token() )
-            {
-            case T_eof:
-                eat_token(T_eof);
-                break;
-            default:
-               F();
-               R();
-               break;
-            }
-            
-    //now that we are done with List, we can pop it from the data
-    //stucture that is tracking it for drawing the parse tree
-    parsetree.pop();
-}
-void parser_t::F(){
-   parsetree.push(NT_F);
-    printf("F\n");
-	switch( scanner.next_token() )
-	{
-        case T_num:
-            eat_token(T_num);
-            break;
-        case T_openparen:
-            eat_token(T_openparen);
-            List();
-            if(scanner.next_token() == T_closeparen)
-                eat_token(T_closeparen);
+        printf("list\n");
+        switch( scanner.next_token() )
+        {
+        case T_eof:
+            eat_token(T_eof);
             break;
         default:
-            syntax_error(NT_F);
+            F();
+            R();
             break;
         }
+        parsetree.pop();
+}
+void parser_t::F(){
+    parsetree.push(NT_F);
+    printf("F\n");
+    switch( scanner.next_token() )
+    {
+    case T_num:
+         eat_token(T_num);
+         break;
+    case T_openparen:
+         eat_token(T_openparen);
+         List();
+         if(scanner.next_token() == T_closeparen){
+             eat_token(T_closeparen);
+         }
+         break;
+    default:
+            syntax_error(NT_F);
+            break;
+    }
     parsetree.pop();
 }
 void parser_t::R() {
     parsetree.push(NT_R);
     printf("R\n");
-    switch (scanner.next_token()) {
+    switch ( scanner.next_token() ) {
         case T_comma:
             Z();
             break;
@@ -541,10 +539,12 @@ void parser_t::R() {
             eat_token(T_plus);
             F();
             R();
+            break;
         case T_minus:
             eat_token(T_minus);
             F();
             R();
+            break;
         default:
             syntax_error(NT_R);
             break;
@@ -562,6 +562,16 @@ void parser_t::Z() {
             break;
         case T_closeparen:
             parsetree.drawepsilon();
+            break;
+         case T_times:
+             eat_token(T_times);
+             F();
+             R();
+            break;
+        case T_div:
+            eat_token(T_div);
+            F();
+            R();
             break;
         default:
             syntax_error(NT_Z);

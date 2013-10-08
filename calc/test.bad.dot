@@ -1,12 +1,6 @@
 digraph G { page="8.5,11"; size="7.5, 10"
 	"List_1" [label="List"]
 list
-	"F_2" [label="F"]
-	"List_1" -> "F_2"
-F
-	"num_3" [label="num",style=filled,fillcolor=powderblue]
-	"F_2" -> "num_3"
-	"R_4" [label="R"]
-	"List_1" -> "R_4"
-R
-syntax error: found + in parsing R - line 1
+	"eof_2" [label="eof",style=filled,fillcolor=powderblue]
+	"List_1" -> "eof_2"
+};
