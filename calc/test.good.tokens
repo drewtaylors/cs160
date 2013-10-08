@@ -1,1 +1,1 @@
-num+num,eof
+num,num,num+num,num*num,num+(num),num+(num-num),num+num*num,num-num-num,num-(num/num),num/num*num,num+num,num*num,num/num,eof

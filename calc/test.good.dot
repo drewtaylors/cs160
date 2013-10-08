@@ -1,82 +1,35 @@
 digraph G { page="8.5,11"; size="7.5, 10"
 	"List_1" [label="List"]
-list
 	"F_2" [label="F"]
 	"List_1" -> "F_2"
-F
 	"num_3" [label="num",style=filled,fillcolor=powderblue]
 	"F_2" -> "num_3"
 	"R_4" [label="R"]
 	"List_1" -> "R_4"
-R
-	"Z_5" [label="Z"]
-	"R_4" -> "Z_5"
-Z
-	"*_6" [label="*",style=filled,fillcolor=powderblue]
-	"Z_5" -> "*_6"
-	"F_7" [label="F"]
-	"Z_5" -> "F_7"
-F
-	"num_8" [label="num",style=filled,fillcolor=powderblue]
-	"F_7" -> "num_8"
-	"R_9" [label="R"]
-	"Z_5" -> "R_9"
-R
-	"Z_10" [label="Z"]
-	"R_9" -> "Z_10"
-Z
-	",_11" [label=",",style=filled,fillcolor=powderblue]
-	"Z_10" -> ",_11"
-	"List_12" [label="List"]
-	"Z_10" -> "List_12"
-list
-	"F_13" [label="F"]
-	"List_12" -> "F_13"
-F
-	"num_14" [label="num",style=filled,fillcolor=powderblue]
-	"F_13" -> "num_14"
-	"R_15" [label="R"]
-	"List_12" -> "R_15"
-R
-	"Z_16" [label="Z"]
-	"R_15" -> "Z_16"
-Z
-	"*_17" [label="*",style=filled,fillcolor=powderblue]
-	"Z_16" -> "*_17"
-	"F_18" [label="F"]
-	"Z_16" -> "F_18"
-F
-	"(_19" [label="(",style=filled,fillcolor=powderblue]
-	"F_18" -> "(_19"
-	"List_20" [label="List"]
-	"F_18" -> "List_20"
-list
-	"F_21" [label="F"]
-	"List_20" -> "F_21"
-F
-	"num_22" [label="num",style=filled,fillcolor=powderblue]
-	"F_21" -> "num_22"
-	"R_23" [label="R"]
-	"List_20" -> "R_23"
-R
-	"Z_24" [label="Z"]
-	"R_23" -> "Z_24"
-Z
-	"e_25" [label="e"]
-	"Z_24" -> "e_25"
-	")_26" [label=")",style=filled,fillcolor=powderblue]
-	"F_18" -> ")_26"
-	"R_27" [label="R"]
-	"Z_16" -> "R_27"
-R
-	"Z_28" [label="Z"]
-	"R_27" -> "Z_28"
-Z
-	",_29" [label=",",style=filled,fillcolor=powderblue]
-	"Z_28" -> ",_29"
-	"List_30" [label="List"]
-	"Z_28" -> "List_30"
-list
-	"eof_31" [label="eof",style=filled,fillcolor=powderblue]
-	"List_30" -> "eof_31"
+	"-_5" [label="-",style=filled,fillcolor=powderblue]
+	"R_4" -> "-_5"
+	"F_6" [label="F"]
+	"R_4" -> "F_6"
+	"num_7" [label="num",style=filled,fillcolor=powderblue]
+	"F_6" -> "num_7"
+	"R_8" [label="R"]
+	"R_4" -> "R_8"
+	"Z_9" [label="Z"]
+	"R_8" -> "Z_9"
+	"*_10" [label="*",style=filled,fillcolor=powderblue]
+	"Z_9" -> "*_10"
+	"F_11" [label="F"]
+	"Z_9" -> "F_11"
+	"num_12" [label="num",style=filled,fillcolor=powderblue]
+	"F_11" -> "num_12"
+	"R_13" [label="R"]
+	"Z_9" -> "R_13"
+	"Z_14" [label="Z"]
+	"R_13" -> "Z_14"
+	",_15" [label=",",style=filled,fillcolor=powderblue]
+	"Z_14" -> ",_15"
+	"List_16" [label="List"]
+	"Z_14" -> "List_16"
+	"eof_17" [label="eof",style=filled,fillcolor=powderblue]
+	"List_16" -> "eof_17"
 };

@@ -1,6 +1,5 @@
 digraph G { page="8.5,11"; size="7.5, 10"
 	"List_1" [label="List"]
-list
 	"eof_2" [label="eof",style=filled,fillcolor=powderblue]
 	"List_1" -> "eof_2"
 };

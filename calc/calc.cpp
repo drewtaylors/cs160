@@ -6,7 +6,7 @@
 #include <stack>
 #include <iostream>
 #include <vector>
-#include <math.h>   
+#include <math.h> 
 
 using namespace std;
 
@@ -101,9 +101,11 @@ class scanner_t {
 
 	// return line number for errors
 	int get_line();
-
+        float getCurrentNum();
 	// constructor - inits g_next_token
 	scanner_t();
+        
+        
 
   private:
 
@@ -147,6 +149,10 @@ token_type scanner_t::next_token()
    
 }
 
+float scanner_t::getCurrentNum(){
+    return atof(strTokens.at(tokenPosition).c_str());
+}
+
 void scanner_t::eat_token(token_type c)
 {
 	// if we are supposed to eat token c, and it does not match
@@ -154,11 +160,12 @@ void scanner_t::eat_token(token_type c)
 	// mismatch error ( call - mismatch_error(c) )
     if(tokens.at(tokenPosition) == T_comma)
         lineNumber++;
-    
     if(c != tokens.at(tokenPosition))
         mismatch_error(c);
     else
         tokenPosition++;
+    
+    
 
 }
 
@@ -424,13 +431,17 @@ class parser_t {
 	parsetree_t parsetree;
 	void eat_token(token_type t);
 	void syntax_error(nonterm_type);
-
+        stack<float>calcNums;
+        stack<token_type> operation;
+        float total;
+        
 	void List();
         void F();
         void R();
         void Z();
-	// WRITEME: fill this out with the rest of the
-	// recursive decent stuff (more methods)
+        
+        void calculate();
+	
 
   public:
 	void parse();
@@ -467,7 +478,11 @@ void parser_t::syntax_error(nonterm_type nt)
 // symbol
 void parser_t::parse()
 {
+       
 	List();
+        //now calculate...
+        calculate();
+        
 }
 
 
@@ -485,7 +500,7 @@ void parser_t::List()
 	//parse tree, and should in should have no effect the actual
 	//parsing of the data
 	parsetree.push(NT_List);
-        printf("list\n");
+//        printf("list\n");
         switch( scanner.next_token() )
         {
         case T_eof:
@@ -500,10 +515,11 @@ void parser_t::List()
 }
 void parser_t::F(){
     parsetree.push(NT_F);
-    printf("F\n");
+//    printf("F\n");
     switch( scanner.next_token() )
     {
     case T_num:
+         calcNums.push(scanner.getCurrentNum());
          eat_token(T_num);
          break;
     case T_openparen:
@@ -521,7 +537,7 @@ void parser_t::F(){
 }
 void parser_t::R() {
     parsetree.push(NT_R);
-    printf("R\n");
+//    printf("R\n");
     switch ( scanner.next_token() ) {
         case T_comma:
             Z();
@@ -536,11 +552,13 @@ void parser_t::R() {
             Z();
             break;
         case T_plus:
+            operation.push(T_plus);
             eat_token(T_plus);
             F();
             R();
             break;
         case T_minus:
+            operation.push(T_minus);
             eat_token(T_minus);
             F();
             R();
@@ -554,7 +572,7 @@ void parser_t::R() {
 
 void parser_t::Z() {
     parsetree.push(NT_Z);
-    printf("Z\n");
+//    printf("Z\n");
     switch (scanner.next_token()) {
         case T_comma:
             eat_token(T_comma);
@@ -564,11 +582,13 @@ void parser_t::Z() {
             parsetree.drawepsilon();
             break;
          case T_times:
+             operation.push(T_times);
              eat_token(T_times);
              F();
              R();
             break;
         case T_div:
+            operation.push(T_div);
             eat_token(T_div);
             F();
             R();
@@ -579,8 +599,48 @@ void parser_t::Z() {
     }
     parsetree.pop();
 }
-// WRITEME: you will need to put the rest of the procedures here
 
+void parser_t::calculate(){
+   
+//    while(!calcNums.empty()){
+//        printf("calcNums: %f \n",calcNums.top());
+//        calcNums.pop();
+//    }
+//    while(!operation.empty()){
+//        printf("Operations: %s \n",token_to_string(operation.top()));
+//        operation.pop();
+//    }
+    
+     //create new stacks to revers e.g 3,2,1 -> 1,2,3
+     
+    total=0;
+    if(!calcNums.empty()){
+        total=calcNums.top();
+        calcNums.pop();
+    }
+    while(!calcNums.empty()){
+        if(operation.top()==T_plus){
+            total+=calcNums.top();
+        }else if(operation.top()==T_minus){
+            total=calcNums.top() - total;
+        }else if(operation.top()==T_times){
+            total*=calcNums.top();
+        }else if(operation.top()==T_div){
+            total=calcNums.top()/total;
+        }
+        calcNums.pop();
+        operation.pop();
+//        if(operation.top()== T_comma){
+//            printf("Result: %f\n", total);
+//            operation.pop();
+//            total=0;
+//        }
+    }
+    //printf("Result: %.2f\n", total);
+    fprintf(stderr, "%.2f\n",total);
+    
+    
+}
 
 /*** Main ***********************************************/
 
