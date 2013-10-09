@@ -1,5 +1,121 @@
 digraph G { page="8.5,11"; size="7.5, 10"
 	"List_1" [label="List"]
-	"eof_2" [label="eof",style=filled,fillcolor=powderblue]
-	"List_1" -> "eof_2"
-};
+	"F_2" [label="F"]
+	"List_1" -> "F_2"
+	"num_3" [label="num",style=filled,fillcolor=powderblue]
+	"F_2" -> "num_3"
+	"R_4" [label="R"]
+	"List_1" -> "R_4"
+	"-_5" [label="-",style=filled,fillcolor=powderblue]
+	"R_4" -> "-_5"
+	"F_6" [label="F"]
+	"R_4" -> "F_6"
+	"(_7" [label="(",style=filled,fillcolor=powderblue]
+	"F_6" -> "(_7"
+	"F_8" [label="F"]
+	"F_6" -> "F_8"
+	"num_9" [label="num",style=filled,fillcolor=powderblue]
+	"F_8" -> "num_9"
+	"A_10" [label="A"]
+	"F_6" -> "A_10"
+	"-_11" [label="-",style=filled,fillcolor=powderblue]
+	"A_10" -> "-_11"
+	"F_12" [label="F"]
+	"A_10" -> "F_12"
+	"num_13" [label="num",style=filled,fillcolor=powderblue]
+	"F_12" -> "num_13"
+	"A_14" [label="A"]
+	"A_10" -> "A_14"
+	"B_15" [label="B"]
+	"A_14" -> "B_15"
+	"e_16" [label="e"]
+	"B_15" -> "e_16"
+	"F_17" [label="F"]
+	"F_6" -> "F_17"
+	")_18" [label=")",style=filled,fillcolor=powderblue]
+	"F_17" -> ")_18"
+	"R_19" [label="R"]
+	"R_4" -> "R_19"
+	"Z_20" [label="Z"]
+	"R_19" -> "Z_20"
+	",_21" [label=",",style=filled,fillcolor=powderblue]
+	"Z_20" -> ",_21"
+	"List_22" [label="List"]
+	"Z_20" -> "List_22"
+	"F_23" [label="F"]
+	"List_22" -> "F_23"
+	"num_24" [label="num",style=filled,fillcolor=powderblue]
+	"F_23" -> "num_24"
+	"R_25" [label="R"]
+	"List_22" -> "R_25"
+	"Z_26" [label="Z"]
+	"R_25" -> "Z_26"
+	",_27" [label=",",style=filled,fillcolor=powderblue]
+	"Z_26" -> ",_27"
+	"List_28" [label="List"]
+	"Z_26" -> "List_28"
+	"F_29" [label="F"]
+	"List_28" -> "F_29"
+	"num_30" [label="num",style=filled,fillcolor=powderblue]
+	"F_29" -> "num_30"
+	"R_31" [label="R"]
+	"List_28" -> "R_31"
+	"Z_32" [label="Z"]
+	"R_31" -> "Z_32"
+	",_33" [label=",",style=filled,fillcolor=powderblue]
+	"Z_32" -> ",_33"
+	"List_34" [label="List"]
+	"Z_32" -> "List_34"
+	"F_35" [label="F"]
+	"List_34" -> "F_35"
+	"num_36" [label="num",style=filled,fillcolor=powderblue]
+	"F_35" -> "num_36"
+	"R_37" [label="R"]
+	"List_34" -> "R_37"
+	"Z_38" [label="Z"]
+	"R_37" -> "Z_38"
+	",_39" [label=",",style=filled,fillcolor=powderblue]
+	"Z_38" -> ",_39"
+	"List_40" [label="List"]
+	"Z_38" -> "List_40"
+	"F_41" [label="F"]
+	"List_40" -> "F_41"
+	"(_42" [label="(",style=filled,fillcolor=powderblue]
+	"F_41" -> "(_42"
+	"F_43" [label="F"]
+	"F_41" -> "F_43"
+	"num_44" [label="num",style=filled,fillcolor=powderblue]
+	"F_43" -> "num_44"
+	"A_45" [label="A"]
+	"F_41" -> "A_45"
+	"-_46" [label="-",style=filled,fillcolor=powderblue]
+	"A_45" -> "-_46"
+	"F_47" [label="F"]
+	"A_45" -> "F_47"
+	"(_48" [label="(",style=filled,fillcolor=powderblue]
+	"F_47" -> "(_48"
+	"F_49" [label="F"]
+	"F_47" -> "F_49"
+	"num_50" [label="num",style=filled,fillcolor=powderblue]
+	"F_49" -> "num_50"
+	"A_51" [label="A"]
+	"F_47" -> "A_51"
+	"-_52" [label="-",style=filled,fillcolor=powderblue]
+	"A_51" -> "-_52"
+	"F_53" [label="F"]
+	"A_51" -> "F_53"
+	"num_54" [label="num",style=filled,fillcolor=powderblue]
+	"F_53" -> "num_54"
+	"A_55" [label="A"]
+	"A_51" -> "A_55"
+	"B_56" [label="B"]
+	"A_55" -> "B_56"
+	"e_57" [label="e"]
+	"B_56" -> "e_57"
+	"F_58" [label="F"]
+	"F_47" -> "F_58"
+	")_59" [label=")",style=filled,fillcolor=powderblue]
+	"F_58" -> ")_59"
+	"A_60" [label="A"]
+	"A_45" -> "A_60"
+syntax error: found ( in parsing R - line 4

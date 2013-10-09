@@ -163,10 +163,10 @@ void scanner_t::eat_token(token_type c)
 	// mismatch error ( call - mismatch_error(c) )
 //    if(tokens.at(tokenPosition) == T_comma)
 //        lineNumber++;
-//    if(strTokens.at(strTokenPosition) == "\n"){
-//        strTokenPosition++;
-//        lineNumber++;
-//    }
+    if(strTokens.at(strTokenPosition) == "\n"){
+        strTokenPosition++;
+        lineNumber++;
+    }
     if(c != tokens.at(tokenPosition))
         mismatch_error(c);
     else{
@@ -544,7 +544,8 @@ void parser_t::F(){
          break;
     case T_openparen:
          eat_token(T_openparen);
-         List();
+         F();
+         A();
          F();
          break;
     case T_closeparen:
@@ -621,11 +622,61 @@ void parser_t::Z() {
     parsetree.pop();
 }
 
-void A(){
-    
+void parser_t::A(){
+     parsetree.push(NT_A);
+//    printf("R\n");
+    switch ( scanner.next_token() ) {
+        case T_times:
+            B();
+            break;
+        case T_div:
+            B();
+            break;
+        case T_closeparen:
+            B();
+            break;
+        case T_plus:
+            operation.push(T_plus);
+            eat_token(T_plus);
+            F();
+            A();
+            break;
+        case T_minus:
+            operation.push(T_minus);
+            eat_token(T_minus);
+            F();
+            A();
+            break;
+        default:
+            syntax_error(NT_R);
+            break;
+    }
+    parsetree.pop();
 }
-void B(){
-
+void parser_t::B(){
+    parsetree.push(NT_B);
+//    printf("Z\n");
+    switch (scanner.next_token()) {
+        case T_closeparen:
+            parsetree.drawepsilon();
+            break;
+         case T_times:
+             operation.push(T_times);
+             eat_token(T_times);
+             F();
+             A();
+            break;
+        case T_div:
+            operation.push(T_div);
+            eat_token(T_div);
+            F();
+            A();
+            break;
+        default:
+            syntax_error(NT_Z);
+            break;
+    }
+    parsetree.pop();
 }
 
 void parser_t::calculate(){
