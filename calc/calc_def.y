@@ -1,4 +1,3 @@
-
 %{
 	#include <stdio.h>
 	int yylex(void);
@@ -29,10 +28,12 @@ F    :  'n'
 A   :   '+' F A
         | '-' F A
         | B
+        ;
 
 B   :   '*' F A
         | '/' F A
         |
+        ;
 
 %%
 
