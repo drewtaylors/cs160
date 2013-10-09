@@ -61,8 +61,9 @@ typedef enum {
 	NT_List,
         NT_F,
         NT_R,
-        NT_Z
-	// WRITEME: add symbolic names for your non-terminals here
+        NT_Z,
+        NT_A,
+        NT_B
 } nonterm_type;
 
 // This function returns a string for the non-terminals. It is used in the
@@ -83,6 +84,8 @@ char* nonterm_to_string(nonterm_type nt)
                   case NT_F: strncpy(buffer,"F",MAX_SYMBOL_NAME_SIZE); break;
                   case NT_R: strncpy(buffer,"R",MAX_SYMBOL_NAME_SIZE); break;
                   case NT_Z: strncpy(buffer,"Z",MAX_SYMBOL_NAME_SIZE); break;
+                  case NT_A: strncpy(buffer,"A",MAX_SYMBOL_NAME_SIZE); break;
+                  case NT_B: strncpy(buffer,"B",MAX_SYMBOL_NAME_SIZE); break;
                 default: strncpy(buffer,"unknown_nonterm",MAX_SYMBOL_NAME_SIZE); break;
 		}
 	return buffer;
@@ -130,8 +133,8 @@ class scanner_t {
         vector<string> strTokens;
         vector<token_type>tokens;
         int tokenPosition=0;
+        int strTokenPosition=0;
         int lineNumber=1;
-
 };
 
 token_type scanner_t::next_token()
@@ -150,7 +153,7 @@ token_type scanner_t::next_token()
 }
 
 float scanner_t::getCurrentNum(){
-    return atof(strTokens.at(tokenPosition).c_str());
+    return atof(strTokens.at(strTokenPosition).c_str());
 }
 
 void scanner_t::eat_token(token_type c)
@@ -158,15 +161,18 @@ void scanner_t::eat_token(token_type c)
 	// if we are supposed to eat token c, and it does not match
 	// what we are supposed to be reading from file, then it is a
 	// mismatch error ( call - mismatch_error(c) )
-    if(tokens.at(tokenPosition) == T_comma)
-        lineNumber++;
+//    if(tokens.at(tokenPosition) == T_comma)
+//        lineNumber++;
+//    if(strTokens.at(strTokenPosition) == "\n"){
+//        strTokenPosition++;
+//        lineNumber++;
+//    }
     if(c != tokens.at(tokenPosition))
         mismatch_error(c);
-    else
-        tokenPosition++;
-    
-    
-
+    else{
+                tokenPosition++;
+                strTokenPosition++;
+    }
 }
 
 scanner_t::scanner_t()
@@ -198,7 +204,12 @@ scanner_t::scanner_t()
             strTokens.push_back(token);
             token.clear();
         }
-        else if(c!='\n' && c!=' ' && c!=EOF){
+        else if(c=='\n'){
+            token+=c;
+            strTokens.push_back(token);
+            token.clear();
+        }
+        else if(c!=' ' && c!=EOF){
                if(c=='+'||c=='-'||c=='*'|| c=='/'||c==','||c=='('||c==')'){
                 token+=c;
                 strTokens.push_back(token);
@@ -226,7 +237,7 @@ void scanner_t::tokenizeString(){
            else if(strTokens.at(i) ==  ")" ) tokens.push_back(T_closeparen);
            else if(strTokens.at(i) ==  "EOF")tokens.push_back(T_eof);
            //its a number or error
-           else scanNumber(strTokens.at(i));       
+           else if(strTokens.at(i) != "\n") scanNumber(strTokens.at(i));       
     }
 //    for(int i=0;i<tokens.size();i++)
 //        printf("Tokens: %s \n", token_to_string(tokens.at(i)));
@@ -439,6 +450,8 @@ class parser_t {
         void F();
         void R();
         void Z();
+        void A();
+        void B();
         
         void calculate();
 	
@@ -481,7 +494,7 @@ void parser_t::parse()
        
 	List();
         //now calculate...
-        calculate();
+        //calculate();
         
 }
 
@@ -506,10 +519,17 @@ void parser_t::List()
         case T_eof:
             eat_token(T_eof);
             break;
-        default:
+        case T_num:
             F();
             R();
             break;
+        case T_openparen:
+            F();
+            R();
+            break;
+        default:
+           syntax_error(NT_F);
+            break; 
         }
         parsetree.pop();
 }
@@ -525,10 +545,11 @@ void parser_t::F(){
     case T_openparen:
          eat_token(T_openparen);
          List();
-         if(scanner.next_token() == T_closeparen){
-             eat_token(T_closeparen);
-         }
+         F();
          break;
+    case T_closeparen:
+        eat_token(T_closeparen);
+        break;
     default:
             syntax_error(NT_F);
             break;
@@ -548,9 +569,9 @@ void parser_t::R() {
         case T_div:
             Z();
             break;
-        case T_closeparen:
-            Z();
-            break;
+//        case T_closeparen:
+//            Z();
+//            break;
         case T_plus:
             operation.push(T_plus);
             eat_token(T_plus);
@@ -578,9 +599,9 @@ void parser_t::Z() {
             eat_token(T_comma);
             List();
             break;
-        case T_closeparen:
-            parsetree.drawepsilon();
-            break;
+//        case T_closeparen:
+//            parsetree.drawepsilon();
+//            break;
          case T_times:
              operation.push(T_times);
              eat_token(T_times);
@@ -598,6 +619,13 @@ void parser_t::Z() {
             break;
     }
     parsetree.pop();
+}
+
+void A(){
+    
+}
+void B(){
+
 }
 
 void parser_t::calculate(){

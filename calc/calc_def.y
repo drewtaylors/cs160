@@ -9,7 +9,7 @@
 %%
 
 S    :    F R {printf("parsed expresion\n");}
-       | 'A'
+       | 'E'
        ;
 
 R    :    '+' F R 
@@ -19,13 +19,20 @@ R    :    '+' F R
 
 Z    :    '*' F R
         | '/' F R
-        | 
         | ',' S
         ;
 
-F    :  | 'n' 
-        | '(' S ')'
+F    :  'n' 
+        | '(' F A ')'
         ;
+
+A   :   '+' F A
+        | '-' F A
+        | B
+
+B   :   '*' F A
+        | '/' F A
+        |
 
 %%
 

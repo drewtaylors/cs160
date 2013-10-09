@@ -2,34 +2,8 @@ digraph G { page="8.5,11"; size="7.5, 10"
 	"List_1" [label="List"]
 	"F_2" [label="F"]
 	"List_1" -> "F_2"
-	"num_3" [label="num",style=filled,fillcolor=powderblue]
-	"F_2" -> "num_3"
-	"R_4" [label="R"]
-	"List_1" -> "R_4"
-	"-_5" [label="-",style=filled,fillcolor=powderblue]
-	"R_4" -> "-_5"
-	"F_6" [label="F"]
-	"R_4" -> "F_6"
-	"num_7" [label="num",style=filled,fillcolor=powderblue]
-	"F_6" -> "num_7"
-	"R_8" [label="R"]
-	"R_4" -> "R_8"
-	"Z_9" [label="Z"]
-	"R_8" -> "Z_9"
-	"*_10" [label="*",style=filled,fillcolor=powderblue]
-	"Z_9" -> "*_10"
-	"F_11" [label="F"]
-	"Z_9" -> "F_11"
-	"num_12" [label="num",style=filled,fillcolor=powderblue]
-	"F_11" -> "num_12"
-	"R_13" [label="R"]
-	"Z_9" -> "R_13"
-	"Z_14" [label="Z"]
-	"R_13" -> "Z_14"
-	",_15" [label=",",style=filled,fillcolor=powderblue]
-	"Z_14" -> ",_15"
-	"List_16" [label="List"]
-	"Z_14" -> "List_16"
-	"eof_17" [label="eof",style=filled,fillcolor=powderblue]
-	"List_16" -> "eof_17"
-};
+	"(_3" [label="(",style=filled,fillcolor=powderblue]
+	"F_2" -> "(_3"
+	"List_4" [label="List"]
+	"F_2" -> "List_4"
+syntax error: found ) in parsing F - line 1
