@@ -63,7 +63,7 @@
 
 /* Copy the first part of user declarations.  */
 /* Line 336 of yacc.c  */
-#line 2 "calc_def.y"
+#line 1 "calc_def.y"
 
 	#include <stdio.h>
 	int yylex(void);
@@ -423,8 +423,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    11,    11,    12,    15,    16,    17,    20,    21,    22,
-      25,    26,    29,    30,    31,    33,    34,    35
+       0,    10,    10,    11,    14,    15,    16,    19,    20,    21,
+      24,    25,    28,    29,    30,    33,    34,    35
 };
 #endif
 
@@ -1354,7 +1354,7 @@ yyreduce:
     {
         case 2:
 /* Line 1787 of yacc.c  */
-#line 11 "calc_def.y"
+#line 10 "calc_def.y"
     {printf("parsed expresion\n");}
     break;
 
@@ -1590,7 +1590,7 @@ yyreturn:
 
 
 /* Line 2048 of yacc.c  */
-#line 37 "calc_def.y"
+#line 38 "calc_def.y"
 
 
 void yyerror(char *s) {
