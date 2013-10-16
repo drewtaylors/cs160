@@ -129,11 +129,10 @@ class scanner_t {
         
         void tokenizeString();
         void scanNumber(string num);
-        void getCurrentToken();
+        
         vector<string> strTokens;
-  //vector<token_type>tokens;
-  token_type tokens;
-    int tokenPosition=0;
+        vector<token_type>tokens;
+        int tokenPosition=0;
         int strTokenPosition=0;
         int lineNumber=1;
 };
@@ -145,9 +144,11 @@ token_type scanner_t::next_token()
 	// actually consume a token - you should be able to call next_token()
 	// multiple times without actually reading any more tokens in
   
-  getCurrentToken();
+    if(strTokens.size() == 0){
+        return T_eof;
+    }
    
-    return tokens;
+    return tokens.at(tokenPosition);
    
 }
 
@@ -166,26 +167,22 @@ void scanner_t::eat_token(token_type c)
         strTokenPosition++;
         lineNumber++;
     }
-    if(c != tokens)
+    if(c != tokens.at(tokenPosition))
         mismatch_error(c);
     else{
-      //tokenPosition++;
+                tokenPosition++;
                 strTokenPosition++;
     }
 }
 
 scanner_t::scanner_t()
 {
-}
-
-void scanner_t::getCurrentToken(){
-
         // WRITEME
     
     char c;
     string token;
 
-    // while ( (c = getchar()) != EOF ){
+    while ( (c = getchar()) != EOF ){
         if(c=='0' || c=='1' || c=='2' || c=='3' || c=='4' || c=='5' ||
            c=='6' || c=='7' || c=='8' || c=='9'){
             token+=c;
@@ -212,11 +209,7 @@ void scanner_t::getCurrentToken(){
             strTokens.push_back(token);
             token.clear();
         }
-	else if(c== EOF){
-	  token+=c;
-	  strTokens.push_back("EOF");
-	}
-        else if(c!=' '){
+        else if(c!=' ' && c!=EOF){
                if(c=='+'||c=='-'||c=='*'|| c=='/'||c==','||c=='('||c==')'){
                 token+=c;
                 strTokens.push_back(token);
@@ -225,8 +218,8 @@ void scanner_t::getCurrentToken(){
                else scan_error(c);
         }
         //else not a valid char
-	//}
-	//strTokens.push_back("EOF");
+    }
+    strTokens.push_back("EOF");
 //    for(int i=0;i<strTokens.size();i++)
 //        printf("strTokens: %s \n", strTokens.at(i).c_str());
 //    
@@ -235,14 +228,14 @@ void scanner_t::getCurrentToken(){
 }
 void scanner_t::tokenizeString(){
     for(int i=0;i<strTokens.size();i++){
-           if(strTokens.at(i) ==  "+" ) tokens = T_plus;
-           else if(strTokens.at(i) ==  "-" ) tokens = T_minus;
-           else if(strTokens.at(i) ==  "*" ) tokens = T_times;
-           else if(strTokens.at(i) ==  "/" ) tokens = T_div;
-           else if(strTokens.at(i) ==  "," ) tokens = T_comma;
-           else if(strTokens.at(i) ==  "(" ) tokens = T_openparen;
-           else if(strTokens.at(i) ==  ")" ) tokens = T_closeparen;
-           else if(strTokens.at(i) ==  "EOF")tokens = T_eof;
+           if(strTokens.at(i) ==  "+" ) tokens.push_back(T_plus);
+           else if(strTokens.at(i) ==  "-" ) tokens.push_back(T_minus);
+           else if(strTokens.at(i) ==  "*" ) tokens.push_back(T_times);
+           else if(strTokens.at(i) ==  "/" ) tokens.push_back(T_div);
+           else if(strTokens.at(i) ==  "," ) tokens.push_back(T_comma);
+           else if(strTokens.at(i) ==  "(" ) tokens.push_back(T_openparen);
+           else if(strTokens.at(i) ==  ")" ) tokens.push_back(T_closeparen);
+           else if(strTokens.at(i) ==  "EOF")tokens.push_back(T_eof);
            //its a number or error
            else if(strTokens.at(i) != "\n") scanNumber(strTokens.at(i));       
     }
@@ -273,7 +266,7 @@ void scanner_t::scanNumber(string num){
    float f = atof(num.c_str());
    if(f < 0 || f > (pow(2,31) -1) )
         scan_error(num[0]);
-   tokens=T_num;
+   tokens.push_back(T_num);
 }
 
 int scanner_t::get_line()
@@ -461,7 +454,7 @@ class parser_t {
         void B();
         
         void calculate();
-	
+
 
   public:
 	void parse();
