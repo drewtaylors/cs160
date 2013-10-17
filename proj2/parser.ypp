@@ -26,6 +26,37 @@
 %token INTARRAY
 %token RETURN
 
+%token EQEQ
+%token GT
+%token GTE
+%token LT
+%token LTE
+%token NE
+%token ANDAND
+%token OROR
+%token NOT
+%token PLUS
+%token MINUS
+%token TIMES
+%token DIVIDE
+
+%token TRUE
+%token FALSE
+
+%token IDENTIFIER
+
+%token SEMICOLON
+%token COLON
+%token COMMA
+%token ABSOLUTEVALUE
+%token LEFTBRACE
+%token RIGHTBRACE
+%token LEFTPAREN
+%token RIGHTPAREN
+%token LEFTBRACKET
+%token RIGHTBRACKET
+%token ASSIGNMENT
+
 
 %%
 

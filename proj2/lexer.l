@@ -33,50 +33,36 @@ function                     { return FUNCTION;}
 intarray                     { return INTARRAY;}
 return                       { return RETURN;  }
 
-==                           { return EQEQ }
->                            { return GT }
->=                           { return GTE }
-<                            { return LT }
-<=                           { return LTE }
-!=                           { return NE }
-&&                           { return ANDAND }
-||                           { return OROR }
-!                            { return NOT }
-+                            { return PLUS }
--                            { return MINUS }
-*                            { return TIMES }
-/                            { return DIVIDE }
+"=="                         { return EQEQ; }
+">"                          { return GT; }
+">="                         { return GTE; }
+"<"                          { return LT; }
+"<="                         { return LTE; }
+"!="                         { return NE; }
+"&&"                         { return ANDAND; }
+"||"                         { return OROR; }
+"!"                          { return NOT; }
+"+"                          { return PLUS; }
+"-"                          { return MINUS; }
+"*"                          { return TIMES; }
+"/"                          { return DIVIDE; }
 
-true                         { return TRUE }
-false                        { return FALSE }
+true                         { return TRUE; }
+false                        { return FALSE; }
 
-[0]                          { return INTEGER }
-[1-9][0-9]*                  { return INTEGER }
-[0x|0X][0-9A-F]              { return INTEGER }
-[0][0-7]+                    { return INTEGER }
-[0-1]+[b]                    { return INTEGER }
+[a-zA-Z][a-zA-Z]*            { return IDENTIFIER;}
 
-[a-zA-Z][a-zA-Z]*            { return IDENTIFIER}
-
-;                            { return SEMICOLON}
-:                            { return COLON }
-,                            { return COMMA }
-|                            { return ABSOLUTEVALUE}
-{                            { return LEFTBRACE
-}                            { return RIGHTBRACE }
-(                            { return LEFTPAREN }
-)                            { return RIGHTPAREN }
-[                            { return LEFTBRACKET }
-]                            { return RIGHTBRACKET }
-=                            { return ASSIGNMENT }
-
-["[$"] [^"$]"] ["$]"]        { }
-
-Main()                       { return MAIN }
-
-$                            {return EOF}
-
-
+";"                          { return SEMICOLON;}
+":"                          { return COLON; }
+","                          { return COMMA; }
+"|"                          { return ABSOLUTEVALUE;}
+"{"                          { return LEFTBRACE;}
+"}"                          { return RIGHTBRACE; }
+"("                          { return LEFTPAREN; }
+")"                          { return RIGHTPAREN; }
+"["                          { return LEFTBRACKET; }
+"]"                          { return RIGHTBRACKET; }
+"="                          { return ASSIGNMENT; }
 
 [ \t\n]                      ; /* skip whitespace */
 

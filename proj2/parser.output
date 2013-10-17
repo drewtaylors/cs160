@@ -9,6 +9,33 @@ Terminals unused in grammar
    FUNCTION
    INTARRAY
    RETURN
+   EQEQ
+   GT
+   GTE
+   LT
+   LTE
+   NE
+   ANDAND
+   OROR
+   NOT
+   PLUS
+   MINUS
+   TIMES
+   DIVIDE
+   TRUE
+   FALSE
+   IDENTIFIER
+   SEMICOLON
+   COLON
+   COMMA
+   ABSOLUTEVALUE
+   LEFTBRACE
+   RIGHTBRACE
+   LEFTPAREN
+   RIGHTPAREN
+   LEFTBRACKET
+   RIGHTBRACKET
+   ASSIGNMENT
 
 
 State 15 conflicts: 4 shift/reduce
@@ -53,15 +80,42 @@ VAR (263)
 FUNCTION (264)
 INTARRAY (265)
 RETURN (266)
+EQEQ (267)
+GT (268)
+GTE (269)
+LT (270)
+LTE (271)
+NE (272)
+ANDAND (273)
+OROR (274)
+NOT (275)
+PLUS (276)
+MINUS (277)
+TIMES (278)
+DIVIDE (279)
+TRUE (280)
+FALSE (281)
+IDENTIFIER (282)
+SEMICOLON (283)
+COLON (284)
+COMMA (285)
+ABSOLUTEVALUE (286)
+LEFTBRACE (287)
+RIGHTBRACE (288)
+LEFTPAREN (289)
+RIGHTPAREN (290)
+LEFTBRACKET (291)
+RIGHTBRACKET (292)
+ASSIGNMENT (293)
 
 
 Nonterminals, with rules where they appear
 
-$accept (20)
+$accept (47)
     on left: 0
-List (21)
+List (48)
     on left: 1 2, on right: 0 1
-Expr (22)
+Expr (49)
     on left: 3 4 5 6 7 8, on right: 1 2 3 4 5 6 8
 
 
