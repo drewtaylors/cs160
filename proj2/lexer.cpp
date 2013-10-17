@@ -788,62 +788,62 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 26 "lexer.l"
-{ return BOOL }
+{ return BOOL;    }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 27 "lexer.l"
-{ return ELSE }
+{ return ELSE;    }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 28 "lexer.l"
-{ return IF   }
+{ return IF;      }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 29 "lexer.l"
-{ return INT  }
+{ return INT;     }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 30 "lexer.l"
-{ return FOR  }
+{ return FOR;     }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 31 "lexer.l"
-{ return VAR  }
+{ return VAR;     }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 32 "lexer.l"
-{ return FUNCTION}
+{ return FUNCTION;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 33 "lexer.l"
-{ return INTARRAY}
+{ return INTARRAY;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 34 "lexer.l"
-{ return RETURN  }
+{ return RETURN;  }
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 38 "lexer.l"
+#line 40 "lexer.l"
 ; /* skip whitespace */
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 40 "lexer.l"
+#line 42 "lexer.l"
 yyerror((char *) "invalid character");
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 42 "lexer.l"
+#line 44 "lexer.l"
 ECHO;
 	YY_BREAK
 #line 850 "lexer.cpp"
@@ -1852,7 +1852,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 42 "lexer.l"
+#line 44 "lexer.l"
 
 
 

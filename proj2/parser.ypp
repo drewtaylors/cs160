@@ -15,6 +15,18 @@
 /* WRITE ME: put all your type definitions here*/
 /* WRITE ME: put all your precedence/associativity rules here*/
 
+
+%token BOOL
+%token ELSE
+%token IF
+%token INT
+%token FOR
+%token VAR
+%token FUNCTION
+%token INTARRAY
+%token RETURN
+
+
 %%
 
 /* WRITE ME: This is the language from Project 1 (Calculator). You need

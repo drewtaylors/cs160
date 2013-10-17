@@ -1,3 +1,16 @@
+Terminals unused in grammar
+
+   BOOL
+   ELSE
+   IF
+   INT
+   FOR
+   VAR
+   FUNCTION
+   INTARRAY
+   RETURN
+
+
 State 15 conflicts: 4 shift/reduce
 State 16 conflicts: 4 shift/reduce
 State 17 conflicts: 4 shift/reduce
@@ -31,15 +44,24 @@ $end (0) 0
 '/' (47) 6
 'n' (110) 7
 error (256)
+BOOL (258)
+ELSE (259)
+IF (260)
+INT (261)
+FOR (262)
+VAR (263)
+FUNCTION (264)
+INTARRAY (265)
+RETURN (266)
 
 
 Nonterminals, with rules where they appear
 
-$accept (11)
+$accept (20)
     on left: 0
-List (12)
+List (21)
     on left: 1 2, on right: 0 1
-Expr (13)
+Expr (22)
     on left: 3 4 5 6 7 8, on right: 1 2 3 4 5 6 8
 
 
