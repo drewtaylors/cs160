@@ -9,13 +9,6 @@
 void yyerror(const char *);
 %}
 
-/* 
-  WRITE ME: put any definitions you need here.  Add your own regular expressions
-            below for ALL tokens defined in the manual. You can choose not to use
-	    definitions here.
-
-*/
-
 /*
   The example below is very simple, but it shows almost everything you will need
   to do for this first part.
@@ -30,8 +23,60 @@ void yyerror(const char *);
 
 %%
 
-[\*\(\),\+\-\*\/]              { return *yytext; }
-[0-9][0-9]*\.[0-9][0-9]*       { return 'n'; }
+"bool"                         { return BOOL }
+"else"                         { return ELSE }
+"if"                           { return IF   }
+"int"                          { return INT  }
+"for"                          { return FOR  }
+"var"                          { return VAR  }
+"function"                     { return FUNCTION}
+"intarray"                     { return INTARRAY}
+"return"                       { return RETURN  }
+
+"=="                           { return EQEQ    }
+">"                            { return GT      }
+">="                           { return GTE     }
+"<"                            { return LT      }
+"<="                           { return LTE     }
+"!="                           { return NE      }
+"&&"                           { return ANDAND  }
+"||"                           { return OROR    }
+"!"                            { return NOT     }
+"+"                            { return PLUS    }
+"-"                            { return MINUS   }
+"*"                            { return TIMES   }
+"/"                            { return DIVIDE  }
+
+"true"                         { return TRUE    }
+"false"                        { return FALSE   }
+
+[0]                            { return INTEGER }
+[1-9][0-9]*                    { return INTEGER }
+[0x|0X][0-9A-F]                { return INTEGER }
+[0][0-7]+                      { return INTEGER }
+[0-1]+[b]                      { return INTEGER }
+
+[a-zA-Z][a-zA-Z]*              { return IDENTIFIER}
+
+";"                            { return SEMICOLON}
+":"                            { return COLON    }
+","                            { return COMMA    }
+"|"                            { return ABSOLUTEVALUE}
+"{"                            { return LEFTBRACE
+"}"                            { return RIGHTBRACE   }
+"("                            { return LEFTPAREN    }
+")"                            { return RIGHTPAREN   }
+"["                            { return LEFTBRACKET  }
+"]"                            { return RIGHTBRACKET }
+"="                            { return ASSIGNMENT   }
+
+["[$"] [^"$]"] ["$]"]          {    }
+
+"Main()"                       { return MAIN         }
+
+$                              {return EOF}
+
+
 [ \t\n]                        ; /* skip whitespace */
 
 .                     yyerror((char *) "invalid character");
