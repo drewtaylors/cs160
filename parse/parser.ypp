@@ -1,0 +1,199 @@
+%{
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <iostream>
+	#define YYDEBUG 1
+
+	int yylex(void);
+	void yyerror(const char *);
+%}
+
+/* Enables verbose error messages */
+%error-verbose
+
+/* WRITE ME: put all your token definitions here*/
+/* WRITE ME: put all your type definitions here*/
+/* WRITE ME: put all your precedence/associativity rules here*/
+
+
+%token BOOL
+%token ELSE
+%token IF
+%token INT
+%token FOR
+%token VAR
+%token FUNCTION
+%token INTARRAY
+%token RETURN
+
+%token EQEQ
+%token GT
+%token GTE
+%token LT
+%token LTE
+%token NE
+%token ANDAND
+%token OROR
+%token NOT
+%token PLUS
+%token MINUS
+%token TIMES
+%token DIVIDE
+
+%token TRUE
+%token FALSE
+
+%token IDENTIFIER
+
+%token SEMICOLON
+%token COLON
+%token COMMA
+%token ABSOLUTEVALUE
+%token LEFTBRACE
+%token RIGHTBRACE
+%token LEFTPAREN
+%token RIGHTPAREN
+%token LEFTBRACKET
+%token RIGHTBRACKET
+%token ASSIGNMENT
+
+
+%%
+
+/* WRITE ME: This is the language from Project 1 (Calculator). You need
+			 to put the productions for the grammar for the
+			 language for this project here*/
+
+Start   : F FUNC_
+        |
+        ;
+
+FUNC_   : F FUNC_
+        | 
+        ;
+
+F       : FUNCTION IDENTIFIER LEFTPAREN P_L RIGHTPAREN COLON
+          R_T LEFTBRACE B_O_F RIGHTBRACE
+        ;
+
+P_L     : 
+        |IDENTIFIER COLON TYPE COMMA P_L
+        ;
+
+TYPE    : INT
+        | BOOL
+        ;
+
+INT_ARRAY : INTARRAY LEFTBRACKET INTEGER RIGHTBRACKET
+          ;
+
+R_T     : TYPE
+        ;
+
+B_O_F   : VAR_DECLERATIONS BODY_CHOICE RETURN_
+        ;
+
+BODY_CHOICE   : F
+              | STATEMENTS_
+              ;
+
+VAR_DECLERATIONS : VAR IDENTIFIER MULT_DEC TYPE SEMICOLON
+                 ;
+
+MULT_DEC :   COMMA IDENTIFIER MULTI_DEC
+            |COMMA INT_ARRAY MULT_DEC
+            |
+            ;
+
+STATEMENTS_  : ASIGN_MENT SEMICOLON 
+             | FUNCTION_CALL SEMICOLON
+             | IF_
+             | IF_ELSE
+             | FOR_
+             |
+             ;
+
+RETURN_     : RETURN EXPR_ESSION SEMICOLON
+            ;
+
+IF_         : IF LEFTPAREN EXPRESSION RIGHTPAREN LEFTBRACE STATEMENT RIGHTBRACE
+
+IF_ELSE     : IF_ ELSE LEFTBRACE STATEMENTS_ RIGHTBRACE
+
+FOR_        : FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE STATEMENT RIGHTBRACE
+            ;
+
+FOR_PARAMS  : FOR_ASIGN LEFTPAREN EXPRESSION RIGHTPAREN FOR_ASIGN
+            ;
+
+FOR_ASIGN   :   ASIGN_MENT
+             |
+             ;
+
+ASIGN_MENT  : IDNETIFIER ASSIGNMENT EXPR_ESSION
+            | INT_ARRAY ASSIGNMENT EXPR_ESSION
+            ;
+
+EXPR_ESSION : MULT_EXPRESSION
+            | LEFTPAREN MULT_EXPRESSION RIGHTPAREN
+            ;
+
+SINGLE_EXPRESSION : MINUS INTEGER
+                  | INTEGER
+                  | TRUE
+                  | NOT TRUE
+                  | FALSE
+                  | NOT FALSE
+                  | IDENTIFIER
+                  | INT_ARRAY
+                  ;
+
+INT_ARRAY         : IDENTIFIER LEFTBRACKET INTEGER RIGHTBRACKET
+                  ;
+                  
+MULT_EXPRESSION   : SINGLE_EXPRESSION OPE_RATOR
+                  ;
+
+OPE_RATOR         : 
+                  | PLUS EXPR_ESSION
+                  | MINUS EXPR_ESSION
+                  | TIMES EXPR_ESSION
+                  | DIVIDE EXPR_ESSION
+                  | OROR EXPR_ESSION
+                  | ANDAND EXPR_ESSION
+                  | EQEQ EXPR_ESSION
+                  | GT EXPR_ESSION
+                  | GTE EXPR_ESSION
+                  | LT EXPR_ESSION
+                  | LTE EXPR_ESSION
+                  | NE EXPR_ESSION
+                  ;
+
+FUNCTION_CALL   : IDENTIFIER ASSIGNMENT LEFTPAREN IN_PARAMS RIGHTPAREN
+                | INT_ARRAY  ASSIGNMENT LEFTPAREN IN_PARAMS RIGHTPAREN
+                ;
+
+IN_PARAMS       : MINUS INTEGER NEXT_PARAM
+                | INTEGER NEXT_PARAM
+                | TRUE NEXT_PARAM
+                | NOT TRUE NEXT_PARAM
+                | FALSE NEXT_PARAM
+                | NOT FALSE NEXT_PARAM
+                | NEXT_PARAM
+                ;
+
+NEXT_PARAM  :   COMMA IN_PARAMS
+            |
+            ;
+
+
+%%
+
+/*You shouldn't have to do anything past this*/
+
+extern int yylineno;
+
+void yyerror(const char *s) {
+	fprintf(stderr, "%s at line %d\n", s, yylineno);
+	exit(0);
+}
