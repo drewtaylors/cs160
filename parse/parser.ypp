@@ -15,6 +15,7 @@
 /* WRITE ME: put all your type definitions here*/
 /* WRITE ME: put all your precedence/associativity rules here*/
 
+%start Start
 
 %token BOOL
 %token ELSE
@@ -57,6 +58,12 @@
 %token LEFTBRACKET
 %token RIGHTBRACKET
 %token ASSIGNMENT
+
+%right ASSIGNMENT
+%left  PLUS
+%left  MINUS
+%left  TIMES
+%left  DIVIDE
 
 
 %%
@@ -141,13 +148,17 @@ EXPR_ESSION : MULT_EXPRESSION
             ;
 
 SINGLE_EXPRESSION : MINUS INTEGER
+                  | ABSOLUTEVALUE MINUS INTEGER ABSOLUTEVALUE
                   | INTEGER
+                  | ABSOLUTEVALUE INTEGER ABSOLUTEVALUE
                   | TRUE
                   | NOT TRUE
                   | FALSE
                   | NOT FALSE
                   | IDENTIFIER
+                  | ABSOLUTEVALUE IDENTIFIER ABSOLUTEVALUE
                   | INT_ARRAY
+                  | ABSOLUTEVALUE INT_ARRAY ABSOLUTEVALUE
                   ;
 
 INT_ARRAY         : IDENTIFIER LEFTBRACKET INTEGER RIGHTBRACKET
@@ -171,8 +182,8 @@ OPE_RATOR         :
                   | NE EXPR_ESSION
                   ;
 
-FUNCTION_CALL   : IDENTIFIER ASSIGNMENT LEFTPAREN IN_PARAMS RIGHTPAREN
-                | INT_ARRAY  ASSIGNMENT LEFTPAREN IN_PARAMS RIGHTPAREN
+FUNCTION_CALL   : IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
+                | INT_ARRAY  ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
                 ;
 
 IN_PARAMS       : MINUS INTEGER NEXT_PARAM
