@@ -1,11 +1,16 @@
-function foo() : int
+function foo(i:int, j:int, k:int) : int
 		{
-			return 0;
-		}
+			var total : int; 
+			
+			function square(t:int) : int 
+			{
+				var temp : int;
+				temp = t * t;
+				return 0;
+			}
+			
+			total = 1;
+			total=2;
 
-		function Main() : int
-		{
-			var a : int;
-			a = foo();
 			return 0;
 		}

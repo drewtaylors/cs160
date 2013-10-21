@@ -385,15 +385,15 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[92] =
     {   0,
-        0,    0,   45,   43,   42,   42,   18,   43,   37,   38,
-       21,   19,   33,   20,   22,   26,   27,   27,   32,   31,
-       13,   41,   11,   25,   25,   39,   40,   25,   25,   25,
-       25,   25,   25,   25,   35,   34,   36,   15,   16,   28,
-       28,   28,   30,   27,   27,   14,   10,   12,   25,   25,
-       25,   25,   25,   25,   25,    3,   25,   25,   25,   25,
-       17,   29,   29,   25,   25,   25,    5,   25,    4,   25,
-       25,    6,    1,    2,   25,   25,   25,   25,   23,   24,
-       25,   25,   25,   25,   25,    9,   25,   25,    7,    8,
+        0,    0,   45,   43,   42,   42,   18,   43,   36,   37,
+       21,   19,   32,   20,   22,   25,   26,   26,   31,   30,
+       13,   40,   11,   41,   41,   38,   39,   41,   41,   41,
+       41,   41,   41,   41,   34,   33,   35,   15,   16,   27,
+       27,   27,   29,   26,   26,   14,   10,   12,   41,   27,
+       41,   41,   41,   41,   41,    3,   41,   41,   41,   41,
+       17,   28,   28,   41,   41,   41,    5,   41,    4,   41,
+       41,    6,    1,    2,   41,   41,   41,   41,   23,   24,
+       41,   41,   41,   41,   41,    9,   41,   41,    7,    8,
         0
 
     } ;
@@ -957,102 +957,102 @@ YY_RULE_SETUP
 case 25:
 YY_RULE_SETUP
 #line 53 "lexer.l"
-{ return IDENTIFIER;}
+{ return INTEGER; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 55 "lexer.l"
+#line 54 "lexer.l"
 { return INTEGER; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 56 "lexer.l"
+#line 55 "lexer.l"
 { return INTEGER; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 57 "lexer.l"
+#line 56 "lexer.l"
 { return INTEGER; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 58 "lexer.l"
+#line 57 "lexer.l"
 { return INTEGER; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 59 "lexer.l"
-{ return INTEGER; }
+{ return SEMICOLON;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 61 "lexer.l"
-{ return SEMICOLON;}
+#line 60 "lexer.l"
+{ return COLON; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 62 "lexer.l"
-{ return COLON; }
+#line 61 "lexer.l"
+{ return COMMA; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 63 "lexer.l"
-{ return COMMA; }
+#line 62 "lexer.l"
+{ return ABSOLUTEVALUE;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 64 "lexer.l"
-{ return ABSOLUTEVALUE;}
+#line 63 "lexer.l"
+{ return LEFTBRACE;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 65 "lexer.l"
-{ return LEFTBRACE;}
+#line 64 "lexer.l"
+{ return RIGHTBRACE; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 66 "lexer.l"
-{ return RIGHTBRACE; }
+#line 65 "lexer.l"
+{ return LEFTPAREN; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 67 "lexer.l"
-{ return LEFTPAREN; }
+#line 66 "lexer.l"
+{ return RIGHTPAREN; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 68 "lexer.l"
-{ return RIGHTPAREN; }
+#line 67 "lexer.l"
+{ return LEFTBRACKET; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 69 "lexer.l"
-{ return LEFTBRACKET; }
+#line 68 "lexer.l"
+{ return RIGHTBRACKET; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 70 "lexer.l"
-{ return RIGHTBRACKET; }
+#line 69 "lexer.l"
+{ return ASSIGNMENT; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 71 "lexer.l"
-{ return ASSIGNMENT; }
+#line 73 "lexer.l"
+{ return IDENTIFIER;}
 	YY_BREAK
 case 42:
 /* rule 42 can match eol */
 YY_RULE_SETUP
-#line 73 "lexer.l"
+#line 75 "lexer.l"
 ; /* skip whitespace */
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 75 "lexer.l"
+#line 77 "lexer.l"
 yyerror((char *) "invalid character");
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 77 "lexer.l"
+#line 79 "lexer.l"
 ECHO;
 	YY_BREAK
 #line 1059 "lexer.cpp"
@@ -2061,7 +2061,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 77 "lexer.l"
+#line 79 "lexer.l"
 
 
 

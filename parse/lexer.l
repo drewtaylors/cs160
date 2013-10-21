@@ -50,8 +50,6 @@ return                       { return RETURN;  }
 true                         { return TRUE; }
 false                        { return FALSE; }
 
-[a-zA-Z][a-zA-Z0-9]*         { return IDENTIFIER;}
-
 [0]                          { return INTEGER; }
 [1-9][0-9]*                  { return INTEGER; }
 [0x|0X][0-9A-F]              { return INTEGER; }
@@ -69,6 +67,10 @@ false                        { return FALSE; }
 "["                          { return LEFTBRACKET; }
 "]"                          { return RIGHTBRACKET; }
 "="                          { return ASSIGNMENT; }
+
+
+
+[a-zA-Z][a-zA-Z0-9]*         { return IDENTIFIER;}
 
 [ \t\n]                      ; /* skip whitespace */
 

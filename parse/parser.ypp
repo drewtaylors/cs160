@@ -105,9 +105,12 @@ R_T     : TYPE
 B_O_F   : VAR_DECLERATIONS BODY_CHOICE RETURN_
         ;
 
-BODY_CHOICE   : F
-              | STATEMENTS_
+BODY_CHOICE   : F BODY_STATEMENTS
+              | BODY_STATEMENTS
               ;
+BODY_STATEMENTS :   STATEMENTS_ BODY_STATEMENTS
+                |
+                ;
 
 VAR_DECLERATIONS : VAR IDENTIFIER MULT_DEC COLON TYPE SEMICOLON
                  |
@@ -123,7 +126,6 @@ STATEMENTS_  : ASIGN_MENT SEMICOLON
              | IF_
              | IF_ELSE
              | FOR_
-             |
              ;
 
 RETURN_     : RETURN EXPR_ESSION SEMICOLON
