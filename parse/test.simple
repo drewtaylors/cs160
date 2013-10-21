@@ -1,0 +1,11 @@
+function foo() : int
+		{
+			return 0;
+		}
+
+		function Main() : int
+		{
+			var a : int;
+			a = foo();
+			return 0;
+		}

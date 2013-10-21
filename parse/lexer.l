@@ -50,7 +50,7 @@ return                       { return RETURN;  }
 true                         { return TRUE; }
 false                        { return FALSE; }
 
-[a-zA-Z][a-zA-Z]*            { return IDENTIFIER;}
+[a-zA-Z][a-zA-Z0-9]*         { return IDENTIFIER;}
 
 [0]                          { return INTEGER; }
 [1-9][0-9]*                  { return INTEGER; }

@@ -84,9 +84,13 @@ F       : FUNCTION IDENTIFIER LEFTPAREN P_L RIGHTPAREN COLON
           R_T LEFTBRACE B_O_F RIGHTBRACE
         ;
 
-P_L     : 
-        |IDENTIFIER COLON TYPE COMMA P_L
+P_L     : IDENTIFIER COLON TYPE MORE_PARAMS
+        |
         ;
+
+MORE_PARAMS : COMMA P_L
+            |
+            ;
 
 TYPE    : INT
         | BOOL
@@ -105,7 +109,7 @@ BODY_CHOICE   : F
               | STATEMENTS_
               ;
 
-VAR_DECLERATIONS : VAR IDENTIFIER MULT_DEC TYPE SEMICOLON
+VAR_DECLERATIONS : VAR IDENTIFIER MULT_DEC COLON TYPE SEMICOLON
                  |
                  ;
 
