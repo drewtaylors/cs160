@@ -1,6 +1,9 @@
 function foo(i:int, j:int, k:int) : int
 		{
-			var total : int; 
+			var total : int;
+			var i : int;
+		var m, n : bool;
+		var o : intarray[100]; 
 			
 			function square(t:int) : int 
 			{
