@@ -97,6 +97,9 @@ MORE_PARAMS : COMMA P_L
 
 TYPE    : INT
         | BOOL
+        ;
+
+TYPE_2  : TYPE
         | INT_ARRAY
         ;
 
@@ -120,7 +123,7 @@ VAR_DECLERATIONS : VAR_DEC VAR_DECLERATIONS
                  |
                  ;
 
-VAR_DEC          : VAR IDENTIFIER MULT_DEC COLON TYPE SEMICOLON
+VAR_DEC          : VAR IDENTIFIER MULT_DEC COLON TYPE_2 SEMICOLON
                  ;
 
 MULT_DEC :   COMMA IDENTIFIER MULT_DEC
