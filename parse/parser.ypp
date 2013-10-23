@@ -59,12 +59,16 @@
 %token RIGHTBRACKET
 %token ASSIGNMENT
 
-%right ASSIGNMENT
-%left  PLUS
-%left  MINUS
-%left  TIMES
-%left  DIVIDE
 
+%left  OROR
+%left  ANDAND
+%left  EQEQ NE
+%left  GT GTE LT LTE 
+%left  PLUS MINUS
+%left  TIMES DIVIDE
+
+%right ASSIGNMENT
+%right NOT
 
 %%
 
@@ -73,7 +77,6 @@
 			 language for this project here*/
 
 Start   : F FUNC_
-        |
         ;
 
 FUNC_   : F FUNC_
@@ -157,18 +160,20 @@ EXPR_ESSION : MULT_EXPRESSION
             | LEFTPAREN MULT_EXPRESSION RIGHTPAREN
             ;
 
-SINGLE_EXPRESSION : MINUS INTEGER
-                  | ABSOLUTEVALUE MINUS INTEGER ABSOLUTEVALUE
+SINGLE_EXPRESSION : MINUS INTEGER %prec NOT
+                  | ABSOLUTEVALUE MINUS INTEGER ABSOLUTEVALUE %prec NOT
                   | INTEGER
                   | ABSOLUTEVALUE INTEGER ABSOLUTEVALUE
                   | TRUE
-                  | NOT TRUE
+                  | NOT TRUE %prec NOT
                   | FALSE
-                  | NOT FALSE
+                  | NOT FALSE %prec NOT
                   | IDENTIFIER
                   | ABSOLUTEVALUE IDENTIFIER ABSOLUTEVALUE
                   | INT_ARRAY
+                  | NOT INT_ARRAY %prec NOT
                   | ABSOLUTEVALUE INT_ARRAY ABSOLUTEVALUE
+                  | ABSOLUTEVALUE NOT INT_ARRAY ABSOLUTEVALUE %prec NOT
                   ;
 
 INT_ARRAY         : IDENTIFIER LEFTBRACKET INTEGER RIGHTBRACKET
@@ -199,9 +204,9 @@ FUNCTION_CALL   : IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPARE
 IN_PARAMS       : MINUS INTEGER NEXT_PARAM
                 | INTEGER NEXT_PARAM
                 | TRUE NEXT_PARAM
-                | NOT TRUE NEXT_PARAM
+                | NOT TRUE NEXT_PARAM %prec NOT
                 | FALSE NEXT_PARAM
-                | NOT FALSE NEXT_PARAM
+                | NOT FALSE NEXT_PARAM %prec NOT
                 | NEXT_PARAM
                 ;
 
