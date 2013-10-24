@@ -1,5 +1,7 @@
+[$ hello world $]
 function cat(): int{
 	   var a: int;
-	   a = (5+(-3));
+	   a = 0x5; [$ heee 
+            $]
 	   return a;
 }

@@ -52,7 +52,7 @@ false                        { return FALSE; }
 
 [0]                          { return INTEGER; }
 [1-9][0-9]*                  { return INTEGER; }
-[0x|0X][0-9A-F]              { return INTEGER; }
+[0][x|X][0-9A-F]             { return INTEGER; }
 [0][0-7]+                    { return INTEGER; }
 [0-1]+[b]                    { return INTEGER; }
 
@@ -67,9 +67,7 @@ false                        { return FALSE; }
 "["                          { return LEFTBRACKET; }
 "]"                          { return RIGHTBRACKET; }
 "="                          { return ASSIGNMENT; }
-
-
-
+"[$"([^\$]|\$[^\]])*"$]"     ;
 [a-zA-Z][a-zA-Z0-9]*         { return IDENTIFIER;}
 
 [ \t\n]                      ; /* skip whitespace */
