@@ -50,11 +50,11 @@ Grammar
 
    31 RETURN_: RETURN EXPR_ESSION SEMICOLON
 
-   32 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE STATEMENTS_ RIGHTBRACE
+   32 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
-   33 IF_ELSE: IF_ ELSE LEFTBRACE STATEMENTS_ RIGHTBRACE
+   33 IF_ELSE: IF_ ELSE LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
-   34 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE STATEMENTS_ RIGHTBRACE
+   34 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
    35 FOR_PARAMS: FOR_ASIGN LEFTPAREN EXPR_ESSION RIGHTPAREN FOR_ASIGN
 
@@ -185,7 +185,7 @@ B_O_F (50)
 BODY_CHOICE (51)
     on left: 16 17, on right: 15
 BODY_STATEMENTS (52)
-    on left: 18 19, on right: 16 17 18
+    on left: 18 19, on right: 16 17 18 32 33 34
 VAR_DECLERATIONS (53)
     on left: 20 21, on right: 15 20
 VAR_DEC (54)
@@ -193,7 +193,7 @@ VAR_DEC (54)
 MULT_DEC (55)
     on left: 23 24 25, on right: 22 23 24
 STATEMENTS_ (56)
-    on left: 26 27 28 29 30, on right: 18 32 33 34
+    on left: 26 27 28 29 30, on right: 18
 RETURN_ (57)
     on left: 31, on right: 15
 IF_ (58)
@@ -501,14 +501,14 @@ state 29
 
 state 30
 
-   32 IF_: IF . LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE STATEMENTS_ RIGHTBRACE
+   32 IF_: IF . LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
     LEFTPAREN  shift, and go to state 47
 
 
 state 31
 
-   34 FOR_: FOR . LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE STATEMENTS_ RIGHTBRACE
+   34 FOR_: FOR . LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
     LEFTPAREN  shift, and go to state 48
 
@@ -599,7 +599,7 @@ state 38
 state 39
 
    28 STATEMENTS_: IF_ .
-   33 IF_ELSE: IF_ . ELSE LEFTBRACE STATEMENTS_ RIGHTBRACE
+   33 IF_ELSE: IF_ . ELSE LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
     ELSE  shift, and go to state 57
 
@@ -661,7 +661,7 @@ state 46
 
 state 47
 
-   32 IF_: IF LEFTPAREN . EXPR_ESSION RIGHTPAREN LEFTBRACE STATEMENTS_ RIGHTBRACE
+   32 IF_: IF LEFTPAREN . EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
     INTARRAY       shift, and go to state 32
     NOT            shift, and go to state 63
@@ -681,7 +681,7 @@ state 47
 
 state 48
 
-   34 FOR_: FOR LEFTPAREN . FOR_PARAMS RIGHTPAREN LEFTBRACE STATEMENTS_ RIGHTBRACE
+   34 FOR_: FOR LEFTPAREN . FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
     INTARRAY    shift, and go to state 32
     IDENTIFIER  shift, and go to state 75
@@ -793,7 +793,7 @@ state 56
 
 state 57
 
-   33 IF_ELSE: IF_ ELSE . LEFTBRACE STATEMENTS_ RIGHTBRACE
+   33 IF_ELSE: IF_ ELSE . LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
     LEFTBRACE  shift, and go to state 87
 
@@ -946,7 +946,7 @@ state 71
 
 state 72
 
-   32 IF_: IF LEFTPAREN EXPR_ESSION . RIGHTPAREN LEFTBRACE STATEMENTS_ RIGHTBRACE
+   32 IF_: IF LEFTPAREN EXPR_ESSION . RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
     RIGHTPAREN  shift, and go to state 104
 
@@ -998,7 +998,7 @@ state 76
 
 state 77
 
-   34 FOR_: FOR LEFTPAREN FOR_PARAMS . RIGHTPAREN LEFTBRACE STATEMENTS_ RIGHTBRACE
+   34 FOR_: FOR LEFTPAREN FOR_PARAMS . RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
     RIGHTPAREN  shift, and go to state 120
 
@@ -1078,20 +1078,23 @@ state 86
 
 state 87
 
-   33 IF_ELSE: IF_ ELSE LEFTBRACE . STATEMENTS_ RIGHTBRACE
+   33 IF_ELSE: IF_ ELSE LEFTBRACE . BODY_STATEMENTS RIGHTBRACE
 
     IF          shift, and go to state 30
     FOR         shift, and go to state 31
     INTARRAY    shift, and go to state 32
     IDENTIFIER  shift, and go to state 33
 
-    INT_ARRAY      go to state 35
-    STATEMENTS_    go to state 128
-    IF_            go to state 39
-    IF_ELSE        go to state 40
-    FOR_           go to state 41
-    ASIGN_MENT     go to state 42
-    FUNCTION_CALL  go to state 43
+    $default  reduce using rule 19 (BODY_STATEMENTS)
+
+    INT_ARRAY        go to state 35
+    BODY_STATEMENTS  go to state 128
+    STATEMENTS_      go to state 38
+    IF_              go to state 39
+    IF_ELSE          go to state 40
+    FOR_             go to state 41
+    ASIGN_MENT       go to state 42
+    FUNCTION_CALL    go to state 43
 
 
 state 88
@@ -1213,7 +1216,7 @@ state 103
 
 state 104
 
-   32 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN . LEFTBRACE STATEMENTS_ RIGHTBRACE
+   32 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN . LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
     LEFTBRACE  shift, and go to state 136
 
@@ -1507,7 +1510,7 @@ state 119
 
 state 120
 
-   34 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN . LEFTBRACE STATEMENTS_ RIGHTBRACE
+   34 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN . LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
     LEFTBRACE  shift, and go to state 149
 
@@ -1596,7 +1599,7 @@ state 127
 
 state 128
 
-   33 IF_ELSE: IF_ ELSE LEFTBRACE STATEMENTS_ . RIGHTBRACE
+   33 IF_ELSE: IF_ ELSE LEFTBRACE BODY_STATEMENTS . RIGHTBRACE
 
     RIGHTBRACE  shift, and go to state 160
 
@@ -1667,20 +1670,23 @@ state 135
 
 state 136
 
-   32 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE . STATEMENTS_ RIGHTBRACE
+   32 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE . BODY_STATEMENTS RIGHTBRACE
 
     IF          shift, and go to state 30
     FOR         shift, and go to state 31
     INTARRAY    shift, and go to state 32
     IDENTIFIER  shift, and go to state 33
 
-    INT_ARRAY      go to state 35
-    STATEMENTS_    go to state 164
-    IF_            go to state 39
-    IF_ELSE        go to state 40
-    FOR_           go to state 41
-    ASIGN_MENT     go to state 42
-    FUNCTION_CALL  go to state 43
+    $default  reduce using rule 19 (BODY_STATEMENTS)
+
+    INT_ARRAY        go to state 35
+    BODY_STATEMENTS  go to state 164
+    STATEMENTS_      go to state 38
+    IF_              go to state 39
+    IF_ELSE          go to state 40
+    FOR_             go to state 41
+    ASIGN_MENT       go to state 42
+    FUNCTION_CALL    go to state 43
 
 
 state 137
@@ -1769,20 +1775,23 @@ state 148
 
 state 149
 
-   34 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE . STATEMENTS_ RIGHTBRACE
+   34 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE . BODY_STATEMENTS RIGHTBRACE
 
     IF          shift, and go to state 30
     FOR         shift, and go to state 31
     INTARRAY    shift, and go to state 32
     IDENTIFIER  shift, and go to state 33
 
-    INT_ARRAY      go to state 35
-    STATEMENTS_    go to state 165
-    IF_            go to state 39
-    IF_ELSE        go to state 40
-    FOR_           go to state 41
-    ASIGN_MENT     go to state 42
-    FUNCTION_CALL  go to state 43
+    $default  reduce using rule 19 (BODY_STATEMENTS)
+
+    INT_ARRAY        go to state 35
+    BODY_STATEMENTS  go to state 165
+    STATEMENTS_      go to state 38
+    IF_              go to state 39
+    IF_ELSE          go to state 40
+    FOR_             go to state 41
+    ASIGN_MENT       go to state 42
+    FUNCTION_CALL    go to state 43
 
 
 state 150
@@ -1881,7 +1890,7 @@ state 159
 
 state 160
 
-   33 IF_ELSE: IF_ ELSE LEFTBRACE STATEMENTS_ RIGHTBRACE .
+   33 IF_ELSE: IF_ ELSE LEFTBRACE BODY_STATEMENTS RIGHTBRACE .
 
     $default  reduce using rule 33 (IF_ELSE)
 
@@ -1909,14 +1918,14 @@ state 163
 
 state 164
 
-   32 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE STATEMENTS_ . RIGHTBRACE
+   32 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS . RIGHTBRACE
 
     RIGHTBRACE  shift, and go to state 176
 
 
 state 165
 
-   34 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE STATEMENTS_ . RIGHTBRACE
+   34 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS . RIGHTBRACE
 
     RIGHTBRACE  shift, and go to state 177
 
@@ -2012,14 +2021,14 @@ state 175
 
 state 176
 
-   32 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE STATEMENTS_ RIGHTBRACE .
+   32 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE .
 
     $default  reduce using rule 32 (IF_)
 
 
 state 177
 
-   34 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE STATEMENTS_ RIGHTBRACE .
+   34 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE .
 
     $default  reduce using rule 34 (FOR_)
 

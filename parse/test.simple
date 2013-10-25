@@ -1,7 +1,8 @@
 [$ hello world $]
 function cat(): int{
     if(true)  {  
-       
+       total = 5;
+       str = 33;
     } [$ we assume i has been declared $] 
     
 
