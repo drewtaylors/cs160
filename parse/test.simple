@@ -1,10 +1,39 @@
 [$ hello world $]
-function cat(): int{
-    if(true)  {  
-       total = 5;
-       str = 33;
-    } [$ we assume i has been declared $] 
-    
-
-    return a;
+[$ this is my comment 
+$]
+[$ 
+this is 
+my comment 
+$]
+function foo() : int
+{
+    return 0;
 }
+function foo() : bool
+{
+    return 0;
+}
+function foo() : int
+{
+    var a,b,c,d,e : int;
+    var o,a,g,c : intarray[100];
+    var d:intarray[0];
+    function foo(i : int, j : int, k : int) : int
+		{
+			function fee(l : int, m : bool, n : int) : bool
+			{
+				return true;
+			}
+			return 0;
+		}
+    function foo() : int
+    {
+        return 0;
+    }
+    a[4+2] = 5;
+    a = foo();
+    return 0;
+}
+function foo() : int { return 0; }
+    function foo2() : int { return 0; }
+    function f234() : int { return 0; }
