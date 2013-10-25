@@ -50,11 +50,11 @@ return                       { return RETURN;  }
 true                         { return TRUE; }
 false                        { return FALSE; }
 
-[0]                          { return INTEGER; }
-[1-9][0-9]*                  { return INTEGER; }
-[0][x|X][0-9A-F]             { return INTEGER; }
+[0][x|X][0-9A-F]*             { return INTEGER; }
 [0][0-7]+                    { return INTEGER; }
 [0-1]+[b]                    { return INTEGER; }
+[1-9][0-9]*                  { return INTEGER; }
+[0]                          { return INTEGER; }
 
 ";"                          { return SEMICOLON;}
 ":"                          { return COLON; }

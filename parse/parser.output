@@ -107,14 +107,15 @@ Grammar
 
    74 IN_PARAMS: MINUS INTEGER NEXT_PARAM
    75          | INTEGER NEXT_PARAM
-   76          | TRUE NEXT_PARAM
-   77          | NOT TRUE NEXT_PARAM
-   78          | FALSE NEXT_PARAM
-   79          | NOT FALSE NEXT_PARAM
-   80          | NEXT_PARAM
+   76          | INT_ARRAY_EXP NEXT_PARAM
+   77          | TRUE NEXT_PARAM
+   78          | NOT TRUE NEXT_PARAM
+   79          | FALSE NEXT_PARAM
+   80          | NOT FALSE NEXT_PARAM
+   81          | NEXT_PARAM
 
-   81 NEXT_PARAM: COMMA IN_PARAMS
-   82           | /* empty */
+   82 NEXT_PARAM: COMMA IN_PARAMS
+   83           | /* empty */
 
 
 Terminals, with rules where they appear
@@ -138,18 +139,18 @@ LTE (271) 70
 NE (272) 71
 ANDAND (273) 65
 OROR (274) 64
-NOT (275) 49 51 55 57 77 79
+NOT (275) 49 51 55 57 78 80
 PLUS (276) 60
 MINUS (277) 44 45 61 74
 TIMES (278) 62
 DIVIDE (279) 63
-TRUE (280) 48 49 76 77
-FALSE (281) 50 51 78 79
+TRUE (280) 48 49 77 78
+FALSE (281) 50 51 79 80
 IDENTIFIER (282) 4 5 14 24 25 40 52 53 72 73
 INTEGER (283) 13 44 45 46 47 74 75
 SEMICOLON (284) 24 28 29 33 38
 COLON (285) 4 5 24
-COMMA (286) 7 25 26 81
+COMMA (286) 7 25 26 82
 ABSOLUTEVALUE (287) 45 47 53 56 57
 LEFTBRACE (288) 4 34 35 36
 RIGHTBRACE (289) 4 34 35 36
@@ -181,7 +182,7 @@ TYPE_2 (47)
 INT_ARRAY (48)
     on left: 13, on right: 12 26
 INT_ARRAY_EXP (49)
-    on left: 14, on right: 41 54 55 56 57 73
+    on left: 14, on right: 41 54 55 56 57 73 76
 R_T (50)
     on left: 15, on right: 4
 B_O_F (51)
@@ -226,9 +227,9 @@ OPE_RATOR (69)
 FUNCTION_CALL (70)
     on left: 72 73, on right: 29
 IN_PARAMS (71)
-    on left: 74 75 76 77 78 79 80, on right: 72 73 81
+    on left: 74 75 76 77 78 79 80 81, on right: 72 73 82
 NEXT_PARAM (72)
-    on left: 81 82, on right: 74 75 76 77 78 79 80
+    on left: 82 83, on right: 74 75 76 77 78 79 80 81
 
 
 state 0
@@ -1697,41 +1698,45 @@ state 145
 
    72 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN . IN_PARAMS RIGHTPAREN
 
-    NOT      shift, and go to state 155
-    MINUS    shift, and go to state 156
-    TRUE     shift, and go to state 157
-    FALSE    shift, and go to state 158
-    INTEGER  shift, and go to state 159
-    COMMA    shift, and go to state 160
+    NOT         shift, and go to state 155
+    MINUS       shift, and go to state 156
+    TRUE        shift, and go to state 157
+    FALSE       shift, and go to state 158
+    IDENTIFIER  shift, and go to state 83
+    INTEGER     shift, and go to state 159
+    COMMA       shift, and go to state 160
 
-    $default  reduce using rule 82 (NEXT_PARAM)
+    $default  reduce using rule 83 (NEXT_PARAM)
 
-    IN_PARAMS   go to state 161
-    NEXT_PARAM  go to state 162
+    INT_ARRAY_EXP  go to state 161
+    IN_PARAMS      go to state 162
+    NEXT_PARAM     go to state 163
 
 
 state 146
 
    73 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN . IN_PARAMS RIGHTPAREN
 
-    NOT      shift, and go to state 155
-    MINUS    shift, and go to state 156
-    TRUE     shift, and go to state 157
-    FALSE    shift, and go to state 158
-    INTEGER  shift, and go to state 159
-    COMMA    shift, and go to state 160
+    NOT         shift, and go to state 155
+    MINUS       shift, and go to state 156
+    TRUE        shift, and go to state 157
+    FALSE       shift, and go to state 158
+    IDENTIFIER  shift, and go to state 83
+    INTEGER     shift, and go to state 159
+    COMMA       shift, and go to state 160
 
-    $default  reduce using rule 82 (NEXT_PARAM)
+    $default  reduce using rule 83 (NEXT_PARAM)
 
-    IN_PARAMS   go to state 163
-    NEXT_PARAM  go to state 162
+    INT_ARRAY_EXP  go to state 161
+    IN_PARAMS      go to state 164
+    NEXT_PARAM     go to state 163
 
 
 state 147
 
    35 IF_ELSE: IF_ ELSE LEFTBRACE BODY_STATEMENTS . RIGHTBRACE
 
-    RIGHTBRACE  shift, and go to state 164
+    RIGHTBRACE  shift, and go to state 165
 
 
 state 148
@@ -1773,7 +1778,7 @@ state 152
     $default  reduce using rule 21 (BODY_STATEMENTS)
 
     INT_ARRAY_EXP    go to state 42
-    BODY_STATEMENTS  go to state 165
+    BODY_STATEMENTS  go to state 166
     STATEMENTS_      go to state 44
     IF_              go to state 45
     IF_ELSE          go to state 46
@@ -1793,7 +1798,7 @@ state 153
     $default  reduce using rule 21 (BODY_STATEMENTS)
 
     INT_ARRAY_EXP    go to state 42
-    BODY_STATEMENTS  go to state 166
+    BODY_STATEMENTS  go to state 167
     STATEMENTS_      go to state 44
     IF_              go to state 45
     IF_ELSE          go to state 46
@@ -1806,45 +1811,45 @@ state 154
 
    37 FOR_PARAMS: FOR_ASIGN LEFTPAREN EXPR_ESSION . RIGHTPAREN FOR_ASIGN
 
-    RIGHTPAREN  shift, and go to state 167
+    RIGHTPAREN  shift, and go to state 168
 
 
 state 155
 
-   77 IN_PARAMS: NOT . TRUE NEXT_PARAM
-   79          | NOT . FALSE NEXT_PARAM
+   78 IN_PARAMS: NOT . TRUE NEXT_PARAM
+   80          | NOT . FALSE NEXT_PARAM
 
-    TRUE   shift, and go to state 168
-    FALSE  shift, and go to state 169
+    TRUE   shift, and go to state 169
+    FALSE  shift, and go to state 170
 
 
 state 156
 
    74 IN_PARAMS: MINUS . INTEGER NEXT_PARAM
 
-    INTEGER  shift, and go to state 170
+    INTEGER  shift, and go to state 171
 
 
 state 157
 
-   76 IN_PARAMS: TRUE . NEXT_PARAM
+   77 IN_PARAMS: TRUE . NEXT_PARAM
 
     COMMA  shift, and go to state 160
 
-    $default  reduce using rule 82 (NEXT_PARAM)
+    $default  reduce using rule 83 (NEXT_PARAM)
 
-    NEXT_PARAM  go to state 171
+    NEXT_PARAM  go to state 172
 
 
 state 158
 
-   78 IN_PARAMS: FALSE . NEXT_PARAM
+   79 IN_PARAMS: FALSE . NEXT_PARAM
 
     COMMA  shift, and go to state 160
 
-    $default  reduce using rule 82 (NEXT_PARAM)
+    $default  reduce using rule 83 (NEXT_PARAM)
 
-    NEXT_PARAM  go to state 172
+    NEXT_PARAM  go to state 173
 
 
 state 159
@@ -1853,71 +1858,84 @@ state 159
 
     COMMA  shift, and go to state 160
 
-    $default  reduce using rule 82 (NEXT_PARAM)
+    $default  reduce using rule 83 (NEXT_PARAM)
 
-    NEXT_PARAM  go to state 173
+    NEXT_PARAM  go to state 174
 
 
 state 160
 
-   81 NEXT_PARAM: COMMA . IN_PARAMS
+   82 NEXT_PARAM: COMMA . IN_PARAMS
 
-    NOT      shift, and go to state 155
-    MINUS    shift, and go to state 156
-    TRUE     shift, and go to state 157
-    FALSE    shift, and go to state 158
-    INTEGER  shift, and go to state 159
-    COMMA    shift, and go to state 160
+    NOT         shift, and go to state 155
+    MINUS       shift, and go to state 156
+    TRUE        shift, and go to state 157
+    FALSE       shift, and go to state 158
+    IDENTIFIER  shift, and go to state 83
+    INTEGER     shift, and go to state 159
+    COMMA       shift, and go to state 160
 
-    $default  reduce using rule 82 (NEXT_PARAM)
+    $default  reduce using rule 83 (NEXT_PARAM)
 
-    IN_PARAMS   go to state 174
-    NEXT_PARAM  go to state 162
+    INT_ARRAY_EXP  go to state 161
+    IN_PARAMS      go to state 175
+    NEXT_PARAM     go to state 163
 
 
 state 161
 
-   72 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS . RIGHTPAREN
+   76 IN_PARAMS: INT_ARRAY_EXP . NEXT_PARAM
 
-    RIGHTPAREN  shift, and go to state 175
+    COMMA  shift, and go to state 160
+
+    $default  reduce using rule 83 (NEXT_PARAM)
+
+    NEXT_PARAM  go to state 176
 
 
 state 162
 
-   80 IN_PARAMS: NEXT_PARAM .
+   72 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS . RIGHTPAREN
 
-    $default  reduce using rule 80 (IN_PARAMS)
+    RIGHTPAREN  shift, and go to state 177
 
 
 state 163
 
-   73 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS . RIGHTPAREN
+   81 IN_PARAMS: NEXT_PARAM .
 
-    RIGHTPAREN  shift, and go to state 176
+    $default  reduce using rule 81 (IN_PARAMS)
 
 
 state 164
+
+   73 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS . RIGHTPAREN
+
+    RIGHTPAREN  shift, and go to state 178
+
+
+state 165
 
    35 IF_ELSE: IF_ ELSE LEFTBRACE BODY_STATEMENTS RIGHTBRACE .
 
     $default  reduce using rule 35 (IF_ELSE)
 
 
-state 165
+state 166
 
    34 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS . RIGHTBRACE
 
-    RIGHTBRACE  shift, and go to state 177
-
-
-state 166
-
-   36 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS . RIGHTBRACE
-
-    RIGHTBRACE  shift, and go to state 178
+    RIGHTBRACE  shift, and go to state 179
 
 
 state 167
+
+   36 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS . RIGHTBRACE
+
+    RIGHTBRACE  shift, and go to state 180
+
+
+state 168
 
    37 FOR_PARAMS: FOR_ASIGN LEFTPAREN EXPR_ESSION RIGHTPAREN . FOR_ASIGN
 
@@ -1926,121 +1944,128 @@ state 167
     $default  reduce using rule 39 (FOR_ASIGN)
 
     INT_ARRAY_EXP  go to state 108
-    FOR_ASIGN      go to state 179
+    FOR_ASIGN      go to state 181
     ASIGN_MENT     go to state 111
-
-
-state 168
-
-   77 IN_PARAMS: NOT TRUE . NEXT_PARAM
-
-    COMMA  shift, and go to state 160
-
-    $default  reduce using rule 82 (NEXT_PARAM)
-
-    NEXT_PARAM  go to state 180
 
 
 state 169
 
-   79 IN_PARAMS: NOT FALSE . NEXT_PARAM
+   78 IN_PARAMS: NOT TRUE . NEXT_PARAM
 
     COMMA  shift, and go to state 160
 
-    $default  reduce using rule 82 (NEXT_PARAM)
+    $default  reduce using rule 83 (NEXT_PARAM)
 
-    NEXT_PARAM  go to state 181
+    NEXT_PARAM  go to state 182
 
 
 state 170
+
+   80 IN_PARAMS: NOT FALSE . NEXT_PARAM
+
+    COMMA  shift, and go to state 160
+
+    $default  reduce using rule 83 (NEXT_PARAM)
+
+    NEXT_PARAM  go to state 183
+
+
+state 171
 
    74 IN_PARAMS: MINUS INTEGER . NEXT_PARAM
 
     COMMA  shift, and go to state 160
 
-    $default  reduce using rule 82 (NEXT_PARAM)
+    $default  reduce using rule 83 (NEXT_PARAM)
 
-    NEXT_PARAM  go to state 182
-
-
-state 171
-
-   76 IN_PARAMS: TRUE NEXT_PARAM .
-
-    $default  reduce using rule 76 (IN_PARAMS)
+    NEXT_PARAM  go to state 184
 
 
 state 172
 
-   78 IN_PARAMS: FALSE NEXT_PARAM .
+   77 IN_PARAMS: TRUE NEXT_PARAM .
 
-    $default  reduce using rule 78 (IN_PARAMS)
+    $default  reduce using rule 77 (IN_PARAMS)
 
 
 state 173
+
+   79 IN_PARAMS: FALSE NEXT_PARAM .
+
+    $default  reduce using rule 79 (IN_PARAMS)
+
+
+state 174
 
    75 IN_PARAMS: INTEGER NEXT_PARAM .
 
     $default  reduce using rule 75 (IN_PARAMS)
 
 
-state 174
-
-   81 NEXT_PARAM: COMMA IN_PARAMS .
-
-    $default  reduce using rule 81 (NEXT_PARAM)
-
-
 state 175
+
+   82 NEXT_PARAM: COMMA IN_PARAMS .
+
+    $default  reduce using rule 82 (NEXT_PARAM)
+
+
+state 176
+
+   76 IN_PARAMS: INT_ARRAY_EXP NEXT_PARAM .
+
+    $default  reduce using rule 76 (IN_PARAMS)
+
+
+state 177
 
    72 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN .
 
     $default  reduce using rule 72 (FUNCTION_CALL)
 
 
-state 176
+state 178
 
    73 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN .
 
     $default  reduce using rule 73 (FUNCTION_CALL)
 
 
-state 177
+state 179
 
    34 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE .
 
     $default  reduce using rule 34 (IF_)
 
 
-state 178
+state 180
 
    36 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE .
 
     $default  reduce using rule 36 (FOR_)
 
 
-state 179
+state 181
 
    37 FOR_PARAMS: FOR_ASIGN LEFTPAREN EXPR_ESSION RIGHTPAREN FOR_ASIGN .
 
     $default  reduce using rule 37 (FOR_PARAMS)
 
 
-state 180
-
-   77 IN_PARAMS: NOT TRUE NEXT_PARAM .
-
-    $default  reduce using rule 77 (IN_PARAMS)
-
-
-state 181
-
-   79 IN_PARAMS: NOT FALSE NEXT_PARAM .
-
-    $default  reduce using rule 79 (IN_PARAMS)
-
-
 state 182
+
+   78 IN_PARAMS: NOT TRUE NEXT_PARAM .
+
+    $default  reduce using rule 78 (IN_PARAMS)
+
+
+state 183
+
+   80 IN_PARAMS: NOT FALSE NEXT_PARAM .
+
+    $default  reduce using rule 80 (IN_PARAMS)
+
+
+state 184
 
    74 IN_PARAMS: MINUS INTEGER NEXT_PARAM .
 
