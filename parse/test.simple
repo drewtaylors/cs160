@@ -1,7 +1,9 @@
 [$ hello world $]
 function cat(): int{
-	   var a: int;
-	   a = 0x5; [$ heee 
-            $]
-	   return a;
+    if(true)  {  
+       
+    } [$ we assume i has been declared $] 
+    
+
+    return a;
 }
