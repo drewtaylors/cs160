@@ -165,18 +165,17 @@ ASIGN_MENT  : IDENTIFIER ASSIGNMENT EXPR_ESSION
 
 EXPR_ESSION : MULT_EXPRESSION
             | LEFTPAREN EXPR_ESSION RIGHTPAREN OPE_RATOR
+            | NOT LEFTPAREN EXPR_ESSION RIGHTPAREN OPE_RATOR
             | ABSOLUTEVALUE EXPR_ESSION ABSOLUTEVALUE OPE_RATOR
             ;
 
 SINGLE_EXPRESSION : MINUS INTEGER %prec NOT
                   | INTEGER
                   | TRUE
-                  | NOT TRUE %prec NOT
                   | FALSE
-                  | NOT FALSE %prec NOT
                   | IDENTIFIER
                   | INT_ARRAY_EXP
-                  | NOT INT_ARRAY_EXP %prec NOT
+                  | NOT SINGLE_EXPRESSION
                   ;
 
                   

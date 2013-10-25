@@ -197,7 +197,7 @@ function newtest(): int
         afa = 076;
         xed = -5-4;
         a = 3 || 2;
-        [$ b=!(3+2)/3;  .....test later $]
+        b=!(3+2)/3;  
         h = |(5+5)|;
         d = |5|;
         h=|a|;
@@ -212,7 +212,7 @@ function newtest(): int
                 for ((true)){ a=5;}
                 for ((true)a=6;){ a = b+1;}
         }
-        test2 = |4| + |7|;
+        test2 = | |4| + |7| |;
         test = hey( 5, 5+4 );  [$this broke my shit$]
         a[6+7] = test();
 
