@@ -69,8 +69,8 @@ Grammar
    41           | INT_ARRAY_EXP ASSIGNMENT EXPR_ESSION
 
    42 EXPR_ESSION: MULT_EXPRESSION
-   43            | LEFTPAREN MULT_EXPRESSION RIGHTPAREN OPE_RATOR
-   44            | ABSOLUTEVALUE MULT_EXPRESSION ABSOLUTEVALUE OPE_RATOR
+   43            | LEFTPAREN EXPR_ESSION RIGHTPAREN OPE_RATOR
+   44            | ABSOLUTEVALUE EXPR_ESSION ABSOLUTEVALUE OPE_RATOR
 
    45 SINGLE_EXPRESSION: MINUS INTEGER
    46                  | INTEGER
@@ -212,12 +212,12 @@ FOR_ASIGN (64)
 ASIGN_MENT (65)
     on left: 40 41, on right: 28 38
 EXPR_ESSION (66)
-    on left: 42 43 44, on right: 14 33 34 37 40 41 56 57 58 59 60 61
-    62 63 64 65 66 67
+    on left: 42 43 44, on right: 14 33 34 37 40 41 43 44 56 57 58 59
+    60 61 62 63 64 65 66 67
 SINGLE_EXPRESSION (67)
     on left: 45 46 47 48 49 50 51 52 53, on right: 54
 MULT_EXPRESSION (68)
-    on left: 54, on right: 42 43 44
+    on left: 54, on right: 42
 OPE_RATOR (69)
     on left: 55 56 57 58 59 60 61 62 63 64 65 66 67, on right: 43 44
     54
@@ -783,34 +783,40 @@ state 59
 
 state 60
 
-   44 EXPR_ESSION: ABSOLUTEVALUE . MULT_EXPRESSION ABSOLUTEVALUE OPE_RATOR
+   44 EXPR_ESSION: ABSOLUTEVALUE . EXPR_ESSION ABSOLUTEVALUE OPE_RATOR
 
-    NOT         shift, and go to state 54
-    MINUS       shift, and go to state 55
-    TRUE        shift, and go to state 56
-    FALSE       shift, and go to state 57
-    IDENTIFIER  shift, and go to state 58
-    INTEGER     shift, and go to state 59
+    NOT            shift, and go to state 54
+    MINUS          shift, and go to state 55
+    TRUE           shift, and go to state 56
+    FALSE          shift, and go to state 57
+    IDENTIFIER     shift, and go to state 58
+    INTEGER        shift, and go to state 59
+    ABSOLUTEVALUE  shift, and go to state 60
+    LEFTPAREN      shift, and go to state 61
 
     INT_ARRAY_EXP      go to state 62
+    EXPR_ESSION        go to state 86
     SINGLE_EXPRESSION  go to state 64
-    MULT_EXPRESSION    go to state 86
+    MULT_EXPRESSION    go to state 65
 
 
 state 61
 
-   43 EXPR_ESSION: LEFTPAREN . MULT_EXPRESSION RIGHTPAREN OPE_RATOR
+   43 EXPR_ESSION: LEFTPAREN . EXPR_ESSION RIGHTPAREN OPE_RATOR
 
-    NOT         shift, and go to state 54
-    MINUS       shift, and go to state 55
-    TRUE        shift, and go to state 56
-    FALSE       shift, and go to state 57
-    IDENTIFIER  shift, and go to state 58
-    INTEGER     shift, and go to state 59
+    NOT            shift, and go to state 54
+    MINUS          shift, and go to state 55
+    TRUE           shift, and go to state 56
+    FALSE          shift, and go to state 57
+    IDENTIFIER     shift, and go to state 58
+    INTEGER        shift, and go to state 59
+    ABSOLUTEVALUE  shift, and go to state 60
+    LEFTPAREN      shift, and go to state 61
 
     INT_ARRAY_EXP      go to state 62
+    EXPR_ESSION        go to state 87
     SINGLE_EXPRESSION  go to state 64
-    MULT_EXPRESSION    go to state 87
+    MULT_EXPRESSION    go to state 65
 
 
 state 62
@@ -1055,14 +1061,14 @@ state 85
 
 state 86
 
-   44 EXPR_ESSION: ABSOLUTEVALUE MULT_EXPRESSION . ABSOLUTEVALUE OPE_RATOR
+   44 EXPR_ESSION: ABSOLUTEVALUE EXPR_ESSION . ABSOLUTEVALUE OPE_RATOR
 
     ABSOLUTEVALUE  shift, and go to state 116
 
 
 state 87
 
-   43 EXPR_ESSION: LEFTPAREN MULT_EXPRESSION . RIGHTPAREN OPE_RATOR
+   43 EXPR_ESSION: LEFTPAREN EXPR_ESSION . RIGHTPAREN OPE_RATOR
 
     RIGHTPAREN  shift, and go to state 117
 
@@ -1434,7 +1440,7 @@ state 115
 
 state 116
 
-   44 EXPR_ESSION: ABSOLUTEVALUE MULT_EXPRESSION ABSOLUTEVALUE . OPE_RATOR
+   44 EXPR_ESSION: ABSOLUTEVALUE EXPR_ESSION ABSOLUTEVALUE . OPE_RATOR
 
     EQEQ    shift, and go to state 89
     GT      shift, and go to state 90
@@ -1456,7 +1462,7 @@ state 116
 
 state 117
 
-   43 EXPR_ESSION: LEFTPAREN MULT_EXPRESSION RIGHTPAREN . OPE_RATOR
+   43 EXPR_ESSION: LEFTPAREN EXPR_ESSION RIGHTPAREN . OPE_RATOR
 
     EQEQ    shift, and go to state 89
     GT      shift, and go to state 90
@@ -1699,14 +1705,14 @@ state 140
 
 state 141
 
-   44 EXPR_ESSION: ABSOLUTEVALUE MULT_EXPRESSION ABSOLUTEVALUE OPE_RATOR .
+   44 EXPR_ESSION: ABSOLUTEVALUE EXPR_ESSION ABSOLUTEVALUE OPE_RATOR .
 
     $default  reduce using rule 44 (EXPR_ESSION)
 
 
 state 142
 
-   43 EXPR_ESSION: LEFTPAREN MULT_EXPRESSION RIGHTPAREN OPE_RATOR .
+   43 EXPR_ESSION: LEFTPAREN EXPR_ESSION RIGHTPAREN OPE_RATOR .
 
     $default  reduce using rule 43 (EXPR_ESSION)
 

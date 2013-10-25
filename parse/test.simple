@@ -197,7 +197,7 @@ function newtest(): int
         afa = 076;
         xed = -5-4;
         a = 3 || 2;
-        b=!(3+2)/3;
+        [$ b=!(3+2)/3;  .....test later $]
         h = |(5+5)|;
         d = |5|;
         h=|a|;
