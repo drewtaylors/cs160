@@ -202,14 +202,8 @@ FUNCTION_CALL   : IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPARE
                 | INT_ARRAY_EXP  ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
                 ;
 
-IN_PARAMS       : MINUS INTEGER NEXT_PARAM
-                | INTEGER NEXT_PARAM
-                | INT_ARRAY_EXP NEXT_PARAM
-                | TRUE NEXT_PARAM
-                | NOT TRUE NEXT_PARAM %prec NOT
-                | FALSE NEXT_PARAM
-                | NOT FALSE NEXT_PARAM %prec NOT
-                | NEXT_PARAM
+IN_PARAMS       : EXPR_ESSION NEXT_PARAM
+                |
                 ;
 
 NEXT_PARAM  :   COMMA IN_PARAMS

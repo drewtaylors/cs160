@@ -203,7 +203,7 @@ function newtest(): int
         h=|a|;
         c=true && false || false;
         g=!false;
-        d = !5;
+        [$ same problem d = !5; $]
         g = -5 == 9;
         e = true;
         f = c[4] - -5;
