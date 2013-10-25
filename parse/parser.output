@@ -70,52 +70,48 @@ Grammar
 
    42 EXPR_ESSION: MULT_EXPRESSION
    43            | LEFTPAREN MULT_EXPRESSION RIGHTPAREN OPE_RATOR
+   44            | ABSOLUTEVALUE MULT_EXPRESSION ABSOLUTEVALUE OPE_RATOR
 
-   44 SINGLE_EXPRESSION: MINUS INTEGER
-   45                  | ABSOLUTEVALUE MINUS INTEGER ABSOLUTEVALUE
+   45 SINGLE_EXPRESSION: MINUS INTEGER
    46                  | INTEGER
-   47                  | ABSOLUTEVALUE INTEGER ABSOLUTEVALUE
-   48                  | TRUE
-   49                  | NOT TRUE
-   50                  | FALSE
-   51                  | NOT FALSE
-   52                  | IDENTIFIER
-   53                  | ABSOLUTEVALUE IDENTIFIER ABSOLUTEVALUE
-   54                  | INT_ARRAY_EXP
-   55                  | NOT INT_ARRAY_EXP
-   56                  | ABSOLUTEVALUE INT_ARRAY_EXP ABSOLUTEVALUE
-   57                  | ABSOLUTEVALUE NOT INT_ARRAY_EXP ABSOLUTEVALUE
+   47                  | TRUE
+   48                  | NOT TRUE
+   49                  | FALSE
+   50                  | NOT FALSE
+   51                  | IDENTIFIER
+   52                  | INT_ARRAY_EXP
+   53                  | NOT INT_ARRAY_EXP
 
-   58 MULT_EXPRESSION: SINGLE_EXPRESSION OPE_RATOR
+   54 MULT_EXPRESSION: SINGLE_EXPRESSION OPE_RATOR
 
-   59 OPE_RATOR: /* empty */
-   60          | PLUS EXPR_ESSION
-   61          | MINUS EXPR_ESSION
-   62          | TIMES EXPR_ESSION
-   63          | DIVIDE EXPR_ESSION
-   64          | OROR EXPR_ESSION
-   65          | ANDAND EXPR_ESSION
-   66          | EQEQ EXPR_ESSION
-   67          | GT EXPR_ESSION
-   68          | GTE EXPR_ESSION
-   69          | LT EXPR_ESSION
-   70          | LTE EXPR_ESSION
-   71          | NE EXPR_ESSION
+   55 OPE_RATOR: /* empty */
+   56          | PLUS EXPR_ESSION
+   57          | MINUS EXPR_ESSION
+   58          | TIMES EXPR_ESSION
+   59          | DIVIDE EXPR_ESSION
+   60          | OROR EXPR_ESSION
+   61          | ANDAND EXPR_ESSION
+   62          | EQEQ EXPR_ESSION
+   63          | GT EXPR_ESSION
+   64          | GTE EXPR_ESSION
+   65          | LT EXPR_ESSION
+   66          | LTE EXPR_ESSION
+   67          | NE EXPR_ESSION
 
-   72 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
-   73              | INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
+   68 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
+   69              | INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
 
-   74 IN_PARAMS: MINUS INTEGER NEXT_PARAM
-   75          | INTEGER NEXT_PARAM
-   76          | INT_ARRAY_EXP NEXT_PARAM
-   77          | TRUE NEXT_PARAM
-   78          | NOT TRUE NEXT_PARAM
-   79          | FALSE NEXT_PARAM
-   80          | NOT FALSE NEXT_PARAM
-   81          | NEXT_PARAM
+   70 IN_PARAMS: MINUS INTEGER NEXT_PARAM
+   71          | INTEGER NEXT_PARAM
+   72          | INT_ARRAY_EXP NEXT_PARAM
+   73          | TRUE NEXT_PARAM
+   74          | NOT TRUE NEXT_PARAM
+   75          | FALSE NEXT_PARAM
+   76          | NOT FALSE NEXT_PARAM
+   77          | NEXT_PARAM
 
-   82 NEXT_PARAM: COMMA IN_PARAMS
-   83           | /* empty */
+   78 NEXT_PARAM: COMMA IN_PARAMS
+   79           | /* empty */
 
 
 Terminals, with rules where they appear
@@ -131,34 +127,34 @@ VAR (263) 24
 FUNCTION (264) 4
 INTARRAY (265) 13
 RETURN (266) 33
-EQEQ (267) 66
-GT (268) 67
-GTE (269) 68
-LT (270) 69
-LTE (271) 70
-NE (272) 71
-ANDAND (273) 65
-OROR (274) 64
-NOT (275) 49 51 55 57 78 80
-PLUS (276) 60
-MINUS (277) 44 45 61 74
-TIMES (278) 62
-DIVIDE (279) 63
-TRUE (280) 48 49 77 78
-FALSE (281) 50 51 79 80
-IDENTIFIER (282) 4 5 14 24 25 40 52 53 72 73
-INTEGER (283) 13 44 45 46 47 74 75
+EQEQ (267) 62
+GT (268) 63
+GTE (269) 64
+LT (270) 65
+LTE (271) 66
+NE (272) 67
+ANDAND (273) 61
+OROR (274) 60
+NOT (275) 48 50 53 74 76
+PLUS (276) 56
+MINUS (277) 45 57 70
+TIMES (278) 58
+DIVIDE (279) 59
+TRUE (280) 47 48 73 74
+FALSE (281) 49 50 75 76
+IDENTIFIER (282) 4 5 14 24 25 40 51 68 69
+INTEGER (283) 13 45 46 70 71
 SEMICOLON (284) 24 28 29 33 38
 COLON (285) 4 5 24
-COMMA (286) 7 25 26 82
-ABSOLUTEVALUE (287) 45 47 53 56 57
+COMMA (286) 7 25 26 78
+ABSOLUTEVALUE (287) 44
 LEFTBRACE (288) 4 34 35 36
 RIGHTBRACE (289) 4 34 35 36
-LEFTPAREN (290) 4 34 36 37 43 72 73
-RIGHTPAREN (291) 4 34 36 37 43 72 73
+LEFTPAREN (290) 4 34 36 37 43 68 69
+RIGHTPAREN (291) 4 34 36 37 43 68 69
 LEFTBRACKET (292) 13 14
 RIGHTBRACKET (293) 13 14
-ASSIGNMENT (294) 40 41 72 73
+ASSIGNMENT (294) 40 41 68 69
 
 
 Nonterminals, with rules where they appear
@@ -182,7 +178,7 @@ TYPE_2 (47)
 INT_ARRAY (48)
     on left: 13, on right: 12 26
 INT_ARRAY_EXP (49)
-    on left: 14, on right: 41 54 55 56 57 73 76
+    on left: 14, on right: 41 52 53 69 72
 R_T (50)
     on left: 15, on right: 4
 B_O_F (51)
@@ -216,20 +212,21 @@ FOR_ASIGN (64)
 ASIGN_MENT (65)
     on left: 40 41, on right: 28 38
 EXPR_ESSION (66)
-    on left: 42 43, on right: 14 33 34 37 40 41 60 61 62 63 64 65 66
-    67 68 69 70 71
+    on left: 42 43 44, on right: 14 33 34 37 40 41 56 57 58 59 60 61
+    62 63 64 65 66 67
 SINGLE_EXPRESSION (67)
-    on left: 44 45 46 47 48 49 50 51 52 53 54 55 56 57, on right: 58
+    on left: 45 46 47 48 49 50 51 52 53, on right: 54
 MULT_EXPRESSION (68)
-    on left: 58, on right: 42 43
+    on left: 54, on right: 42 43 44
 OPE_RATOR (69)
-    on left: 59 60 61 62 63 64 65 66 67 68 69 70 71, on right: 43 58
+    on left: 55 56 57 58 59 60 61 62 63 64 65 66 67, on right: 43 44
+    54
 FUNCTION_CALL (70)
-    on left: 72 73, on right: 29
+    on left: 68 69, on right: 29
 IN_PARAMS (71)
-    on left: 74 75 76 77 78 79 80 81, on right: 72 73 82
+    on left: 70 71 72 73 74 75 76 77, on right: 68 69 78
 NEXT_PARAM (72)
-    on left: 82 83, on right: 74 75 76 77 78 79 80 81
+    on left: 78 79, on right: 70 71 72 73 74 75 76 77
 
 
 state 0
@@ -612,7 +609,7 @@ state 41
 
    14 INT_ARRAY_EXP: IDENTIFIER . LEFTBRACKET EXPR_ESSION RIGHTBRACKET
    40 ASIGN_MENT: IDENTIFIER . ASSIGNMENT EXPR_ESSION
-   72 FUNCTION_CALL: IDENTIFIER . ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
+   68 FUNCTION_CALL: IDENTIFIER . ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
 
     LEFTBRACKET  shift, and go to state 68
     ASSIGNMENT   shift, and go to state 69
@@ -621,7 +618,7 @@ state 41
 state 42
 
    41 ASIGN_MENT: INT_ARRAY_EXP . ASSIGNMENT EXPR_ESSION
-   73 FUNCTION_CALL: INT_ARRAY_EXP . ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
+   69 FUNCTION_CALL: INT_ARRAY_EXP . ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
 
     ASSIGNMENT  shift, and go to state 70
 
@@ -735,9 +732,9 @@ state 53
 
 state 54
 
-   49 SINGLE_EXPRESSION: NOT . TRUE
-   51                  | NOT . FALSE
-   55                  | NOT . INT_ARRAY_EXP
+   48 SINGLE_EXPRESSION: NOT . TRUE
+   50                  | NOT . FALSE
+   53                  | NOT . INT_ARRAY_EXP
 
     TRUE        shift, and go to state 81
     FALSE       shift, and go to state 82
@@ -748,33 +745,33 @@ state 54
 
 state 55
 
-   44 SINGLE_EXPRESSION: MINUS . INTEGER
+   45 SINGLE_EXPRESSION: MINUS . INTEGER
 
     INTEGER  shift, and go to state 85
 
 
 state 56
 
-   48 SINGLE_EXPRESSION: TRUE .
+   47 SINGLE_EXPRESSION: TRUE .
 
-    $default  reduce using rule 48 (SINGLE_EXPRESSION)
+    $default  reduce using rule 47 (SINGLE_EXPRESSION)
 
 
 state 57
 
-   50 SINGLE_EXPRESSION: FALSE .
+   49 SINGLE_EXPRESSION: FALSE .
 
-    $default  reduce using rule 50 (SINGLE_EXPRESSION)
+    $default  reduce using rule 49 (SINGLE_EXPRESSION)
 
 
 state 58
 
    14 INT_ARRAY_EXP: IDENTIFIER . LEFTBRACKET EXPR_ESSION RIGHTBRACKET
-   52 SINGLE_EXPRESSION: IDENTIFIER .
+   51 SINGLE_EXPRESSION: IDENTIFIER .
 
     LEFTBRACKET  shift, and go to state 68
 
-    $default  reduce using rule 52 (SINGLE_EXPRESSION)
+    $default  reduce using rule 51 (SINGLE_EXPRESSION)
 
 
 state 59
@@ -786,71 +783,70 @@ state 59
 
 state 60
 
-   45 SINGLE_EXPRESSION: ABSOLUTEVALUE . MINUS INTEGER ABSOLUTEVALUE
-   47                  | ABSOLUTEVALUE . INTEGER ABSOLUTEVALUE
-   53                  | ABSOLUTEVALUE . IDENTIFIER ABSOLUTEVALUE
-   56                  | ABSOLUTEVALUE . INT_ARRAY_EXP ABSOLUTEVALUE
-   57                  | ABSOLUTEVALUE . NOT INT_ARRAY_EXP ABSOLUTEVALUE
+   44 EXPR_ESSION: ABSOLUTEVALUE . MULT_EXPRESSION ABSOLUTEVALUE OPE_RATOR
 
-    NOT         shift, and go to state 86
-    MINUS       shift, and go to state 87
-    IDENTIFIER  shift, and go to state 88
-    INTEGER     shift, and go to state 89
+    NOT         shift, and go to state 54
+    MINUS       shift, and go to state 55
+    TRUE        shift, and go to state 56
+    FALSE       shift, and go to state 57
+    IDENTIFIER  shift, and go to state 58
+    INTEGER     shift, and go to state 59
 
-    INT_ARRAY_EXP  go to state 90
+    INT_ARRAY_EXP      go to state 62
+    SINGLE_EXPRESSION  go to state 64
+    MULT_EXPRESSION    go to state 86
 
 
 state 61
 
    43 EXPR_ESSION: LEFTPAREN . MULT_EXPRESSION RIGHTPAREN OPE_RATOR
 
-    NOT            shift, and go to state 54
-    MINUS          shift, and go to state 55
-    TRUE           shift, and go to state 56
-    FALSE          shift, and go to state 57
-    IDENTIFIER     shift, and go to state 58
-    INTEGER        shift, and go to state 59
-    ABSOLUTEVALUE  shift, and go to state 60
+    NOT         shift, and go to state 54
+    MINUS       shift, and go to state 55
+    TRUE        shift, and go to state 56
+    FALSE       shift, and go to state 57
+    IDENTIFIER  shift, and go to state 58
+    INTEGER     shift, and go to state 59
 
     INT_ARRAY_EXP      go to state 62
     SINGLE_EXPRESSION  go to state 64
-    MULT_EXPRESSION    go to state 91
+    MULT_EXPRESSION    go to state 87
 
 
 state 62
 
-   54 SINGLE_EXPRESSION: INT_ARRAY_EXP .
+   52 SINGLE_EXPRESSION: INT_ARRAY_EXP .
 
-    $default  reduce using rule 54 (SINGLE_EXPRESSION)
+    $default  reduce using rule 52 (SINGLE_EXPRESSION)
 
 
 state 63
 
    33 RETURN_: RETURN EXPR_ESSION . SEMICOLON
 
-    SEMICOLON  shift, and go to state 92
+    SEMICOLON  shift, and go to state 88
 
 
 state 64
 
-   58 MULT_EXPRESSION: SINGLE_EXPRESSION . OPE_RATOR
+   54 MULT_EXPRESSION: SINGLE_EXPRESSION . OPE_RATOR
 
-    EQEQ    shift, and go to state 93
-    GT      shift, and go to state 94
-    GTE     shift, and go to state 95
-    LT      shift, and go to state 96
-    LTE     shift, and go to state 97
-    NE      shift, and go to state 98
-    ANDAND  shift, and go to state 99
-    OROR    shift, and go to state 100
-    PLUS    shift, and go to state 101
-    MINUS   shift, and go to state 102
-    TIMES   shift, and go to state 103
-    DIVIDE  shift, and go to state 104
+    EQEQ    shift, and go to state 89
+    GT      shift, and go to state 90
+    GTE     shift, and go to state 91
+    LT      shift, and go to state 92
+    LTE     shift, and go to state 93
+    NE      shift, and go to state 94
+    ANDAND  shift, and go to state 95
+    OROR    shift, and go to state 96
+    PLUS    shift, and go to state 97
+    MINUS   shift, and go to state 98
+    TIMES   shift, and go to state 99
+    DIVIDE  shift, and go to state 100
 
-    $default  reduce using rule 59 (OPE_RATOR)
+    $default  reduce using rule 55 (OPE_RATOR)
 
-    OPE_RATOR  go to state 105
+    OPE_RATOR  go to state 101
 
 
 state 65
@@ -874,7 +870,7 @@ state 66
     LEFTPAREN      shift, and go to state 61
 
     INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 106
+    EXPR_ESSION        go to state 102
     SINGLE_EXPRESSION  go to state 64
     MULT_EXPRESSION    go to state 65
 
@@ -883,14 +879,14 @@ state 67
 
    36 FOR_: FOR LEFTPAREN . FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
-    IDENTIFIER  shift, and go to state 107
+    IDENTIFIER  shift, and go to state 103
 
     $default  reduce using rule 39 (FOR_ASIGN)
 
-    INT_ARRAY_EXP  go to state 108
-    FOR_PARAMS     go to state 109
-    FOR_ASIGN      go to state 110
-    ASIGN_MENT     go to state 111
+    INT_ARRAY_EXP  go to state 104
+    FOR_PARAMS     go to state 105
+    FOR_ASIGN      go to state 106
+    ASIGN_MENT     go to state 107
 
 
 state 68
@@ -907,7 +903,7 @@ state 68
     LEFTPAREN      shift, and go to state 61
 
     INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 112
+    EXPR_ESSION        go to state 108
     SINGLE_EXPRESSION  go to state 64
     MULT_EXPRESSION    go to state 65
 
@@ -915,19 +911,19 @@ state 68
 state 69
 
    40 ASIGN_MENT: IDENTIFIER ASSIGNMENT . EXPR_ESSION
-   72 FUNCTION_CALL: IDENTIFIER ASSIGNMENT . IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
+   68 FUNCTION_CALL: IDENTIFIER ASSIGNMENT . IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
 
     NOT            shift, and go to state 54
     MINUS          shift, and go to state 55
     TRUE           shift, and go to state 56
     FALSE          shift, and go to state 57
-    IDENTIFIER     shift, and go to state 113
+    IDENTIFIER     shift, and go to state 109
     INTEGER        shift, and go to state 59
     ABSOLUTEVALUE  shift, and go to state 60
     LEFTPAREN      shift, and go to state 61
 
     INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 114
+    EXPR_ESSION        go to state 110
     SINGLE_EXPRESSION  go to state 64
     MULT_EXPRESSION    go to state 65
 
@@ -935,19 +931,19 @@ state 69
 state 70
 
    41 ASIGN_MENT: INT_ARRAY_EXP ASSIGNMENT . EXPR_ESSION
-   73 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT . IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
+   69 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT . IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
 
     NOT            shift, and go to state 54
     MINUS          shift, and go to state 55
     TRUE           shift, and go to state 56
     FALSE          shift, and go to state 57
-    IDENTIFIER     shift, and go to state 115
+    IDENTIFIER     shift, and go to state 111
     INTEGER        shift, and go to state 59
     ABSOLUTEVALUE  shift, and go to state 60
     LEFTPAREN      shift, and go to state 61
 
     INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 116
+    EXPR_ESSION        go to state 112
     SINGLE_EXPRESSION  go to state 64
     MULT_EXPRESSION    go to state 65
 
@@ -963,7 +959,7 @@ state 72
 
    35 IF_ELSE: IF_ ELSE . LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
-    LEFTBRACE  shift, and go to state 117
+    LEFTBRACE  shift, and go to state 113
 
 
 state 73
@@ -984,7 +980,7 @@ state 75
 
    13 INT_ARRAY: INTARRAY LEFTBRACKET . INTEGER RIGHTBRACKET
 
-    INTEGER  shift, and go to state 118
+    INTEGER  shift, and go to state 114
 
 
 state 76
@@ -1012,7 +1008,7 @@ state 79
 
    24 VAR_DEC: VAR IDENTIFIER MULT_DEC COLON TYPE_2 . SEMICOLON
 
-    SEMICOLON  shift, and go to state 119
+    SEMICOLON  shift, and go to state 115
 
 
 state 80
@@ -1024,16 +1020,16 @@ state 80
 
 state 81
 
-   49 SINGLE_EXPRESSION: NOT TRUE .
+   48 SINGLE_EXPRESSION: NOT TRUE .
 
-    $default  reduce using rule 49 (SINGLE_EXPRESSION)
+    $default  reduce using rule 48 (SINGLE_EXPRESSION)
 
 
 state 82
 
-   51 SINGLE_EXPRESSION: NOT FALSE .
+   50 SINGLE_EXPRESSION: NOT FALSE .
 
-    $default  reduce using rule 51 (SINGLE_EXPRESSION)
+    $default  reduce using rule 50 (SINGLE_EXPRESSION)
 
 
 state 83
@@ -1045,74 +1041,194 @@ state 83
 
 state 84
 
-   55 SINGLE_EXPRESSION: NOT INT_ARRAY_EXP .
+   53 SINGLE_EXPRESSION: NOT INT_ARRAY_EXP .
 
-    $default  reduce using rule 55 (SINGLE_EXPRESSION)
+    $default  reduce using rule 53 (SINGLE_EXPRESSION)
 
 
 state 85
 
-   44 SINGLE_EXPRESSION: MINUS INTEGER .
+   45 SINGLE_EXPRESSION: MINUS INTEGER .
 
-    $default  reduce using rule 44 (SINGLE_EXPRESSION)
+    $default  reduce using rule 45 (SINGLE_EXPRESSION)
 
 
 state 86
 
-   57 SINGLE_EXPRESSION: ABSOLUTEVALUE NOT . INT_ARRAY_EXP ABSOLUTEVALUE
+   44 EXPR_ESSION: ABSOLUTEVALUE MULT_EXPRESSION . ABSOLUTEVALUE OPE_RATOR
 
-    IDENTIFIER  shift, and go to state 83
-
-    INT_ARRAY_EXP  go to state 120
+    ABSOLUTEVALUE  shift, and go to state 116
 
 
 state 87
 
-   45 SINGLE_EXPRESSION: ABSOLUTEVALUE MINUS . INTEGER ABSOLUTEVALUE
+   43 EXPR_ESSION: LEFTPAREN MULT_EXPRESSION . RIGHTPAREN OPE_RATOR
 
-    INTEGER  shift, and go to state 121
+    RIGHTPAREN  shift, and go to state 117
 
 
 state 88
-
-   14 INT_ARRAY_EXP: IDENTIFIER . LEFTBRACKET EXPR_ESSION RIGHTBRACKET
-   53 SINGLE_EXPRESSION: ABSOLUTEVALUE IDENTIFIER . ABSOLUTEVALUE
-
-    ABSOLUTEVALUE  shift, and go to state 122
-    LEFTBRACKET    shift, and go to state 68
-
-
-state 89
-
-   47 SINGLE_EXPRESSION: ABSOLUTEVALUE INTEGER . ABSOLUTEVALUE
-
-    ABSOLUTEVALUE  shift, and go to state 123
-
-
-state 90
-
-   56 SINGLE_EXPRESSION: ABSOLUTEVALUE INT_ARRAY_EXP . ABSOLUTEVALUE
-
-    ABSOLUTEVALUE  shift, and go to state 124
-
-
-state 91
-
-   43 EXPR_ESSION: LEFTPAREN MULT_EXPRESSION . RIGHTPAREN OPE_RATOR
-
-    RIGHTPAREN  shift, and go to state 125
-
-
-state 92
 
    33 RETURN_: RETURN EXPR_ESSION SEMICOLON .
 
     $default  reduce using rule 33 (RETURN_)
 
 
+state 89
+
+   62 OPE_RATOR: EQEQ . EXPR_ESSION
+
+    NOT            shift, and go to state 54
+    MINUS          shift, and go to state 55
+    TRUE           shift, and go to state 56
+    FALSE          shift, and go to state 57
+    IDENTIFIER     shift, and go to state 58
+    INTEGER        shift, and go to state 59
+    ABSOLUTEVALUE  shift, and go to state 60
+    LEFTPAREN      shift, and go to state 61
+
+    INT_ARRAY_EXP      go to state 62
+    EXPR_ESSION        go to state 118
+    SINGLE_EXPRESSION  go to state 64
+    MULT_EXPRESSION    go to state 65
+
+
+state 90
+
+   63 OPE_RATOR: GT . EXPR_ESSION
+
+    NOT            shift, and go to state 54
+    MINUS          shift, and go to state 55
+    TRUE           shift, and go to state 56
+    FALSE          shift, and go to state 57
+    IDENTIFIER     shift, and go to state 58
+    INTEGER        shift, and go to state 59
+    ABSOLUTEVALUE  shift, and go to state 60
+    LEFTPAREN      shift, and go to state 61
+
+    INT_ARRAY_EXP      go to state 62
+    EXPR_ESSION        go to state 119
+    SINGLE_EXPRESSION  go to state 64
+    MULT_EXPRESSION    go to state 65
+
+
+state 91
+
+   64 OPE_RATOR: GTE . EXPR_ESSION
+
+    NOT            shift, and go to state 54
+    MINUS          shift, and go to state 55
+    TRUE           shift, and go to state 56
+    FALSE          shift, and go to state 57
+    IDENTIFIER     shift, and go to state 58
+    INTEGER        shift, and go to state 59
+    ABSOLUTEVALUE  shift, and go to state 60
+    LEFTPAREN      shift, and go to state 61
+
+    INT_ARRAY_EXP      go to state 62
+    EXPR_ESSION        go to state 120
+    SINGLE_EXPRESSION  go to state 64
+    MULT_EXPRESSION    go to state 65
+
+
+state 92
+
+   65 OPE_RATOR: LT . EXPR_ESSION
+
+    NOT            shift, and go to state 54
+    MINUS          shift, and go to state 55
+    TRUE           shift, and go to state 56
+    FALSE          shift, and go to state 57
+    IDENTIFIER     shift, and go to state 58
+    INTEGER        shift, and go to state 59
+    ABSOLUTEVALUE  shift, and go to state 60
+    LEFTPAREN      shift, and go to state 61
+
+    INT_ARRAY_EXP      go to state 62
+    EXPR_ESSION        go to state 121
+    SINGLE_EXPRESSION  go to state 64
+    MULT_EXPRESSION    go to state 65
+
+
 state 93
 
-   66 OPE_RATOR: EQEQ . EXPR_ESSION
+   66 OPE_RATOR: LTE . EXPR_ESSION
+
+    NOT            shift, and go to state 54
+    MINUS          shift, and go to state 55
+    TRUE           shift, and go to state 56
+    FALSE          shift, and go to state 57
+    IDENTIFIER     shift, and go to state 58
+    INTEGER        shift, and go to state 59
+    ABSOLUTEVALUE  shift, and go to state 60
+    LEFTPAREN      shift, and go to state 61
+
+    INT_ARRAY_EXP      go to state 62
+    EXPR_ESSION        go to state 122
+    SINGLE_EXPRESSION  go to state 64
+    MULT_EXPRESSION    go to state 65
+
+
+state 94
+
+   67 OPE_RATOR: NE . EXPR_ESSION
+
+    NOT            shift, and go to state 54
+    MINUS          shift, and go to state 55
+    TRUE           shift, and go to state 56
+    FALSE          shift, and go to state 57
+    IDENTIFIER     shift, and go to state 58
+    INTEGER        shift, and go to state 59
+    ABSOLUTEVALUE  shift, and go to state 60
+    LEFTPAREN      shift, and go to state 61
+
+    INT_ARRAY_EXP      go to state 62
+    EXPR_ESSION        go to state 123
+    SINGLE_EXPRESSION  go to state 64
+    MULT_EXPRESSION    go to state 65
+
+
+state 95
+
+   61 OPE_RATOR: ANDAND . EXPR_ESSION
+
+    NOT            shift, and go to state 54
+    MINUS          shift, and go to state 55
+    TRUE           shift, and go to state 56
+    FALSE          shift, and go to state 57
+    IDENTIFIER     shift, and go to state 58
+    INTEGER        shift, and go to state 59
+    ABSOLUTEVALUE  shift, and go to state 60
+    LEFTPAREN      shift, and go to state 61
+
+    INT_ARRAY_EXP      go to state 62
+    EXPR_ESSION        go to state 124
+    SINGLE_EXPRESSION  go to state 64
+    MULT_EXPRESSION    go to state 65
+
+
+state 96
+
+   60 OPE_RATOR: OROR . EXPR_ESSION
+
+    NOT            shift, and go to state 54
+    MINUS          shift, and go to state 55
+    TRUE           shift, and go to state 56
+    FALSE          shift, and go to state 57
+    IDENTIFIER     shift, and go to state 58
+    INTEGER        shift, and go to state 59
+    ABSOLUTEVALUE  shift, and go to state 60
+    LEFTPAREN      shift, and go to state 61
+
+    INT_ARRAY_EXP      go to state 62
+    EXPR_ESSION        go to state 125
+    SINGLE_EXPRESSION  go to state 64
+    MULT_EXPRESSION    go to state 65
+
+
+state 97
+
+   56 OPE_RATOR: PLUS . EXPR_ESSION
 
     NOT            shift, and go to state 54
     MINUS          shift, and go to state 55
@@ -1129,9 +1245,9 @@ state 93
     MULT_EXPRESSION    go to state 65
 
 
-state 94
+state 98
 
-   67 OPE_RATOR: GT . EXPR_ESSION
+   57 OPE_RATOR: MINUS . EXPR_ESSION
 
     NOT            shift, and go to state 54
     MINUS          shift, and go to state 55
@@ -1148,9 +1264,9 @@ state 94
     MULT_EXPRESSION    go to state 65
 
 
-state 95
+state 99
 
-   68 OPE_RATOR: GTE . EXPR_ESSION
+   58 OPE_RATOR: TIMES . EXPR_ESSION
 
     NOT            shift, and go to state 54
     MINUS          shift, and go to state 55
@@ -1167,9 +1283,9 @@ state 95
     MULT_EXPRESSION    go to state 65
 
 
-state 96
+state 100
 
-   69 OPE_RATOR: LT . EXPR_ESSION
+   59 OPE_RATOR: DIVIDE . EXPR_ESSION
 
     NOT            shift, and go to state 54
     MINUS          shift, and go to state 55
@@ -1186,255 +1302,103 @@ state 96
     MULT_EXPRESSION    go to state 65
 
 
-state 97
-
-   70 OPE_RATOR: LTE . EXPR_ESSION
-
-    NOT            shift, and go to state 54
-    MINUS          shift, and go to state 55
-    TRUE           shift, and go to state 56
-    FALSE          shift, and go to state 57
-    IDENTIFIER     shift, and go to state 58
-    INTEGER        shift, and go to state 59
-    ABSOLUTEVALUE  shift, and go to state 60
-    LEFTPAREN      shift, and go to state 61
-
-    INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 130
-    SINGLE_EXPRESSION  go to state 64
-    MULT_EXPRESSION    go to state 65
-
-
-state 98
-
-   71 OPE_RATOR: NE . EXPR_ESSION
-
-    NOT            shift, and go to state 54
-    MINUS          shift, and go to state 55
-    TRUE           shift, and go to state 56
-    FALSE          shift, and go to state 57
-    IDENTIFIER     shift, and go to state 58
-    INTEGER        shift, and go to state 59
-    ABSOLUTEVALUE  shift, and go to state 60
-    LEFTPAREN      shift, and go to state 61
-
-    INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 131
-    SINGLE_EXPRESSION  go to state 64
-    MULT_EXPRESSION    go to state 65
-
-
-state 99
-
-   65 OPE_RATOR: ANDAND . EXPR_ESSION
-
-    NOT            shift, and go to state 54
-    MINUS          shift, and go to state 55
-    TRUE           shift, and go to state 56
-    FALSE          shift, and go to state 57
-    IDENTIFIER     shift, and go to state 58
-    INTEGER        shift, and go to state 59
-    ABSOLUTEVALUE  shift, and go to state 60
-    LEFTPAREN      shift, and go to state 61
-
-    INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 132
-    SINGLE_EXPRESSION  go to state 64
-    MULT_EXPRESSION    go to state 65
-
-
-state 100
-
-   64 OPE_RATOR: OROR . EXPR_ESSION
-
-    NOT            shift, and go to state 54
-    MINUS          shift, and go to state 55
-    TRUE           shift, and go to state 56
-    FALSE          shift, and go to state 57
-    IDENTIFIER     shift, and go to state 58
-    INTEGER        shift, and go to state 59
-    ABSOLUTEVALUE  shift, and go to state 60
-    LEFTPAREN      shift, and go to state 61
-
-    INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 133
-    SINGLE_EXPRESSION  go to state 64
-    MULT_EXPRESSION    go to state 65
-
-
 state 101
 
-   60 OPE_RATOR: PLUS . EXPR_ESSION
+   54 MULT_EXPRESSION: SINGLE_EXPRESSION OPE_RATOR .
 
-    NOT            shift, and go to state 54
-    MINUS          shift, and go to state 55
-    TRUE           shift, and go to state 56
-    FALSE          shift, and go to state 57
-    IDENTIFIER     shift, and go to state 58
-    INTEGER        shift, and go to state 59
-    ABSOLUTEVALUE  shift, and go to state 60
-    LEFTPAREN      shift, and go to state 61
-
-    INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 134
-    SINGLE_EXPRESSION  go to state 64
-    MULT_EXPRESSION    go to state 65
+    $default  reduce using rule 54 (MULT_EXPRESSION)
 
 
 state 102
 
-   61 OPE_RATOR: MINUS . EXPR_ESSION
+   34 IF_: IF LEFTPAREN EXPR_ESSION . RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
-    NOT            shift, and go to state 54
-    MINUS          shift, and go to state 55
-    TRUE           shift, and go to state 56
-    FALSE          shift, and go to state 57
-    IDENTIFIER     shift, and go to state 58
-    INTEGER        shift, and go to state 59
-    ABSOLUTEVALUE  shift, and go to state 60
-    LEFTPAREN      shift, and go to state 61
-
-    INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 135
-    SINGLE_EXPRESSION  go to state 64
-    MULT_EXPRESSION    go to state 65
+    RIGHTPAREN  shift, and go to state 130
 
 
 state 103
-
-   62 OPE_RATOR: TIMES . EXPR_ESSION
-
-    NOT            shift, and go to state 54
-    MINUS          shift, and go to state 55
-    TRUE           shift, and go to state 56
-    FALSE          shift, and go to state 57
-    IDENTIFIER     shift, and go to state 58
-    INTEGER        shift, and go to state 59
-    ABSOLUTEVALUE  shift, and go to state 60
-    LEFTPAREN      shift, and go to state 61
-
-    INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 136
-    SINGLE_EXPRESSION  go to state 64
-    MULT_EXPRESSION    go to state 65
-
-
-state 104
-
-   63 OPE_RATOR: DIVIDE . EXPR_ESSION
-
-    NOT            shift, and go to state 54
-    MINUS          shift, and go to state 55
-    TRUE           shift, and go to state 56
-    FALSE          shift, and go to state 57
-    IDENTIFIER     shift, and go to state 58
-    INTEGER        shift, and go to state 59
-    ABSOLUTEVALUE  shift, and go to state 60
-    LEFTPAREN      shift, and go to state 61
-
-    INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 137
-    SINGLE_EXPRESSION  go to state 64
-    MULT_EXPRESSION    go to state 65
-
-
-state 105
-
-   58 MULT_EXPRESSION: SINGLE_EXPRESSION OPE_RATOR .
-
-    $default  reduce using rule 58 (MULT_EXPRESSION)
-
-
-state 106
-
-   34 IF_: IF LEFTPAREN EXPR_ESSION . RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
-
-    RIGHTPAREN  shift, and go to state 138
-
-
-state 107
 
    14 INT_ARRAY_EXP: IDENTIFIER . LEFTBRACKET EXPR_ESSION RIGHTBRACKET
    40 ASIGN_MENT: IDENTIFIER . ASSIGNMENT EXPR_ESSION
 
     LEFTBRACKET  shift, and go to state 68
-    ASSIGNMENT   shift, and go to state 139
+    ASSIGNMENT   shift, and go to state 131
+
+
+state 104
+
+   41 ASIGN_MENT: INT_ARRAY_EXP . ASSIGNMENT EXPR_ESSION
+
+    ASSIGNMENT  shift, and go to state 132
+
+
+state 105
+
+   36 FOR_: FOR LEFTPAREN FOR_PARAMS . RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
+
+    RIGHTPAREN  shift, and go to state 133
+
+
+state 106
+
+   37 FOR_PARAMS: FOR_ASIGN . LEFTPAREN EXPR_ESSION RIGHTPAREN FOR_ASIGN
+
+    LEFTPAREN  shift, and go to state 134
+
+
+state 107
+
+   38 FOR_ASIGN: ASIGN_MENT . SEMICOLON
+
+    SEMICOLON  shift, and go to state 135
 
 
 state 108
 
-   41 ASIGN_MENT: INT_ARRAY_EXP . ASSIGNMENT EXPR_ESSION
+   14 INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET EXPR_ESSION . RIGHTBRACKET
 
-    ASSIGNMENT  shift, and go to state 140
+    RIGHTBRACKET  shift, and go to state 136
 
 
 state 109
 
-   36 FOR_: FOR LEFTPAREN FOR_PARAMS . RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
+   14 INT_ARRAY_EXP: IDENTIFIER . LEFTBRACKET EXPR_ESSION RIGHTBRACKET
+   51 SINGLE_EXPRESSION: IDENTIFIER .
+   68 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER . LEFTPAREN IN_PARAMS RIGHTPAREN
 
-    RIGHTPAREN  shift, and go to state 141
+    LEFTPAREN    shift, and go to state 137
+    LEFTBRACKET  shift, and go to state 68
+
+    $default  reduce using rule 51 (SINGLE_EXPRESSION)
 
 
 state 110
-
-   37 FOR_PARAMS: FOR_ASIGN . LEFTPAREN EXPR_ESSION RIGHTPAREN FOR_ASIGN
-
-    LEFTPAREN  shift, and go to state 142
-
-
-state 111
-
-   38 FOR_ASIGN: ASIGN_MENT . SEMICOLON
-
-    SEMICOLON  shift, and go to state 143
-
-
-state 112
-
-   14 INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET EXPR_ESSION . RIGHTBRACKET
-
-    RIGHTBRACKET  shift, and go to state 144
-
-
-state 113
-
-   14 INT_ARRAY_EXP: IDENTIFIER . LEFTBRACKET EXPR_ESSION RIGHTBRACKET
-   52 SINGLE_EXPRESSION: IDENTIFIER .
-   72 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER . LEFTPAREN IN_PARAMS RIGHTPAREN
-
-    LEFTPAREN    shift, and go to state 145
-    LEFTBRACKET  shift, and go to state 68
-
-    $default  reduce using rule 52 (SINGLE_EXPRESSION)
-
-
-state 114
 
    40 ASIGN_MENT: IDENTIFIER ASSIGNMENT EXPR_ESSION .
 
     $default  reduce using rule 40 (ASIGN_MENT)
 
 
-state 115
+state 111
 
    14 INT_ARRAY_EXP: IDENTIFIER . LEFTBRACKET EXPR_ESSION RIGHTBRACKET
-   52 SINGLE_EXPRESSION: IDENTIFIER .
-   73 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT IDENTIFIER . LEFTPAREN IN_PARAMS RIGHTPAREN
+   51 SINGLE_EXPRESSION: IDENTIFIER .
+   69 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT IDENTIFIER . LEFTPAREN IN_PARAMS RIGHTPAREN
 
-    LEFTPAREN    shift, and go to state 146
+    LEFTPAREN    shift, and go to state 138
     LEFTBRACKET  shift, and go to state 68
 
-    $default  reduce using rule 52 (SINGLE_EXPRESSION)
+    $default  reduce using rule 51 (SINGLE_EXPRESSION)
 
 
-state 116
+state 112
 
    41 ASIGN_MENT: INT_ARRAY_EXP ASSIGNMENT EXPR_ESSION .
 
     $default  reduce using rule 41 (ASIGN_MENT)
 
 
-state 117
+state 113
 
    35 IF_ELSE: IF_ ELSE LEFTBRACE . BODY_STATEMENTS RIGHTBRACE
 
@@ -1445,7 +1409,7 @@ state 117
     $default  reduce using rule 21 (BODY_STATEMENTS)
 
     INT_ARRAY_EXP    go to state 42
-    BODY_STATEMENTS  go to state 147
+    BODY_STATEMENTS  go to state 139
     STATEMENTS_      go to state 44
     IF_              go to state 45
     IF_ELSE          go to state 46
@@ -1454,169 +1418,156 @@ state 117
     FUNCTION_CALL    go to state 49
 
 
-state 118
+state 114
 
    13 INT_ARRAY: INTARRAY LEFTBRACKET INTEGER . RIGHTBRACKET
 
-    RIGHTBRACKET  shift, and go to state 148
+    RIGHTBRACKET  shift, and go to state 140
 
 
-state 119
+state 115
 
    24 VAR_DEC: VAR IDENTIFIER MULT_DEC COLON TYPE_2 SEMICOLON .
 
     $default  reduce using rule 24 (VAR_DEC)
 
 
-state 120
+state 116
 
-   57 SINGLE_EXPRESSION: ABSOLUTEVALUE NOT INT_ARRAY_EXP . ABSOLUTEVALUE
+   44 EXPR_ESSION: ABSOLUTEVALUE MULT_EXPRESSION ABSOLUTEVALUE . OPE_RATOR
 
-    ABSOLUTEVALUE  shift, and go to state 149
+    EQEQ    shift, and go to state 89
+    GT      shift, and go to state 90
+    GTE     shift, and go to state 91
+    LT      shift, and go to state 92
+    LTE     shift, and go to state 93
+    NE      shift, and go to state 94
+    ANDAND  shift, and go to state 95
+    OROR    shift, and go to state 96
+    PLUS    shift, and go to state 97
+    MINUS   shift, and go to state 98
+    TIMES   shift, and go to state 99
+    DIVIDE  shift, and go to state 100
 
+    $default  reduce using rule 55 (OPE_RATOR)
 
-state 121
-
-   45 SINGLE_EXPRESSION: ABSOLUTEVALUE MINUS INTEGER . ABSOLUTEVALUE
-
-    ABSOLUTEVALUE  shift, and go to state 150
-
-
-state 122
-
-   53 SINGLE_EXPRESSION: ABSOLUTEVALUE IDENTIFIER ABSOLUTEVALUE .
-
-    $default  reduce using rule 53 (SINGLE_EXPRESSION)
-
-
-state 123
-
-   47 SINGLE_EXPRESSION: ABSOLUTEVALUE INTEGER ABSOLUTEVALUE .
-
-    $default  reduce using rule 47 (SINGLE_EXPRESSION)
+    OPE_RATOR  go to state 141
 
 
-state 124
-
-   56 SINGLE_EXPRESSION: ABSOLUTEVALUE INT_ARRAY_EXP ABSOLUTEVALUE .
-
-    $default  reduce using rule 56 (SINGLE_EXPRESSION)
-
-
-state 125
+state 117
 
    43 EXPR_ESSION: LEFTPAREN MULT_EXPRESSION RIGHTPAREN . OPE_RATOR
 
-    EQEQ    shift, and go to state 93
-    GT      shift, and go to state 94
-    GTE     shift, and go to state 95
-    LT      shift, and go to state 96
-    LTE     shift, and go to state 97
-    NE      shift, and go to state 98
-    ANDAND  shift, and go to state 99
-    OROR    shift, and go to state 100
-    PLUS    shift, and go to state 101
-    MINUS   shift, and go to state 102
-    TIMES   shift, and go to state 103
-    DIVIDE  shift, and go to state 104
+    EQEQ    shift, and go to state 89
+    GT      shift, and go to state 90
+    GTE     shift, and go to state 91
+    LT      shift, and go to state 92
+    LTE     shift, and go to state 93
+    NE      shift, and go to state 94
+    ANDAND  shift, and go to state 95
+    OROR    shift, and go to state 96
+    PLUS    shift, and go to state 97
+    MINUS   shift, and go to state 98
+    TIMES   shift, and go to state 99
+    DIVIDE  shift, and go to state 100
 
-    $default  reduce using rule 59 (OPE_RATOR)
+    $default  reduce using rule 55 (OPE_RATOR)
 
-    OPE_RATOR  go to state 151
-
-
-state 126
-
-   66 OPE_RATOR: EQEQ EXPR_ESSION .
-
-    $default  reduce using rule 66 (OPE_RATOR)
+    OPE_RATOR  go to state 142
 
 
-state 127
+state 118
 
-   67 OPE_RATOR: GT EXPR_ESSION .
-
-    $default  reduce using rule 67 (OPE_RATOR)
-
-
-state 128
-
-   68 OPE_RATOR: GTE EXPR_ESSION .
-
-    $default  reduce using rule 68 (OPE_RATOR)
-
-
-state 129
-
-   69 OPE_RATOR: LT EXPR_ESSION .
-
-    $default  reduce using rule 69 (OPE_RATOR)
-
-
-state 130
-
-   70 OPE_RATOR: LTE EXPR_ESSION .
-
-    $default  reduce using rule 70 (OPE_RATOR)
-
-
-state 131
-
-   71 OPE_RATOR: NE EXPR_ESSION .
-
-    $default  reduce using rule 71 (OPE_RATOR)
-
-
-state 132
-
-   65 OPE_RATOR: ANDAND EXPR_ESSION .
-
-    $default  reduce using rule 65 (OPE_RATOR)
-
-
-state 133
-
-   64 OPE_RATOR: OROR EXPR_ESSION .
-
-    $default  reduce using rule 64 (OPE_RATOR)
-
-
-state 134
-
-   60 OPE_RATOR: PLUS EXPR_ESSION .
-
-    $default  reduce using rule 60 (OPE_RATOR)
-
-
-state 135
-
-   61 OPE_RATOR: MINUS EXPR_ESSION .
-
-    $default  reduce using rule 61 (OPE_RATOR)
-
-
-state 136
-
-   62 OPE_RATOR: TIMES EXPR_ESSION .
+   62 OPE_RATOR: EQEQ EXPR_ESSION .
 
     $default  reduce using rule 62 (OPE_RATOR)
 
 
-state 137
+state 119
 
-   63 OPE_RATOR: DIVIDE EXPR_ESSION .
+   63 OPE_RATOR: GT EXPR_ESSION .
 
     $default  reduce using rule 63 (OPE_RATOR)
 
 
-state 138
+state 120
+
+   64 OPE_RATOR: GTE EXPR_ESSION .
+
+    $default  reduce using rule 64 (OPE_RATOR)
+
+
+state 121
+
+   65 OPE_RATOR: LT EXPR_ESSION .
+
+    $default  reduce using rule 65 (OPE_RATOR)
+
+
+state 122
+
+   66 OPE_RATOR: LTE EXPR_ESSION .
+
+    $default  reduce using rule 66 (OPE_RATOR)
+
+
+state 123
+
+   67 OPE_RATOR: NE EXPR_ESSION .
+
+    $default  reduce using rule 67 (OPE_RATOR)
+
+
+state 124
+
+   61 OPE_RATOR: ANDAND EXPR_ESSION .
+
+    $default  reduce using rule 61 (OPE_RATOR)
+
+
+state 125
+
+   60 OPE_RATOR: OROR EXPR_ESSION .
+
+    $default  reduce using rule 60 (OPE_RATOR)
+
+
+state 126
+
+   56 OPE_RATOR: PLUS EXPR_ESSION .
+
+    $default  reduce using rule 56 (OPE_RATOR)
+
+
+state 127
+
+   57 OPE_RATOR: MINUS EXPR_ESSION .
+
+    $default  reduce using rule 57 (OPE_RATOR)
+
+
+state 128
+
+   58 OPE_RATOR: TIMES EXPR_ESSION .
+
+    $default  reduce using rule 58 (OPE_RATOR)
+
+
+state 129
+
+   59 OPE_RATOR: DIVIDE EXPR_ESSION .
+
+    $default  reduce using rule 59 (OPE_RATOR)
+
+
+state 130
 
    34 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN . LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
-    LEFTBRACE  shift, and go to state 152
+    LEFTBRACE  shift, and go to state 143
 
 
-state 139
+state 131
 
    40 ASIGN_MENT: IDENTIFIER ASSIGNMENT . EXPR_ESSION
 
@@ -1630,12 +1581,12 @@ state 139
     LEFTPAREN      shift, and go to state 61
 
     INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 114
+    EXPR_ESSION        go to state 110
     SINGLE_EXPRESSION  go to state 64
     MULT_EXPRESSION    go to state 65
 
 
-state 140
+state 132
 
    41 ASIGN_MENT: INT_ARRAY_EXP ASSIGNMENT . EXPR_ESSION
 
@@ -1649,19 +1600,19 @@ state 140
     LEFTPAREN      shift, and go to state 61
 
     INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 116
+    EXPR_ESSION        go to state 112
     SINGLE_EXPRESSION  go to state 64
     MULT_EXPRESSION    go to state 65
 
 
-state 141
+state 133
 
    36 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN . LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
-    LEFTBRACE  shift, and go to state 153
+    LEFTBRACE  shift, and go to state 144
 
 
-state 142
+state 134
 
    37 FOR_PARAMS: FOR_ASIGN LEFTPAREN . EXPR_ESSION RIGHTPAREN FOR_ASIGN
 
@@ -1675,99 +1626,92 @@ state 142
     LEFTPAREN      shift, and go to state 61
 
     INT_ARRAY_EXP      go to state 62
-    EXPR_ESSION        go to state 154
+    EXPR_ESSION        go to state 145
     SINGLE_EXPRESSION  go to state 64
     MULT_EXPRESSION    go to state 65
 
 
-state 143
+state 135
 
    38 FOR_ASIGN: ASIGN_MENT SEMICOLON .
 
     $default  reduce using rule 38 (FOR_ASIGN)
 
 
-state 144
+state 136
 
    14 INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET EXPR_ESSION RIGHTBRACKET .
 
     $default  reduce using rule 14 (INT_ARRAY_EXP)
 
 
-state 145
+state 137
 
-   72 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN . IN_PARAMS RIGHTPAREN
+   68 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN . IN_PARAMS RIGHTPAREN
 
-    NOT         shift, and go to state 155
-    MINUS       shift, and go to state 156
-    TRUE        shift, and go to state 157
-    FALSE       shift, and go to state 158
+    NOT         shift, and go to state 146
+    MINUS       shift, and go to state 147
+    TRUE        shift, and go to state 148
+    FALSE       shift, and go to state 149
     IDENTIFIER  shift, and go to state 83
-    INTEGER     shift, and go to state 159
-    COMMA       shift, and go to state 160
+    INTEGER     shift, and go to state 150
+    COMMA       shift, and go to state 151
 
-    $default  reduce using rule 83 (NEXT_PARAM)
+    $default  reduce using rule 79 (NEXT_PARAM)
 
-    INT_ARRAY_EXP  go to state 161
-    IN_PARAMS      go to state 162
-    NEXT_PARAM     go to state 163
+    INT_ARRAY_EXP  go to state 152
+    IN_PARAMS      go to state 153
+    NEXT_PARAM     go to state 154
 
 
-state 146
+state 138
 
-   73 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN . IN_PARAMS RIGHTPAREN
+   69 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN . IN_PARAMS RIGHTPAREN
 
-    NOT         shift, and go to state 155
-    MINUS       shift, and go to state 156
-    TRUE        shift, and go to state 157
-    FALSE       shift, and go to state 158
+    NOT         shift, and go to state 146
+    MINUS       shift, and go to state 147
+    TRUE        shift, and go to state 148
+    FALSE       shift, and go to state 149
     IDENTIFIER  shift, and go to state 83
-    INTEGER     shift, and go to state 159
-    COMMA       shift, and go to state 160
+    INTEGER     shift, and go to state 150
+    COMMA       shift, and go to state 151
 
-    $default  reduce using rule 83 (NEXT_PARAM)
+    $default  reduce using rule 79 (NEXT_PARAM)
 
-    INT_ARRAY_EXP  go to state 161
-    IN_PARAMS      go to state 164
-    NEXT_PARAM     go to state 163
+    INT_ARRAY_EXP  go to state 152
+    IN_PARAMS      go to state 155
+    NEXT_PARAM     go to state 154
 
 
-state 147
+state 139
 
    35 IF_ELSE: IF_ ELSE LEFTBRACE BODY_STATEMENTS . RIGHTBRACE
 
-    RIGHTBRACE  shift, and go to state 165
+    RIGHTBRACE  shift, and go to state 156
 
 
-state 148
+state 140
 
    13 INT_ARRAY: INTARRAY LEFTBRACKET INTEGER RIGHTBRACKET .
 
     $default  reduce using rule 13 (INT_ARRAY)
 
 
-state 149
+state 141
 
-   57 SINGLE_EXPRESSION: ABSOLUTEVALUE NOT INT_ARRAY_EXP ABSOLUTEVALUE .
+   44 EXPR_ESSION: ABSOLUTEVALUE MULT_EXPRESSION ABSOLUTEVALUE OPE_RATOR .
 
-    $default  reduce using rule 57 (SINGLE_EXPRESSION)
-
-
-state 150
-
-   45 SINGLE_EXPRESSION: ABSOLUTEVALUE MINUS INTEGER ABSOLUTEVALUE .
-
-    $default  reduce using rule 45 (SINGLE_EXPRESSION)
+    $default  reduce using rule 44 (EXPR_ESSION)
 
 
-state 151
+state 142
 
    43 EXPR_ESSION: LEFTPAREN MULT_EXPRESSION RIGHTPAREN OPE_RATOR .
 
     $default  reduce using rule 43 (EXPR_ESSION)
 
 
-state 152
+state 143
 
    34 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE . BODY_STATEMENTS RIGHTBRACE
 
@@ -1778,7 +1722,7 @@ state 152
     $default  reduce using rule 21 (BODY_STATEMENTS)
 
     INT_ARRAY_EXP    go to state 42
-    BODY_STATEMENTS  go to state 166
+    BODY_STATEMENTS  go to state 157
     STATEMENTS_      go to state 44
     IF_              go to state 45
     IF_ELSE          go to state 46
@@ -1787,7 +1731,7 @@ state 152
     FUNCTION_CALL    go to state 49
 
 
-state 153
+state 144
 
    36 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE . BODY_STATEMENTS RIGHTBRACE
 
@@ -1798,7 +1742,7 @@ state 153
     $default  reduce using rule 21 (BODY_STATEMENTS)
 
     INT_ARRAY_EXP    go to state 42
-    BODY_STATEMENTS  go to state 167
+    BODY_STATEMENTS  go to state 158
     STATEMENTS_      go to state 44
     IF_              go to state 45
     IF_ELSE          go to state 46
@@ -1807,266 +1751,266 @@ state 153
     FUNCTION_CALL    go to state 49
 
 
-state 154
+state 145
 
    37 FOR_PARAMS: FOR_ASIGN LEFTPAREN EXPR_ESSION . RIGHTPAREN FOR_ASIGN
+
+    RIGHTPAREN  shift, and go to state 159
+
+
+state 146
+
+   74 IN_PARAMS: NOT . TRUE NEXT_PARAM
+   76          | NOT . FALSE NEXT_PARAM
+
+    TRUE   shift, and go to state 160
+    FALSE  shift, and go to state 161
+
+
+state 147
+
+   70 IN_PARAMS: MINUS . INTEGER NEXT_PARAM
+
+    INTEGER  shift, and go to state 162
+
+
+state 148
+
+   73 IN_PARAMS: TRUE . NEXT_PARAM
+
+    COMMA  shift, and go to state 151
+
+    $default  reduce using rule 79 (NEXT_PARAM)
+
+    NEXT_PARAM  go to state 163
+
+
+state 149
+
+   75 IN_PARAMS: FALSE . NEXT_PARAM
+
+    COMMA  shift, and go to state 151
+
+    $default  reduce using rule 79 (NEXT_PARAM)
+
+    NEXT_PARAM  go to state 164
+
+
+state 150
+
+   71 IN_PARAMS: INTEGER . NEXT_PARAM
+
+    COMMA  shift, and go to state 151
+
+    $default  reduce using rule 79 (NEXT_PARAM)
+
+    NEXT_PARAM  go to state 165
+
+
+state 151
+
+   78 NEXT_PARAM: COMMA . IN_PARAMS
+
+    NOT         shift, and go to state 146
+    MINUS       shift, and go to state 147
+    TRUE        shift, and go to state 148
+    FALSE       shift, and go to state 149
+    IDENTIFIER  shift, and go to state 83
+    INTEGER     shift, and go to state 150
+    COMMA       shift, and go to state 151
+
+    $default  reduce using rule 79 (NEXT_PARAM)
+
+    INT_ARRAY_EXP  go to state 152
+    IN_PARAMS      go to state 166
+    NEXT_PARAM     go to state 154
+
+
+state 152
+
+   72 IN_PARAMS: INT_ARRAY_EXP . NEXT_PARAM
+
+    COMMA  shift, and go to state 151
+
+    $default  reduce using rule 79 (NEXT_PARAM)
+
+    NEXT_PARAM  go to state 167
+
+
+state 153
+
+   68 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS . RIGHTPAREN
 
     RIGHTPAREN  shift, and go to state 168
 
 
+state 154
+
+   77 IN_PARAMS: NEXT_PARAM .
+
+    $default  reduce using rule 77 (IN_PARAMS)
+
+
 state 155
 
-   78 IN_PARAMS: NOT . TRUE NEXT_PARAM
-   80          | NOT . FALSE NEXT_PARAM
+   69 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS . RIGHTPAREN
 
-    TRUE   shift, and go to state 169
-    FALSE  shift, and go to state 170
+    RIGHTPAREN  shift, and go to state 169
 
 
 state 156
-
-   74 IN_PARAMS: MINUS . INTEGER NEXT_PARAM
-
-    INTEGER  shift, and go to state 171
-
-
-state 157
-
-   77 IN_PARAMS: TRUE . NEXT_PARAM
-
-    COMMA  shift, and go to state 160
-
-    $default  reduce using rule 83 (NEXT_PARAM)
-
-    NEXT_PARAM  go to state 172
-
-
-state 158
-
-   79 IN_PARAMS: FALSE . NEXT_PARAM
-
-    COMMA  shift, and go to state 160
-
-    $default  reduce using rule 83 (NEXT_PARAM)
-
-    NEXT_PARAM  go to state 173
-
-
-state 159
-
-   75 IN_PARAMS: INTEGER . NEXT_PARAM
-
-    COMMA  shift, and go to state 160
-
-    $default  reduce using rule 83 (NEXT_PARAM)
-
-    NEXT_PARAM  go to state 174
-
-
-state 160
-
-   82 NEXT_PARAM: COMMA . IN_PARAMS
-
-    NOT         shift, and go to state 155
-    MINUS       shift, and go to state 156
-    TRUE        shift, and go to state 157
-    FALSE       shift, and go to state 158
-    IDENTIFIER  shift, and go to state 83
-    INTEGER     shift, and go to state 159
-    COMMA       shift, and go to state 160
-
-    $default  reduce using rule 83 (NEXT_PARAM)
-
-    INT_ARRAY_EXP  go to state 161
-    IN_PARAMS      go to state 175
-    NEXT_PARAM     go to state 163
-
-
-state 161
-
-   76 IN_PARAMS: INT_ARRAY_EXP . NEXT_PARAM
-
-    COMMA  shift, and go to state 160
-
-    $default  reduce using rule 83 (NEXT_PARAM)
-
-    NEXT_PARAM  go to state 176
-
-
-state 162
-
-   72 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS . RIGHTPAREN
-
-    RIGHTPAREN  shift, and go to state 177
-
-
-state 163
-
-   81 IN_PARAMS: NEXT_PARAM .
-
-    $default  reduce using rule 81 (IN_PARAMS)
-
-
-state 164
-
-   73 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS . RIGHTPAREN
-
-    RIGHTPAREN  shift, and go to state 178
-
-
-state 165
 
    35 IF_ELSE: IF_ ELSE LEFTBRACE BODY_STATEMENTS RIGHTBRACE .
 
     $default  reduce using rule 35 (IF_ELSE)
 
 
-state 166
+state 157
 
    34 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS . RIGHTBRACE
 
-    RIGHTBRACE  shift, and go to state 179
+    RIGHTBRACE  shift, and go to state 170
 
 
-state 167
+state 158
 
    36 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS . RIGHTBRACE
 
-    RIGHTBRACE  shift, and go to state 180
+    RIGHTBRACE  shift, and go to state 171
 
 
-state 168
+state 159
 
    37 FOR_PARAMS: FOR_ASIGN LEFTPAREN EXPR_ESSION RIGHTPAREN . FOR_ASIGN
 
-    IDENTIFIER  shift, and go to state 107
+    IDENTIFIER  shift, and go to state 103
 
     $default  reduce using rule 39 (FOR_ASIGN)
 
-    INT_ARRAY_EXP  go to state 108
-    FOR_ASIGN      go to state 181
-    ASIGN_MENT     go to state 111
+    INT_ARRAY_EXP  go to state 104
+    FOR_ASIGN      go to state 172
+    ASIGN_MENT     go to state 107
 
 
-state 169
+state 160
 
-   78 IN_PARAMS: NOT TRUE . NEXT_PARAM
+   74 IN_PARAMS: NOT TRUE . NEXT_PARAM
 
-    COMMA  shift, and go to state 160
+    COMMA  shift, and go to state 151
 
-    $default  reduce using rule 83 (NEXT_PARAM)
+    $default  reduce using rule 79 (NEXT_PARAM)
 
-    NEXT_PARAM  go to state 182
-
-
-state 170
-
-   80 IN_PARAMS: NOT FALSE . NEXT_PARAM
-
-    COMMA  shift, and go to state 160
-
-    $default  reduce using rule 83 (NEXT_PARAM)
-
-    NEXT_PARAM  go to state 183
+    NEXT_PARAM  go to state 173
 
 
-state 171
+state 161
 
-   74 IN_PARAMS: MINUS INTEGER . NEXT_PARAM
+   76 IN_PARAMS: NOT FALSE . NEXT_PARAM
 
-    COMMA  shift, and go to state 160
+    COMMA  shift, and go to state 151
 
-    $default  reduce using rule 83 (NEXT_PARAM)
+    $default  reduce using rule 79 (NEXT_PARAM)
 
-    NEXT_PARAM  go to state 184
-
-
-state 172
-
-   77 IN_PARAMS: TRUE NEXT_PARAM .
-
-    $default  reduce using rule 77 (IN_PARAMS)
+    NEXT_PARAM  go to state 174
 
 
-state 173
+state 162
 
-   79 IN_PARAMS: FALSE NEXT_PARAM .
+   70 IN_PARAMS: MINUS INTEGER . NEXT_PARAM
 
-    $default  reduce using rule 79 (IN_PARAMS)
+    COMMA  shift, and go to state 151
+
+    $default  reduce using rule 79 (NEXT_PARAM)
+
+    NEXT_PARAM  go to state 175
 
 
-state 174
+state 163
 
-   75 IN_PARAMS: INTEGER NEXT_PARAM .
+   73 IN_PARAMS: TRUE NEXT_PARAM .
+
+    $default  reduce using rule 73 (IN_PARAMS)
+
+
+state 164
+
+   75 IN_PARAMS: FALSE NEXT_PARAM .
 
     $default  reduce using rule 75 (IN_PARAMS)
 
 
-state 175
+state 165
 
-   82 NEXT_PARAM: COMMA IN_PARAMS .
+   71 IN_PARAMS: INTEGER NEXT_PARAM .
 
-    $default  reduce using rule 82 (NEXT_PARAM)
-
-
-state 176
-
-   76 IN_PARAMS: INT_ARRAY_EXP NEXT_PARAM .
-
-    $default  reduce using rule 76 (IN_PARAMS)
+    $default  reduce using rule 71 (IN_PARAMS)
 
 
-state 177
+state 166
 
-   72 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN .
+   78 NEXT_PARAM: COMMA IN_PARAMS .
 
-    $default  reduce using rule 72 (FUNCTION_CALL)
-
-
-state 178
-
-   73 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN .
-
-    $default  reduce using rule 73 (FUNCTION_CALL)
+    $default  reduce using rule 78 (NEXT_PARAM)
 
 
-state 179
+state 167
+
+   72 IN_PARAMS: INT_ARRAY_EXP NEXT_PARAM .
+
+    $default  reduce using rule 72 (IN_PARAMS)
+
+
+state 168
+
+   68 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN .
+
+    $default  reduce using rule 68 (FUNCTION_CALL)
+
+
+state 169
+
+   69 FUNCTION_CALL: INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN .
+
+    $default  reduce using rule 69 (FUNCTION_CALL)
+
+
+state 170
 
    34 IF_: IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE .
 
     $default  reduce using rule 34 (IF_)
 
 
-state 180
+state 171
 
    36 FOR_: FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE .
 
     $default  reduce using rule 36 (FOR_)
 
 
-state 181
+state 172
 
    37 FOR_PARAMS: FOR_ASIGN LEFTPAREN EXPR_ESSION RIGHTPAREN FOR_ASIGN .
 
     $default  reduce using rule 37 (FOR_PARAMS)
 
 
-state 182
+state 173
 
-   78 IN_PARAMS: NOT TRUE NEXT_PARAM .
-
-    $default  reduce using rule 78 (IN_PARAMS)
-
-
-state 183
-
-   80 IN_PARAMS: NOT FALSE NEXT_PARAM .
-
-    $default  reduce using rule 80 (IN_PARAMS)
-
-
-state 184
-
-   74 IN_PARAMS: MINUS INTEGER NEXT_PARAM .
+   74 IN_PARAMS: NOT TRUE NEXT_PARAM .
 
     $default  reduce using rule 74 (IN_PARAMS)
+
+
+state 174
+
+   76 IN_PARAMS: NOT FALSE NEXT_PARAM .
+
+    $default  reduce using rule 76 (IN_PARAMS)
+
+
+state 175
+
+   70 IN_PARAMS: MINUS INTEGER NEXT_PARAM .
+
+    $default  reduce using rule 70 (IN_PARAMS)

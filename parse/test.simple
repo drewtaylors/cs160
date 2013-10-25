@@ -212,7 +212,8 @@ function newtest(): int
                 for ((true)){ a=5;}
                 for ((true)a=6;){ a = b+1;}
         }
-        test = hey( 5, 5+4 );
+        test2 = |4| + |7|;
+        test = hey( 5, 5+4 );  [$this broke my shit$]
         a[6+7] = test();
 
         for ( i = 3*2; (i+1) a=7*i+(9); ){ e = e+5; }

@@ -164,23 +164,19 @@ ASIGN_MENT  : IDENTIFIER ASSIGNMENT EXPR_ESSION
             ;
 
 EXPR_ESSION : MULT_EXPRESSION
-            | LEFTPAREN MULT_EXPRESSION RIGHTPAREN OPE_RATOR 
+            | LEFTPAREN MULT_EXPRESSION RIGHTPAREN OPE_RATOR
+            | ABSOLUTEVALUE MULT_EXPRESSION ABSOLUTEVALUE OPE_RATOR
             ;
 
 SINGLE_EXPRESSION : MINUS INTEGER %prec NOT
-                  | ABSOLUTEVALUE MINUS INTEGER ABSOLUTEVALUE %prec NOT
                   | INTEGER
-                  | ABSOLUTEVALUE INTEGER ABSOLUTEVALUE
                   | TRUE
                   | NOT TRUE %prec NOT
                   | FALSE
                   | NOT FALSE %prec NOT
                   | IDENTIFIER
-                  | ABSOLUTEVALUE IDENTIFIER ABSOLUTEVALUE
                   | INT_ARRAY_EXP
                   | NOT INT_ARRAY_EXP %prec NOT
-                  | ABSOLUTEVALUE INT_ARRAY_EXP ABSOLUTEVALUE
-                  | ABSOLUTEVALUE NOT INT_ARRAY_EXP ABSOLUTEVALUE %prec NOT
                   ;
 
                   
