@@ -1,0 +1,38 @@
+%{
+	#include <stdio.h>
+    	#include "ast.hpp"
+    	#include "primitive.hpp"
+    	#include "symtab.hpp"
+	#define YYDEBUG 1
+
+    	extern Program_ptr ast;
+	int yylex(void);
+	void yyerror(const char *);
+%}
+
+/* Enables verbose error messages */
+%error-verbose
+
+
+
+
+/*********************************************************
+	Replace with your code from project 2
+*********************************************************/
+%%
+A: {/* This is totally useless*/}
+
+%%
+/*********************************************************
+	Stop here
+*********************************************************/
+
+
+
+
+extern int yylineno;
+
+void yyerror(const char *s) {
+	fprintf(stderr, "%s at line %d\n", s, yylineno);
+	return;
+}
