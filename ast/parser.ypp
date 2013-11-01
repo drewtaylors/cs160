@@ -19,8 +19,200 @@
 /*********************************************************
 	Replace with your code from project 2
 *********************************************************/
+%start Start
+
+%token BOOL
+%token ELSE
+%token IF
+%token INT
+%token FOR
+%token VAR
+%token FUNCTION
+%token INTARRAY
+%token RETURN
+
+%token EQEQ
+%token GT
+%token GTE
+%token LT
+%token LTE
+%token NE
+%token ANDAND
+%token OROR
+%token NOT
+%token PLUS
+%token MINUS
+%token TIMES
+%token DIVIDE
+
+%token TRUE
+%token FALSE
+
+%token IDENTIFIER
+%token INTEGER
+
+%token SEMICOLON
+%token COLON
+%token COMMA
+%token ABSOLUTEVALUE
+%token LEFTBRACE
+%token RIGHTBRACE
+%token LEFTPAREN
+%token RIGHTPAREN
+%token LEFTBRACKET
+%token RIGHTBRACKET
+%token ASSIGNMENT
+
+
+%left OROR
+%left ANDAND
+%left EQEQ NE
+%left GT GTE LT LTE
+%left PLUS MINUS
+%left TIMES DIVIDE
+
+%right ASSIGNMENT
+%right NOT
+
 %%
-A: {/* This is totally useless*/}
+
+/* WRITE ME: This is the language from Project 1 (Calculator). You need
+                         to put the productions for the grammar for the
+                         language for this project here*/
+
+Start : F FUNC_
+        ;
+
+FUNC_ : F FUNC_
+        |
+        ;
+
+F : FUNCTION IDENTIFIER LEFTPAREN P_L RIGHTPAREN COLON
+          R_T LEFTBRACE B_O_F RIGHTBRACE
+        ;
+
+P_L : IDENTIFIER COLON TYPE MORE_PARAMS
+        |
+        ;
+
+MORE_PARAMS : COMMA P_L
+            |
+            ;
+
+TYPE : INT
+        | BOOL
+        ;
+
+TYPE_2 : TYPE
+        | INT_ARRAY
+        ;
+
+INT_ARRAY : INTARRAY LEFTBRACKET INTEGER RIGHTBRACKET
+          ;
+INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET EXPR_ESSION RIGHTBRACKET
+             ;
+
+R_T : TYPE
+        ;
+
+B_O_F : VAR_DECLERATIONS BODY_CHOICE RETURN_
+        ;
+
+BODY_CHOICE : MULT_FUNCTIONS BODY_STATEMENTS
+              ;
+MULT_FUNCTIONS: F MULT_FUNCTIONS
+              |
+              ;
+BODY_STATEMENTS : STATEMENTS_ BODY_STATEMENTS
+                |
+                ;
+
+VAR_DECLERATIONS : VAR_DEC VAR_DECLERATIONS
+                 |
+                 ;
+
+VAR_DEC : VAR IDENTIFIER MULT_DEC COLON TYPE_2 SEMICOLON
+                 ;
+
+MULT_DEC : COMMA IDENTIFIER MULT_DEC
+            |COMMA INT_ARRAY MULT_DEC
+            |
+            ;
+
+STATEMENTS_ : ASIGN_MENT SEMICOLON
+             | FUNCTION_CALL SEMICOLON
+             | IF_
+             | IF_ELSE
+             | FOR_
+             ;
+
+RETURN_ : RETURN EXPR_ESSION SEMICOLON
+            ;
+
+IF_ : IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
+
+IF_ELSE : IF_ ELSE LEFTBRACE BODY_STATEMENTS RIGHTBRACE
+
+FOR_ : FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
+            ;
+
+FOR_PARAMS : FOR_ASIGN LEFTPAREN EXPR_ESSION RIGHTPAREN FOR_ASIGN
+            ;
+
+FOR_ASIGN : ASIGN_MENT SEMICOLON
+             |
+             ;
+
+ASIGN_MENT : IDENTIFIER ASSIGNMENT EXPR_ESSION
+            | INT_ARRAY_EXP ASSIGNMENT EXPR_ESSION
+            ;
+
+EXPR_ESSION : MULT_EXPRESSION
+            | LEFTPAREN EXPR_ESSION RIGHTPAREN OPE_RATOR
+            | NOT LEFTPAREN EXPR_ESSION RIGHTPAREN OPE_RATOR
+            | ABSOLUTEVALUE EXPR_ESSION ABSOLUTEVALUE OPE_RATOR
+            ;
+
+SINGLE_EXPRESSION : MINUS INTEGER %prec NOT
+                  | INTEGER
+                  | TRUE
+                  | FALSE
+                  | IDENTIFIER
+                  | INT_ARRAY_EXP
+                  | NOT SINGLE_EXPRESSION
+                  ;
+
+                  
+MULT_EXPRESSION : SINGLE_EXPRESSION OPE_RATOR
+                  ;
+
+OPE_RATOR :
+                  | PLUS EXPR_ESSION
+                  | MINUS EXPR_ESSION
+                  | TIMES EXPR_ESSION
+                  | DIVIDE EXPR_ESSION
+                  | OROR EXPR_ESSION
+                  | ANDAND EXPR_ESSION
+                  | EQEQ EXPR_ESSION
+                  | GT EXPR_ESSION
+                  | GTE EXPR_ESSION
+                  | LT EXPR_ESSION
+                  | LTE EXPR_ESSION
+                  | NE EXPR_ESSION
+                  ;
+
+FUNCTION_CALL : IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
+                | INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
+                ;
+
+IN_PARAMS : EXPR_ESSION NEXT_PARAM
+                |
+                ;
+
+NEXT_PARAM : COMMA IN_PARAMS
+            |
+            ;
+
 
 %%
 /*********************************************************
