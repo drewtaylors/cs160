@@ -42,12 +42,12 @@ extern int yylineno;
 	}
  }
  void ProgramImpl::visit_children( Visitor* v ) {
- 	list<Func_ptr>::iterator m_func_list_iter;
-	for(m_func_list_iter = m_func_list->begin();
-	  m_func_list_iter != m_func_list->end();
-	  ++m_func_list_iter){
-		(*m_func_list_iter)->accept( v );
-	}
+// 	list<Func_ptr>::iterator m_func_list_iter;
+//	for(m_func_list_iter = m_func_list->begin();
+//	  m_func_list_iter != m_func_list->end();
+//	  ++m_func_list_iter){
+//		(*m_func_list_iter)->accept( v );
+//	}
  }
  void ProgramImpl::accept(Visitor *v) { v->visitProgramImpl(this); }
  ProgramImpl *ProgramImpl::clone() const { return new ProgramImpl(*this); }

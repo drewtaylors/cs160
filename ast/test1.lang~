@@ -1,0 +1,21 @@
+function Main() : int
+{
+    var x: int;
+    var k,j :int ;
+    var t: bool;
+
+    x = 5;
+    if (x < 3) {
+        x = 7;
+    }
+    if (x <3) {
+        x = 9;
+    }
+    else {
+        if (t == true) {
+            x = 12;
+        }
+    }
+   
+    return 0;
+}

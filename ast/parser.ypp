@@ -76,11 +76,7 @@
 
 %%
 
-/* WRITE ME: This is the language from Project 1 (Calculator). You need
-                         to put the productions for the grammar for the
-                         language for this project here*/
-
-Start : F FUNC_
+Start : F FUNC_      {  $$.u_program=new ProgramImpl(new list<Func_ptr>() ); ast=$$.u_program; }
         ;
 
 FUNC_ : F FUNC_

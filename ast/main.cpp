@@ -4,6 +4,7 @@
 	file does is calls yyparse() and uses the visitor class ast2dot to print
 	the graph
 */
+#include <stdio.h>
 #include "ast.hpp"
 #include "parser.hpp"
 #include <assert.h>
@@ -23,7 +24,9 @@ int main(void) {
         yyparse();  
 
         // walk over the ast and print it out as a dot file
-        if (ast) dopass_ast2dot( ast );
+        if (ast){
+            dopass_ast2dot( ast );
+        } 
         return 0;
 
 }

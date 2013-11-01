@@ -501,14 +501,14 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    83,    83,    86,    87,    90,    94,    95,    98,    99,
-     102,   103,   106,   107,   110,   112,   115,   118,   121,   123,
-     124,   126,   127,   130,   131,   134,   137,   138,   139,   142,
-     143,   144,   145,   146,   149,   152,   154,   156,   159,   162,
-     163,   166,   167,   170,   171,   172,   173,   176,   177,   178,
-     179,   180,   181,   182,   186,   189,   190,   191,   192,   193,
-     194,   195,   196,   197,   198,   199,   200,   201,   204,   205,
-     208,   209,   212,   213
+       0,    79,    79,    82,    83,    86,    90,    91,    94,    95,
+      98,    99,   102,   103,   106,   108,   111,   114,   117,   119,
+     120,   122,   123,   126,   127,   130,   133,   134,   135,   138,
+     139,   140,   141,   142,   145,   148,   150,   152,   155,   158,
+     159,   162,   163,   166,   167,   168,   169,   172,   173,   174,
+     175,   176,   177,   178,   182,   185,   186,   187,   188,   189,
+     190,   191,   192,   193,   194,   195,   196,   197,   200,   201,
+     204,   205,   208,   209
 };
 #endif
 
@@ -1534,9 +1534,15 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-      
+        case 2:
 /* Line 1787 of yacc.c  */
-#line 1540 "parser.cpp"
+#line 79 "parser.ypp"
+    {  (yyval).u_program=new ProgramImpl(new list<Func_ptr>() ); ast=(yyval).u_program; }
+    break;
+
+
+/* Line 1787 of yacc.c  */
+#line 1546 "parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1766,7 +1772,7 @@ yyreturn:
 
 
 /* Line 2048 of yacc.c  */
-#line 217 "parser.ypp"
+#line 213 "parser.ypp"
 
 /*********************************************************
 	Stop here
