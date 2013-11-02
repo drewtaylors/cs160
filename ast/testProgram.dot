@@ -1,4 +1,6 @@
 digraph G { 
 "0" -> "1"
 "1" [label="ProgramImpl"]
+"1" -> "2"
+"2" [label="FuncImpl"]
 }; 

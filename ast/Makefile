@@ -14,10 +14,6 @@ OBJS += lexer.o parser.o main.o ast.o primitive.o  ast2dot.o symtab.o
 RMFILES = core.* lexer.cpp parser.cpp parser.hpp parser.output ast.hpp ast.cpp $(TARGET) $(OBJS)
 
 
-test_ast: 
-	./simple < test1.lang > testProgram.dot
-	dot -Tpng testProgram.dot -o testProgram.png
-
 # dependencies
 $(TARGET): parser.cpp lexer.cpp parser.hpp $(OBJS)
 	$(CPP) -o $(TARGET) $(OBJS)
@@ -53,6 +49,10 @@ ast.cpp: ast.cdef
 ast.hpp: ast.cdef
 
 primitive.o: primitive.hpp primitive.cpp ast.hpp
+
+ast:
+	./simple < test1.lang > testProgram.dot
+	dot -Tpng testProgram.dot -o testProgram.png
 
 clean:
 	rm -f $(RMFILES)

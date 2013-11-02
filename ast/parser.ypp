@@ -76,10 +76,10 @@
 
 %%
 
-Start : F FUNC_      {  $$.u_program=new ProgramImpl(new list<Func_ptr>() ); ast=$$.u_program; }
+Start : F FUNC_      { $$.u_func_list=new list<Func_ptr>(); $1.u_func=new FuncImpl(NULL,NULL,NULL,NULL); $2.u_func; $$.u_func_list->push_back($1.u_func); ast=new ProgramImpl($$.u_func_list);  }
         ;
 
-FUNC_ : F FUNC_
+FUNC_ : F FUNC_      { $1.u_func=new FuncImpl(NULL,NULL,NULL,NULL); }
         |
         ;
 
