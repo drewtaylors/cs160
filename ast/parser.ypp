@@ -76,18 +76,18 @@
 
 %%
 
-Start : F FUNC_      { $$.u_func_list=new list<Func_ptr>(); $1.u_func=new FuncImpl(NULL,NULL,NULL,NULL); $2.u_func; $$.u_func_list->push_back($1.u_func); ast=new ProgramImpl($$.u_func_list);  }
+Start : F FUNC_ { $1.u_func; $2.u_func_list=new list<Func_ptr>(); $2.u_func_list->push_back($1.u_func); ast=new ProgramImpl($2.u_func_list); }
         ;
 
-FUNC_ : F FUNC_      { $1.u_func=new FuncImpl(NULL,NULL,NULL,NULL); }
+FUNC_ : F FUNC_ { $1.u_func=new FuncImpl(NULL,NULL,NULL,NULL);}
         |
         ;
 
 F : FUNCTION IDENTIFIER LEFTPAREN P_L RIGHTPAREN COLON
-          R_T LEFTBRACE B_O_F RIGHTBRACE
+          R_T LEFTBRACE B_O_F RIGHTBRACE {$$.u_func=new FuncImpl($7.u_type,new SymName($2.u_base_charptr),NULL,NULL);}
         ;
 
-P_L : IDENTIFIER COLON TYPE MORE_PARAMS
+P_L : IDENTIFIER COLON TYPE MORE_PARAMS {}
         |
         ;
 
@@ -108,8 +108,9 @@ INT_ARRAY : INTARRAY LEFTBRACKET INTEGER RIGHTBRACKET
 INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET EXPR_ESSION RIGHTBRACKET
              ;
 
-R_T : TYPE
-        ;
+R_T : INT  {$$.u_type=new TInteger();}
+    | BOOL {$$.u_type=new TBoolean();}
+    ;
 
 B_O_F : VAR_DECLERATIONS BODY_CHOICE RETURN_
         ;

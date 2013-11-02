@@ -57,10 +57,10 @@ extern int yylineno;
  FuncImpl::FuncImpl(Type *p1, SymName *p2, list<Decl_ptr> *p3, Function_block *p4)  {
 	m_type = p1;
 	m_symname = p2;
-	m_decl_list = p3;
-	m_function_block = p4;
-	m_attribute.lineno = yylineno;
-	m_parent_attribute = NULL;
+//	m_decl_list = p3;
+//	m_function_block = p4;
+//	m_attribute.lineno = yylineno;
+//	m_parent_attribute = NULL;
 //	m_type->m_parent_attribute = &m_attribute;
 // 	m_symname->m_parent_attribute = &m_attribute;
 // 	list<Decl_ptr>::iterator m_decl_list_iter;
