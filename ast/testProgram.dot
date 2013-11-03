@@ -3,10 +3,26 @@ digraph G {
 "1" [label="ProgramImpl"]
 "1" -> "2"
 "2" [label="FuncImpl"]
-"1" -> "3"
-"3" [label="FuncImpl"]
-"1" -> "4"
-"4" [label="FuncImpl"]
+"2" -> "3"
+"3" [label="TInteger"]
+"2" -> "4"
+"4" [label="SymName\n\"(null)\""]
 "1" -> "5"
 "5" [label="FuncImpl"]
+"5" -> "6"
+"6" [label="TInteger"]
+"5" -> "7"
+"7" [label="SymName\n\"(null)\""]
+"1" -> "8"
+"8" [label="FuncImpl"]
+"8" -> "9"
+"9" [label="TInteger"]
+"8" -> "10"
+"10" [label="SymName\n\"(null)\""]
+"1" -> "11"
+"11" [label="FuncImpl"]
+"11" -> "12"
+"12" [label="TBoolean"]
+"11" -> "13"
+"13" [label="SymName\n\"(null)\""]
 }; 

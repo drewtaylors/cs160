@@ -76,26 +76,26 @@
 
 %%
 
-Start : F FUNC_ { $2.u_func_list->push_back($1.u_func); ast=new ProgramImpl($2.u_func_list); }
+Start : F FUNC_ { $2.u_func_list->push_front($1.u_func); ast=new ProgramImpl($2.u_func_list); }
         ;
 
-FUNC_ : F FUNC_ { $2.u_func_list->push_back($1.u_func); $$.u_func_list= $2.u_func_list;}
+FUNC_ : F FUNC_ { $2.u_func_list->push_front($1.u_func); $$.u_func_list= $2.u_func_list;}
         | { $$.u_func_list=new list<Func_ptr>(); }
         ;
 
-F : FUNCTION IDENTIFIER LEFTPAREN P_L RIGHTPAREN COLON R_T LEFTBRACE B_O_F RIGHTBRACE {$4.u_decl_list=new list<Decl_ptr>(); $$.u_func=new FuncImpl($7.u_type,new SymName($2.u_base_charptr),$4.u_decl_list,NULL);}
+F : FUNCTION IDENTIFIER LEFTPAREN P_L RIGHTPAREN COLON TYPE LEFTBRACE B_O_F RIGHTBRACE { $$.u_func=new FuncImpl($7.u_type,new SymName($2.u_base_charptr),$4.u_decl_list,NULL);}
         ;
 
-P_L : IDENTIFIER COLON TYPE MORE_PARAMS {$1.u_symname=new SymName($1.u_base_charptr); $1.u_symname_list=new list<SymName_ptr>(); $1.u_symname_list->push_back($1.u_symname);/*$$.u_decl_list->push_back(new DeclImpl($3.u_type,$1.u_symname_list));*/}
-        |
+P_L : IDENTIFIER COLON TYPE MORE_PARAMS { $1.u_symname_list=new list<SymName_ptr>(); $1.u_symname_list->push_back(new SymName($1.u_base_charptr)); $4.u_decl_list->push_front(new DeclImpl($3.u_type,$1.u_symname_list)); $$.u_decl_list=$4.u_decl_list;}
+        | 
         ;
 
 MORE_PARAMS : COMMA P_L 
-            |
+            | {$$.u_decl_list=new list<Decl_ptr>();}
             ;
 
-TYPE : INT
-        | BOOL
+TYPE :    INT   {$$.u_type=new TInteger();}
+        | BOOL  {$$.u_type=new TBoolean();}
         ;
 
 TYPE_2 : TYPE
@@ -107,9 +107,6 @@ INT_ARRAY : INTARRAY LEFTBRACKET INTEGER RIGHTBRACKET
 INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET EXPR_ESSION RIGHTBRACKET
              ;
 
-R_T : INT  {$$.u_type=new TInteger();}
-    | BOOL {$$.u_type=new TBoolean();}
-    ;
 
 B_O_F : VAR_DECLERATIONS BODY_CHOICE RETURN_
         ;

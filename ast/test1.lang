@@ -16,7 +16,7 @@ function three():int{
 	b = 4;
 	return 4;
 }
-function four():int{
+function four():bool{
 	var a,b,c:int;
 	a = 5;
 	b = 4;
