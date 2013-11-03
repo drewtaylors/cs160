@@ -60,15 +60,15 @@ extern int yylineno;
 	m_decl_list = p3;
 //	m_function_block = p4;
 	m_attribute.lineno = yylineno;
-//	m_parent_attribute = NULL;
-//	m_type->m_parent_attribute = &m_attribute;
-// 	m_symname->m_parent_attribute = &m_attribute;
-// 	list<Decl_ptr>::iterator m_decl_list_iter;
-//	for(m_decl_list_iter = m_decl_list->begin();
-//	  m_decl_list_iter != m_decl_list->end();
-//	  ++m_decl_list_iter){
-//		(*m_decl_list_iter)->m_parent_attribute = &m_attribute;
-//	}
+	m_parent_attribute = NULL;
+	m_type->m_parent_attribute = &m_attribute;
+ 	m_symname->m_parent_attribute = &m_attribute;
+ 	list<Decl_ptr>::iterator m_decl_list_iter;
+	for(m_decl_list_iter = m_decl_list->begin();
+	  m_decl_list_iter != m_decl_list->end();
+	  ++m_decl_list_iter){
+		(*m_decl_list_iter)->m_parent_attribute = &m_attribute;
+	}
 //	m_function_block->m_parent_attribute = &m_attribute;
   }
  FuncImpl::FuncImpl(const FuncImpl & other) {
@@ -104,12 +104,12 @@ extern int yylineno;
  void FuncImpl::visit_children( Visitor* v ) {
  	m_type->accept( v );
  	m_symname->accept( v );
-// 	list<Decl_ptr>::iterator m_decl_list_iter;
-//	for(m_decl_list_iter = m_decl_list->begin();
-//	  m_decl_list_iter != m_decl_list->end();
-//	  ++m_decl_list_iter){
-//		(*m_decl_list_iter)->accept( v );
-//	}
+ 	list<Decl_ptr>::iterator m_decl_list_iter;
+	for(m_decl_list_iter = m_decl_list->begin();
+	  m_decl_list_iter != m_decl_list->end();
+	  ++m_decl_list_iter){
+		(*m_decl_list_iter)->accept( v );
+	}
 //	m_function_block->accept( v );
   }
  void FuncImpl::accept(Visitor *v) { v->visitFuncImpl(this); }

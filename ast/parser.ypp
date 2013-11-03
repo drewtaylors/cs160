@@ -83,14 +83,14 @@ FUNC_ : F FUNC_ { $2.u_func_list->push_front($1.u_func); $$.u_func_list= $2.u_fu
         | { $$.u_func_list=new list<Func_ptr>(); }
         ;
 
-F : FUNCTION IDENTIFIER LEFTPAREN P_L RIGHTPAREN COLON TYPE LEFTBRACE B_O_F RIGHTBRACE { $$.u_func=new FuncImpl($7.u_type,new SymName($2.u_base_charptr),$4.u_decl_list,NULL);}
+F : FUNCTION IDENTIFIER LEFTPAREN P_L RIGHTPAREN COLON TYPE LEFTBRACE B_O_F RIGHTBRACE { $$.u_func=new FuncImpl($7.u_type,new SymName($2.u_base_charptr),$4.u_decl_list,NULL); }
         ;
 
-P_L : IDENTIFIER COLON TYPE MORE_PARAMS { $1.u_symname_list=new list<SymName_ptr>(); $1.u_symname_list->push_back(new SymName($1.u_base_charptr)); $4.u_decl_list->push_front(new DeclImpl($3.u_type,$1.u_symname_list)); $$.u_decl_list=$4.u_decl_list;}
-        | 
-        ;
+P_L : IDENTIFIER COLON TYPE MORE_PARAMS { $1.u_symname_list=new list<SymName_ptr>(); $1.u_symname_list->push_back(new SymName($1.u_base_charptr)); $4.u_decl_list->push_front(new DeclImpl($3.u_type,$1.u_symname_list)); $$.u_decl_list=$4.u_decl_list; }
+      | {$$.u_decl_list=new list<Decl_ptr>();} 
+      ;
 
-MORE_PARAMS : COMMA P_L 
+MORE_PARAMS : COMMA P_L {$$.u_decl_list=$2.u_decl_list;}
             | {$$.u_decl_list=new list<Decl_ptr>();}
             ;
 

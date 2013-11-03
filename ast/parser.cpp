@@ -1555,13 +1555,25 @@ yyreduce:
   case 5:
 /* Line 1787 of yacc.c  */
 #line 86 "parser.ypp"
-    { (yyval).u_func=new FuncImpl((yyvsp[(7) - (10)]).u_type,new SymName((yyvsp[(2) - (10)]).u_base_charptr),(yyvsp[(4) - (10)]).u_decl_list,NULL);}
+    { (yyval).u_func=new FuncImpl((yyvsp[(7) - (10)]).u_type,new SymName((yyvsp[(2) - (10)]).u_base_charptr),(yyvsp[(4) - (10)]).u_decl_list,NULL); }
     break;
 
   case 6:
 /* Line 1787 of yacc.c  */
 #line 89 "parser.ypp"
-    { (yyvsp[(1) - (4)]).u_symname_list=new list<SymName_ptr>(); (yyvsp[(1) - (4)]).u_symname_list->push_back(new SymName((yyvsp[(1) - (4)]).u_base_charptr)); (yyvsp[(4) - (4)]).u_decl_list->push_front(new DeclImpl((yyvsp[(3) - (4)]).u_type,(yyvsp[(1) - (4)]).u_symname_list)); (yyval).u_decl_list=(yyvsp[(4) - (4)]).u_decl_list;}
+    { (yyvsp[(1) - (4)]).u_symname_list=new list<SymName_ptr>(); (yyvsp[(1) - (4)]).u_symname_list->push_back(new SymName((yyvsp[(1) - (4)]).u_base_charptr)); (yyvsp[(4) - (4)]).u_decl_list->push_front(new DeclImpl((yyvsp[(3) - (4)]).u_type,(yyvsp[(1) - (4)]).u_symname_list)); (yyval).u_decl_list=(yyvsp[(4) - (4)]).u_decl_list; }
+    break;
+
+  case 7:
+/* Line 1787 of yacc.c  */
+#line 90 "parser.ypp"
+    {(yyval).u_decl_list=new list<Decl_ptr>();}
+    break;
+
+  case 8:
+/* Line 1787 of yacc.c  */
+#line 93 "parser.ypp"
+    {(yyval).u_decl_list=(yyvsp[(2) - (2)]).u_decl_list;}
     break;
 
   case 9:
@@ -1584,7 +1596,7 @@ yyreduce:
 
 
 /* Line 1787 of yacc.c  */
-#line 1588 "parser.cpp"
+#line 1600 "parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

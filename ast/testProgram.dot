@@ -7,22 +7,34 @@ digraph G {
 "3" [label="TInteger"]
 "2" -> "4"
 "4" [label="SymName\n\"(null)\""]
-"1" -> "5"
-"5" [label="FuncImpl"]
+"2" -> "5"
+"5" [label="DeclImpl"]
 "5" -> "6"
 "6" [label="TInteger"]
 "5" -> "7"
-"7" [label="SymName\n\"(null)\""]
-"1" -> "8"
-"8" [label="FuncImpl"]
+"7" [label="SymName\n\"\""]
+"2" -> "8"
+"8" [label="DeclImpl"]
 "8" -> "9"
 "9" [label="TInteger"]
 "8" -> "10"
-"10" [label="SymName\n\"(null)\""]
+"10" [label="SymName\n\"@˜\""]
 "1" -> "11"
 "11" [label="FuncImpl"]
 "11" -> "12"
-"12" [label="TBoolean"]
+"12" [label="TInteger"]
 "11" -> "13"
 "13" [label="SymName\n\"(null)\""]
+"1" -> "14"
+"14" [label="FuncImpl"]
+"14" -> "15"
+"15" [label="TInteger"]
+"14" -> "16"
+"16" [label="SymName\n\"(null)\""]
+"1" -> "17"
+"17" [label="FuncImpl"]
+"17" -> "18"
+"18" [label="TBoolean"]
+"17" -> "19"
+"19" [label="SymName\n\"(null)\""]
 }; 
