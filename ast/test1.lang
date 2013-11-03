@@ -1,16 +1,10 @@
-function Main():int{
+function Main(i : int):int{
 	var a,b,c:int;
 	a = 5;
 	b = 4;
 	return 4;
 }
 function two():int{
-	var a,b,c:int;
-	a = 5;
-	b = 4;
-	return 4;
-}
-function three():int{
 	var a,b,c:int;
 	a = 5;
 	b = 4;

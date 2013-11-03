@@ -501,14 +501,14 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    79,    79,    82,    83,    86,    90,    91,    94,    95,
-      98,    99,   102,   103,   106,   108,   111,   112,   115,   118,
-     120,   121,   123,   124,   127,   128,   131,   134,   135,   136,
-     139,   140,   141,   142,   143,   146,   149,   151,   153,   156,
-     159,   160,   163,   164,   167,   168,   169,   170,   173,   174,
-     175,   176,   177,   178,   179,   183,   186,   187,   188,   189,
-     190,   191,   192,   193,   194,   195,   196,   197,   198,   201,
-     202,   205,   206,   209,   210
+       0,    79,    79,    82,    83,    86,    89,    90,    93,    94,
+      97,    98,   101,   102,   105,   107,   110,   111,   114,   117,
+     119,   120,   122,   123,   126,   127,   130,   133,   134,   135,
+     138,   139,   140,   141,   142,   145,   148,   150,   152,   155,
+     158,   159,   162,   163,   166,   167,   168,   169,   172,   173,
+     174,   175,   176,   177,   178,   182,   185,   186,   187,   188,
+     189,   190,   191,   192,   193,   194,   195,   196,   197,   200,
+     201,   204,   205,   208,   209
 };
 #endif
 
@@ -1543,30 +1543,30 @@ yyreduce:
   case 3:
 /* Line 1787 of yacc.c  */
 #line 82 "parser.ypp"
-    { (yyvsp[(1) - (2)]).u_func=new FuncImpl(NULL,NULL,NULL,NULL);}
+    { (yyvsp[(1) - (2)]).u_func; /*$$.u_func_list->push_back($1.u_func);*/}
     break;
 
   case 5:
 /* Line 1787 of yacc.c  */
-#line 87 "parser.ypp"
-    {(yyval).u_func=new FuncImpl((yyvsp[(7) - (10)]).u_type,new SymName((yyvsp[(2) - (10)]).u_base_charptr),NULL,NULL);}
+#line 86 "parser.ypp"
+    {(yyvsp[(4) - (10)]).u_decl_list=new list<Decl_ptr>(); (yyval).u_func=new FuncImpl((yyvsp[(7) - (10)]).u_type,new SymName((yyvsp[(2) - (10)]).u_base_charptr),(yyvsp[(4) - (10)]).u_decl_list,NULL);}
     break;
 
   case 6:
 /* Line 1787 of yacc.c  */
-#line 90 "parser.ypp"
-    {}
+#line 89 "parser.ypp"
+    {(yyvsp[(1) - (4)]).u_symname=new SymName((yyvsp[(1) - (4)]).u_base_charptr); (yyvsp[(1) - (4)]).u_symname_list=new list<SymName_ptr>(); (yyvsp[(1) - (4)]).u_symname_list->push_back((yyvsp[(1) - (4)]).u_symname);/*$$.u_decl_list->push_back(new DeclImpl($3.u_type,$1.u_symname_list));*/}
     break;
 
   case 16:
 /* Line 1787 of yacc.c  */
-#line 111 "parser.ypp"
+#line 110 "parser.ypp"
     {(yyval).u_type=new TInteger();}
     break;
 
   case 17:
 /* Line 1787 of yacc.c  */
-#line 112 "parser.ypp"
+#line 111 "parser.ypp"
     {(yyval).u_type=new TBoolean();}
     break;
 
@@ -1802,7 +1802,7 @@ yyreturn:
 
 
 /* Line 2048 of yacc.c  */
-#line 214 "parser.ypp"
+#line 213 "parser.ypp"
 
 /*********************************************************
 	Stop here

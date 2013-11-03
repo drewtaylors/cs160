@@ -55,8 +55,8 @@ extern int yylineno;
  
 /********* FuncImpl ************/
  FuncImpl::FuncImpl(Type *p1, SymName *p2, list<Decl_ptr> *p3, Function_block *p4)  {
-	m_type = p1;
-	m_symname = p2;
+//	m_type = p1;
+//	m_symname = p2;
 //	m_decl_list = p3;
 //	m_function_block = p4;
 //	m_attribute.lineno = yylineno;
