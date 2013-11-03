@@ -1537,13 +1537,19 @@ yyreduce:
         case 2:
 /* Line 1787 of yacc.c  */
 #line 79 "parser.ypp"
-    { (yyvsp[(1) - (2)]).u_func; (yyvsp[(2) - (2)]).u_func_list=new list<Func_ptr>(); (yyvsp[(2) - (2)]).u_func_list->push_back((yyvsp[(1) - (2)]).u_func); ast=new ProgramImpl((yyvsp[(2) - (2)]).u_func_list); }
+    { (yyvsp[(2) - (2)]).u_func_list->push_back((yyvsp[(1) - (2)]).u_func); ast=new ProgramImpl((yyvsp[(2) - (2)]).u_func_list); }
     break;
 
   case 3:
 /* Line 1787 of yacc.c  */
 #line 82 "parser.ypp"
-    { (yyvsp[(1) - (2)]).u_func; /*$$.u_func_list->push_back($1.u_func);*/}
+    { (yyvsp[(2) - (2)]).u_func_list->push_back((yyvsp[(1) - (2)]).u_func); (yyval).u_func_list= (yyvsp[(2) - (2)]).u_func_list;}
+    break;
+
+  case 4:
+/* Line 1787 of yacc.c  */
+#line 83 "parser.ypp"
+    { (yyval).u_func_list=new list<Func_ptr>(); }
     break;
 
   case 5:
@@ -1572,7 +1578,7 @@ yyreduce:
 
 
 /* Line 1787 of yacc.c  */
-#line 1576 "parser.cpp"
+#line 1582 "parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

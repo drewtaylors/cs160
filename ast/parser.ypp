@@ -76,11 +76,11 @@
 
 %%
 
-Start : F FUNC_ { $1.u_func; $2.u_func_list=new list<Func_ptr>(); $2.u_func_list->push_back($1.u_func); ast=new ProgramImpl($2.u_func_list); }
+Start : F FUNC_ { $2.u_func_list->push_back($1.u_func); ast=new ProgramImpl($2.u_func_list); }
         ;
 
-FUNC_ : F FUNC_ { $1.u_func; /*$$.u_func_list->push_back($1.u_func);*/}
-        |
+FUNC_ : F FUNC_ { $2.u_func_list->push_back($1.u_func); $$.u_func_list= $2.u_func_list;}
+        | { $$.u_func_list=new list<Func_ptr>(); }
         ;
 
 F : FUNCTION IDENTIFIER LEFTPAREN P_L RIGHTPAREN COLON R_T LEFTBRACE B_O_F RIGHTBRACE {$4.u_decl_list=new list<Decl_ptr>(); $$.u_func=new FuncImpl($7.u_type,new SymName($2.u_base_charptr),$4.u_decl_list,NULL);}

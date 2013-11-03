@@ -3,4 +3,10 @@ digraph G {
 "1" [label="ProgramImpl"]
 "1" -> "2"
 "2" [label="FuncImpl"]
+"1" -> "3"
+"3" [label="FuncImpl"]
+"1" -> "4"
+"4" [label="FuncImpl"]
+"1" -> "5"
+"5" [label="FuncImpl"]
 }; 
