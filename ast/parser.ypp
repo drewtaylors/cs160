@@ -165,7 +165,7 @@ EXPR_ESSION : MULT_EXPRESSION {$$.u_expr=$1.u_expr;}
             | ABSOLUTEVALUE EXPR_ESSION ABSOLUTEVALUE OPE_RATOR
             ;
 
-SINGLE_EXPRESSION : MINUS INTEGER %prec NOT {$$.u_expr=new Uminus(new IntLit(new Primitive($2.u_base_int)));}
+SINGLE_EXPRESSION : MINUS SINGLE_EXPRESSION %prec NOT {$$.u_expr=new Uminus($2.u_expr);}
                   | INTEGER         {$$.u_expr=new IntLit(new Primitive($1.u_base_int)); }
                   | TRUE            {$$.u_expr=new BoolLit(new Primitive($1.u_base_int));}
                   | FALSE           {$$.u_expr=new BoolLit(new Primitive($1.u_base_int));}
@@ -176,7 +176,7 @@ SINGLE_EXPRESSION : MINUS INTEGER %prec NOT {$$.u_expr=new Uminus(new IntLit(new
 
                   
 MULT_EXPRESSION : SINGLE_EXPRESSION OPE_RATOR
-                  ;
+                ;
 
 OPE_RATOR :
                   | PLUS EXPR_ESSION

@@ -40,7 +40,7 @@ digraph G {
 "19" -> "20"
 "20" [label="Uminus"]
 "20" -> "21"
-"21" [label="IntLit"]
+"21" [label="Ident"]
 "21" -> "22"
-"22" [label="Primitive\n0"]
+"22" [label="SymName\n\"(null)\""]
 }; 

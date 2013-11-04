@@ -70,7 +70,7 @@ Grammar
    42            | NOT LEFTPAREN EXPR_ESSION RIGHTPAREN OPE_RATOR
    43            | ABSOLUTEVALUE EXPR_ESSION ABSOLUTEVALUE OPE_RATOR
 
-   44 SINGLE_EXPRESSION: MINUS INTEGER
+   44 SINGLE_EXPRESSION: MINUS SINGLE_EXPRESSION
    45                  | INTEGER
    46                  | TRUE
    47                  | FALSE
@@ -133,7 +133,7 @@ DIVIDE (279) 56
 TRUE (280) 46
 FALSE (281) 47
 IDENTIFIER (282) 4 5 14 23 24 38 48 65 66
-INTEGER (283) 13 44 45
+INTEGER (283) 13 45
 SEMICOLON (284) 23 26 27 31 36
 COLON (285) 4 5 23
 COMMA (286) 7 24 69
@@ -203,7 +203,7 @@ EXPR_ESSION (65)
     on left: 40 41 42 43, on right: 14 31 32 35 38 39 41 42 43 53 54
     55 56 57 58 59 60 61 62 63 64 67
 SINGLE_EXPRESSION (66)
-    on left: 44 45 46 47 48 49 50, on right: 50 51
+    on left: 44 45 46 47 48 49 50, on right: 44 50 51
 MULT_EXPRESSION (67)
     on left: 51, on right: 40
 OPE_RATOR (68)
@@ -707,9 +707,17 @@ state 51
 
 state 52
 
-   44 SINGLE_EXPRESSION: MINUS . INTEGER
+   44 SINGLE_EXPRESSION: MINUS . SINGLE_EXPRESSION
 
-    INTEGER  shift, and go to state 80
+    NOT         shift, and go to state 77
+    MINUS       shift, and go to state 52
+    TRUE        shift, and go to state 53
+    FALSE       shift, and go to state 54
+    IDENTIFIER  shift, and go to state 55
+    INTEGER     shift, and go to state 56
+
+    INT_ARRAY_EXP      go to state 59
+    SINGLE_EXPRESSION  go to state 80
 
 
 state 53
@@ -1022,7 +1030,7 @@ state 79
 
 state 80
 
-   44 SINGLE_EXPRESSION: MINUS INTEGER .
+   44 SINGLE_EXPRESSION: MINUS SINGLE_EXPRESSION .
 
     $default  reduce using rule 44 (SINGLE_EXPRESSION)
 
