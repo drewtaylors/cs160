@@ -125,11 +125,11 @@ extern int yylineno;
 	m_attribute.lineno = yylineno;
 	m_parent_attribute = NULL;
 	list<Decl_ptr>::iterator m_decl_list_iter;
-//	for(m_decl_list_iter = m_decl_list->begin();
-//	  m_decl_list_iter != m_decl_list->end();
-//	  ++m_decl_list_iter){
-//		(*m_decl_list_iter)->m_parent_attribute = &m_attribute;
-//	}
+	for(m_decl_list_iter = m_decl_list->begin();
+	  m_decl_list_iter != m_decl_list->end();
+	  ++m_decl_list_iter){
+		(*m_decl_list_iter)->m_parent_attribute = &m_attribute;
+	}
 //	list<Func_ptr>::iterator m_func_list_iter;
 //	for(m_func_list_iter = m_func_list->begin();
 //	  m_func_list_iter != m_func_list->end();
@@ -197,12 +197,12 @@ extern int yylineno;
 	delete(m_return);
   }
  void Function_blockImpl::visit_children( Visitor* v ) {
-// 	list<Decl_ptr>::iterator m_decl_list_iter;
-//	for(m_decl_list_iter = m_decl_list->begin();
-//	  m_decl_list_iter != m_decl_list->end();
-//	  ++m_decl_list_iter){
-//		(*m_decl_list_iter)->accept( v );
-//	}
+ 	list<Decl_ptr>::iterator m_decl_list_iter;
+	for(m_decl_list_iter = m_decl_list->begin();
+	  m_decl_list_iter != m_decl_list->end();
+	  ++m_decl_list_iter){
+		(*m_decl_list_iter)->accept( v );
+	}
 //	list<Func_ptr>::iterator m_func_list_iter;
 //	for(m_func_list_iter = m_func_list->begin();
 //	  m_func_list_iter != m_func_list->end();

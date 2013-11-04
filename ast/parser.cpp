@@ -1633,7 +1633,7 @@ yyreduce:
   case 24:
 /* Line 1787 of yacc.c  */
 #line 127 "parser.ypp"
-    { (yyval).u_decl=new DeclImpl((yyvsp[(5) - (6)]).u_type,(yyvsp[(3) - (6)]).u_symname_list); }
+    { (yyvsp[(3) - (6)]).u_symname_list->push_front(new SymName((yyvsp[(1) - (6)]).u_base_charptr)); (yyval).u_decl=new DeclImpl((yyvsp[(5) - (6)]).u_type,(yyvsp[(3) - (6)]).u_symname_list); }
     break;
 
   case 25:

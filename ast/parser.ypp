@@ -124,7 +124,7 @@ VAR_DECLERATIONS : VAR_DEC VAR_DECLERATIONS   { $2.u_decl_list->push_front($1.u_
                  | {$$.u_decl_list=new list<Decl_ptr>();}
                  ;
 
-VAR_DEC : VAR IDENTIFIER MULT_DEC COLON TYPE_2 SEMICOLON { $$.u_decl=new DeclImpl($5.u_type,$3.u_symname_list); }
+VAR_DEC : VAR IDENTIFIER MULT_DEC COLON TYPE_2 SEMICOLON { $3.u_symname_list->push_front(new SymName($1.u_base_charptr)); $$.u_decl=new DeclImpl($5.u_type,$3.u_symname_list); }
          ;
 
 MULT_DEC :   COMMA IDENTIFIER MULT_DEC {$$.u_symname_list=$3.u_symname_list; }

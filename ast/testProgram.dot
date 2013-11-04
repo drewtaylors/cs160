@@ -9,4 +9,10 @@ digraph G {
 "4" [label="SymName\n\"(null)\""]
 "2" -> "5"
 "5" [label="FunctionBlockImpl"]
+"5" -> "6"
+"6" [label="DeclImpl"]
+"6" -> "7"
+"7" [label="TInteger"]
+"6" -> "8"
+"8" [label="SymName\n\"(null)\""]
 }; 
