@@ -104,11 +104,11 @@ TYPE_2 : TYPE {$$.u_type=$$.u_type;}
 
 INT_ARRAY : INTARRAY LEFTBRACKET INTEGER RIGHTBRACKET {$$.u_type=new TIntArray(new Primitive($3.u_base_int));}
           ;
-INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET EXPR_ESSION RIGHTBRACKET
+INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET EXPR_ESSION RIGHTBRACKET {$$.u_expr=new ArrayAccess(new SymName($1.u_base_charptr),$3.u_expr); }
              ;
 
 
-B_O_F : VAR_DECLERATIONS BODY_CHOICE RETURN_ {$$.u_function_block=new Function_blockImpl($1.u_decl_list,NULL,NULL,NULL);}
+B_O_F : VAR_DECLERATIONS BODY_CHOICE RETURN_ {$$.u_function_block=new Function_blockImpl($1.u_decl_list,NULL,NULL,$3.u_return);}
         ;
 
 BODY_CHOICE : MULT_FUNCTIONS BODY_STATEMENTS
@@ -138,8 +138,8 @@ STATEMENTS_ : ASIGN_MENT SEMICOLON
              | FOR_
              ;
 
-RETURN_ : RETURN EXPR_ESSION SEMICOLON
-            ;
+RETURN_ : RETURN EXPR_ESSION SEMICOLON {$$.u_return=new ReturnImpl($2.u_expr);}
+          ;
 
 IF_ : IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
 
@@ -159,18 +159,18 @@ ASIGN_MENT : IDENTIFIER ASSIGNMENT EXPR_ESSION
             | INT_ARRAY_EXP ASSIGNMENT EXPR_ESSION
             ;
 
-EXPR_ESSION : MULT_EXPRESSION
+EXPR_ESSION : MULT_EXPRESSION {$$.u_expr=$1.u_expr;}
             | LEFTPAREN EXPR_ESSION RIGHTPAREN OPE_RATOR
             | NOT LEFTPAREN EXPR_ESSION RIGHTPAREN OPE_RATOR
             | ABSOLUTEVALUE EXPR_ESSION ABSOLUTEVALUE OPE_RATOR
             ;
 
-SINGLE_EXPRESSION : MINUS INTEGER %prec NOT
-                  | INTEGER
-                  | TRUE
-                  | FALSE
-                  | IDENTIFIER
-                  | INT_ARRAY_EXP
+SINGLE_EXPRESSION : MINUS INTEGER %prec NOT {$$.u_expr=new Uminus(new IntLit(new Primitive($2.u_base_int)));}
+                  | INTEGER         {$$.u_expr=new IntLit(new Primitive($1.u_base_int)); }
+                  | TRUE            {$$.u_expr=new BoolLit(new Primitive($1.u_base_int));}
+                  | FALSE           {$$.u_expr=new BoolLit(new Primitive($1.u_base_int));}
+                  | IDENTIFIER      { $$.u_expr=new Ident(new SymName($1.u_base_charptr));}
+                  | INT_ARRAY_EXP   {$$.u_expr=$1.u_expr;}
                   | NOT SINGLE_EXPRESSION
                   ;
 

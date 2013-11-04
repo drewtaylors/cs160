@@ -142,7 +142,7 @@ extern int yylineno;
 //	  ++m_stat_list_iter){
 //		(*m_stat_list_iter)->m_parent_attribute = &m_attribute;
 //	}
-//	m_return->m_parent_attribute = &m_attribute;
+	m_return->m_parent_attribute = &m_attribute;
   }
  Function_blockImpl::Function_blockImpl(const Function_blockImpl & other) {
 	m_decl_list = new list<Decl_ptr>;
@@ -215,7 +215,7 @@ extern int yylineno;
 //	  ++m_stat_list_iter){
 //		(*m_stat_list_iter)->accept( v );
 //	}
-//	m_return->accept( v );
+	m_return->accept( v );
   }
  void Function_blockImpl::accept(Visitor *v) { v->visitFunction_blockImpl(this); }
  Function_blockImpl *Function_blockImpl::clone() const { return new Function_blockImpl(*this); }

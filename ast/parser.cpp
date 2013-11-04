@@ -1609,10 +1609,16 @@ yyreduce:
     {(yyval).u_type=new TIntArray(new Primitive((yyvsp[(3) - (4)]).u_base_int));}
     break;
 
+  case 15:
+/* Line 1787 of yacc.c  */
+#line 107 "parser.ypp"
+    {(yyval).u_expr=new ArrayAccess(new SymName((yyvsp[(1) - (4)]).u_base_charptr),(yyvsp[(3) - (4)]).u_expr); }
+    break;
+
   case 16:
 /* Line 1787 of yacc.c  */
 #line 111 "parser.ypp"
-    {(yyval).u_function_block=new Function_blockImpl((yyvsp[(1) - (3)]).u_decl_list,NULL,NULL,NULL);}
+    {(yyval).u_function_block=new Function_blockImpl((yyvsp[(1) - (3)]).u_decl_list,NULL,NULL,(yyvsp[(3) - (3)]).u_return);}
     break;
 
   case 22:
@@ -1645,9 +1651,57 @@ yyreduce:
     {(yyval).u_symname_list=new list<SymName_ptr>();}
     break;
 
+  case 32:
+/* Line 1787 of yacc.c  */
+#line 141 "parser.ypp"
+    {(yyval).u_return=new ReturnImpl((yyvsp[(2) - (3)]).u_expr);}
+    break;
+
+  case 41:
+/* Line 1787 of yacc.c  */
+#line 162 "parser.ypp"
+    {(yyval).u_expr=(yyvsp[(1) - (1)]).u_expr;}
+    break;
+
+  case 45:
+/* Line 1787 of yacc.c  */
+#line 168 "parser.ypp"
+    {(yyval).u_expr=new Uminus(new IntLit(new Primitive((yyvsp[(2) - (2)]).u_base_int)));}
+    break;
+
+  case 46:
+/* Line 1787 of yacc.c  */
+#line 169 "parser.ypp"
+    {(yyval).u_expr=new IntLit(new Primitive((yyvsp[(1) - (1)]).u_base_int)); }
+    break;
+
+  case 47:
+/* Line 1787 of yacc.c  */
+#line 170 "parser.ypp"
+    {(yyval).u_expr=new BoolLit(new Primitive((yyvsp[(1) - (1)]).u_base_int));}
+    break;
+
+  case 48:
+/* Line 1787 of yacc.c  */
+#line 171 "parser.ypp"
+    {(yyval).u_expr=new BoolLit(new Primitive((yyvsp[(1) - (1)]).u_base_int));}
+    break;
+
+  case 49:
+/* Line 1787 of yacc.c  */
+#line 172 "parser.ypp"
+    { (yyval).u_expr=new Ident(new SymName((yyvsp[(1) - (1)]).u_base_charptr));}
+    break;
+
+  case 50:
+/* Line 1787 of yacc.c  */
+#line 173 "parser.ypp"
+    {(yyval).u_expr=(yyvsp[(1) - (1)]).u_expr;}
+    break;
+
 
 /* Line 1787 of yacc.c  */
-#line 1651 "parser.cpp"
+#line 1705 "parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

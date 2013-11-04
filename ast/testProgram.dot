@@ -23,4 +23,24 @@ digraph G {
 "11" [label="SymName\n\"(null)\""]
 "6" -> "12"
 "12" [label="SymName\n\"(null)\""]
+"5" -> "13"
+"13" [label="DeclImpl"]
+"13" -> "14"
+"14" [label="TInteger"]
+"13" -> "15"
+"15" [label="SymName\n\"(null)\""]
+"13" -> "16"
+"16" [label="SymName\n\"(null)\""]
+"13" -> "17"
+"17" [label="SymName\n\"(null)\""]
+"13" -> "18"
+"18" [label="SymName\n\"(null)\""]
+"5" -> "19"
+"19" [label="Return"]
+"19" -> "20"
+"20" [label="Uminus"]
+"20" -> "21"
+"21" [label="IntLit"]
+"21" -> "22"
+"22" [label="Primitive\n0"]
 }; 
