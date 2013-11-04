@@ -83,7 +83,7 @@ FUNC_ : F FUNC_ { $2.u_func_list->push_front($1.u_func); $$.u_func_list= $2.u_fu
         | { $$.u_func_list=new list<Func_ptr>(); }
         ;
 
-F : FUNCTION IDENTIFIER LEFTPAREN P_L RIGHTPAREN COLON TYPE LEFTBRACE B_O_F RIGHTBRACE { $$.u_func=new FuncImpl($7.u_type,new SymName($2.u_base_charptr),$4.u_decl_list,NULL); }
+F : FUNCTION IDENTIFIER LEFTPAREN P_L RIGHTPAREN COLON TYPE LEFTBRACE B_O_F RIGHTBRACE { $$.u_func=new FuncImpl($7.u_type,new SymName($2.u_base_charptr),$4.u_decl_list,$9.u_function_block); }
         ;
 
 P_L : IDENTIFIER COLON TYPE MORE_PARAMS { $1.u_symname_list=new list<SymName_ptr>(); $1.u_symname_list->push_back(new SymName($1.u_base_charptr)); $4.u_decl_list->push_front(new DeclImpl($3.u_type,$1.u_symname_list)); $$.u_decl_list=$4.u_decl_list; }
@@ -98,17 +98,17 @@ TYPE :    INT   {$$.u_type=new TInteger();}
         | BOOL  {$$.u_type=new TBoolean();}
         ;
 
-TYPE_2 : TYPE
-        | INT_ARRAY
+TYPE_2 : TYPE {$$.u_type=$$.u_type;}
+        | INT_ARRAY {$$.u_type = $1.u_type;}
         ;
 
-INT_ARRAY : INTARRAY LEFTBRACKET INTEGER RIGHTBRACKET
+INT_ARRAY : INTARRAY LEFTBRACKET INTEGER RIGHTBRACKET {$$.u_type=new TIntArray($3.u_primitive);}
           ;
 INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET EXPR_ESSION RIGHTBRACKET
              ;
 
 
-B_O_F : VAR_DECLERATIONS BODY_CHOICE RETURN_
+B_O_F : VAR_DECLERATIONS BODY_CHOICE RETURN_ {$$.u_function_block=new Function_blockImpl($1.u_decl_list,NULL,NULL,NULL);}
         ;
 
 BODY_CHOICE : MULT_FUNCTIONS BODY_STATEMENTS
@@ -120,16 +120,16 @@ BODY_STATEMENTS : STATEMENTS_ BODY_STATEMENTS
                 |
                 ;
 
-VAR_DECLERATIONS : VAR_DEC VAR_DECLERATIONS
-                 |
+VAR_DECLERATIONS : VAR_DEC VAR_DECLERATIONS   { $2.u_decl_list->push_front($1.u_decl); $$.u_decl_list=$2.u_decl_list;  }
+                 | {$$.u_decl_list=new list<Decl_ptr>();}
                  ;
 
-VAR_DEC : VAR IDENTIFIER MULT_DEC COLON TYPE_2 SEMICOLON
-                 ;
+VAR_DEC : VAR IDENTIFIER MULT_DEC COLON TYPE_2 SEMICOLON { $$.u_decl=new DeclImpl($5.u_type,$3.u_symname_list); }
+         ;
 
-MULT_DEC : COMMA IDENTIFIER MULT_DEC
-            |COMMA INT_ARRAY MULT_DEC
-            |
+MULT_DEC :   COMMA IDENTIFIER MULT_DEC {$$.u_symname_list=$3.u_symname_list; }
+            |COMMA INT_ARRAY MULT_DEC  {$$.u_symname_list=$3.u_symname_list;}
+            | {$$.u_symname_list=new list<SymName_ptr>();}
             ;
 
 STATEMENTS_ : ASIGN_MENT SEMICOLON

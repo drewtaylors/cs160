@@ -58,7 +58,7 @@ extern int yylineno;
 	m_type = p1;
 	m_symname = p2;
 	m_decl_list = p3;
-//	m_function_block = p4;
+	m_function_block = p4;
 	m_attribute.lineno = yylineno;
 	m_parent_attribute = NULL;
 	m_type->m_parent_attribute = &m_attribute;
@@ -69,7 +69,7 @@ extern int yylineno;
 	  ++m_decl_list_iter){
 		(*m_decl_list_iter)->m_parent_attribute = &m_attribute;
 	}
-//	m_function_block->m_parent_attribute = &m_attribute;
+	m_function_block->m_parent_attribute = &m_attribute;
   }
  FuncImpl::FuncImpl(const FuncImpl & other) {
 	m_type = other.m_type->clone();
@@ -110,7 +110,7 @@ extern int yylineno;
 	  ++m_decl_list_iter){
 		(*m_decl_list_iter)->accept( v );
 	}
-//	m_function_block->accept( v );
+	m_function_block->accept( v );
   }
  void FuncImpl::accept(Visitor *v) { v->visitFuncImpl(this); }
  FuncImpl *FuncImpl::clone() const { return new FuncImpl(*this); }
@@ -125,24 +125,24 @@ extern int yylineno;
 	m_attribute.lineno = yylineno;
 	m_parent_attribute = NULL;
 	list<Decl_ptr>::iterator m_decl_list_iter;
-	for(m_decl_list_iter = m_decl_list->begin();
-	  m_decl_list_iter != m_decl_list->end();
-	  ++m_decl_list_iter){
-		(*m_decl_list_iter)->m_parent_attribute = &m_attribute;
-	}
-	list<Func_ptr>::iterator m_func_list_iter;
-	for(m_func_list_iter = m_func_list->begin();
-	  m_func_list_iter != m_func_list->end();
-	  ++m_func_list_iter){
-		(*m_func_list_iter)->m_parent_attribute = &m_attribute;
-	}
-	list<Stat_ptr>::iterator m_stat_list_iter;
-	for(m_stat_list_iter = m_stat_list->begin();
-	  m_stat_list_iter != m_stat_list->end();
-	  ++m_stat_list_iter){
-		(*m_stat_list_iter)->m_parent_attribute = &m_attribute;
-	}
-	m_return->m_parent_attribute = &m_attribute;
+//	for(m_decl_list_iter = m_decl_list->begin();
+//	  m_decl_list_iter != m_decl_list->end();
+//	  ++m_decl_list_iter){
+//		(*m_decl_list_iter)->m_parent_attribute = &m_attribute;
+//	}
+//	list<Func_ptr>::iterator m_func_list_iter;
+//	for(m_func_list_iter = m_func_list->begin();
+//	  m_func_list_iter != m_func_list->end();
+//	  ++m_func_list_iter){
+//		(*m_func_list_iter)->m_parent_attribute = &m_attribute;
+//	}
+//	list<Stat_ptr>::iterator m_stat_list_iter;
+//	for(m_stat_list_iter = m_stat_list->begin();
+//	  m_stat_list_iter != m_stat_list->end();
+//	  ++m_stat_list_iter){
+//		(*m_stat_list_iter)->m_parent_attribute = &m_attribute;
+//	}
+//	m_return->m_parent_attribute = &m_attribute;
   }
  Function_blockImpl::Function_blockImpl(const Function_blockImpl & other) {
 	m_decl_list = new list<Decl_ptr>;
@@ -197,25 +197,25 @@ extern int yylineno;
 	delete(m_return);
   }
  void Function_blockImpl::visit_children( Visitor* v ) {
- 	list<Decl_ptr>::iterator m_decl_list_iter;
-	for(m_decl_list_iter = m_decl_list->begin();
-	  m_decl_list_iter != m_decl_list->end();
-	  ++m_decl_list_iter){
-		(*m_decl_list_iter)->accept( v );
-	}
-	list<Func_ptr>::iterator m_func_list_iter;
-	for(m_func_list_iter = m_func_list->begin();
-	  m_func_list_iter != m_func_list->end();
-	  ++m_func_list_iter){
-		(*m_func_list_iter)->accept( v );
-	}
-	list<Stat_ptr>::iterator m_stat_list_iter;
-	for(m_stat_list_iter = m_stat_list->begin();
-	  m_stat_list_iter != m_stat_list->end();
-	  ++m_stat_list_iter){
-		(*m_stat_list_iter)->accept( v );
-	}
-	m_return->accept( v );
+// 	list<Decl_ptr>::iterator m_decl_list_iter;
+//	for(m_decl_list_iter = m_decl_list->begin();
+//	  m_decl_list_iter != m_decl_list->end();
+//	  ++m_decl_list_iter){
+//		(*m_decl_list_iter)->accept( v );
+//	}
+//	list<Func_ptr>::iterator m_func_list_iter;
+//	for(m_func_list_iter = m_func_list->begin();
+//	  m_func_list_iter != m_func_list->end();
+//	  ++m_func_list_iter){
+//		(*m_func_list_iter)->accept( v );
+//	}
+//	list<Stat_ptr>::iterator m_stat_list_iter;
+//	for(m_stat_list_iter = m_stat_list->begin();
+//	  m_stat_list_iter != m_stat_list->end();
+//	  ++m_stat_list_iter){
+//		(*m_stat_list_iter)->accept( v );
+//	}
+//	m_return->accept( v );
   }
  void Function_blockImpl::accept(Visitor *v) { v->visitFunction_blockImpl(this); }
  Function_blockImpl *Function_blockImpl::clone() const { return new Function_blockImpl(*this); }

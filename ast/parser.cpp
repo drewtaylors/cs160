@@ -1555,7 +1555,7 @@ yyreduce:
   case 5:
 /* Line 1787 of yacc.c  */
 #line 86 "parser.ypp"
-    { (yyval).u_func=new FuncImpl((yyvsp[(7) - (10)]).u_type,new SymName((yyvsp[(2) - (10)]).u_base_charptr),(yyvsp[(4) - (10)]).u_decl_list,NULL); }
+    { (yyval).u_func=new FuncImpl((yyvsp[(7) - (10)]).u_type,new SymName((yyvsp[(2) - (10)]).u_base_charptr),(yyvsp[(4) - (10)]).u_decl_list,(yyvsp[(9) - (10)]).u_function_block); }
     break;
 
   case 6:
@@ -1594,9 +1594,69 @@ yyreduce:
     {(yyval).u_type=new TBoolean();}
     break;
 
+  case 12:
+/* Line 1787 of yacc.c  */
+#line 101 "parser.ypp"
+    {(yyval).u_type=(yyval).u_type;}
+    break;
+
+  case 13:
+/* Line 1787 of yacc.c  */
+#line 102 "parser.ypp"
+    {(yyval).u_type = (yyvsp[(1) - (1)]).u_type;}
+    break;
+
+  case 14:
+/* Line 1787 of yacc.c  */
+#line 105 "parser.ypp"
+    {(yyval).u_type=new TIntArray((yyvsp[(3) - (4)]).u_primitive);}
+    break;
+
+  case 16:
+/* Line 1787 of yacc.c  */
+#line 111 "parser.ypp"
+    {(yyval).u_function_block=new Function_blockImpl((yyvsp[(1) - (3)]).u_decl_list,NULL,NULL,NULL);}
+    break;
+
+  case 22:
+/* Line 1787 of yacc.c  */
+#line 123 "parser.ypp"
+    { (yyvsp[(2) - (2)]).u_decl_list->push_front((yyvsp[(1) - (2)]).u_decl); (yyval).u_decl_list=(yyvsp[(2) - (2)]).u_decl_list;  }
+    break;
+
+  case 23:
+/* Line 1787 of yacc.c  */
+#line 124 "parser.ypp"
+    {(yyval).u_decl_list=new list<Decl_ptr>();}
+    break;
+
+  case 24:
+/* Line 1787 of yacc.c  */
+#line 127 "parser.ypp"
+    { (yyval).u_decl=new DeclImpl((yyvsp[(5) - (6)]).u_type,(yyvsp[(3) - (6)]).u_symname_list); }
+    break;
+
+  case 25:
+/* Line 1787 of yacc.c  */
+#line 130 "parser.ypp"
+    {(yyval).u_symname_list=(yyvsp[(3) - (3)]).u_symname_list; }
+    break;
+
+  case 26:
+/* Line 1787 of yacc.c  */
+#line 131 "parser.ypp"
+    {(yyval).u_symname_list=(yyvsp[(3) - (3)]).u_symname_list;}
+    break;
+
+  case 27:
+/* Line 1787 of yacc.c  */
+#line 132 "parser.ypp"
+    {(yyval).u_symname_list=new list<SymName_ptr>();}
+    break;
+
 
 /* Line 1787 of yacc.c  */
-#line 1600 "parser.cpp"
+#line 1660 "parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
