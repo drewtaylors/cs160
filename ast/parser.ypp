@@ -102,7 +102,7 @@ TYPE_2 : TYPE {$$.u_type=$$.u_type;}
         | INT_ARRAY {$$.u_type = $1.u_type;}
         ;
 
-INT_ARRAY : INTARRAY LEFTBRACKET INTEGER RIGHTBRACKET {$$.u_type=new TIntArray($3.u_primitive);}
+INT_ARRAY : INTARRAY LEFTBRACKET INTEGER RIGHTBRACKET {$$.u_type=new TIntArray(new Primitive($3.u_base_int));}
           ;
 INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET EXPR_ESSION RIGHTBRACKET
              ;
@@ -127,8 +127,7 @@ VAR_DECLERATIONS : VAR_DEC VAR_DECLERATIONS   { $2.u_decl_list->push_front($1.u_
 VAR_DEC : VAR IDENTIFIER MULT_DEC COLON TYPE_2 SEMICOLON { $3.u_symname_list->push_front(new SymName($1.u_base_charptr)); $$.u_decl=new DeclImpl($5.u_type,$3.u_symname_list); }
          ;
 
-MULT_DEC :   COMMA IDENTIFIER MULT_DEC {$$.u_symname_list=$3.u_symname_list; }
-            |COMMA INT_ARRAY MULT_DEC  {$$.u_symname_list=$3.u_symname_list;}
+MULT_DEC :   COMMA IDENTIFIER MULT_DEC {$3.u_symname_list->push_front(new SymName($2.u_base_charptr)); $$.u_symname_list=$3.u_symname_list; }
             | {$$.u_symname_list=new list<SymName_ptr>();}
             ;
 
