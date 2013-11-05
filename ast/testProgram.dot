@@ -38,9 +38,19 @@ digraph G {
 "5" -> "19"
 "19" [label="Return"]
 "19" -> "20"
-"20" [label="Not"]
+"20" [label="Minus"]
 "20" -> "21"
-"21" [label="Ident"]
+"21" [label="IntLit"]
 "21" -> "22"
-"22" [label="SymName\n\"(null)\""]
+"22" [label="Primitive\n0"]
+"20" -> "23"
+"23" [label="Times"]
+"23" -> "24"
+"24" [label="IntLit"]
+"24" -> "25"
+"25" [label="Primitive\n0"]
+"23" -> "26"
+"26" [label="IntLit"]
+"26" -> "27"
+"27" [label="Primitive\n0"]
 }; 

@@ -164,18 +164,18 @@ EXPR_ESSION : LEFTPAREN EXPR_ESSION RIGHTPAREN  {$$.u_expr=$2.u_expr;}
             | ABSOLUTEVALUE EXPR_ESSION ABSOLUTEVALUE {$$.u_expr=$2.u_expr;}
             | MINUS EXPR_ESSION %prec NOT {$$.u_expr=new Uminus($2.u_expr);}
             | NOT EXPR_ESSION   %prec NOT {$$.u_expr=new Not($2.u_expr);}
-            | EXPR_ESSION PLUS EXPR_ESSION {/*$$.u_expr=$1.u_expr;*/}
-            | EXPR_ESSION MINUS EXPR_ESSION
-            | EXPR_ESSION TIMES EXPR_ESSION
-            | EXPR_ESSION DIVIDE EXPR_ESSION
-            | EXPR_ESSION OROR EXPR_ESSION
-            | EXPR_ESSION ANDAND EXPR_ESSION
-            | EXPR_ESSION EQEQ EXPR_ESSION
-            | EXPR_ESSION GT EXPR_ESSION
-            | EXPR_ESSION GTE EXPR_ESSION
-            | EXPR_ESSION LT EXPR_ESSION
-            | EXPR_ESSION LTE EXPR_ESSION
-            | EXPR_ESSION NE EXPR_ESSION
+            | EXPR_ESSION PLUS EXPR_ESSION {$$.u_expr=new Plus($1.u_expr,$3.u_expr);}
+            | EXPR_ESSION MINUS EXPR_ESSION {$$.u_expr=new Minus($1.u_expr,$3.u_expr);}
+            | EXPR_ESSION TIMES EXPR_ESSION {$$.u_expr=new Times($1.u_expr,$3.u_expr);}
+            | EXPR_ESSION DIVIDE EXPR_ESSION {$$.u_expr=new Div($1.u_expr,$3.u_expr);}
+            | EXPR_ESSION OROR EXPR_ESSION   {$$.u_expr=new Or($1.u_expr,$3.u_expr);}
+            | EXPR_ESSION ANDAND EXPR_ESSION {$$.u_expr=new And($1.u_expr,$3.u_expr);}
+            | EXPR_ESSION EQEQ EXPR_ESSION   {$$.u_expr=new Compare($1.u_expr,$3.u_expr);}
+            | EXPR_ESSION GT EXPR_ESSION     {$$.u_expr=new Gt($1.u_expr,$3.u_expr);}
+            | EXPR_ESSION GTE EXPR_ESSION    {$$.u_expr=new Gteq($1.u_expr,$3.u_expr);}
+            | EXPR_ESSION LT EXPR_ESSION     {$$.u_expr=new Lt($1.u_expr,$3.u_expr);}
+            | EXPR_ESSION LTE EXPR_ESSION    {$$.u_expr=new Lteq($1.u_expr,$3.u_expr);}
+            | EXPR_ESSION NE EXPR_ESSION     {$$.u_expr=new Noteq($1.u_expr,$3.u_expr);}
             | SINGLE_EXPRESSION { $$.u_expr=$1.u_expr;}
             ;
 

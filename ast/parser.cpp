@@ -1703,7 +1703,73 @@ yyreduce:
   case 45:
 /* Line 1787 of yacc.c  */
 #line 167 "parser.ypp"
-    {/*$$.u_expr=$1.u_expr;*/}
+    {(yyval).u_expr=new Plus((yyvsp[(1) - (3)]).u_expr,(yyvsp[(3) - (3)]).u_expr);}
+    break;
+
+  case 46:
+/* Line 1787 of yacc.c  */
+#line 168 "parser.ypp"
+    {(yyval).u_expr=new Minus((yyvsp[(1) - (3)]).u_expr,(yyvsp[(3) - (3)]).u_expr);}
+    break;
+
+  case 47:
+/* Line 1787 of yacc.c  */
+#line 169 "parser.ypp"
+    {(yyval).u_expr=new Times((yyvsp[(1) - (3)]).u_expr,(yyvsp[(3) - (3)]).u_expr);}
+    break;
+
+  case 48:
+/* Line 1787 of yacc.c  */
+#line 170 "parser.ypp"
+    {(yyval).u_expr=new Div((yyvsp[(1) - (3)]).u_expr,(yyvsp[(3) - (3)]).u_expr);}
+    break;
+
+  case 49:
+/* Line 1787 of yacc.c  */
+#line 171 "parser.ypp"
+    {(yyval).u_expr=new Or((yyvsp[(1) - (3)]).u_expr,(yyvsp[(3) - (3)]).u_expr);}
+    break;
+
+  case 50:
+/* Line 1787 of yacc.c  */
+#line 172 "parser.ypp"
+    {(yyval).u_expr=new And((yyvsp[(1) - (3)]).u_expr,(yyvsp[(3) - (3)]).u_expr);}
+    break;
+
+  case 51:
+/* Line 1787 of yacc.c  */
+#line 173 "parser.ypp"
+    {(yyval).u_expr=new Compare((yyvsp[(1) - (3)]).u_expr,(yyvsp[(3) - (3)]).u_expr);}
+    break;
+
+  case 52:
+/* Line 1787 of yacc.c  */
+#line 174 "parser.ypp"
+    {(yyval).u_expr=new Gt((yyvsp[(1) - (3)]).u_expr,(yyvsp[(3) - (3)]).u_expr);}
+    break;
+
+  case 53:
+/* Line 1787 of yacc.c  */
+#line 175 "parser.ypp"
+    {(yyval).u_expr=new Gteq((yyvsp[(1) - (3)]).u_expr,(yyvsp[(3) - (3)]).u_expr);}
+    break;
+
+  case 54:
+/* Line 1787 of yacc.c  */
+#line 176 "parser.ypp"
+    {(yyval).u_expr=new Lt((yyvsp[(1) - (3)]).u_expr,(yyvsp[(3) - (3)]).u_expr);}
+    break;
+
+  case 55:
+/* Line 1787 of yacc.c  */
+#line 177 "parser.ypp"
+    {(yyval).u_expr=new Lteq((yyvsp[(1) - (3)]).u_expr,(yyvsp[(3) - (3)]).u_expr);}
+    break;
+
+  case 56:
+/* Line 1787 of yacc.c  */
+#line 178 "parser.ypp"
+    {(yyval).u_expr=new Noteq((yyvsp[(1) - (3)]).u_expr,(yyvsp[(3) - (3)]).u_expr);}
     break;
 
   case 57:
@@ -1744,7 +1810,7 @@ yyreduce:
 
 
 /* Line 1787 of yacc.c  */
-#line 1748 "parser.cpp"
+#line 1814 "parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
