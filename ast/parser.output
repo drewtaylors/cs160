@@ -80,19 +80,19 @@ Grammar
 
    51 MULT_EXPRESSION: SINGLE_EXPRESSION OPE_RATOR
 
-   52 OPE_RATOR: /* empty */
-   53          | PLUS EXPR_ESSION
-   54          | MINUS EXPR_ESSION
-   55          | TIMES EXPR_ESSION
-   56          | DIVIDE EXPR_ESSION
-   57          | OROR EXPR_ESSION
-   58          | ANDAND EXPR_ESSION
-   59          | EQEQ EXPR_ESSION
-   60          | GT EXPR_ESSION
-   61          | GTE EXPR_ESSION
-   62          | LT EXPR_ESSION
-   63          | LTE EXPR_ESSION
-   64          | NE EXPR_ESSION
+   52 OPE_RATOR: PLUS EXPR_ESSION
+   53          | MINUS EXPR_ESSION
+   54          | TIMES EXPR_ESSION
+   55          | DIVIDE EXPR_ESSION
+   56          | OROR EXPR_ESSION
+   57          | ANDAND EXPR_ESSION
+   58          | EQEQ EXPR_ESSION
+   59          | GT EXPR_ESSION
+   60          | GTE EXPR_ESSION
+   61          | LT EXPR_ESSION
+   62          | LTE EXPR_ESSION
+   63          | NE EXPR_ESSION
+   64          | /* empty */
 
    65 FUNCTION_CALL: IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
    66              | INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
@@ -117,19 +117,19 @@ VAR (263) 23
 FUNCTION (264) 4
 INTARRAY (265) 13
 RETURN (266) 31
-EQEQ (267) 59
-GT (268) 60
-GTE (269) 61
-LT (270) 62
-LTE (271) 63
-NE (272) 64
-ANDAND (273) 58
-OROR (274) 57
+EQEQ (267) 58
+GT (268) 59
+GTE (269) 60
+LT (270) 61
+LTE (271) 62
+NE (272) 63
+ANDAND (273) 57
+OROR (274) 56
 NOT (275) 42 50
-PLUS (276) 53
-MINUS (277) 44 54
-TIMES (278) 55
-DIVIDE (279) 56
+PLUS (276) 52
+MINUS (277) 44 53
+TIMES (278) 54
+DIVIDE (279) 55
 TRUE (280) 46
 FALSE (281) 47
 IDENTIFIER (282) 4 5 14 23 24 38 48 65 66
@@ -200,8 +200,8 @@ FOR_ASIGN (63)
 ASIGN_MENT (64)
     on left: 38 39, on right: 26 36
 EXPR_ESSION (65)
-    on left: 40 41 42 43, on right: 14 31 32 35 38 39 41 42 43 53 54
-    55 56 57 58 59 60 61 62 63 64 67
+    on left: 40 41 42 43, on right: 14 31 32 35 38 39 41 42 43 52 53
+    54 55 56 57 58 59 60 61 62 63 67
 SINGLE_EXPRESSION (66)
     on left: 44 45 46 47 48 49 50, on right: 44 50 51
 MULT_EXPRESSION (67)
@@ -820,7 +820,7 @@ state 61
     TIMES   shift, and go to state 94
     DIVIDE  shift, and go to state 95
 
-    $default  reduce using rule 52 (OPE_RATOR)
+    $default  reduce using rule 64 (OPE_RATOR)
 
     OPE_RATOR  go to state 96
 
@@ -1058,7 +1058,7 @@ state 83
 
 state 84
 
-   59 OPE_RATOR: EQEQ . EXPR_ESSION
+   58 OPE_RATOR: EQEQ . EXPR_ESSION
 
     NOT            shift, and go to state 51
     MINUS          shift, and go to state 52
@@ -1077,7 +1077,7 @@ state 84
 
 state 85
 
-   60 OPE_RATOR: GT . EXPR_ESSION
+   59 OPE_RATOR: GT . EXPR_ESSION
 
     NOT            shift, and go to state 51
     MINUS          shift, and go to state 52
@@ -1096,7 +1096,7 @@ state 85
 
 state 86
 
-   61 OPE_RATOR: GTE . EXPR_ESSION
+   60 OPE_RATOR: GTE . EXPR_ESSION
 
     NOT            shift, and go to state 51
     MINUS          shift, and go to state 52
@@ -1115,7 +1115,7 @@ state 86
 
 state 87
 
-   62 OPE_RATOR: LT . EXPR_ESSION
+   61 OPE_RATOR: LT . EXPR_ESSION
 
     NOT            shift, and go to state 51
     MINUS          shift, and go to state 52
@@ -1134,7 +1134,7 @@ state 87
 
 state 88
 
-   63 OPE_RATOR: LTE . EXPR_ESSION
+   62 OPE_RATOR: LTE . EXPR_ESSION
 
     NOT            shift, and go to state 51
     MINUS          shift, and go to state 52
@@ -1153,7 +1153,7 @@ state 88
 
 state 89
 
-   64 OPE_RATOR: NE . EXPR_ESSION
+   63 OPE_RATOR: NE . EXPR_ESSION
 
     NOT            shift, and go to state 51
     MINUS          shift, and go to state 52
@@ -1172,7 +1172,7 @@ state 89
 
 state 90
 
-   58 OPE_RATOR: ANDAND . EXPR_ESSION
+   57 OPE_RATOR: ANDAND . EXPR_ESSION
 
     NOT            shift, and go to state 51
     MINUS          shift, and go to state 52
@@ -1191,7 +1191,7 @@ state 90
 
 state 91
 
-   57 OPE_RATOR: OROR . EXPR_ESSION
+   56 OPE_RATOR: OROR . EXPR_ESSION
 
     NOT            shift, and go to state 51
     MINUS          shift, and go to state 52
@@ -1210,7 +1210,7 @@ state 91
 
 state 92
 
-   53 OPE_RATOR: PLUS . EXPR_ESSION
+   52 OPE_RATOR: PLUS . EXPR_ESSION
 
     NOT            shift, and go to state 51
     MINUS          shift, and go to state 52
@@ -1229,7 +1229,7 @@ state 92
 
 state 93
 
-   54 OPE_RATOR: MINUS . EXPR_ESSION
+   53 OPE_RATOR: MINUS . EXPR_ESSION
 
     NOT            shift, and go to state 51
     MINUS          shift, and go to state 52
@@ -1248,7 +1248,7 @@ state 93
 
 state 94
 
-   55 OPE_RATOR: TIMES . EXPR_ESSION
+   54 OPE_RATOR: TIMES . EXPR_ESSION
 
     NOT            shift, and go to state 51
     MINUS          shift, and go to state 52
@@ -1267,7 +1267,7 @@ state 94
 
 state 95
 
-   56 OPE_RATOR: DIVIDE . EXPR_ESSION
+   55 OPE_RATOR: DIVIDE . EXPR_ESSION
 
     NOT            shift, and go to state 51
     MINUS          shift, and go to state 52
@@ -1438,7 +1438,7 @@ state 112
     TIMES   shift, and go to state 94
     DIVIDE  shift, and go to state 95
 
-    $default  reduce using rule 52 (OPE_RATOR)
+    $default  reduce using rule 64 (OPE_RATOR)
 
     OPE_RATOR  go to state 138
 
@@ -1460,93 +1460,93 @@ state 113
     TIMES   shift, and go to state 94
     DIVIDE  shift, and go to state 95
 
-    $default  reduce using rule 52 (OPE_RATOR)
+    $default  reduce using rule 64 (OPE_RATOR)
 
     OPE_RATOR  go to state 139
 
 
 state 114
 
-   59 OPE_RATOR: EQEQ EXPR_ESSION .
-
-    $default  reduce using rule 59 (OPE_RATOR)
-
-
-state 115
-
-   60 OPE_RATOR: GT EXPR_ESSION .
-
-    $default  reduce using rule 60 (OPE_RATOR)
-
-
-state 116
-
-   61 OPE_RATOR: GTE EXPR_ESSION .
-
-    $default  reduce using rule 61 (OPE_RATOR)
-
-
-state 117
-
-   62 OPE_RATOR: LT EXPR_ESSION .
-
-    $default  reduce using rule 62 (OPE_RATOR)
-
-
-state 118
-
-   63 OPE_RATOR: LTE EXPR_ESSION .
-
-    $default  reduce using rule 63 (OPE_RATOR)
-
-
-state 119
-
-   64 OPE_RATOR: NE EXPR_ESSION .
-
-    $default  reduce using rule 64 (OPE_RATOR)
-
-
-state 120
-
-   58 OPE_RATOR: ANDAND EXPR_ESSION .
+   58 OPE_RATOR: EQEQ EXPR_ESSION .
 
     $default  reduce using rule 58 (OPE_RATOR)
 
 
-state 121
+state 115
 
-   57 OPE_RATOR: OROR EXPR_ESSION .
+   59 OPE_RATOR: GT EXPR_ESSION .
+
+    $default  reduce using rule 59 (OPE_RATOR)
+
+
+state 116
+
+   60 OPE_RATOR: GTE EXPR_ESSION .
+
+    $default  reduce using rule 60 (OPE_RATOR)
+
+
+state 117
+
+   61 OPE_RATOR: LT EXPR_ESSION .
+
+    $default  reduce using rule 61 (OPE_RATOR)
+
+
+state 118
+
+   62 OPE_RATOR: LTE EXPR_ESSION .
+
+    $default  reduce using rule 62 (OPE_RATOR)
+
+
+state 119
+
+   63 OPE_RATOR: NE EXPR_ESSION .
+
+    $default  reduce using rule 63 (OPE_RATOR)
+
+
+state 120
+
+   57 OPE_RATOR: ANDAND EXPR_ESSION .
 
     $default  reduce using rule 57 (OPE_RATOR)
 
 
+state 121
+
+   56 OPE_RATOR: OROR EXPR_ESSION .
+
+    $default  reduce using rule 56 (OPE_RATOR)
+
+
 state 122
 
-   53 OPE_RATOR: PLUS EXPR_ESSION .
+   52 OPE_RATOR: PLUS EXPR_ESSION .
 
-    $default  reduce using rule 53 (OPE_RATOR)
+    $default  reduce using rule 52 (OPE_RATOR)
 
 
 state 123
 
-   54 OPE_RATOR: MINUS EXPR_ESSION .
+   53 OPE_RATOR: MINUS EXPR_ESSION .
 
-    $default  reduce using rule 54 (OPE_RATOR)
+    $default  reduce using rule 53 (OPE_RATOR)
 
 
 state 124
 
-   55 OPE_RATOR: TIMES EXPR_ESSION .
+   54 OPE_RATOR: TIMES EXPR_ESSION .
 
-    $default  reduce using rule 55 (OPE_RATOR)
+    $default  reduce using rule 54 (OPE_RATOR)
 
 
 state 125
 
-   56 OPE_RATOR: DIVIDE EXPR_ESSION .
+   55 OPE_RATOR: DIVIDE EXPR_ESSION .
 
-    $default  reduce using rule 56 (OPE_RATOR)
+    $default  reduce using rule 55 (OPE_RATOR)
 
 
 state 126
@@ -1709,7 +1709,7 @@ state 137
     TIMES   shift, and go to state 94
     DIVIDE  shift, and go to state 95
 
-    $default  reduce using rule 52 (OPE_RATOR)
+    $default  reduce using rule 64 (OPE_RATOR)
 
     OPE_RATOR  go to state 148
 

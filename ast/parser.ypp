@@ -175,11 +175,10 @@ SINGLE_EXPRESSION : MINUS SINGLE_EXPRESSION %prec NOT {$$.u_expr=new Uminus($2.u
                   ;
 
                   
-MULT_EXPRESSION : SINGLE_EXPRESSION OPE_RATOR
+MULT_EXPRESSION : SINGLE_EXPRESSION OPE_RATOR 
                 ;
 
-OPE_RATOR :
-                  | PLUS EXPR_ESSION
+OPE_RATOR :         PLUS EXPR_ESSION 
                   | MINUS EXPR_ESSION
                   | TIMES EXPR_ESSION
                   | DIVIDE EXPR_ESSION
@@ -191,6 +190,7 @@ OPE_RATOR :
                   | LT EXPR_ESSION
                   | LTE EXPR_ESSION
                   | NE EXPR_ESSION
+                  | 
                   ;
 
 FUNCTION_CALL : IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
