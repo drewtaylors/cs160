@@ -3,5 +3,5 @@ function Main():int{
         var e,f,g,h:int;
 	a = 5;
 	b = 4;
-	return -c;
+	return !c;
 }

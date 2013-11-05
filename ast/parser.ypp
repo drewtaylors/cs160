@@ -171,7 +171,7 @@ SINGLE_EXPRESSION : MINUS SINGLE_EXPRESSION %prec NOT {$$.u_expr=new Uminus($2.u
                   | FALSE           {$$.u_expr=new BoolLit(new Primitive($1.u_base_int));}
                   | IDENTIFIER      { $$.u_expr=new Ident(new SymName($1.u_base_charptr));}
                   | INT_ARRAY_EXP   {$$.u_expr=$1.u_expr;}
-                  | NOT SINGLE_EXPRESSION
+                  | NOT SINGLE_EXPRESSION   {$$.u_expr=new Not($2.u_expr);}
                   ;
 
                   

@@ -38,7 +38,7 @@ digraph G {
 "5" -> "19"
 "19" [label="Return"]
 "19" -> "20"
-"20" [label="Uminus"]
+"20" [label="Not"]
 "20" -> "21"
 "21" [label="Ident"]
 "21" -> "22"

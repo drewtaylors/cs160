@@ -1697,9 +1697,15 @@ yyreduce:
     {(yyval).u_expr=(yyvsp[(1) - (1)]).u_expr;}
     break;
 
+  case 51:
+/* Line 1787 of yacc.c  */
+#line 174 "parser.ypp"
+    {(yyval).u_expr=new Not((yyvsp[(2) - (2)]).u_expr);}
+    break;
+
 
 /* Line 1787 of yacc.c  */
-#line 1703 "parser.cpp"
+#line 1709 "parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
