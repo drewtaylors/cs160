@@ -63,7 +63,6 @@
 %token RIGHTBRACKET
 %token ASSIGNMENT
 
-
 %left OROR
 %left ANDAND
 %left EQEQ NE
@@ -142,8 +141,10 @@ RETURN_ : RETURN EXPR_ESSION SEMICOLON {$$.u_return=new ReturnImpl($2.u_expr);}
           ;
 
 IF_ : IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
+    ;
 
 IF_ELSE : IF_ ELSE LEFTBRACE BODY_STATEMENTS RIGHTBRACE
+        ;
 
 FOR_ : FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
             ;
@@ -159,39 +160,32 @@ ASIGN_MENT : IDENTIFIER ASSIGNMENT EXPR_ESSION
             | INT_ARRAY_EXP ASSIGNMENT EXPR_ESSION
             ;
 
-EXPR_ESSION : MULT_EXPRESSION {$$.u_expr=$1.u_expr;}
-            | LEFTPAREN EXPR_ESSION RIGHTPAREN OPE_RATOR
-            | NOT LEFTPAREN EXPR_ESSION RIGHTPAREN OPE_RATOR
-            | ABSOLUTEVALUE EXPR_ESSION ABSOLUTEVALUE OPE_RATOR
+EXPR_ESSION : LEFTPAREN EXPR_ESSION RIGHTPAREN  {$$.u_expr=$2.u_expr;}
+            | ABSOLUTEVALUE EXPR_ESSION ABSOLUTEVALUE {$$.u_expr=$2.u_expr;}
+            | MINUS EXPR_ESSION %prec NOT {$$.u_expr=new Uminus($2.u_expr);}
+            | NOT EXPR_ESSION   %prec NOT {$$.u_expr=new Not($2.u_expr);}
+            | EXPR_ESSION PLUS EXPR_ESSION {/*$$.u_expr=$1.u_expr;*/}
+            | EXPR_ESSION MINUS EXPR_ESSION
+            | EXPR_ESSION TIMES EXPR_ESSION
+            | EXPR_ESSION DIVIDE EXPR_ESSION
+            | EXPR_ESSION OROR EXPR_ESSION
+            | EXPR_ESSION ANDAND EXPR_ESSION
+            | EXPR_ESSION EQEQ EXPR_ESSION
+            | EXPR_ESSION GT EXPR_ESSION
+            | EXPR_ESSION GTE EXPR_ESSION
+            | EXPR_ESSION LT EXPR_ESSION
+            | EXPR_ESSION LTE EXPR_ESSION
+            | EXPR_ESSION NE EXPR_ESSION
+            | SINGLE_EXPRESSION { $$.u_expr=$1.u_expr;}
             ;
 
-SINGLE_EXPRESSION : MINUS SINGLE_EXPRESSION %prec NOT {$$.u_expr=new Uminus($2.u_expr);}
-                  | INTEGER         {$$.u_expr=new IntLit(new Primitive($1.u_base_int)); }
+SINGLE_EXPRESSION : INTEGER         {$$.u_expr=new IntLit(new Primitive($1.u_base_int)); }
                   | TRUE            {$$.u_expr=new BoolLit(new Primitive($1.u_base_int));}
                   | FALSE           {$$.u_expr=new BoolLit(new Primitive($1.u_base_int));}
                   | IDENTIFIER      { $$.u_expr=new Ident(new SymName($1.u_base_charptr));}
                   | INT_ARRAY_EXP   {$$.u_expr=$1.u_expr;}
-                  | NOT SINGLE_EXPRESSION   {$$.u_expr=new Not($2.u_expr);}
                   ;
 
-                  
-MULT_EXPRESSION : SINGLE_EXPRESSION OPE_RATOR 
-                ;
-
-OPE_RATOR :         PLUS EXPR_ESSION 
-                  | MINUS EXPR_ESSION
-                  | TIMES EXPR_ESSION
-                  | DIVIDE EXPR_ESSION
-                  | OROR EXPR_ESSION
-                  | ANDAND EXPR_ESSION
-                  | EQEQ EXPR_ESSION
-                  | GT EXPR_ESSION
-                  | GTE EXPR_ESSION
-                  | LT EXPR_ESSION
-                  | LTE EXPR_ESSION
-                  | NE EXPR_ESSION
-                  | 
-                  ;
 
 FUNCTION_CALL : IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
                 | INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
