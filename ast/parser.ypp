@@ -107,16 +107,14 @@ INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET EXPR_ESSION RIGHTBRACKET {$$.u_expr=new Ar
              ;
 
 
-B_O_F : VAR_DECLERATIONS BODY_CHOICE RETURN_ {$$.u_function_block=new Function_blockImpl($1.u_decl_list,NULL,NULL,$3.u_return);}
+B_O_F : VAR_DECLERATIONS MULT_FUNCTIONS BODY_STATEMENTS RETURN_ {$$.u_function_block=new Function_blockImpl($1.u_decl_list,NULL,$3.u_stat_list,$4.u_return);}
         ;
 
-BODY_CHOICE : MULT_FUNCTIONS BODY_STATEMENTS
-              ;
 MULT_FUNCTIONS: F MULT_FUNCTIONS
               |
               ;
-BODY_STATEMENTS : STATEMENTS_ BODY_STATEMENTS
-                |
+BODY_STATEMENTS : STATEMENTS_ BODY_STATEMENTS {$2.u_stat_list->push_front($1.u_stat);$$.u_stat_list=$2.u_stat_list;}
+                |   {$$.u_stat_list=new list<Stat_ptr>();}
                 ;
 
 VAR_DECLERATIONS : VAR_DEC VAR_DECLERATIONS   { $2.u_decl_list->push_front($1.u_decl); $$.u_decl_list=$2.u_decl_list;  }
@@ -130,7 +128,7 @@ MULT_DEC :   COMMA IDENTIFIER MULT_DEC {$3.u_symname_list->push_front(new SymNam
             | {$$.u_symname_list=new list<SymName_ptr>();}
             ;
 
-STATEMENTS_ : ASIGN_MENT SEMICOLON
+STATEMENTS_ : ASIGN_MENT SEMICOLON  {$$.u_stat=$1.u_stat;}
              | FUNCTION_CALL SEMICOLON
              | IF_
              | IF_ELSE
@@ -156,8 +154,8 @@ FOR_ASIGN : ASIGN_MENT SEMICOLON
              |
              ;
 
-ASIGN_MENT : IDENTIFIER ASSIGNMENT EXPR_ESSION
-            | INT_ARRAY_EXP ASSIGNMENT EXPR_ESSION
+ASIGN_MENT : IDENTIFIER ASSIGNMENT EXPR_ESSION {$$.u_stat=new Assignment(new SymName($1.u_base_charptr),$3.u_expr);}
+            | IDENTIFIER LEFTBRACKET EXPR_ESSION RIGHTBRACKET ASSIGNMENT EXPR_ESSION  {$$.u_stat=new ArrayAssignment(new SymName($1.u_base_charptr),$3.u_expr,$6.u_expr);}
             ;
 
 EXPR_ESSION : LEFTPAREN EXPR_ESSION RIGHTPAREN  {$$.u_expr=$2.u_expr;}

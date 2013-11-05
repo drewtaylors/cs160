@@ -136,12 +136,12 @@ extern int yylineno;
 //	  ++m_func_list_iter){
 //		(*m_func_list_iter)->m_parent_attribute = &m_attribute;
 //	}
-//	list<Stat_ptr>::iterator m_stat_list_iter;
-//	for(m_stat_list_iter = m_stat_list->begin();
-//	  m_stat_list_iter != m_stat_list->end();
-//	  ++m_stat_list_iter){
-//		(*m_stat_list_iter)->m_parent_attribute = &m_attribute;
-//	}
+	list<Stat_ptr>::iterator m_stat_list_iter;
+	for(m_stat_list_iter = m_stat_list->begin();
+	  m_stat_list_iter != m_stat_list->end();
+	  ++m_stat_list_iter){
+		(*m_stat_list_iter)->m_parent_attribute = &m_attribute;
+	}
 	m_return->m_parent_attribute = &m_attribute;
   }
  Function_blockImpl::Function_blockImpl(const Function_blockImpl & other) {
@@ -209,12 +209,12 @@ extern int yylineno;
 //	  ++m_func_list_iter){
 //		(*m_func_list_iter)->accept( v );
 //	}
-//	list<Stat_ptr>::iterator m_stat_list_iter;
-//	for(m_stat_list_iter = m_stat_list->begin();
-//	  m_stat_list_iter != m_stat_list->end();
-//	  ++m_stat_list_iter){
-//		(*m_stat_list_iter)->accept( v );
-//	}
+	list<Stat_ptr>::iterator m_stat_list_iter;
+	for(m_stat_list_iter = m_stat_list->begin();
+	  m_stat_list_iter != m_stat_list->end();
+	  ++m_stat_list_iter){
+		(*m_stat_list_iter)->accept( v );
+	}
 	m_return->accept( v );
   }
  void Function_blockImpl::accept(Visitor *v) { v->visitFunction_blockImpl(this); }

@@ -1,7 +1,5 @@
 function Main():int{
-	var a,b,c,d:intarray[100];
-        var e,f,g,h:int;
-	a = 5+7;
-	b = 4;
+        var a:int;
+        a[19] = 24 + 3;
 	return 10-5*7;
 }
