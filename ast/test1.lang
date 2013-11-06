@@ -1,7 +1,8 @@
 function  Main(x: int, y: bool) : bool
 {
-	var a,b : intarray[100] ;
-	[$var c: int; $]
+        var a : intarray[100] ; 
+        var a:int;
+	
 	c = -5;
 	a[19] = 24 + 3;
 	a[4+2] = 5;
