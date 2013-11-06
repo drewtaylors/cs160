@@ -1,8 +1,6 @@
 function Main():int{
-        if(true){
-            a=5;
-        }else{
-            a=b+5;
+        for(j=10;(i<10) j=i+1;){
+            i=3;
         }
-	return 0;
+        return 0;
 }
