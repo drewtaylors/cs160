@@ -1706,10 +1706,22 @@ yyreduce:
     {(yyval).u_stat=(yyvsp[(1) - (2)]).u_stat;}
     break;
 
+  case 29:
+/* Line 1787 of yacc.c  */
+#line 134 "parser.ypp"
+    {(yyval).u_stat=(yyvsp[(1) - (1)]).u_stat;}
+    break;
+
   case 32:
 /* Line 1787 of yacc.c  */
 #line 139 "parser.ypp"
     {(yyval).u_return=new ReturnImpl((yyvsp[(2) - (3)]).u_expr);}
+    break;
+
+  case 33:
+/* Line 1787 of yacc.c  */
+#line 142 "parser.ypp"
+    {(yyval).u_stat=new IfNoElse((yyvsp[(3) - (7)]).u_expr,new Nested_blockImpl((yyvsp[(6) - (7)]).u_stat_list));}
     break;
 
   case 39:
@@ -1894,7 +1906,7 @@ yyreduce:
 
 
 /* Line 1787 of yacc.c  */
-#line 1898 "parser.cpp"
+#line 1910 "parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

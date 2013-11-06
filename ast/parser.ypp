@@ -131,7 +131,7 @@ MULT_DEC :   COMMA IDENTIFIER MULT_DEC {$3.u_symname_list->push_front(new SymNam
 
 STATEMENTS_ : ASIGN_MENT SEMICOLON  {$$.u_stat=$1.u_stat;}
              | FUNCTION_CALL SEMICOLON  {$$.u_stat=$1.u_stat;}
-             | IF_
+             | IF_  {$$.u_stat=$1.u_stat;}
              | IF_ELSE
              | FOR_
              ;
@@ -139,7 +139,7 @@ STATEMENTS_ : ASIGN_MENT SEMICOLON  {$$.u_stat=$1.u_stat;}
 RETURN_ : RETURN EXPR_ESSION SEMICOLON {$$.u_return=new ReturnImpl($2.u_expr);}
           ;
 
-IF_ : IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
+IF_ : IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE  {$$.u_stat=new IfNoElse($3.u_expr,new Nested_blockImpl($6.u_stat_list));}
     ;
 
 IF_ELSE : IF_ ELSE LEFTBRACE BODY_STATEMENTS RIGHTBRACE
