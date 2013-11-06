@@ -139,10 +139,16 @@ STATEMENTS_ : ASIGN_MENT SEMICOLON  {$$.u_stat=$1.u_stat;}
 RETURN_ : RETURN EXPR_ESSION SEMICOLON {$$.u_return=new ReturnImpl($2.u_expr);}
           ;
 
-IF_ : IF LEFTPAREN EXPR_ESSION RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE  {$$.u_stat=new IfNoElse($3.u_expr,new Nested_blockImpl($6.u_stat_list));}
+IF_ :  IF_EXPR IF_BODY  {$$.u_stat=new IfNoElse($1.u_expr,$2.u_nested_block);}
     ;
 
-IF_ELSE : IF_ ELSE LEFTBRACE BODY_STATEMENTS RIGHTBRACE
+IF_EXPR: IF LEFTPAREN EXPR_ESSION RIGHTPAREN {$$.u_expr= $3.u_expr;}
+        ;
+
+IF_BODY : LEFTBRACE BODY_STATEMENTS RIGHTBRACE   {$$.u_nested_block=new Nested_blockImpl($2.u_stat_list);}
+        ;
+
+IF_ELSE : IF_EXPR IF_BODY ELSE LEFTBRACE BODY_STATEMENTS RIGHTBRACE {$$.u_stat=new IfWithElse($1.u_expr,$2.u_nested_block,new Nested_blockImpl($5.u_stat_list));}
         ;
 
 FOR_ : FOR LEFTPAREN FOR_PARAMS RIGHTPAREN LEFTBRACE BODY_STATEMENTS RIGHTBRACE
