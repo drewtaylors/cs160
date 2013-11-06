@@ -47,8 +47,8 @@ false { return FALSE; }
 [0][x|X][0-9A-F]* {  return INTEGER; }
 [0][0-7]+ {          return INTEGER; }
 [0-1]+[b] {          return INTEGER; }
-[1-9][0-9]* {        return INTEGER; }
-[0] {               yylval.u_base_int = atoi(yytext); return INTEGER; }
+[1-9][0-9]* {        /*yylval.u_base_int = atoi(yytext); */return INTEGER; }
+[0] {                /*yylval.u_base_int = atoi(yytext);*/ return INTEGER; }
 
 ";" { return SEMICOLON;}
 ":" { return COLON; }
@@ -62,7 +62,7 @@ false { return FALSE; }
 "]" { return RIGHTBRACKET; }
 "=" { return ASSIGNMENT; }
 "[$"([^\$]|\$[^\]])*"$]" ;
-[a-zA-Z][a-zA-Z0-9]* {  yylval.u_base_charptr = yytext; return IDENTIFIER;}
+[a-zA-Z][a-zA-Z0-9]* {  yylval.u_base_charptr = strdup(yytext); return IDENTIFIER;}
 
 [ \t\n] ; /* skip whitespace */
 
