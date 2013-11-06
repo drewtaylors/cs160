@@ -103,15 +103,16 @@ TYPE_2 : TYPE {$$.u_type=$$.u_type;}
 
 INT_ARRAY : INTARRAY LEFTBRACKET INTEGER RIGHTBRACKET {$$.u_type=new TIntArray(new Primitive($3.u_base_int));}
           ;
-INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET EXPR_ESSION RIGHTBRACKET {$$.u_expr=new ArrayAccess(new SymName($1.u_base_charptr),$3.u_expr); }
+INT_ARRAY_EXP: IDENTIFIER LEFTBRACKET  {$$.u_symname=new SymName($1.u_base_charptr); /*$$.u_expr=$3.u_expr;$$.u_expr=new ArrayAccess(new SymName($1.u_base_charptr),$3.u_expr);*/ }
              ;
+ARRAY_EXP     : EXPR_ESSION RIGHTBRACKET    {$$.u_expr=$1.u_expr;}
+              ;
 
-
-B_O_F : VAR_DECLERATIONS MULT_FUNCTIONS BODY_STATEMENTS RETURN_ {$$.u_function_block=new Function_blockImpl($1.u_decl_list,NULL,$3.u_stat_list,$4.u_return);}
+B_O_F : VAR_DECLERATIONS MULT_FUNCTIONS BODY_STATEMENTS RETURN_ {$$.u_function_block=new Function_blockImpl($1.u_decl_list,$2.u_func_list,$3.u_stat_list,$4.u_return);}
         ;
 
-MULT_FUNCTIONS: F MULT_FUNCTIONS
-              |
+MULT_FUNCTIONS: F MULT_FUNCTIONS {$2.u_func_list->push_front($1.u_func);$$.u_func_list=$2.u_func_list;}
+              | {$$.u_func_list=new list<Func_ptr>();}
               ;
 BODY_STATEMENTS : STATEMENTS_ BODY_STATEMENTS {$2.u_stat_list->push_front($1.u_stat);$$.u_stat_list=$2.u_stat_list;}
                 |   {$$.u_stat_list=new list<Stat_ptr>();}
@@ -155,7 +156,7 @@ FOR_ASIGN : ASIGN_MENT SEMICOLON
              ;
 
 ASIGN_MENT : IDENTIFIER ASSIGNMENT EXPR_ESSION {$$.u_stat=new Assignment(new SymName($1.u_base_charptr),$3.u_expr);}
-            | IDENTIFIER LEFTBRACKET EXPR_ESSION RIGHTBRACKET ASSIGNMENT EXPR_ESSION  {$$.u_stat=new ArrayAssignment(new SymName($1.u_base_charptr),$3.u_expr,$6.u_expr);}
+            | INT_ARRAY_EXP ARRAY_EXP ASSIGNMENT EXPR_ESSION  {$$.u_stat=new ArrayAssignment($1.u_symname,$2.u_expr,$4.u_expr);}
             ;
 
 EXPR_ESSION : LEFTPAREN EXPR_ESSION RIGHTPAREN  {$$.u_expr=$2.u_expr;}
@@ -181,12 +182,12 @@ SINGLE_EXPRESSION : INTEGER         {$$.u_expr=new IntLit(new Primitive($1.u_bas
                   | TRUE            {$$.u_expr=new BoolLit(new Primitive($1.u_base_int));}
                   | FALSE           {$$.u_expr=new BoolLit(new Primitive($1.u_base_int));}
                   | IDENTIFIER      { $$.u_expr=new Ident(new SymName($1.u_base_charptr));}
-                  | INT_ARRAY_EXP   {$$.u_expr=$1.u_expr;}
+                  | INT_ARRAY_EXP ARRAY_EXP  {$$.u_expr=new ArrayAccess($1.u_symname,$2.u_expr);}
                   ;
 
 
 FUNCTION_CALL : IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
-                | INT_ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
+                | INT_ARRAY_EXP ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
                 ;
 
 IN_PARAMS : EXPR_ESSION NEXT_PARAM

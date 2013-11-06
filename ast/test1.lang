@@ -1,5 +1,6 @@
 function Main():int{
         var a:int;
-        a[19] = 24 + 3;
+        
+        a[b]=b[5];
 	return 10-5*7;
 }
