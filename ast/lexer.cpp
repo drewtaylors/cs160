@@ -971,7 +971,7 @@ YY_RULE_SETUP
 case 29:
 YY_RULE_SETUP
 #line 51 "lexer.l"
-{               /*yylval.u_base_int = atoi(yytext);*/ return INTEGER; }
+{               yylval.u_base_int = atoi(yytext); return INTEGER; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
@@ -1037,7 +1037,7 @@ YY_RULE_SETUP
 case 42:
 YY_RULE_SETUP
 #line 65 "lexer.l"
-{  /*yylval.u_base_charptr = yytext*/; return IDENTIFIER;}
+{  yylval.u_base_charptr = yytext; return IDENTIFIER;}
 	YY_BREAK
 case 43:
 /* rule 43 can match eol */
