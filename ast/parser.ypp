@@ -130,7 +130,7 @@ MULT_DEC :   COMMA IDENTIFIER MULT_DEC {$3.u_symname_list->push_front(new SymNam
             ;
 
 STATEMENTS_ : ASIGN_MENT SEMICOLON  {$$.u_stat=$1.u_stat;}
-             | FUNCTION_CALL SEMICOLON
+             | FUNCTION_CALL SEMICOLON  {$$.u_stat=$1.u_stat;}
              | IF_
              | IF_ELSE
              | FOR_
@@ -186,16 +186,16 @@ SINGLE_EXPRESSION : INTEGER         {$$.u_expr=new IntLit(new Primitive($1.u_bas
                   ;
 
 
-FUNCTION_CALL : IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
+FUNCTION_CALL : IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN {$$.u_stat=new Call(new SymName($1.u_base_charptr),new SymName($3.u_base_charptr), $5.u_expr_list);}
                 | INT_ARRAY_EXP ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
                 ;
 
-IN_PARAMS : EXPR_ESSION NEXT_PARAM
-                |
-                ;
+IN_PARAMS : EXPR_ESSION NEXT_PARAM  {$2.u_expr_list->push_front($1.u_expr);$$.u_expr_list=$2.u_expr_list;}
+          | {$$.u_expr_list=new list<Expr_ptr>();}
+          ;
 
-NEXT_PARAM : COMMA IN_PARAMS
-            |
+NEXT_PARAM : COMMA EXPR_ESSION NEXT_PARAM {$3.u_expr_list->push_front($2.u_expr); $$.u_expr_list=$3.u_expr_list;}
+            |   {$$.u_expr_list=new list<Expr_ptr>();}
             ;
 
 

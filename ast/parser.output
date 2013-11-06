@@ -95,7 +95,7 @@ Grammar
    64 IN_PARAMS: EXPR_ESSION NEXT_PARAM
    65          | /* empty */
 
-   66 NEXT_PARAM: COMMA IN_PARAMS
+   66 NEXT_PARAM: COMMA EXPR_ESSION NEXT_PARAM
    67           | /* empty */
 
 
@@ -197,15 +197,15 @@ ASIGN_MENT (64)
 EXPR_ESSION (65)
     on left: 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56, on right:
     15 31 32 35 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54
-    55 64
+    55 64 66
 SINGLE_EXPRESSION (66)
     on left: 57 58 59 60 61, on right: 56
 FUNCTION_CALL (67)
     on left: 62 63, on right: 27
 IN_PARAMS (68)
-    on left: 64 65, on right: 62 63 66
+    on left: 64 65, on right: 62 63
 NEXT_PARAM (69)
-    on left: 66 67, on right: 64
+    on left: 66 67, on right: 64 66
 
 
 state 0
@@ -2163,7 +2163,7 @@ state 143
 
 state 144
 
-   66 NEXT_PARAM: COMMA . IN_PARAMS
+   66 NEXT_PARAM: COMMA . EXPR_ESSION NEXT_PARAM
 
     NOT            shift, and go to state 52
     MINUS          shift, and go to state 53
@@ -2174,12 +2174,9 @@ state 144
     ABSOLUTEVALUE  shift, and go to state 58
     LEFTPAREN      shift, and go to state 59
 
-    $default  reduce using rule 65 (IN_PARAMS)
-
     INT_ARRAY_EXP      go to state 60
-    EXPR_ESSION        go to state 136
+    EXPR_ESSION        go to state 151
     SINGLE_EXPRESSION  go to state 63
-    IN_PARAMS          go to state 151
 
 
 state 145
@@ -2226,9 +2223,37 @@ state 150
 
 state 151
 
-   66 NEXT_PARAM: COMMA IN_PARAMS .
+   44 EXPR_ESSION: EXPR_ESSION . PLUS EXPR_ESSION
+   45            | EXPR_ESSION . MINUS EXPR_ESSION
+   46            | EXPR_ESSION . TIMES EXPR_ESSION
+   47            | EXPR_ESSION . DIVIDE EXPR_ESSION
+   48            | EXPR_ESSION . OROR EXPR_ESSION
+   49            | EXPR_ESSION . ANDAND EXPR_ESSION
+   50            | EXPR_ESSION . EQEQ EXPR_ESSION
+   51            | EXPR_ESSION . GT EXPR_ESSION
+   52            | EXPR_ESSION . GTE EXPR_ESSION
+   53            | EXPR_ESSION . LT EXPR_ESSION
+   54            | EXPR_ESSION . LTE EXPR_ESSION
+   55            | EXPR_ESSION . NE EXPR_ESSION
+   66 NEXT_PARAM: COMMA EXPR_ESSION . NEXT_PARAM
 
-    $default  reduce using rule 66 (NEXT_PARAM)
+    EQEQ    shift, and go to state 89
+    GT      shift, and go to state 90
+    GTE     shift, and go to state 91
+    LT      shift, and go to state 92
+    LTE     shift, and go to state 93
+    NE      shift, and go to state 94
+    ANDAND  shift, and go to state 95
+    OROR    shift, and go to state 96
+    PLUS    shift, and go to state 97
+    MINUS   shift, and go to state 98
+    TIMES   shift, and go to state 99
+    DIVIDE  shift, and go to state 100
+    COMMA   shift, and go to state 144
+
+    $default  reduce using rule 67 (NEXT_PARAM)
+
+    NEXT_PARAM  go to state 153
 
 
 state 152
@@ -2236,3 +2261,10 @@ state 152
    63 FUNCTION_CALL: INT_ARRAY_EXP ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN .
 
     $default  reduce using rule 63 (FUNCTION_CALL)
+
+
+state 153
+
+   66 NEXT_PARAM: COMMA EXPR_ESSION NEXT_PARAM .
+
+    $default  reduce using rule 66 (NEXT_PARAM)
