@@ -187,7 +187,7 @@ SINGLE_EXPRESSION : INTEGER         {$$.u_expr=new IntLit(new Primitive($1.u_bas
 
 
 FUNCTION_CALL : IDENTIFIER ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN {$$.u_stat=new Call(new SymName($1.u_base_charptr),new SymName($3.u_base_charptr), $5.u_expr_list);}
-                | INT_ARRAY_EXP ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN
+                | INT_ARRAY_EXP ARRAY_EXP ASSIGNMENT IDENTIFIER LEFTPAREN IN_PARAMS RIGHTPAREN {$$.u_stat=new ArrayCall($1.u_symname, $2.u_expr, new SymName($4.u_base_charptr), $6.u_expr_list);}
                 ;
 
 IN_PARAMS : EXPR_ESSION NEXT_PARAM  {$2.u_expr_list->push_front($1.u_expr);$$.u_expr_list=$2.u_expr_list;}

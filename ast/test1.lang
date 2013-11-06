@@ -1,6 +1,5 @@
 function Main():int{
-        var a:int;
-        
-        b=a(a,b,c,10);
-	return 10-5*7;
+       
+        b[3] = b[6] + b[19];
+	return 0;
 }

@@ -1862,6 +1862,12 @@ yyreduce:
     {(yyval).u_stat=new Call(new SymName((yyvsp[(1) - (6)]).u_base_charptr),new SymName((yyvsp[(3) - (6)]).u_base_charptr), (yyvsp[(5) - (6)]).u_expr_list);}
     break;
 
+  case 64:
+/* Line 1787 of yacc.c  */
+#line 190 "parser.ypp"
+    {(yyval).u_stat=new ArrayCall((yyvsp[(1) - (7)]).u_symname, (yyvsp[(2) - (7)]).u_expr, new SymName((yyvsp[(4) - (7)]).u_base_charptr), (yyvsp[(6) - (7)]).u_expr_list);}
+    break;
+
   case 65:
 /* Line 1787 of yacc.c  */
 #line 193 "parser.ypp"
@@ -1888,7 +1894,7 @@ yyreduce:
 
 
 /* Line 1787 of yacc.c  */
-#line 1892 "parser.cpp"
+#line 1898 "parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
