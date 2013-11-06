@@ -4,21 +4,131 @@ digraph G {
 "1" -> "2"
 "2" [label="FuncImpl"]
 "2" -> "3"
-"3" [label="TInteger"]
+"3" [label="TBoolean"]
 "2" -> "4"
-"4" [label="SymName\n\"array\""]
+"4" [label="SymName\n\"Main\""]
 "2" -> "5"
 "5" [label="DeclImpl"]
 "5" -> "6"
 "6" [label="TInteger"]
 "5" -> "7"
-"7" [label="SymName\n\"`A$\""]
+"7" [label="SymName\n\"x\""]
 "2" -> "8"
-"8" [label="FunctionBlockImpl"]
+"8" [label="DeclImpl"]
 "8" -> "9"
-"9" [label="Return"]
-"9" -> "10"
-"10" [label="IntLit"]
-"10" -> "11"
-"11" [label="Primitive\n19153072"]
+"9" [label="TBoolean"]
+"8" -> "10"
+"10" [label="SymName\n\"y\""]
+"2" -> "11"
+"11" [label="FunctionBlockImpl"]
+"11" -> "12"
+"12" [label="DeclImpl"]
+"12" -> "13"
+"13" [label="TIntArray"]
+"13" -> "14"
+"14" [label="Primitive\n100"]
+"12" -> "15"
+"15" [label="SymName\n\"y\""]
+"12" -> "16"
+"16" [label="SymName\n\"b\""]
+"11" -> "17"
+"17" [label="Assignment"]
+"17" -> "18"
+"18" [label="SymName\n\"c\""]
+"17" -> "19"
+"19" [label="Uminus"]
+"19" -> "20"
+"20" [label="IntLit"]
+"20" -> "21"
+"21" [label="Primitive\n5"]
+"11" -> "22"
+"22" [label="ArrayAssignment"]
+"22" -> "23"
+"23" [label="SymName\n\"a\""]
+"22" -> "24"
+"24" [label="IntLit"]
+"24" -> "25"
+"25" [label="Primitive\n19"]
+"22" -> "26"
+"26" [label="Plus"]
+"26" -> "27"
+"27" [label="IntLit"]
+"27" -> "28"
+"28" [label="Primitive\n24"]
+"26" -> "29"
+"29" [label="IntLit"]
+"29" -> "30"
+"30" [label="Primitive\n3"]
+"11" -> "31"
+"31" [label="ArrayAssignment"]
+"31" -> "32"
+"32" [label="SymName\n\"a\""]
+"31" -> "33"
+"33" [label="Plus"]
+"33" -> "34"
+"34" [label="IntLit"]
+"34" -> "35"
+"35" [label="Primitive\n4"]
+"33" -> "36"
+"36" [label="IntLit"]
+"36" -> "37"
+"37" [label="Primitive\n2"]
+"31" -> "38"
+"38" [label="IntLit"]
+"38" -> "39"
+"39" [label="Primitive\n5"]
+"11" -> "40"
+"40" [label="Assignment"]
+"40" -> "41"
+"41" [label="SymName\n\"b\""]
+"40" -> "42"
+"42" [label="Ident"]
+"42" -> "43"
+"43" [label="SymName\n\"a\""]
+"11" -> "44"
+"44" [label="ArrayAssignment"]
+"44" -> "45"
+"45" [label="SymName\n\"b\""]
+"44" -> "46"
+"46" [label="IntLit"]
+"46" -> "47"
+"47" [label="Primitive\n3"]
+"44" -> "48"
+"48" [label="Plus"]
+"48" -> "49"
+"49" [label="Plus"]
+"49" -> "50"
+"50" [label="ArrayAccess"]
+"50" -> "51"
+"51" [label="SymName\n\"b\""]
+"50" -> "52"
+"52" [label="IntLit"]
+"52" -> "53"
+"53" [label="Primitive\n6"]
+"49" -> "54"
+"54" [label="ArrayAccess"]
+"54" -> "55"
+"55" [label="SymName\n\"b\""]
+"54" -> "56"
+"56" [label="IntLit"]
+"56" -> "57"
+"57" [label="Primitive\n19"]
+"48" -> "58"
+"58" [label="Ident"]
+"58" -> "59"
+"59" [label="SymName\n\"c\""]
+"11" -> "60"
+"60" [label="Return"]
+"60" -> "61"
+"61" [label="Gt"]
+"61" -> "62"
+"62" [label="Ident"]
+"62" -> "63"
+"63" [label="SymName\n\"x\""]
+"61" -> "64"
+"64" [label="Uminus"]
+"64" -> "65"
+"65" [label="Ident"]
+"65" -> "66"
+"66" [label="SymName\n\"c\""]
 }; 

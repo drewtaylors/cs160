@@ -1575,7 +1575,7 @@ yyreduce:
   case 6:
 /* Line 1787 of yacc.c  */
 #line 88 "parser.ypp"
-    { (yyvsp[(1) - (4)]).u_symname_list=new list<SymName_ptr>(); (yyvsp[(1) - (4)]).u_symname_list->push_back(new SymName((yyvsp[(1) - (4)]).u_base_charptr)); (yyvsp[(4) - (4)]).u_decl_list->push_front(new DeclImpl((yyvsp[(3) - (4)]).u_type,(yyvsp[(1) - (4)]).u_symname_list)); (yyval).u_decl_list=(yyvsp[(4) - (4)]).u_decl_list; }
+    { (yyvsp[(2) - (4)]).u_symname_list=new list<SymName_ptr>(); (yyvsp[(2) - (4)]).u_symname_list->push_back(new SymName((yyvsp[(1) - (4)]).u_base_charptr)); (yyvsp[(4) - (4)]).u_decl_list->push_front(new DeclImpl((yyvsp[(3) - (4)]).u_type,(yyvsp[(2) - (4)]).u_symname_list)); (yyval).u_decl_list=(yyvsp[(4) - (4)]).u_decl_list; }
     break;
 
   case 7:

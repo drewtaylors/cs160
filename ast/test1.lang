@@ -1,5 +1,11 @@
-function array(ax: int) : int
+function  Main(x: int, y: bool) : bool
 {
-
-  return 5;
+	var a,b : intarray[100] ;
+	[$var c: int; $]
+	c = -5;
+	a[19] = 24 + 3;
+	a[4+2] = 5;
+	b = a;
+	b[3] = b[6] + b[19] + |c|;
+	return (x > -c);
 }
