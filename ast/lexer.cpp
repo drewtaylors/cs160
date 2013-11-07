@@ -941,12 +941,12 @@ YY_RULE_SETUP
 case 23:
 YY_RULE_SETUP
 #line 44 "lexer.l"
-{ return TRUE; }
+{  yylval.u_base_int = 1; return TRUE;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 45 "lexer.l"
-{ return FALSE; }
+{ yylval.u_base_int = 0; return FALSE; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP

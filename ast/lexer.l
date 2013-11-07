@@ -41,8 +41,8 @@ return { return RETURN; }
 "*" { return TIMES; }
 "/" { return DIVIDE; }
 
-true { return TRUE; }
-false { return FALSE; }
+true {  yylval.u_base_int = 1; return TRUE;}
+false { yylval.u_base_int = 0; return FALSE; }
 
 [0][x|X][0-9A-F]* {   yylval.u_base_int = strtol(yytext,NULL, 16); return INTEGER; }
 [0][0-7]+ {           yylval.u_base_int = strtol(yytext,NULL, 8); return INTEGER;  }
