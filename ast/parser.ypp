@@ -133,7 +133,7 @@ STATEMENTS_ : ASIGN_MENT SEMICOLON  {$$.u_stat=$1.u_stat;}
              | FUNCTION_CALL SEMICOLON  {$$.u_stat=$1.u_stat;}
              | IF_  {$$.u_stat=$1.u_stat;}
              | IF_ELSE  {$$.u_stat=$1.u_stat;}
-             | FOR_ {$$.u_stat=$1.u_stat}
+             | FOR_ {$$.u_stat=$1.u_stat;}
              ;
 
 RETURN_ : RETURN EXPR_ESSION SEMICOLON {$$.u_return=new ReturnImpl($2.u_expr);}
@@ -155,7 +155,7 @@ FOR_ : FOR LEFTPAREN FOR_ASIGN LEFTPAREN EXPR_ESSION RIGHTPAREN FOR_ASIGN RIGHTP
             ;
 
 FOR_ASIGN : ASIGN_MENT SEMICOLON {$$.u_stat=$1.u_stat;}
-             |  
+             |  {$$.u_stat=new None();}
              ;
 
 ASIGN_MENT : IDENTIFIER ASSIGNMENT EXPR_ESSION {$$.u_stat=new Assignment(new SymName($1.u_base_charptr),$3.u_expr);}

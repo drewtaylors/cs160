@@ -1770,6 +1770,12 @@ yyreduce:
     {(yyval).u_stat=(yyvsp[(1) - (2)]).u_stat;}
     break;
 
+  case 39:
+/* Line 1787 of yacc.c  */
+#line 158 "parser.ypp"
+    {(yyval).u_stat=new None();}
+    break;
+
   case 40:
 /* Line 1787 of yacc.c  */
 #line 161 "parser.ypp"
@@ -1952,7 +1958,7 @@ yyreduce:
 
 
 /* Line 1787 of yacc.c  */
-#line 1956 "parser.cpp"
+#line 1962 "parser.cpp"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
