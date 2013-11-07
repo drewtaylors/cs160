@@ -1,12 +1,19 @@
-function  Main(x: int, y: bool) : bool
+function f(ax: int) : int
 {
-        var a : intarray[100] ; 
-        var a:int;
-	
-	c = -5;
-	a[19] = 24 + 3;
-	a[4+2] = 5;
-	b = a;
-	b[3] = b[6] + b[19] + |c|;
-	return (x > -c);
+    var d: bool;
+
+    function nested() : bool
+    {
+        var  i, a : int;
+	return j-a == 12;
+    }
+    
+    function nested() : bool
+    {
+        var  i, a : int;
+	return j-a == 12;
+    }
+
+    return -(---k+j*k/x);
 }
+

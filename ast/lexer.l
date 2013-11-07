@@ -44,9 +44,9 @@ return { return RETURN; }
 true { return TRUE; }
 false { return FALSE; }
 
-[0][x|X][0-9A-F]* {  return INTEGER; }
-[0][0-7]+ {          return INTEGER; }
-[0-1]+[b] {          return INTEGER; }
+[0][x|X][0-9A-F]* {   yylval.u_base_int = strtol(yytext,NULL, 16); return INTEGER; }
+[0][0-7]+ {           yylval.u_base_int = strtol(yytext,NULL, 8); return INTEGER;  }
+[0-1]+[b] {          yylval.u_base_int = strtol(yytext,NULL, 2); return INTEGER; }
 [1-9][0-9]* {        yylval.u_base_int = atoi(yytext); return INTEGER; }
 [0] {                yylval.u_base_int = atoi(yytext); return INTEGER; }
 

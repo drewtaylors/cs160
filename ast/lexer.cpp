@@ -951,17 +951,17 @@ YY_RULE_SETUP
 case 25:
 YY_RULE_SETUP
 #line 47 "lexer.l"
-{  return INTEGER; }
+{   yylval.u_base_int = strtol(yytext,NULL, 16); return INTEGER; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 48 "lexer.l"
-{          return INTEGER; }
+{           yylval.u_base_int = strtol(yytext,NULL, 8); return INTEGER;  }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 49 "lexer.l"
-{          return INTEGER; }
+{          yylval.u_base_int = strtol(yytext,NULL, 2); return INTEGER; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP

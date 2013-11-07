@@ -130,12 +130,12 @@ extern int yylineno;
 	  ++m_decl_list_iter){
 		(*m_decl_list_iter)->m_parent_attribute = &m_attribute;
 	}
-//	list<Func_ptr>::iterator m_func_list_iter;
-//	for(m_func_list_iter = m_func_list->begin();
-//	  m_func_list_iter != m_func_list->end();
-//	  ++m_func_list_iter){
-//		(*m_func_list_iter)->m_parent_attribute = &m_attribute;
-//	}
+	list<Func_ptr>::iterator m_func_list_iter;
+	for(m_func_list_iter = m_func_list->begin();
+	  m_func_list_iter != m_func_list->end();
+	  ++m_func_list_iter){
+		(*m_func_list_iter)->m_parent_attribute = &m_attribute;
+	}
 	list<Stat_ptr>::iterator m_stat_list_iter;
 	for(m_stat_list_iter = m_stat_list->begin();
 	  m_stat_list_iter != m_stat_list->end();
@@ -203,12 +203,12 @@ extern int yylineno;
 	  ++m_decl_list_iter){
 		(*m_decl_list_iter)->accept( v );
 	}
-//	list<Func_ptr>::iterator m_func_list_iter;
-//	for(m_func_list_iter = m_func_list->begin();
-//	  m_func_list_iter != m_func_list->end();
-//	  ++m_func_list_iter){
-//		(*m_func_list_iter)->accept( v );
-//	}
+	list<Func_ptr>::iterator m_func_list_iter;
+	for(m_func_list_iter = m_func_list->begin();
+	  m_func_list_iter != m_func_list->end();
+	  ++m_func_list_iter){
+		(*m_func_list_iter)->accept( v );
+	}
 	list<Stat_ptr>::iterator m_stat_list_iter;
 	for(m_stat_list_iter = m_stat_list->begin();
 	  m_stat_list_iter != m_stat_list->end();
@@ -533,7 +533,7 @@ extern int yylineno;
  IfNoElse *IfNoElse::clone() const { return new IfNoElse(*this); }
  
  
-/********* IfWithElse ************/
+/********* IfWithElseF ************/
  IfWithElse::IfWithElse(Expr *p1, Nested_block *p2, Nested_block *p3)  {
 	m_expr = p1;
 	m_nested_block_1 = p2;
