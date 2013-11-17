@@ -11,22 +11,28 @@ digraph G {
 "2" -> "5"
 "6" [label="Decl"]
 "5" -> "6"
-"7" [label="TInteger"]
+"7" [label="TIntArray"]
 "6" -> "7"
-"8" [label="SymName\n\"g\""]
-"6" -> "8"
-"9" [label="Assignment"]
-"5" -> "9"
-"10" [label="SymName\n\"g\""]
-"9" -> "10"
-"11" [label="IntLit\n<17>"]
-"9" -> "11"
-"12" [label="Primitive\n17"]
-"11" -> "12"
-"13" [label="Return"]
-"5" -> "13"
-"14" [label="IntLit\n<7>"]
-"13" -> "14"
-"15" [label="Primitive\n7"]
+"8" [label="Primitive\n100"]
+"7" -> "8"
+"9" [label="SymName\n\"b\""]
+"6" -> "9"
+"10" [label="ArrayAssignment"]
+"5" -> "10"
+"11" [label="SymName\n\"b\""]
+"10" -> "11"
+"12" [label="IntLit\n<10>"]
+"10" -> "12"
+"13" [label="Primitive\n10"]
+"12" -> "13"
+"14" [label="IntLit\n<10>"]
+"10" -> "14"
+"15" [label="Primitive\n10"]
 "14" -> "15"
+"16" [label="Return"]
+"5" -> "16"
+"17" [label="IntLit\n<7>"]
+"16" -> "17"
+"18" [label="Primitive\n7"]
+"17" -> "18"
 }; 

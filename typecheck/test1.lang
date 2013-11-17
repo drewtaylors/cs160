@@ -1,5 +1,5 @@
 function Main():int{
-	var g: int;
-        g = 17;
+	var b : intarray[100];
+        b[10] = 10;
 	return 7;
 }
