@@ -1,6 +1,6 @@
 function foo():int{
 	var g: int;
-	g = 4;
+	g = 4+7;
 	return 7;
 }
 
