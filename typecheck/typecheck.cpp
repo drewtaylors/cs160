@@ -287,10 +287,10 @@ class Typecheck : public Visitor {
 	// WRITEME
 	// ASSERT left hand side var exists, and is an int/bool
 	Symbol* assign = m_st -> lookup(p -> m_symname -> spelling());
-//    if (f == NULL)
-//    	this -> t_error(sym_name_undef, t -> m_attribute);
-//    if (f -> m_basetype != bt_function)
-//    	this -> t_error(sym_type_mismatch, t -> m_attribute);
+    if (assign == NULL)
+    	this -> t_error(sym_name_undef, p -> m_attribute);
+    if (assign -> m_basetype != bt_integer || assign -> m_basetype != bt_boolean )
+    	this -> t_error(sym_type_mismatch, t -> m_attribute);
 
 	// ASSERT right hand side matches that type
   }
