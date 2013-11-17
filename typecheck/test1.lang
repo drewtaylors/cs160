@@ -1,4 +1,4 @@
-function Mgit adain():int{
+function Main():int{
 	var b: int;
 	g = 4;
 	return 7;
