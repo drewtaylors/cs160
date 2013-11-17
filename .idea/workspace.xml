@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0b21f244-bfcf-450b-bf26-c3e1d1004e2f" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/typecheck/simple" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typecheck/test1.lang" afterPath="$PROJECT_DIR$/typecheck/test1.lang" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typecheck/typecheck.cpp" afterPath="$PROJECT_DIR$/typecheck/typecheck.cpp" />
     </list>
     <ignored path="cs160.iws" />
@@ -41,7 +40,7 @@
           <file leaf-file-name="typecheck.cpp" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/typecheck/typecheck.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="321" column="41" selection-start="11650" selection-end="11667" vertical-scroll-proportion="0.33333334" vertical-offset="4643" max-vertical-offset="8310">
+                <state line="323" column="41" selection-start="11721" selection-end="11738" vertical-scroll-proportion="0.33333334" vertical-offset="4673" max-vertical-offset="8340">
                   <folding />
                 </state>
               </provider>
@@ -69,12 +68,12 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="typecheck.cpp" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="typecheck.cpp" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/typecheck/typecheck.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="292" column="3" selection-start="10671" selection-end="10671" vertical-scroll-proportion="-9.04" vertical-offset="4154" max-vertical-offset="8310">
+                <state line="294" column="0" selection-start="10792" selection-end="10792" vertical-scroll-proportion="0.49612403" vertical-offset="4154" max-vertical-offset="8340">
                   <folding>
-                    <marker date="1384714029000" expanded="true" signature="10509:10726" placeholder="..." />
+                    <marker date="1384714471000" expanded="true" signature="10509:10798" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -89,10 +88,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="test1.lang" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="test1.lang" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/typecheck/test1.lang">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="2" column="11" selection-start="41" selection-end="41" vertical-scroll-proportion="0.054151624" vertical-offset="0" max-vertical-offset="554">
+                <state line="2" column="11" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
                   <folding />
                 </state>
               </provider>
@@ -120,8 +119,8 @@
       <list>
         <option value="$PROJECT_DIR$/typecheck/symtab.hpp" />
         <option value="$PROJECT_DIR$/typecheck/Makefile" />
-        <option value="$PROJECT_DIR$/typecheck/typecheck.cpp" />
         <option value="$PROJECT_DIR$/typecheck/test1.lang" />
+        <option value="$PROJECT_DIR$/typecheck/typecheck.cpp" />
       </list>
     </option>
   </component>
@@ -396,6 +395,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/typecheck/test1.lang">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="11" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/typecheck/symtab.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="24" selection-start="783" selection-end="793" vertical-scroll-proportion="0.0" vertical-offset="186" max-vertical-offset="3765">
@@ -405,17 +411,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/typecheck/typecheck.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="292" column="3" selection-start="10671" selection-end="10671" vertical-scroll-proportion="-9.04" vertical-offset="4154" max-vertical-offset="8310">
+        <state line="294" column="0" selection-start="10792" selection-end="10792" vertical-scroll-proportion="0.49612403" vertical-offset="4154" max-vertical-offset="8340">
           <folding>
-            <marker date="1384714029000" expanded="true" signature="10509:10726" placeholder="..." />
+            <marker date="1384714471000" expanded="true" signature="10509:10798" placeholder="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/typecheck/test1.lang">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="11" selection-start="41" selection-end="41" vertical-scroll-proportion="0.054151624" vertical-offset="0" max-vertical-offset="554">
-          <folding />
         </state>
       </provider>
     </entry>
