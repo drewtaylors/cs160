@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0b21f244-bfcf-450b-bf26-c3e1d1004e2f" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/typecheck/simple" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typecheck/test1.lang" afterPath="$PROJECT_DIR$/typecheck/test1.lang" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/typecheck/typecheck.cpp" afterPath="$PROJECT_DIR$/typecheck/typecheck.cpp" />
     </list>
     <ignored path="cs160.iws" />
@@ -41,7 +40,7 @@
           <file leaf-file-name="typecheck.cpp" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/typecheck/typecheck.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="212" column="35" selection-start="8474" selection-end="8478" vertical-scroll-proportion="0.33333334" vertical-offset="3008" max-vertical-offset="8325">
+                <state line="212" column="35" selection-start="8474" selection-end="8478" vertical-scroll-proportion="0.33333334" vertical-offset="3008" max-vertical-offset="8340">
                   <folding />
                 </state>
               </provider>
@@ -72,9 +71,9 @@
           <file leaf-file-name="typecheck.cpp" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/typecheck/typecheck.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="293" column="5" selection-start="10741" selection-end="10741" vertical-scroll-proportion="0.33333334" vertical-offset="4223" max-vertical-offset="8325">
+                <state line="292" column="31" selection-start="10697" selection-end="10697" vertical-scroll-proportion="0.30426356" vertical-offset="4223" max-vertical-offset="8340">
                   <folding>
-                    <marker date="1384715341000" expanded="true" signature="10509:10742" placeholder="..." />
+                    <marker date="1384715507000" expanded="true" signature="10509:10771" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -412,9 +411,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/typecheck/typecheck.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="293" column="5" selection-start="10741" selection-end="10741" vertical-scroll-proportion="0.33333334" vertical-offset="4223" max-vertical-offset="8325">
+        <state line="292" column="31" selection-start="10697" selection-end="10697" vertical-scroll-proportion="0.30426356" vertical-offset="4223" max-vertical-offset="8340">
           <folding>
-            <marker date="1384715341000" expanded="true" signature="10509:10742" placeholder="..." />
+            <marker date="1384715507000" expanded="true" signature="10509:10771" placeholder="..." />
           </folding>
         </state>
       </provider>

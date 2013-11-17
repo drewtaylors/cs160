@@ -290,6 +290,7 @@ class Typecheck : public Visitor {
     if (assign == NULL)
     	this -> t_error(sym_name_undef, p -> m_attribute);
     if (assign -> m_basetype != bt_integer || assign -> m_basetype != bt_boolean ){
+            	printf('hell');
             	this -> t_error(sym_type_mismatch, p -> m_attribute);
     }
 
