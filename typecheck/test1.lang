@@ -1,4 +1,5 @@
 function foo():int{
+	var g: int;
 	g = 4;
 	return 7;
 }
