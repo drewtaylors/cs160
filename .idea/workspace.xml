@@ -40,7 +40,7 @@
           <file leaf-file-name="typecheck.cpp" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/typecheck/typecheck.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="212" column="35" selection-start="8474" selection-end="8478" vertical-scroll-proportion="0.33333334" vertical-offset="3008" max-vertical-offset="8340">
+                <state line="212" column="35" selection-start="8474" selection-end="8478" vertical-scroll-proportion="2.5426357" vertical-offset="1868" max-vertical-offset="8340">
                   <folding />
                 </state>
               </provider>
@@ -71,9 +71,9 @@
           <file leaf-file-name="typecheck.cpp" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/typecheck/typecheck.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="292" column="31" selection-start="10697" selection-end="10697" vertical-scroll-proportion="0.30426356" vertical-offset="4223" max-vertical-offset="8340">
+                <state line="292" column="30" selection-start="10696" selection-end="10696" vertical-scroll-proportion="0.33333334" vertical-offset="4208" max-vertical-offset="8340">
                   <folding>
-                    <marker date="1384715507000" expanded="true" signature="10509:10771" placeholder="..." />
+                    <marker date="1384715580000" expanded="true" signature="10509:10772" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -411,9 +411,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/typecheck/typecheck.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="292" column="31" selection-start="10697" selection-end="10697" vertical-scroll-proportion="0.30426356" vertical-offset="4223" max-vertical-offset="8340">
+        <state line="292" column="30" selection-start="10696" selection-end="10696" vertical-scroll-proportion="0.33333334" vertical-offset="4208" max-vertical-offset="8340">
           <folding>
-            <marker date="1384715507000" expanded="true" signature="10509:10771" placeholder="..." />
+            <marker date="1384715580000" expanded="true" signature="10509:10772" placeholder="..." />
           </folding>
         </state>
       </provider>
