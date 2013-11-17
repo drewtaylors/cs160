@@ -50,5 +50,9 @@ typecheck.o: typecheck.cpp ast.hpp symtab.hpp primitive.hpp attribute.hpp
 
 constantfolding.o: constantfolding.cpp ast.hpp symtab.hpp primitive.hpp attribute.hpp
 
+ast:
+	./simple < test1.lang > testProgram.dot
+	dot -Tpng testProgram.dot -o testProgram.png
+
 clean:
 	rm -f $(RMFILES)

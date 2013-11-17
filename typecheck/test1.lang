@@ -1,0 +1,12 @@
+function foo():int{
+	g = 4;
+	return 7;
+}
+
+				
+				
+				
+				
+				
+				
+				
