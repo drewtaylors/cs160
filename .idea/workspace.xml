@@ -91,7 +91,7 @@
           <file leaf-file-name="test1.lang" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/typecheck/test1.lang">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="1" column="19" selection-start="43" selection-end="43" vertical-scroll-proportion="0.027075812" vertical-offset="0" max-vertical-offset="554">
+                <state line="1" column="9" selection-start="33" selection-end="33" vertical-scroll-proportion="0.027075812" vertical-offset="0" max-vertical-offset="554">
                   <folding />
                 </state>
               </provider>
@@ -413,7 +413,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/typecheck/test1.lang">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="19" selection-start="43" selection-end="43" vertical-scroll-proportion="0.027075812" vertical-offset="0" max-vertical-offset="554">
+        <state line="1" column="9" selection-start="33" selection-end="33" vertical-scroll-proportion="0.027075812" vertical-offset="0" max-vertical-offset="554">
           <folding />
         </state>
       </provider>

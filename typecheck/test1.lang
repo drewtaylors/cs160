@@ -1,5 +1,5 @@
 function Mgit adain():int{
-	[$var g: int;$]
+	var b: int;
 	g = 4;
 	return 7;
 }
