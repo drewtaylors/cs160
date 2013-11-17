@@ -52,7 +52,6 @@ constantfolding.o: constantfolding.cpp ast.hpp symtab.hpp primitive.hpp attribut
 
 ast:
 	./simple < test1.lang > testProgram.dot
-	dot -Tpng testProgram.dot -o testProgram.png
 
 clean:
 	rm -f $(RMFILES)

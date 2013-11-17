@@ -165,7 +165,6 @@ class Typecheck : public Visitor {
 			this -> t_error(dup_ident_name,  p -> m_attribute);
 	}
   }
-
   // add symbol table information for parameter declarations (they are also variable declaration)
   void add_decl_symbol(Param *p)
   {
@@ -286,13 +285,11 @@ class Typecheck : public Visitor {
 	set_scope_and_descend_into_children(p);
 	// WRITEME
 	// ASSERT left hand side var exists, and is an int/bool
-	Symbol* assign = m_st -> lookup(p -> m_symname -> spelling());
-    if (assign == NULL)
-    	this -> t_error(sym_name_undef, p -> m_attribute);
-    if (assign -> m_basetype != bt_integer || assign -> m_basetype != bt_boolean ){
-            	printf("hello");
-            	this -> t_error(sym_type_mismatch, p -> m_attribute);
-    }
+        Symbol* assign = m_st -> lookup(p -> m_symname -> spelling());
+        if (assign == NULL)
+            this -> t_error(sym_name_undef, p -> m_attribute);
+        if (assign -> m_basetype != bt_integer && assign -> m_basetype != bt_boolean )
+            this -> t_error(sym_type_mismatch, p -> m_attribute);
 
 	// ASSERT right hand side matches that type
   }
