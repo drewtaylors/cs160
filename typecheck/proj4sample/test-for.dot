@@ -1,0 +1,74 @@
+digraph G { 
+"1" [label="Program"]
+"0" -> "1"
+"2" [label="Func"]
+"1" -> "2"
+"3" [label="TInteger"]
+"2" -> "3"
+"4" [label="SymName\n\"Main\""]
+"2" -> "4"
+"5" [label="FunctionBlock"]
+"2" -> "5"
+"6" [label="Decl"]
+"5" -> "6"
+"7" [label="TInteger"]
+"6" -> "7"
+"8" [label="SymName\n\"a\""]
+"6" -> "8"
+"9" [label="ForLoop"]
+"5" -> "9"
+"10" [label="Assignment"]
+"9" -> "10"
+"11" [label="SymName\n\"a\""]
+"10" -> "11"
+"12" [label="IntLit\n<0>"]
+"10" -> "12"
+"13" [label="Primitive\n0"]
+"12" -> "13"
+"14" [label="Lt\n<TOP>"]
+"9" -> "14"
+"15" [label="Ident\n<TOP>"]
+"14" -> "15"
+"16" [label="SymName\n\"a\""]
+"15" -> "16"
+"17" [label="IntLit\n<5>"]
+"14" -> "17"
+"18" [label="Primitive\n5"]
+"17" -> "18"
+"19" [label="Assignment"]
+"9" -> "19"
+"20" [label="SymName\n\"a\""]
+"19" -> "20"
+"21" [label="Plus\n<TOP>"]
+"19" -> "21"
+"22" [label="Ident\n<TOP>"]
+"21" -> "22"
+"23" [label="SymName\n\"a\""]
+"22" -> "23"
+"24" [label="IntLit\n<1>"]
+"21" -> "24"
+"25" [label="Primitive\n1"]
+"24" -> "25"
+"26" [label="NestedBlock"]
+"9" -> "26"
+"27" [label="Assignment"]
+"26" -> "27"
+"28" [label="SymName\n\"a\""]
+"27" -> "28"
+"29" [label="Times\n<TOP>"]
+"27" -> "29"
+"30" [label="Ident\n<TOP>"]
+"29" -> "30"
+"31" [label="SymName\n\"a\""]
+"30" -> "31"
+"32" [label="IntLit\n<1>"]
+"29" -> "32"
+"33" [label="Primitive\n1"]
+"32" -> "33"
+"34" [label="Return"]
+"5" -> "34"
+"35" [label="Ident\n<TOP>"]
+"34" -> "35"
+"36" [label="SymName\n\"a\""]
+"35" -> "36"
+}; 
