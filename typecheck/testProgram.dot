@@ -11,32 +11,26 @@ digraph G {
 "2" -> "5"
 "6" [label="Decl"]
 "5" -> "6"
-"7" [label="TInteger"]
+"7" [label="TIntArray"]
 "6" -> "7"
-"8" [label="SymName\n\"a\""]
-"6" -> "8"
-"9" [label="Return"]
-"5" -> "9"
-"10" [label="Plus\n<35>"]
-"9" -> "10"
-"11" [label="IntLit\n<35>"]
+"8" [label="Primitive\n10"]
+"7" -> "8"
+"9" [label="SymName\n\"a\""]
+"6" -> "9"
+"10" [label="Return"]
+"5" -> "10"
+"11" [label="Div\n<0>"]
 "10" -> "11"
-"12" [label="Primitive\n35"]
+"12" [label="IntLit\n<0>"]
 "11" -> "12"
-"13" [label="Times\n<0>"]
-"10" -> "13"
-"14" [label="Times\n<TOP>"]
-"13" -> "14"
-"15" [label="IntLit\n<6>"]
+"13" [label="Primitive\n0"]
+"12" -> "13"
+"14" [label="ArrayAccess\n<TOP>"]
+"11" -> "14"
+"15" [label="SymName\n\"a\""]
 "14" -> "15"
-"16" [label="Primitive\n6"]
-"15" -> "16"
-"17" [label="Ident\n<TOP>"]
-"14" -> "17"
-"18" [label="SymName\n\"a\""]
-"17" -> "18"
-"19" [label="IntLit\n<0>"]
-"13" -> "19"
-"20" [label="Primitive\n0"]
-"19" -> "20"
+"16" [label="IntLit\n<1>"]
+"14" -> "16"
+"17" [label="Primitive\n1"]
+"16" -> "17"
 }; 

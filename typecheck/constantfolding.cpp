@@ -2,6 +2,7 @@
 #include "primitive.hpp"
 #include "attribute.hpp"
 #include "symtab.hpp"
+#include <cmath>
 #include <iostream>
 
 using namespace std;
@@ -145,7 +146,8 @@ public:
   LatticeElemMap* visitReturn(Return *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    p->m_attribute.m_lattice_elem=p->m_expr->m_attribute.m_lattice_elem
+    //just return expression value
+    p->m_attribute.m_lattice_elem=p->m_expr->m_attribute.m_lattice_elem;
     return in;
   }
 
@@ -167,13 +169,17 @@ public:
 
   LatticeElemMap* visitCall(Call *p, LatticeElemMap *in)
   {
+    //Set to TOP
     in = visit_children_of(p, in);
+    (*in)[p->m_symname_1->spelling()]=TOP;
     return in;
   }
 
   LatticeElemMap* visitArrayCall(ArrayCall *p, LatticeElemMap *in)
   {
+    //Set to TOP
     in = visit_children_of(p, in);
+    (*in)[p->m_symname_1->spelling()]=TOP;
     return in;
   }
 
@@ -271,60 +277,167 @@ public:
   LatticeElemMap* visitAnd(And *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
+    // Read that lattice element of m_expr_1
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+    if(e_2.value == false || e_1.value==false)
+        p->m_attribute.m_lattice_elem = false;
+    else if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value && e_2.value;
     return in;
   }
   
   LatticeElemMap* visitOr(Or *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
+       // Read that lattice element of m_expr_1
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+    if(e_2.value == true || e_1.value==true)
+        p->m_attribute.m_lattice_elem = true;
+    else if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value || e_2.value;
     return in;
   }
 
   LatticeElemMap* visitCompare(Compare *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+ 
+    if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value == e_2.value;
     return in;
   }
   
   LatticeElemMap* visitNoteq(Noteq *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
+     LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+ 
+    if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value != e_2.value;
     return in;
   }
 
   LatticeElemMap* visitGt(Gt *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
+     LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+ 
+    if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value > e_2.value;
     return in;
   }
 
   LatticeElemMap* visitGteq(Gteq *p, LatticeElemMap *in)
   {
-    in = visit_children_of(p, in);
+     in = visit_children_of(p, in);
+     LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+ 
+    if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value >= e_2.value;
     return in;
   }
 
   LatticeElemMap* visitLt(Lt *p, LatticeElemMap *in)
   {
-    in = visit_children_of(p, in);
+     in = visit_children_of(p, in);
+     LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+ 
+    if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value < e_2.value;
     return in;
   }
 
   LatticeElemMap* visitLteq(Lteq *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
+     LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+ 
+    if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value <= e_2.value;
     return in;
   }
 
   LatticeElemMap* visitUminus(Uminus *p, LatticeElemMap *in)
   {
+    // First visit the child expression. After this line of code, the child
+    // expression should have a valid LatticeElem stored inside it
     in = visit_children_of(p, in);
+
+    // Read that lattice element
+    LatticeElem &e = p->m_expr->m_attribute.m_lattice_elem;
+
+    // If it's TOP, then we cannot know anything about this expression; it should be TOP as well
+    if (e == TOP)
+	    p->m_attribute.m_lattice_elem = TOP;
+    else
+	    // Otherwise, it contains the boolean opposite of the child's LatticeElem
+	    p->m_attribute.m_lattice_elem = -1*e.value;
+
+    // And now we return the LatticeElemMap. We didn't modify it, we didn't need to.
     return in;
   }
   
   LatticeElemMap* visitMagnitude(Magnitude *p, LatticeElemMap *in)
   {
+    // First visit the child expression. After this line of code, the child
+    // expression should have a valid LatticeElem stored inside it
     in = visit_children_of(p, in);
+
+    // Read that lattice element
+    LatticeElem &e = p->m_expr->m_attribute.m_lattice_elem;
+
+    // If it's TOP, then we cannot know anything about this expression; it should be TOP as well
+    if (e == TOP)
+	    p->m_attribute.m_lattice_elem = TOP;
+    else
+	    // Otherwise, it contains the boolean opposite of the child's LatticeElem
+	    p->m_attribute.m_lattice_elem = abs(e.value);
+
+    // And now we return the LatticeElemMap. We didn't modify it, we didn't need to.
     return in;
   }
 
@@ -382,6 +495,20 @@ public:
   LatticeElemMap* visitDiv(Div *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
+    // Read that lattice element of m_expr_1
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+    if(e_1.value==0)
+         p->m_attribute.m_lattice_elem = 0;
+    else if(e_2.value==0)
+         p->m_attribute.m_lattice_elem = TOP;
+    else if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+         // Otherwise, it contains the boolean opposite of the child's LatticeElem
+         p->m_attribute.m_lattice_elem = e_1.value / e_2.value;
     return in;
   }
 
@@ -424,7 +551,12 @@ public:
   LatticeElemMap* visitArrayAccess(ArrayAccess *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
+    // Read that lattice element
+
+    // If it's TOP, then we cannot know anything about this expression; it should be TOP as well
+    p->m_attribute.m_lattice_elem = TOP;
     return in;
+    
   }
 
   LatticeElemMap* visitIntLit(IntLit *p, LatticeElemMap *in)
