@@ -145,6 +145,7 @@ public:
   LatticeElemMap* visitReturn(Return *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
+    p->m_attribute.m_lattice_elem=p->m_expr->m_attribute.m_lattice_elem
     return in;
   }
 
@@ -159,6 +160,8 @@ public:
   LatticeElemMap* visitArrayAssignment(ArrayAssignment *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
+    //In an array assign, set everything to top
+    (*in)[p->m_symname->spelling()]= TOP;
     return in;
   }
 
