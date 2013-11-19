@@ -1,14 +1,7 @@
-function hey():int{
-	var a:int;
-	a = 4;
-	return 4;
-}
-
-function Main():int{
-	var b : intarray[100];
-        var c : int;
-        b[10]=hey();
-        c=b[10];
-	return 7;
+function Main() : bool {
+        var a,b : int;
+        a=10;
+        b=a+5;
+        return true;
 }
 

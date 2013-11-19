@@ -63,7 +63,7 @@ using namespace std;
  * cannot guarantee that an expression will be a constant. This LatticeElem can be accessed, for an expression node *p:
  *   p->m_attribute.m_lattice_elem
  *
- * To recursivelly do the analysis on all the children of a node, use "out = visit_children_of(node, in);"
+ * To recursively do the analysis on all the children of a node, use "out = visit_children_of(node, in);"
  * Each child's "out" LatticeElemMap is propagated to the next child as it "in"; the last "out" is returned.
  *  
  * To visit a single child, use "out = visit(child_node, in);". To visit a child that is a list of nodes, use
@@ -320,6 +320,20 @@ public:
   LatticeElemMap* visitPlus(Plus *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
+    
+    // Read that lattice element of m_expr_1
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+     if (e_1 == TOP || e_2 == TOP)
+	    p->m_attribute.m_lattice_elem = TOP;
+    else
+	    // Otherwise, it contains the boolean opposite of the child's LatticeElem
+	    p->m_attribute.m_lattice_elem = e_1.value + e_2.value;
+    
+    
+    
     return in;
   }
 
