@@ -133,6 +133,12 @@ public:
   LatticeElemMap* visitDecl(Decl *p, LatticeElemMap *in)
   {
      in = visit_children_of(p, in);
+     list<SymName_ptr>::iterator iter;
+     for(iter = p->m_symname_list->begin(); iter != p->m_symname_list->end(); iter++){
+         (*in)[(*iter)->spelling()] = TOP;
+     }
+     
+    
      return in;
   }
 
@@ -355,6 +361,18 @@ public:
   LatticeElemMap* visitTimes(Times *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
+     // Read that lattice element of m_expr_1
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+    if(e_1.value==0||e_2.value==0)
+         p->m_attribute.m_lattice_elem = 0;
+    else if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+         // Otherwise, it contains the boolean opposite of the child's LatticeElem
+         p->m_attribute.m_lattice_elem = e_1.value * e_2.value;
     return in;
   }
 

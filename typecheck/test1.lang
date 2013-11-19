@@ -1,7 +1,5 @@
-function Main() : bool {
-        var a,b : int;
-        a=10;
-        b=a-5;
-        return true;
+function Main() : int {
+        var a : int;
+        return (35+6*a*0);
 }
 
