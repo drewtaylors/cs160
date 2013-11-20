@@ -202,7 +202,6 @@ public:
    delete in;
    in = clone;
 
-   
    return in;
     
     
@@ -218,7 +217,7 @@ public:
     clone = visit(p->m_nested_block_1, clone);
     clone2 = visit(p->m_nested_block_2,clone2);
 
-    join_lattice_elem_maps(clone, in);
+//    join_lattice_elem_maps(clone, in);
     join_lattice_elem_maps(clone, clone2);
 
    // Make "in" point to the clone, deleting in

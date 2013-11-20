@@ -1,18 +1,11 @@
 function Main() : int {
 	var a, b : int;
-	
-	a = 3;
-	if (a > b) {
-		a = 4;
+	function kme() : int {
+		a = 9;
+		return a + 1;
 	}
-	a = a;
-
-	if (a > b) {
-		a = 4;
-		b = 7-a;
-	} else {
-		a = 3;
-		b = 6-a;
-	}
-	return a + b;
+	a = a + 1;
+	b = 5;
+	a = kme();
+	return a+b;
 }
