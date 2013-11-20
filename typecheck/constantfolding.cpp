@@ -217,14 +217,17 @@ public:
     LatticeElemMap* clone2= new LatticeElemMap(*in);
     // Visit the block using this clone
     clone = visit(p->m_nested_block_1, clone);
-    clone2 = visit(p->m_nested_block_2,clone2);
-    
     // Join the original "in" lattice_elem_map with the clone,
     // storing the result in the clone
-   join_lattice_elem_maps(clone, in);
-   join_lattice_elem_maps(clone2,in);
-   join_lattice_elem_maps(clone,clone2);
-   
+    join_lattice_elem_maps(clone, in);
+
+    clone2 = visit(p->m_nested_block_2,clone2);
+    join_lattice_elem_maps(clone2, in);
+
+    join_lattice_elem_maps(clone,clone2);
+    
+
+
    // Make "in" point to the clone, deleting in
    delete in;
    in = clone;
