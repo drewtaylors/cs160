@@ -325,8 +325,7 @@ class Typecheck : public Visitor {
   //   The return type is as expected.
   //
   // Use this method to check calls
-  void check_call(Stat* t, SymName* symname, list<Expr_ptr>*
-  , Basetype return_type)
+  void check_call(Stat* t, SymName* symname, list<Expr_ptr>*exprList, Basetype return_type)
   {
 	list<Expr_ptr>::iterator exprIterator;
 	Symbol* f = m_st -> lookup(symname -> spelling());
