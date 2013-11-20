@@ -185,7 +185,8 @@ public:
 
   LatticeElemMap* visitIfNoElse(IfNoElse *p, LatticeElemMap *in)
   {
-    in = visit_children_of(p, in);
+//    in = visit_children_of(p, in);
+
     // visit the expression.
     in = visit(p->m_expr, in);
     // Copy this lattice elem map into another
