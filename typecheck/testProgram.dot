@@ -57,13 +57,13 @@ digraph G {
 "27" -> "28"
 "29" [label="IfWithElse"]
 "5" -> "29"
-"30" [label="Gt\n<0>"]
+"30" [label="Gt\n<TOP>"]
 "29" -> "30"
-"31" [label="Ident\n<3>"]
+"31" [label="Ident\n<TOP>"]
 "30" -> "31"
 "32" [label="SymName\n\"a\""]
 "31" -> "32"
-"33" [label="Ident\n<3>"]
+"33" [label="Ident\n<TOP>"]
 "30" -> "33"
 "34" [label="SymName\n\"b\""]
 "33" -> "34"
@@ -117,13 +117,13 @@ digraph G {
 "57" -> "58"
 "59" [label="Return"]
 "5" -> "59"
-"60" [label="Plus\n<6>"]
+"60" [label="Plus\n<TOP>"]
 "59" -> "60"
-"61" [label="Ident\n<3>"]
+"61" [label="Ident\n<TOP>"]
 "60" -> "61"
 "62" [label="SymName\n\"a\""]
 "61" -> "62"
-"63" [label="Ident\n<3>"]
+"63" [label="Ident\n<TOP>"]
 "60" -> "63"
 "64" [label="SymName\n\"b\""]
 "63" -> "64"
