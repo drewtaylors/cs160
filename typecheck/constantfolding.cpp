@@ -185,8 +185,6 @@ public:
 
   LatticeElemMap* visitIfNoElse(IfNoElse *p, LatticeElemMap *in)
   {
-  //works now!
-//    in = visit_children_of(p, in);
 
     // visit the expression.
     in = visit(p->m_expr, in);
@@ -209,25 +207,21 @@ public:
 
   LatticeElemMap* visitIfWithElse(IfWithElse *p, LatticeElemMap *in)
   {
-//    in = visit_children_of(p, in);
-    // visit the expression.
     in = visit(p->m_expr, in);
     // Copy this lattice elem map into another
     LatticeElemMap* clone = new LatticeElemMap(*in);
     LatticeElemMap* clone2= new LatticeElemMap(*in);
     // Visit the block using this clone
-    clone = visit_children_of(p->m_nested_block_1, clone);
-    clone2 = visit_children_of(p->m_nested_block_2,clone2);
+    clone = visit(p->m_nested_block_1, clone);
+    clone2 = visit(p->m_nested_block_2,clone2);
 
     join_lattice_elem_maps(clone, clone2);
     join_lattice_elem_maps(clone, in);
 
-
-
    // Make "in" point to the clone, deleting in
    delete in;
    in = clone;
-   
+   print_lattice_map(in);
    return in;
   }
 

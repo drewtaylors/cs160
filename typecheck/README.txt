@@ -7,3 +7,4 @@ The only problem I see with typechecking is that maybe I got an error with the t
 
 constant folding.
 For constant folding, I worked off of the examples, and the only difficult part was the if and if no else block.
+I had a problem with the 3rd testcase in proj4sample...The return value of a+b;
