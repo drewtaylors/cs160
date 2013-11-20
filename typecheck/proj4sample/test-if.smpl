@@ -1,4 +1,4 @@
-function Main() : int {
+git function Main() : int {
 	var a, b : int;
 	
 	a = 3;

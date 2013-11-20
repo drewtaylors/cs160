@@ -221,11 +221,12 @@ public:
     
     // Join the original "in" lattice_elem_map with the clone,
     // storing the result in the clone
-   join_lattice_elem_maps(clone2, in);
+   join_lattice_elem_maps(clone, in);
+   join_lattice_elem_maps(clone,clone2);
    
    // Make "in" point to the clone, deleting in
    delete in;
-   in = clone2;
+   in = clone;
    
    return in;
   }
