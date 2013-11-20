@@ -147,7 +147,6 @@ public:
   {
     in = visit_children_of(p, in);
     //just return expression value
-    print_lattice_map(in);
 
     p->m_attribute.m_lattice_elem=p->m_expr->m_attribute.m_lattice_elem;
     return in;
@@ -198,9 +197,11 @@ public:
     // storing the result in the clone
    join_lattice_elem_maps(clone, in);
    
+
    // Make "in" point to the clone, deleting in
    delete in;
    in = clone;
+
    
    return in;
     
@@ -218,7 +219,7 @@ public:
     clone2 = visit(p->m_nested_block_2,clone2);
 
     join_lattice_elem_maps(clone, clone2);
-    join_lattice_elem_maps(clone, in);
+//    join_lattice_elem_maps(clone, in);
 
    // Make "in" point to the clone, deleting in
    delete in;
