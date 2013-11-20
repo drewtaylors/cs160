@@ -173,6 +173,14 @@ public:
     //Set to TOP
     in = visit_children_of(p, in);
     (*in)[p->m_symname_1->spelling()]=TOP;
+
+    LatticeElemMap::iterator iter;
+
+   for (iter = in->begin(); iter != in->end(); iter++) {
+    	iter->second=TOP;
+    }
+
+
     return in;
   }
 
@@ -181,6 +189,13 @@ public:
     //Set to TOP
     in = visit_children_of(p, in);
     (*in)[p->m_symname_1->spelling()]=TOP;
+
+    LatticeElemMap::iterator iter;
+
+       for (iter = in->begin(); iter != in->end(); iter++) {
+        	iter->second=TOP;
+        }
+        
     return in;
   }
 
