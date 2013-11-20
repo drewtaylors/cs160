@@ -216,8 +216,8 @@ public:
     LatticeElemMap* clone = new LatticeElemMap(*in);
     LatticeElemMap* clone2= new LatticeElemMap(*in);
     // Visit the block using this clone
-    clone = visit(p->m_nested_block_1, clone);
-    clone2 = visit(p->m_nested_block_2,clone2);
+    clone = visit_children(p->m_nested_block_1, clone);
+    clone2 = visit_children(p->m_nested_block_2,clone2);
 
     join_lattice_elem_maps(clone, clone2);
     join_lattice_elem_maps(clone, in);
