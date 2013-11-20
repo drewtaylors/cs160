@@ -147,6 +147,8 @@ public:
   {
     in = visit_children_of(p, in);
     //just return expression value
+    print_lattice_map(in);
+
     p->m_attribute.m_lattice_elem=p->m_expr->m_attribute.m_lattice_elem;
     return in;
   }
@@ -221,7 +223,6 @@ public:
    // Make "in" point to the clone, deleting in
    delete in;
    in = clone;
-   print_lattice_map(in);
    return in;
   }
 
