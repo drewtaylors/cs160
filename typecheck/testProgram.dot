@@ -1,4 +1,4 @@
-{ (a = 2147483647) (b = 2147483647) }digraph G { 
+digraph G { 
 "1" [label="Program"]
 "0" -> "1"
 "2" [label="Func"]
@@ -123,7 +123,7 @@
 "60" -> "61"
 "62" [label="SymName\n\"a\""]
 "61" -> "62"
-"63" [label="Ident\n<TOP>"]
+"63" [label="Ident\n<3>"]
 "60" -> "63"
 "64" [label="SymName\n\"b\""]
 "63" -> "64"
