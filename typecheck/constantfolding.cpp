@@ -214,6 +214,7 @@ public:
     in = visit(p->m_expr, in);
     // Copy this lattice elem map into another
     LatticeElemMap* clone = new LatticeElemMap(*in);
+    LatticeElemMap* clone2= new LatticeElemMap(*in);
     // Visit the block using this clone
     clone = visit(p->m_nested_block_1, clone);
     clone2 = visit(p->m_nested_block_2,clone);
