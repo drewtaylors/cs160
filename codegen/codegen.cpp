@@ -155,7 +155,8 @@ public:
   void visitAssignment(Assignment * p)
   {
     p->visit_children(this);
-    fprintf( m_outputfile, " pushl $%d\n", p->m_expr->m_attribute.m_lattice_elem.value);
+    fprintf( m_outputfile, "popl %%ebx\n");
+    fprintf( m_outputfile, "pushl $%d\n", p->m_expr->m_attribute.m_lattice_elem.value);
 
   }
   void visitArrayAssignment(ArrayAssignment * p)
