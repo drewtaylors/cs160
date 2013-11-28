@@ -154,7 +154,9 @@ public:
   }
   void visitAssignment(Assignment * p)
   {
-    // WRITEME
+    p->visit_children(this);
+    fprintf( m_outputfile, " pushl $%d\n", p->m_expr->m_attribute.m_lattice_elem.value);
+
   }
   void visitArrayAssignment(ArrayAssignment * p)
   {
@@ -201,6 +203,8 @@ public:
   // variable declarations (no code generation needed)
   void visitDecl(Decl * p)
   {
+     p -> visit_children(this);
+
   }
   void visitParam(Param *p)
   {
