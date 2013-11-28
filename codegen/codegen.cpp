@@ -146,6 +146,7 @@ public:
   void visitFunction_block(Function_block * p)
   {
     // WRITEME
+    p->visit_children(this);
   }
   void visitNested_block(Nested_block * p)
   {
