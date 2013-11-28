@@ -2,6 +2,7 @@
 #include "primitive.hpp"
 #include "attribute.hpp"
 #include "symtab.hpp"
+#include <cmath>
 #include <iostream>
 
 using namespace std;
@@ -63,7 +64,7 @@ using namespace std;
  * cannot guarantee that an expression will be a constant. This LatticeElem can be accessed, for an expression node *p:
  *   p->m_attribute.m_lattice_elem
  *
- * To recursivelly do the analysis on all the children of a node, use "out = visit_children_of(node, in);"
+ * To recursively do the analysis on all the children of a node, use "out = visit_children_of(node, in);"
  * Each child's "out" LatticeElemMap is propagated to the next child as it "in"; the last "out" is returned.
  *  
  * To visit a single child, use "out = visit(child_node, in);". To visit a child that is a list of nodes, use
@@ -83,7 +84,7 @@ using namespace std;
  *   * We are not keeping track of IntArrays. Any array element is assumed to be TOP at all times.
  * Also:
  *   * Anything multiplied by 0 is 0
- *   * Dividing 0 by anything is always 0, and dividing anything by 0 makes the result 0 for this assignment
+ *   * Dividing 0 by anything is always 0, and dividing anything by 0 makes the result TOP for the purposes of the analysis
  *   * false AND anything is false, true OR anything is true
  *
  * While it is possible to do a more detailed analysis, that is not allowed in order to keep the grading fair. If you have 
@@ -127,62 +128,117 @@ public:
   LatticeElemMap* visitParam(Param *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
     return in;
   }
 
   LatticeElemMap* visitDecl(Decl *p, LatticeElemMap *in)
   {
      in = visit_children_of(p, in);
-     // WRITEME
+     list<SymName_ptr>::iterator iter;
+     for(iter = p->m_symname_list->begin(); iter != p->m_symname_list->end(); iter++){
+         (*in)[(*iter)->spelling()] = TOP;
+     }
+     
+    
      return in;
   }
 
   LatticeElemMap* visitReturn(Return *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+    //just return expression value
+
+    p->m_attribute.m_lattice_elem=p->m_expr->m_attribute.m_lattice_elem;
     return in;
   }
 
   LatticeElemMap* visitAssignment(Assignment *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+    //find the symbol you are asigning to by name and add the value to it
+    (*in)[p->m_symname->spelling()]= p->m_expr->m_attribute.m_lattice_elem;
     return in;
   }
 
   LatticeElemMap* visitArrayAssignment(ArrayAssignment *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+    //In an array assign, set everything to top
+    (*in)[p->m_symname->spelling()]= TOP;
     return in;
   }
 
   LatticeElemMap* visitCall(Call *p, LatticeElemMap *in)
   {
+    //Set to TOP
     in = visit_children_of(p, in);
-    // WRITEME
+    (*in)[p->m_symname_1->spelling()]=TOP;
+
+    LatticeElemMap::iterator iter;
+
+   for (iter = in->begin(); iter != in->end(); iter++) {
+    	iter->second=TOP;
+    }
+
+
     return in;
   }
 
   LatticeElemMap* visitArrayCall(ArrayCall *p, LatticeElemMap *in)
   {
+    //Set to TOP
     in = visit_children_of(p, in);
-    // WRITEME
+    (*in)[p->m_symname_1->spelling()]=TOP;
+
+    LatticeElemMap::iterator iter;
+
+       for (iter = in->begin(); iter != in->end(); iter++) {
+        	iter->second=TOP;
+        }
+
     return in;
   }
 
   LatticeElemMap* visitIfNoElse(IfNoElse *p, LatticeElemMap *in)
   {
-    // WRITEME
-    return in;
+
+    // visit the expression.
+    in = visit(p->m_expr, in);
+    // Copy this lattice elem map into another
+    LatticeElemMap* clone = new LatticeElemMap(*in);
+    // Visit the block using this clone
+    clone = visit(p->m_nested_block, clone);
+    // Join the original "in" lattice_elem_map with the clone,
+    // storing the result in the clone
+   join_lattice_elem_maps(clone, in);
+   
+
+   // Make "in" point to the clone, deleting in
+   delete in;
+   in = clone;
+
+   return in;
+    
+    
   }
 
   LatticeElemMap* visitIfWithElse(IfWithElse *p, LatticeElemMap *in)
   {
-    // WRITEME
-    return in;
+    in = visit(p->m_expr, in);
+    // Copy this lattice elem map into another
+    LatticeElemMap* clone = new LatticeElemMap(*in);
+    LatticeElemMap* clone2= new LatticeElemMap(*in);
+    // Visit the block using this clone
+    clone = visit(p->m_nested_block_1, clone);
+    clone2 = visit(p->m_nested_block_2,clone2);
+
+//    join_lattice_elem_maps(clone, in);
+    join_lattice_elem_maps(clone, clone2);
+
+   // Make "in" point to the clone, deleting in
+   delete in;
+   in = clone;
+   return in;
   }
 
   LatticeElemMap* visitForLoop(ForLoop *p, LatticeElemMap *in)
@@ -203,17 +259,39 @@ public:
     // stops being changed by iterating through the block, we've reached a fix-point
     // and only then can we continue.
     
+
+    // First, visit the initialization statement
     in = visit(p->m_stat_1, in);
+    
+    // Then visit the expression.
     in = visit(p->m_expr, in);
+
+    // And then, as many times as needed,
     while(true) {
+        // Copy this lattice elem map into another
         LatticeElemMap* clone = new LatticeElemMap(*in);
+	   
+	   // Visit the block using this clone
     	   clone = visit(p->m_nested_block, clone);
+    	   // Visit the incrementer statement using this clone
     	   clone = visit(p->m_stat_2, clone);
+        
+	   // Join the original "in" lattice_elem_map with the clone,
+	   // storing the result in the clone
 	   join_lattice_elem_maps(clone, in);
+    	   
+	   // now visit the expression
 	   clone = visit(p->m_expr, clone);
+        
+	   // Compare them
 	   bool equal = lattice_maps_equal(in, clone);
+        
+	   // Make "in" point to the clone, deleting in
 	   delete in;
 	   in = clone;
+        
+	   // If the clone was the same as "in", meaning that we've reached a fix-point,
+	   // we're done!
 	   if (equal)
 	       return in;
     }
@@ -223,125 +301,260 @@ public:
   {
       return in;
   }
-  
+
   LatticeElemMap* visitTInteger(TInteger *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
     return in;
   }
 
   LatticeElemMap* visitTBoolean(TBoolean *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
     return in;
   }
 
   LatticeElemMap* visitTIntArray(TIntArray *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
     return in;
   }
 
   LatticeElemMap* visitAnd(And *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+    // Read that lattice element of m_expr_1
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+    if(e_2.value == false || e_1.value==false)
+        p->m_attribute.m_lattice_elem = false;
+    else if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value && e_2.value;
     return in;
   }
   
   LatticeElemMap* visitOr(Or *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+       // Read that lattice element of m_expr_1
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+    if(e_2.value == true || e_1.value==true)
+        p->m_attribute.m_lattice_elem = true;
+    else if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value || e_2.value;
     return in;
   }
 
   LatticeElemMap* visitCompare(Compare *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+ 
+    if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value == e_2.value;
     return in;
   }
   
   LatticeElemMap* visitNoteq(Noteq *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+     LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+ 
+    if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value != e_2.value;
     return in;
   }
 
   LatticeElemMap* visitGt(Gt *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+     LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+ 
+    if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value > e_2.value;
     return in;
   }
 
   LatticeElemMap* visitGteq(Gteq *p, LatticeElemMap *in)
   {
-    in = visit_children_of(p, in);
-    // WRITEME
+     in = visit_children_of(p, in);
+     LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+ 
+    if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value >= e_2.value;
     return in;
   }
 
   LatticeElemMap* visitLt(Lt *p, LatticeElemMap *in)
   {
-    in = visit_children_of(p, in);
-    // WRITEME
+     in = visit_children_of(p, in);
+     LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+ 
+    if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value < e_2.value;
     return in;
   }
 
   LatticeElemMap* visitLteq(Lteq *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+     LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+ 
+    if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value <= e_2.value;
     return in;
   }
 
   LatticeElemMap* visitUminus(Uminus *p, LatticeElemMap *in)
   {
+    // First visit the child expression. After this line of code, the child
+    // expression should have a valid LatticeElem stored inside it
     in = visit_children_of(p, in);
-    // WRITEME
+
+    // Read that lattice element
+    LatticeElem &e = p->m_expr->m_attribute.m_lattice_elem;
+
+    // If it's TOP, then we cannot know anything about this expression; it should be TOP as well
+    if (e == TOP)
+	    p->m_attribute.m_lattice_elem = TOP;
+    else
+	    // Otherwise, it contains the boolean opposite of the child's LatticeElem
+	    p->m_attribute.m_lattice_elem = -1*e.value;
+
+    // And now we return the LatticeElemMap. We didn't modify it, we didn't need to.
     return in;
   }
   
   LatticeElemMap* visitMagnitude(Magnitude *p, LatticeElemMap *in)
   {
+    // First visit the child expression. After this line of code, the child
+    // expression should have a valid LatticeElem stored inside it
     in = visit_children_of(p, in);
-    // WRITEME
+
+    // Read that lattice element
+    LatticeElem &e = p->m_expr->m_attribute.m_lattice_elem;
+
+    // If it's TOP, then we cannot know anything about this expression; it should be TOP as well
+    if (e == TOP)
+	    p->m_attribute.m_lattice_elem = TOP;
+    else
+	    // Otherwise, it contains the boolean opposite of the child's LatticeElem
+	    p->m_attribute.m_lattice_elem = abs(e.value);
+
+    // And now we return the LatticeElemMap. We didn't modify it, we didn't need to.
     return in;
   }
 
   LatticeElemMap* visitPlus(Plus *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+    
+    // Read that lattice element of m_expr_1
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+     if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+     else
+	// Otherwise, it contains the boolean opposite of the child's LatticeElem
+	p->m_attribute.m_lattice_elem = e_1.value + e_2.value;
     return in;
   }
 
   LatticeElemMap* visitMinus(Minus *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+    // Read that lattice element of m_expr_1
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+     if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+     else
+           // Otherwise, it contains the boolean opposite of the child's LatticeElem
+           p->m_attribute.m_lattice_elem = e_1.value - e_2.value;
     return in;
   }
 
   LatticeElemMap* visitTimes(Times *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+     // Read that lattice element of m_expr_1
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+    if(e_1.value==0||e_2.value==0)
+         p->m_attribute.m_lattice_elem = 0;
+    else if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+         // Otherwise, it contains the boolean opposite of the child's LatticeElem
+         p->m_attribute.m_lattice_elem = e_1.value * e_2.value;
     return in;
   }
 
   LatticeElemMap* visitDiv(Div *p, LatticeElemMap *in)
   {
-    // now anything div by 0 will result in 0 instead of TOP ( x/0 = 0) update your code
-    // accordingly
     in = visit_children_of(p, in);
-    // WRITEME
+    // Read that lattice element of m_expr_1
+    LatticeElem &e_1 = p->m_expr_1->m_attribute.m_lattice_elem;
+    // Read that lattice element of m_expr_2
+    LatticeElem &e_2 = p->m_expr_2->m_attribute.m_lattice_elem;
+    
+    if(e_1.value==0)
+         p->m_attribute.m_lattice_elem = 0;
+    else if(e_2.value==0)
+         p->m_attribute.m_lattice_elem = 0;
+    else if (e_1 == TOP || e_2 == TOP)
+	   p->m_attribute.m_lattice_elem = TOP;
+    else
+         // Otherwise, it contains the boolean opposite of the child's LatticeElem
+         p->m_attribute.m_lattice_elem = e_1.value / e_2.value;
     return in;
   }
 
@@ -368,15 +581,28 @@ public:
   LatticeElemMap* visitIdent(Ident *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+    
+     // Read that lattice element
+    LatticeElem &le = (*in)[p->m_symname->spelling()];
+
+    // If it's TOP, then we cannot know anything about this expression; it should be TOP as well
+    if (le == TOP)
+	    p->m_attribute.m_lattice_elem = TOP;
+    else
+	    // Otherwise, it contains the value
+	    p->m_attribute.m_lattice_elem = le.value;
     return in;
   }
 
   LatticeElemMap* visitArrayAccess(ArrayAccess *p, LatticeElemMap *in)
   {
     in = visit_children_of(p, in);
-    // WRITEME
+    // Read that lattice element
+
+    // If it's TOP, then we cannot know anything about this expression; it should be TOP as well
+    p->m_attribute.m_lattice_elem = TOP;
     return in;
+    
   }
 
   LatticeElemMap* visitIntLit(IntLit *p, LatticeElemMap *in)
