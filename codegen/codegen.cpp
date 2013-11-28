@@ -335,8 +335,6 @@ public:
           fprintf( m_outputfile, " popl %%eax\n");
           fprintf( m_outputfile, " not  %%eax\n");
           fprintf( m_outputfile, " pushl %%eax\n");
-    }
-
   }
   void visitUminus(Uminus * p)
   {
