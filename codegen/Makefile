@@ -52,7 +52,7 @@ constantfolding.o: constantfolding.cpp ast.hpp symtab.hpp primitive.hpp attribut
 
 codegen.o: codegen.cpp ast.hpp symtab.hpp primitive.hpp
 
-simple:
+sim:
     ./simple < main.simple > sample.s
     gcc -m32 -c -o simple.o simple.s
     gcc -Wa,--32 -m32 -c -o sample.o sample.s
@@ -60,4 +60,3 @@ simple:
 
 clean:
 	rm -f $(RMFILES)
-
