@@ -130,11 +130,20 @@ public:
   void visitProgram(Program * p)
   {
     set_text_mode();
-    // WRITEME
+    fprintf( m_outputfile, " .text\n");
+    p -> visit_children(this);
   }
   void visitFunc(Func * p)
   {
     // WRITEME
+//    if (p -> m_attribute.m_symname == 'Main') {
+                fprintf( m_outputfile, ".global Main\n");
+                fprintf( m_outputfile, "Main:\n")
+                p->visit_children(this);
+                fprintf( m_outputfile, "ret");
+                return;
+//    }
+
   }
   void visitFunction_block(Function_block * p)
   {
