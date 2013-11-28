@@ -173,7 +173,7 @@ public:
     // WRITEME
     p -> visit_children(this);
     fprintf( m_outputfile, "popl %%eax\n");
-//    fprintf( m_outputfile, "movl $%d, %%eax\n",p -> m_attribute.m_lattice_elem.value);
+    //fprintf( m_outputfile, "movl $%d, %%eax\n",p -> m_attribute.m_lattice_elem.value);
     fprintf( m_outputfile, "\tret\n");
 
   }
