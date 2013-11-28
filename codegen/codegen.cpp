@@ -233,39 +233,144 @@ public:
   // arithmetic and logic operations
   void visitAnd(And * p)
   {
-    // WRITEME
+     fprintf( m_outputfile, "#### AND\n");
+     if (p -> m_attribute.m_lattice_elem != TOP) {
+         fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+         return;
+     }
+
+     p -> visit_children(this);
+
+     fprintf( m_outputfile, " popl %%ebx\n");
+     fprintf( m_outputfile, " popl %%eax\n");
+     fprintf( m_outputfile, " andl %%ebx, %%eax\n");
+     fprintf( m_outputfile, " pushl %%eax\n");
   }
   void visitOr(Or * p)
   {
-    // WRITEME
+    fprintf( m_outputfile, "#### OR\n");
+     if (p -> m_attribute.m_lattice_elem != TOP) {
+         fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+         return;
+     }
+
+     p -> visit_children(this);
+
+     fprintf( m_outputfile, " popl %%ebx\n");
+     fprintf( m_outputfile, " popl %%eax\n");
+     fprintf( m_outputfile, " orl %%ebx, %%eax\n");
+     fprintf( m_outputfile, " pushl %%eax\n");
   }
   void visitMinus(Minus * p)
   {
-    // WRITEME
+   fprintf( m_outputfile, "#### MINUS\n");
+   if (p -> m_attribute.m_lattice_elem != TOP) {
+       fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+       return;
+   }
+
+   p -> visit_children(this);
+
+    fprintf( m_outputfile, " popl %%ebx\n");
+    fprintf( m_outputfile, " popl %%eax\n");
+    fprintf( m_outputfile, " subl %%ebx, %%eax\n");
+    fprintf( m_outputfile, " pushl %%eax\n");
   }
   void visitPlus(Plus * p)
   {
-    // WRITEME
+     fprintf( m_outputfile, "#### PLUS\n");
+     if (p -> m_attribute.m_lattice_elem != TOP) {
+         fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+         return;
+     }
+
+     p -> visit_children(this);
+
+     fprintf( m_outputfile, " popl %%ebx\n");
+     fprintf( m_outputfile, " popl %%eax\n");
+     fprintf( m_outputfile, " addl %%ebx, %%eax\n");
+     fprintf( m_outputfile, " pushl %%eax\n");
+
   }
   void visitTimes(Times * p)
   {
-    // WRITEME
+     fprintf( m_outputfile, "#### TIMES\n");
+     if (p -> m_attribute.m_lattice_elem != TOP) {
+         fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+         return;
+     }
+
+     p -> visit_children(this);
+
+     fprintf( m_outputfile, " popl %%ebx\n");
+     fprintf( m_outputfile, " popl %%eax\n");
+     fprintf( m_outputfile, " imull %%ebx, %%eax\n");
+     fprintf( m_outputfile, " pushl %%eax\n");
   }
   void visitDiv(Div * p)
   {
-    // WRITEME
+    fprintf( m_outputfile, "#### DIVIDE\n");
+    if (p -> m_attribute.m_lattice_elem != TOP) {
+         fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+         return;
+    }
+
+     p -> visit_children(this);
+
+     fprintf( m_outputfile, " popl %%ebx\n");
+     fprintf( m_outputfile, " popl %%eax\n");
+     fprintf( m_outputfile, " idivl %%ebx, %%eax\n");
+     fprintf( m_outputfile, " pushl %%eax\n");
   }
   void visitNot(Not * p)
   {
-    // WRITEME
+  fprintf( m_outputfile, "#### NOT\n");
+         if (p -> m_attribute.m_lattice_elem != TOP) {
+              fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+              return;
+         }
+
+          p -> visit_children(this);
+
+          fprintf( m_outputfile, " popl %%eax\n");
+          fprintf( m_outputfile, " not  %%eax\n");
+          fprintf( m_outputfile, " pushl %%eax\n");
+    }
+
   }
   void visitUminus(Uminus * p)
   {
-    // WRITEME
+    fprintf( m_outputfile, "#### Uminus\n");
+       if (p -> m_attribute.m_lattice_elem != TOP) {
+            fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+            return;
+       }
+
+        p -> visit_children(this);
+
+        fprintf( m_outputfile, " popl %%eax\n");
+        fprintf( m_outputfile, " negl %%eax\n");
+        fprintf( m_outputfile, " pushl %%eax\n");
   }
   void visitMagnitude(Magnitude * p)
   {
-    // WRITEME
+    fprintf( m_outputfile, "#### Magnitude\n");
+           if (p -> m_attribute.m_lattice_elem != TOP) {
+                fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+                return;
+           }
+
+            p -> visit_children(this);
+
+//            cdq               // Expand sign of %eax into all of %edx
+//             xorl %edx, %eax;
+//             subl %edx, %eax;
+
+            fprintf( m_outputfile, " popl %%ebx\n");
+            fprintf( m_outputfile, "cdq\n");
+            fprintf( m_outputfile, "xor %%ebx, %%eax\n"");
+            fprintf( m_outputfile, " subl %%eax, %%ebx\n");
+            fprintf( m_outputfile, " pushl %%ebx\n");
   }
 
   // variable and constant access
