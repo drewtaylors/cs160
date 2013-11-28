@@ -172,6 +172,7 @@ public:
   {
     // WRITEME
     p -> visit_children(this);
+    fprintf( m_outputfile, "popl %%eax");
     fprintf( m_outputfile, "movl $%d, %%eax\n",p -> m_attribute.m_lattice_elem.value);
     fprintf( m_outputfile, "\tret\n");
 
@@ -292,16 +293,16 @@ public:
   {
      fprintf( m_outputfile, "#### PLUS\n");
      if (p -> m_attribute.m_lattice_elem != TOP) {
-         fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+         fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
          return;
      }
 
      p -> visit_children(this);
 
-     fprintf( m_outputfile, " popl %%ebx\n");
-     fprintf( m_outputfile, " popl %%eax\n");
-     fprintf( m_outputfile, " addl %%ebx, %%eax\n");
-     fprintf( m_outputfile, " pushl %%eax\n");
+     fprintf( m_outputfile, "popl %%ebx\n");
+     fprintf( m_outputfile, "popl %%eax\n");
+     fprintf( m_outputfile, "addl %%ebx, %%eax\n");
+     fprintf( m_outputfile, "pushl %%eax\n");
 
   }
   void visitTimes(Times * p)
