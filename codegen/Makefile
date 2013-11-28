@@ -55,7 +55,7 @@ codegen.o: codegen.cpp ast.hpp symtab.hpp primitive.hpp
 codegen:
 	./simple < main.simple > sample.s
 	gcc  -m32 -c -o start.o start.c
-	#gcc -Wa,--32 -m32 -c -o sample.o sample.s
-	#gcc -m32 -o sample start.o sample.o
+	gcc -Wa,--32 -m32 -c -o sample.o sample.s
+	gcc -m32 -o sample start.o sample.o
 clean:
 	rm -f $(RMFILES)
