@@ -139,7 +139,6 @@ public:
                 fprintf( m_outputfile, ".global Main\n");
                 fprintf( m_outputfile, "Main:\n");
                 p->visit_children(this);
-                fprintf( m_outputfile, "\tret\n");
                 return;
 //    }
 
@@ -171,6 +170,9 @@ public:
   void visitReturn(Return * p)
   {
     // WRITEME
+    p -> visit_children(this);
+    fprintf( m_outputfile, "\tret $%d\n",p -> m_attribute.m_lattice_elem.value);
+
   }
 
   // control flow
