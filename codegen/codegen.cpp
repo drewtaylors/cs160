@@ -130,7 +130,6 @@ public:
   void visitProgram(Program * p)
   {
     set_text_mode();
-    fprintf( m_outputfile, " .text\n");
     p -> visit_children(this);
   }
   void visitFunc(Func * p)
@@ -140,7 +139,7 @@ public:
                 fprintf( m_outputfile, ".global Main\n");
                 fprintf( m_outputfile, "Main:\n");
                 p->visit_children(this);
-                fprintf( m_outputfile, "ret");
+                fprintf( m_outputfile, "ret\n");
                 return;
 //    }
 
