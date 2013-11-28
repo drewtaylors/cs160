@@ -390,7 +390,7 @@ public:
   void visitIntLit(IntLit * p)
   {
     // WRITEME
-    fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+    fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
 
   }
   void visitBoolLit(BoolLit * p)
