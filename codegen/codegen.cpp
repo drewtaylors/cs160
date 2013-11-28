@@ -138,7 +138,7 @@ public:
     // WRITEME
 //    if (p -> m_attribute.m_symname == 'Main') {
                 fprintf( m_outputfile, ".global Main\n");
-                fprintf( m_outputfile, "Main:\n")
+                fprintf( m_outputfile, "Main:\n");
                 p->visit_children(this);
                 fprintf( m_outputfile, "ret");
                 return;
