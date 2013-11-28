@@ -368,7 +368,7 @@ public:
 
             fprintf( m_outputfile, " popl %%ebx\n");
             fprintf( m_outputfile, "cdq\n");
-            fprintf( m_outputfile, "xor %%ebx, %%eax\n"");
+            fprintf( m_outputfile, "xor %%ebx, %%eax\n");
             fprintf( m_outputfile, " subl %%eax, %%ebx\n");
             fprintf( m_outputfile, " pushl %%ebx\n");
   }
