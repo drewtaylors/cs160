@@ -136,7 +136,7 @@ public:
   {
     // WRITEME
     char *name = strdup(p -> m_symname -> spelling());
-    fprintf(m_outputfile, "name: %c\n",name);
+    fprintf(m_outputfile, "name: %s\n",name);
     if ( name == "Main") {
                 fprintf( m_outputfile, ".global Main\n");
                 fprintf( m_outputfile, "Main:\n");
