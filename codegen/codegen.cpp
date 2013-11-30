@@ -156,7 +156,7 @@ public:
         fprintf(m_outputfile, "mov ebp, esp \n");
         fprintf(m_outputfile, "pop ebp\n");
         fprintf(m_outputfile, "ret\n");
-        frpintf(m_outputfile, "_%c ENDP\n", name);
+        fprintf(m_outputfile, "_%c ENDP\n", name);
         fprintf(m_outputfile, "END\n");
         return;
     }
