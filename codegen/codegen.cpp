@@ -187,13 +187,14 @@ public:
        fprintf( m_outputfile, "pushl $%d\n", p->m_expr_2->m_attribute.m_lattice_elem.value);  }
   void visitCall(Call * p)
   {
+        p -> visit_children(this);
         int counter=0;
         //push input params right to left
         list<SymName_ptr>::iterator iter;
-             for(iter = p->m_symname_list->end(); iter != p->m_symname_list->begin(); iter--){
-                 fprintf(m_outputfile, "pushl %d\n", iter->m_attribute.m_lattice_elem.value);
-                counter+=4;
-             }
+         for(iter = p->m_expr_list->end(); iter != p->m_expr_list->begin(); iter--){
+             fprintf(m_outputfile, "pushl %d\n", iter->m_attribute.m_lattice_elem.value);
+            counter+=4;
+         }
         //call func
         fprintf(m_outputfile, "call %c\n", p->m_symname_2);
         //add to get back memory position
