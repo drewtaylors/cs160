@@ -135,7 +135,7 @@ public:
   void visitFunc(Func * p)
   {
     // WRITEME
-    char *name = strdup(p -> m_symname );
+    char *name = (p -> m_symname -> spelling());
     if ( name == "Main") {
                 fprintf( m_outputfile, ".global Main\n");
                 fprintf( m_outputfile, "Main:\n");
