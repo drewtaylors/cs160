@@ -184,17 +184,18 @@ public:
        //IDK IF THIS IS WRITE??
        p->visit_children(this);
        fprintf( m_outputfile, "popl %%ebx\n");
-       fprintf( m_outputfile, "pushl $%d\n", p->m_expr_2->m_attribute.m_lattice_elem.value);  }
+       fprintf( m_outputfile, "pushl $%d\n", p->m_expr_2->m_attribute.m_lattice_elem.value);
+  }
   void visitCall(Call * p)
   {
         p -> visit_children(this);
         int counter=0;
         //push input params right to left
-//        list<SymName_ptr>::iterator iter;
-//         for(iter = p->m_expr_list->end(); iter != p->m_expr_list->begin(); iter--){
-//             fprintf(m_outputfile, "pushl %d\n", iter->m_attribute.m_lattice_elem.value);
-//            counter+=4;
-//         }
+        list<Expr_ptr>::iterator iter;
+         for(iter = p->m_expr_list->end(); iter != p->m_expr_list->begin(); iter--){
+//            fprintf(m_outputfile, "pushl %d\n", iter->m_attribute.m_lattice_elem.value);
+            counter+=4;
+         }
         char *name = strdup(p -> m_symname_2 -> spelling());
         //call func
         fprintf(m_outputfile, "call %c\n", name);
