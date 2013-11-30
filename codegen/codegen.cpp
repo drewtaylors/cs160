@@ -249,7 +249,8 @@ public:
          totalLocalVars = new_label();
      }
      totalLocalVars=totalLocalVars*4;
-     fprintf(m_outputfile, "sub esp, %d\n",totalLocalVars);
+     if(totalLocalVars > 0)
+        fprintf(m_outputfile, "sub %d, esp\n",totalLocalVars);
   }
   void visitParam(Param *p)
   {
