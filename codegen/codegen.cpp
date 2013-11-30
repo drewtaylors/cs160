@@ -196,9 +196,9 @@ public:
         //call func
         fprintf(m_outputfile, "call %c\n", p->m_symname_2);
         //add to get back memory position
-        fprintf(m_outputfile, "addl %i\n", counter);
+        fprintf(m_outputfile, "addl  %i, esp\n", counter);
         //result stored in %eax
-        
+
 
   }
   void visitArrayCall(ArrayCall *p)
