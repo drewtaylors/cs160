@@ -242,6 +242,7 @@ public:
   // variable declarations (no code generation needed)
   void visitDecl(Decl * p)
   {
+     fprintf( m_outputfile, "#### VISIT Decl\n");
      p -> visit_children(this);
      int totalLocalVars=0;
      list<SymName_ptr>::iterator iter;
