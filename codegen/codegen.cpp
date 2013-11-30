@@ -190,13 +190,14 @@ public:
         p -> visit_children(this);
         int counter=0;
         //push input params right to left
-        list<SymName_ptr>::iterator iter;
-         for(iter = p->m_expr_list->end(); iter != p->m_expr_list->begin(); iter--){
-             fprintf(m_outputfile, "pushl %d\n", iter->m_attribute.m_lattice_elem.value);
-            counter+=4;
-         }
+//        list<SymName_ptr>::iterator iter;
+//         for(iter = p->m_expr_list->end(); iter != p->m_expr_list->begin(); iter--){
+//             fprintf(m_outputfile, "pushl %d\n", iter->m_attribute.m_lattice_elem.value);
+//            counter+=4;
+//         }
+        char *name = strdup(p -> m_symname_2 -> spelling());
         //call func
-        fprintf(m_outputfile, "call %c\n", p->m_symname_2);
+        fprintf(m_outputfile, "call %c\n", name);
         //add to get back memory position
         fprintf(m_outputfile, "addl  %i, esp\n", counter);
         //result stored in %eax
