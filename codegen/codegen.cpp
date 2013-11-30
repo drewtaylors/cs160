@@ -135,12 +135,31 @@ public:
   void visitFunc(Func * p)
   {
     // WRITEME
-//    if (p -> m_attribute.m_symname == 'Main') {
+    if (p -> m_attribute.m_symname == 'Main') {
                 fprintf( m_outputfile, ".global Main\n");
                 fprintf( m_outputfile, "Main:\n");
                 p->visit_children(this);
+                fprintf( m_outputfile, "\tret\n");
                 return;
-//    }
+    }
+    else{
+        //prologue
+        fprintf(m_outputfile, "PUBLIC _%c\n",p->m_attribute.m_symname);
+        fprintf(m_outputfile, "_%c PROC\n",  p->m_attribute.m_symname);
+        fprintf(m_outputfile, "push ebp\n");
+        fprintf(m_outputfile, "mov esp, ebp");
+        //sub esp, 4   ; Make room for one 4-byte local variable.
+        p->visit_children(this);
+
+        //epilogue
+        fprintf(m_outputfile, "mov ebp, esp \n");
+        fprintf(m_outputfile, "pop ebp\n");
+        fprintf(m_outputfile, "ret\n");
+        frpintf(m_outputfile, "_%c ENDP\n", p->m_attribute.m_symname);
+        fprintf(m_outputfile, "END\n");
+        return;
+    }
+
 
   }
   void visitFunction_block(Function_block * p)
@@ -161,11 +180,26 @@ public:
   }
   void visitArrayAssignment(ArrayAssignment * p)
   {
-    // WRITEME
-  }
+       //IDK IF THIS IS WRITE??
+       p->visit_children(this);
+       fprintf( m_outputfile, "popl %%ebx\n");
+       fprintf( m_outputfile, "pushl $%d\n", p->m_expr_2->m_attribute.m_lattice_elem.value);  }
   void visitCall(Call * p)
   {
-    // WRITEME
+        int counter=0;
+        //push input params right to left
+        list<SymName_ptr>::iterator iter;
+             for(iter = p->m_symname_list->end(); iter != p->m_symname_list->begin(); iter--){
+                 fprintf(m_outputfile, "pushl %d\n", iter->m_attribute.m_lattice_elem.value);
+                counter+=4;
+             }
+        //call func
+        fprintf(m_outputfile, "call %c\n", p->m_symname_2);
+        //add to get back memory position
+        fprintf(m_outputfile, "addl  %i, esp\n", counter);
+        //result stored in %eax
+
+
   }
   void visitArrayCall(ArrayCall *p)
   {
@@ -177,7 +211,7 @@ public:
     p -> visit_children(this);
     fprintf( m_outputfile, "popl %%eax\n");
     //fprintf( m_outputfile, "movl $%d, %%eax\n",p -> m_attribute.m_lattice_elem.value);
-    fprintf( m_outputfile, "\tret\n");
+//    fprintf( m_outputfile, "\tret\n");
 
   }
 
@@ -205,7 +239,13 @@ public:
   void visitDecl(Decl * p)
   {
      p -> visit_children(this);
-
+     int totalLocalVars=0;
+     list<SymName_ptr>::iterator iter;
+     for(iter = p->m_symname_list->begin(); iter != p->m_symname_list->end(); iter++){
+         totalLocalVars = new_label();
+     }
+     totalLocalVars=totalLocalVars*4;
+     fprintf(m_outputfile, "sub esp, %d\n",totalLocalVars);
   }
   void visitParam(Param *p)
   {
@@ -393,6 +433,7 @@ public:
   void visitIdent(Ident * p)
   {
     // WRITEME
+    fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
   }
   void visitIntLit(IntLit * p)
   {
