@@ -175,6 +175,7 @@ public:
   void visitAssignment(Assignment * p)
   {
     p->visit_children(this);
+    fprintf( m_outputfile, "#### ASSIGN\n");
     fprintf( m_outputfile, "popl %%ebx\n");
     fprintf( m_outputfile, "pushl $%d\n", p->m_expr->m_attribute.m_lattice_elem.value);
 
@@ -183,6 +184,7 @@ public:
   {
        //IDK IF THIS IS WRITE??
        p->visit_children(this);
+       fprintf( m_outputfile, "#### ARRAY ASSIGN\n");
        fprintf( m_outputfile, "popl %%ebx\n");
        fprintf( m_outputfile, "pushl $%d\n", p->m_expr_2->m_attribute.m_lattice_elem.value);
   }
@@ -211,8 +213,8 @@ public:
   }
   void visitReturn(Return * p)
   {
-    // WRITEME
     p -> visit_children(this);
+    fprintf( m_outputfile, "#### RETURN\n");
     fprintf( m_outputfile, "popl %%eax\n");
     //fprintf( m_outputfile, "movl $%d, %%eax\n",p -> m_attribute.m_lattice_elem.value);
 //    fprintf( m_outputfile, "\tret\n");
@@ -242,8 +244,8 @@ public:
   // variable declarations (no code generation needed)
   void visitDecl(Decl * p)
   {
-     fprintf( m_outputfile, "#### VISIT Decl\n");
      p -> visit_children(this);
+     fprintf( m_outputfile, "#### VISIT Decl\n");
      int totalLocalVars=0;
      list<SymName_ptr>::iterator iter;
      for(iter = p->m_symname_list->begin(); iter != p->m_symname_list->end(); iter++){
