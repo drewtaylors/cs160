@@ -441,8 +441,8 @@ public:
   void visitIdent(Ident * p)
   {
     // WRITEME
-    fprintf( m_outputfile, "#### Visit ID");
-    fprintf( m_outputfile, "popl $%eax\n");
+    fprintf( m_outputfile, "#### Visit ID\n");
+    fprintf( m_outputfile, "popl %%eax\n");
     fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
   }
   void visitIntLit(IntLit * p)
