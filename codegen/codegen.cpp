@@ -135,7 +135,7 @@ public:
   void visitFunc(Func * p)
   {
     // WRITEME
-    if (p ->m_symname == 'Main') {
+    if (p ->m_symname->spelling() == 'Main') {
                 fprintf( m_outputfile, ".global Main\n");
                 fprintf( m_outputfile, "Main:\n");
                 p->visit_children(this);
