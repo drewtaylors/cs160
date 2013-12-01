@@ -175,7 +175,7 @@ public:
     p->visit_children(this);
     fprintf( m_outputfile, "#### ASSIGN\n");
     fprintf( m_outputfile, "popl %%eax\n");
-    fprintf( m_outputfile, "movl $%d\n, %%eax", p->m_expr->m_attribute.m_lattice_elem.value);
+    fprintf( m_outputfile, "movl $%d, %%eax\n", p->m_expr->m_attribute.m_lattice_elem.value);
 
   }
   void visitArrayAssignment(ArrayAssignment * p)
@@ -184,7 +184,7 @@ public:
        p->visit_children(this);
        fprintf( m_outputfile, "#### ARRAY ASSIGN\n");
        fprintf( m_outputfile, "popl %%ebx\n");
-       fprintf( m_outputfile, "movl $%d\n, %%eax", p->m_expr_2->m_attribute.m_lattice_elem.value);
+       fprintf( m_outputfile, "movl $%d, %%eax\n", p->m_expr_2->m_attribute.m_lattice_elem.value);
 
   }
   void visitCall(Call * p)
