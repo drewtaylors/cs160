@@ -145,7 +145,7 @@ public:
     }
     else{
         //prologue
-        fprintf(m_outputfile, "PUBLIC %s\n",name);
+//        fprintf(m_outputfile, "PUBLIC %s\n",name);
         fprintf(m_outputfile, "%s PROC\n",  name);
         fprintf(m_outputfile, "push %%ebp\n");
         fprintf(m_outputfile, "mov %%esp, %%ebp\n");
@@ -155,7 +155,7 @@ public:
         //epilogue
         fprintf(m_outputfile, "mov %%ebp, %%esp \n");
         fprintf(m_outputfile, "pop %%ebp\n");
-        fprintf(m_outputfile, "\0ret\n");
+        fprintf(m_outputfile, "\tret\n");
         fprintf(m_outputfile, "%s ENDP\n", name);
         fprintf(m_outputfile, "END\n\n");
         return;
