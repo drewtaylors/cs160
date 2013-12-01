@@ -200,7 +200,7 @@ public:
         //call func
         fprintf(m_outputfile, "call %s\n", name);
         //add to get back memory position
-        fprintf(m_outputfile, "addl  %i, esp\n", counter);
+        fprintf(m_outputfile, "addl  %i, %%esp\n", counter);
         //result stored in %eax
 
 
