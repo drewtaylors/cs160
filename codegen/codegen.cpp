@@ -205,7 +205,7 @@ public:
         fprintf(m_outputfile, "add  $%i, %%esp\n", counter);
         //pop off local vars
          for(iter = p->m_expr_list->end(); iter != p->m_expr_list->begin(); iter--){
-            fprintf(m_outputfile, "popl $%d\n", iter);
+            fprintf(m_outputfile, "popl %%ebx\n", iter);
             counter+=4;
          }
         //result stored in %eax
