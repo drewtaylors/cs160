@@ -204,6 +204,7 @@ public:
         //add to get back memory position
         fprintf(m_outputfile, "addl  %i, %%esp\n", counter);
         //result stored in %eax
+        fprintf(m_outputfile, "pushl %%eax\n");
 
 
   }
