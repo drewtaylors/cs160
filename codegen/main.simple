@@ -1,9 +1,9 @@
-function test():int{
+function test(a):int{
     return 8;
 }
 
 function Main() : int {
     var a:int;
-    a=test();
+    a=test(5);
     return a;
 }
