@@ -1,3 +1,7 @@
+function test():int{
+    return 5;
+}
+
 function Main() : int {
     var a: int;
     a=5+(3*2);
