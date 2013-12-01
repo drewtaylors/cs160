@@ -114,6 +114,14 @@ class Codegen : public Visitor
   }
   
   // HERE: more functions to emit code
+  //check if main func or other
+  int isMain=0;
+  void inMain(bool checkMain){
+    if(checkMain == true)
+        isMain = 1;
+    else
+        isMain=0;
+  }
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -137,10 +145,12 @@ public:
     // WRITEME
     char *name = strdup(p -> m_symname -> spelling());
     if ( strcmp(name,"Main") == 0 ) {
+                inMain(true);
                 fprintf( m_outputfile, ".global Main\n");
                 fprintf( m_outputfile, "Main:\n");
                 p->visit_children(this);
                 fprintf( m_outputfile, "\tret\n");
+                inMain(false);
                 return;
     }
     else{
@@ -259,7 +269,7 @@ public:
          totalLocalVars++;
      }
      totalLocalVars=totalLocalVars*4;
-     if(totalLocalVars > 0)
+     if(totalLocalVars > 0 && isMain==0)
         fprintf(m_outputfile, "sub $%d, %%esp\n",totalLocalVars);
   }
   void visitParam(Param *p)
