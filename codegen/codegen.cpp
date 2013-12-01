@@ -145,8 +145,8 @@ public:
     }
     else{
         //prologue
-        fprintf(m_outputfile, "PUBLIC _%s\n",name);
-        fprintf(m_outputfile, "_%s PROC\n",  name);
+        fprintf(m_outputfile, "PUBLIC %s\n",name);
+        fprintf(m_outputfile, "%s PROC\n",  name);
         fprintf(m_outputfile, "push ebp\n");
         fprintf(m_outputfile, "mov esp, ebp");
         //sub esp, 4   ; Make room for one 4-byte local variable.
@@ -156,8 +156,8 @@ public:
         fprintf(m_outputfile, "mov ebp, esp \n");
         fprintf(m_outputfile, "pop ebp\n");
         fprintf(m_outputfile, "\0ret\n");
-        fprintf(m_outputfile, "_%c ENDP\n", name);
-        fprintf(m_outputfile, "END\n");
+        fprintf(m_outputfile, "%c ENDP\n", name);
+        fprintf(m_outputfile, "END\n\n");
         return;
     }
 
