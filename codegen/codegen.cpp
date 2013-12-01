@@ -146,7 +146,7 @@ public:
     else{
         //prologue
 //        fprintf(m_outputfile, "PUBLIC %s\n",name);
-        fprintf(m_outputfile, "%s PROC\n",  name);
+        fprintf(m_outputfile, "_%s: \n",  name);
         fprintf(m_outputfile, "push %%ebp\n");
         fprintf(m_outputfile, "mov %%esp, %%ebp\n");
         //sub esp, 4   ; Make room for one 4-byte local variable.
@@ -157,7 +157,7 @@ public:
         fprintf(m_outputfile, "pop %%ebp\n");
         fprintf(m_outputfile, "\tret\n");
         fprintf(m_outputfile, "%s ENDP\n", name);
-        fprintf(m_outputfile, "END\n\n");
+//        fprintf(m_outputfile, "END\n\n");
         return;
     }
 
