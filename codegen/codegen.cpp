@@ -143,23 +143,23 @@ public:
                 fprintf( m_outputfile, "\tret\n");
                 return;
     }
-//    else{
-//        //prologue
-//        fprintf(m_outputfile, "PUBLIC _%c\n",name);
-//        fprintf(m_outputfile, "_%c PROC\n",  name);
-//        fprintf(m_outputfile, "push ebp\n");
-//        fprintf(m_outputfile, "mov esp, ebp");
-//        //sub esp, 4   ; Make room for one 4-byte local variable.
-//        p->visit_children(this);
-//
-//        //epilogue
-//        fprintf(m_outputfile, "mov ebp, esp \n");
-//        fprintf(m_outputfile, "pop ebp\n");
-//        fprintf(m_outputfile, "ret\n");
-//        fprintf(m_outputfile, "_%c ENDP\n", name);
-//        fprintf(m_outputfile, "END\n");
-//        return;
-//    }
+    else{
+        //prologue
+        fprintf(m_outputfile, "PUBLIC _%c\n",name);
+        fprintf(m_outputfile, "_%c PROC\n",  name);
+        fprintf(m_outputfile, "push ebp\n");
+        fprintf(m_outputfile, "mov esp, ebp");
+        //sub esp, 4   ; Make room for one 4-byte local variable.
+        p->visit_children(this);
+
+        //epilogue
+        fprintf(m_outputfile, "mov ebp, esp \n");
+        fprintf(m_outputfile, "pop ebp\n");
+        fprintf(m_outputfile, "ret\n");
+        fprintf(m_outputfile, "_%c ENDP\n", name);
+        fprintf(m_outputfile, "END\n");
+        return;
+    }
 
 
   }
