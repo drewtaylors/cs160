@@ -3,7 +3,5 @@ function test():int{
 }
 
 function Main() : int {
-    var a: int;
-    a=5;
-    return a;
+    return 5;
 }
