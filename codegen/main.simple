@@ -3,5 +3,5 @@ function test():int{
 }
 
 function Main() : int {
-    return 5+7;
+    return test();
 }
