@@ -1,9 +1,10 @@
-function test(a:int):int{
-    return a;
+function test():int{
+    var a:int;
+    return 5;
 }
 
 function Main() : int {
     var a:int;
-    a=test(5);
+    a=test();
     return a;
 }
