@@ -203,6 +203,11 @@ public:
         fprintf(m_outputfile, "call _%s\n", name);
         //add to get back memory position
         fprintf(m_outputfile, "add  $%i, %%esp\n", counter);
+        //pop off local vars
+         for(iter = p->m_expr_list->end(); iter != p->m_expr_list->begin(); iter--){
+            fprintf(m_outputfile, "popl $%d\n", iter);
+            counter+=4;
+         }
         //result stored in %eax
         fprintf(m_outputfile, "pushl %%eax\n");
 
