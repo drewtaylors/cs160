@@ -198,7 +198,7 @@ public:
          }
         char *name = strdup(p -> m_symname_2 -> spelling());
         //call func
-        fprintf(m_outputfile, "call %s\n", name);
+        fprintf(m_outputfile, "call _%s\n", name);
         //add to get back memory position
         fprintf(m_outputfile, "addl  %i, %%esp\n", counter);
         //result stored in %eax
