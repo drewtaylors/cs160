@@ -302,7 +302,6 @@ public:
   {
      fprintf( m_outputfile, "#### AND\n");
      if (p -> m_attribute.m_lattice_elem != TOP) {
-         fprintf( m_outputfile, " popl %%eax\n");
          fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
          return;
      }
@@ -318,7 +317,6 @@ public:
   {
     fprintf( m_outputfile, "#### OR\n");
      if (p -> m_attribute.m_lattice_elem != TOP) {
-        fprintf( m_outputfile, " popl %%eax\n");
          fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
          return;
      }
@@ -334,7 +332,6 @@ public:
   {
    fprintf( m_outputfile, "#### MINUS\n");
    if (p -> m_attribute.m_lattice_elem != TOP) {
-       fprintf( m_outputfile, " popl %%eax\n");
        fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
        return;
    }
@@ -350,7 +347,6 @@ public:
   {
      fprintf( m_outputfile, "#### PLUS\n");
      if (p -> m_attribute.m_lattice_elem != TOP) {
-        fprintf( m_outputfile, " popl %%eax\n");
          fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
          return;
      }
@@ -367,7 +363,6 @@ public:
   {
      fprintf( m_outputfile, "#### TIMES\n");
      if (p -> m_attribute.m_lattice_elem != TOP) {
-        fprintf( m_outputfile, " popl %%eax\n");
          fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
          return;
      }
@@ -383,7 +378,6 @@ public:
   {
     fprintf( m_outputfile, "#### DIVIDE\n");
     if (p -> m_attribute.m_lattice_elem != TOP) {
-        fprintf( m_outputfile, " popl %%eax\n");
          fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
          return;
     }
@@ -399,7 +393,6 @@ public:
   {
   fprintf( m_outputfile, "#### NOT\n");
          if (p -> m_attribute.m_lattice_elem != TOP) {
-              fprintf( m_outputfile, " popl %%eax\n");
               fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
               return;
          }
@@ -414,7 +407,6 @@ public:
   {
     fprintf( m_outputfile, "#### Uminus\n");
        if (p -> m_attribute.m_lattice_elem != TOP) {
-            fprintf( m_outputfile, " popl %%eax\n");
             fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
             return;
        }
@@ -429,7 +421,6 @@ public:
   {
     fprintf( m_outputfile, "#### Magnitude\n");
            if (p -> m_attribute.m_lattice_elem != TOP) {
-                fprintf( m_outputfile, " popl %%eax\n");
                 fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
                 return;
            }
