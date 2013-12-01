@@ -189,6 +189,7 @@ public:
   void visitCall(Call * p)
   {
         p -> visit_children(this);
+        fprintf(m_outputfile, "####VISIT CALL\n");
         int counter=0;
         //push input params right to left
         list<Expr_ptr>::iterator iter;
@@ -438,10 +439,10 @@ public:
   // variable and constant access
   void visitIdent(Ident * p)
   {
-    // WRITEME
+    p -> visit_children(this);
     fprintf( m_outputfile, "#### Visit ID\n");
-    fprintf( m_outputfile, "popl %%eax\n");
-    fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+//    fprintf( m_outputfile, "popl %%eax\n");
+//    fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
   }
   void visitIntLit(IntLit * p)
   {
