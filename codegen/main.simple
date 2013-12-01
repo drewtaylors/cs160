@@ -1,6 +1,7 @@
 function test():int{
     var a:int;
-    return 5;
+    a = 10;
+    return a;
 }
 
 function Main() : int {
