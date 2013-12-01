@@ -1,5 +1,5 @@
 function test(a:int):int{
-    return 8;
+    return a;
 }
 
 function Main() : int {
