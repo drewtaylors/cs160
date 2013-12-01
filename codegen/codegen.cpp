@@ -148,7 +148,7 @@ public:
         fprintf(m_outputfile, "PUBLIC %s\n",name);
         fprintf(m_outputfile, "%s PROC\n",  name);
         fprintf(m_outputfile, "push %%ebp\n");
-        fprintf(m_outputfile, "mov %%esp, %%ebp");
+        fprintf(m_outputfile, "mov %%esp, %%ebp\n");
         //sub esp, 4   ; Make room for one 4-byte local variable.
         p->visit_children(this);
 
