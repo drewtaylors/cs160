@@ -147,14 +147,14 @@ public:
         //prologue
 //        fprintf(m_outputfile, "PUBLIC %s\n",name);
         fprintf(m_outputfile, "_%s: \n",  name);
-        fprintf(m_outputfile, "push %%ebp\n");
-        fprintf(m_outputfile, "mov %%esp, %%ebp\n");
+        fprintf(m_outputfile, "pushl %%ebp\n");
+        fprintf(m_outputfile, "movl %%esp, %%ebp\n");
         //sub esp, 4   ; Make room for one 4-byte local variable.
         p->visit_children(this);
 
         //epilogue
-        fprintf(m_outputfile, "mov %%ebp, %%esp \n");
-        fprintf(m_outputfile, "pop %%ebp\n");
+        fprintf(m_outputfile, "movl %%ebp, %%esp \n");
+        fprintf(m_outputfile, "popl %%ebp\n");
         fprintf(m_outputfile, "\tret\n\n"); //could return size of local vars
         return;
     }
