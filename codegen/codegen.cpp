@@ -140,7 +140,7 @@ public:
                 fprintf( m_outputfile, ".global Main\n");
                 fprintf( m_outputfile, "Main:\n");
                 p->visit_children(this);
-                fprintf( m_outputfile, "\tret\n");
+                fprintf( m_outputfile, "\tret 0\n");
                 return;
     }
     else{
@@ -155,7 +155,7 @@ public:
         //epilogue
         fprintf(m_outputfile, "movl %%ebp, %%esp \n");
         fprintf(m_outputfile, "popl %%ebp\n");
-        fprintf(m_outputfile, "\tret\n\n"); //could return size of local vars
+        fprintf(m_outputfile, "\tret 0\n\n"); //could return size of local vars
         return;
     }
 
