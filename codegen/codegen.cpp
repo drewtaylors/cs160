@@ -201,7 +201,7 @@ public:
         char *name = strdup(p -> m_symname_2 -> spelling());
         //call func
         fprintf(m_outputfile, "call _%s\n", name);
-        //add to get back memory position
+        //add to get back memory position for call params
         fprintf(m_outputfile, "add  $%i, %%esp\n", counter);
         //pop off local vars
          for(iter = p->m_expr_list->end(); iter != p->m_expr_list->begin(); iter--){
@@ -256,11 +256,11 @@ public:
      int totalLocalVars=0;
      list<SymName_ptr>::iterator iter;
      for(iter = p->m_symname_list->begin(); iter != p->m_symname_list->end(); iter++){
-         totalLocalVars = new_label();
+         totalLocalVars++;
      }
      totalLocalVars=totalLocalVars*4;
      if(totalLocalVars > 0)
-        fprintf(m_outputfile, "sub %d, esp\n",totalLocalVars);
+        fprintf(m_outputfile, "sub $%d, %%esp\n",totalLocalVars);
   }
   void visitParam(Param *p)
   {
