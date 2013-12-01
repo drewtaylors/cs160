@@ -115,7 +115,7 @@ class Codegen : public Visitor
   
   // HERE: more functions to emit code
   //check if main func or other
-  int isMain=0;
+  int isMain;
   void inMain(bool checkMain){
     if(checkMain == true)
         isMain = 1;
