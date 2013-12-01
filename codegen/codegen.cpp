@@ -155,9 +155,7 @@ public:
         //epilogue
         fprintf(m_outputfile, "mov %%ebp, %%esp \n");
         fprintf(m_outputfile, "pop %%ebp\n");
-        fprintf(m_outputfile, "\tret\n");
-        fprintf(m_outputfile, "%s ENDP\n", name);
-//        fprintf(m_outputfile, "END\n\n");
+        fprintf(m_outputfile, "\tret\n\n"); //could return size of local vars
         return;
     }
 
