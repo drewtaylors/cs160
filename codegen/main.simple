@@ -1,4 +1,4 @@
-function test(a):int{
+function test(a:int):int{
     return 8;
 }
 
