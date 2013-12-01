@@ -175,7 +175,7 @@ public:
     p->visit_children(this);
     fprintf( m_outputfile, "#### ASSIGN\n");
     fprintf( m_outputfile, "popl %%eax\n");
-    fprintf( m_outputfile, "movl $%d, %%eax\n", p->m_expr->m_attribute.m_lattice_elem.value);
+    fprintf( m_outputfile, "pushl $%d\n", p->m_expr->m_attribute.m_lattice_elem.value);
 
   }
   void visitArrayAssignment(ArrayAssignment * p)
@@ -183,8 +183,8 @@ public:
        //IDK IF THIS IS WRITE??
        p->visit_children(this);
        fprintf( m_outputfile, "#### ARRAY ASSIGN\n");
-       fprintf( m_outputfile, "popl %%ebx\n");
-       fprintf( m_outputfile, "movl $%d, %%eax\n", p->m_expr_2->m_attribute.m_lattice_elem.value);
+       fprintf( m_outputfile, "popl %%eax\n");
+       fprintf( m_outputfile, "pushl $%d\n", p->m_expr_2->m_attribute.m_lattice_elem.value);
 
   }
   void visitCall(Call * p)
@@ -215,9 +215,9 @@ public:
   {
     p -> visit_children(this);
     fprintf( m_outputfile, "#### RETURN\n");
-//    fprintf( m_outputfile, "popl %%eax\n");
+    fprintf( m_outputfile, "popl %%eax\n");
 
-    fprintf( m_outputfile, "movl $%d, %%eax\n",p -> m_attribute.m_lattice_elem.value);
+//    fprintf( m_outputfile, "movl $%d, %%eax\n",p -> m_attribute.m_lattice_elem.value);
 //    fprintf( m_outputfile, "\tret\n");
 
   }
@@ -302,6 +302,7 @@ public:
   {
      fprintf( m_outputfile, "#### AND\n");
      if (p -> m_attribute.m_lattice_elem != TOP) {
+         fprintf( m_outputfile, " popl $eax\n");
          fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
          return;
      }
@@ -317,6 +318,7 @@ public:
   {
     fprintf( m_outputfile, "#### OR\n");
      if (p -> m_attribute.m_lattice_elem != TOP) {
+        fprintf( m_outputfile, " popl $eax\n");
          fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
          return;
      }
@@ -332,6 +334,7 @@ public:
   {
    fprintf( m_outputfile, "#### MINUS\n");
    if (p -> m_attribute.m_lattice_elem != TOP) {
+       fprintf( m_outputfile, " popl $eax\n");
        fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
        return;
    }
@@ -347,6 +350,7 @@ public:
   {
      fprintf( m_outputfile, "#### PLUS\n");
      if (p -> m_attribute.m_lattice_elem != TOP) {
+        fprintf( m_outputfile, " popl $eax\n");
          fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
          return;
      }
@@ -363,6 +367,7 @@ public:
   {
      fprintf( m_outputfile, "#### TIMES\n");
      if (p -> m_attribute.m_lattice_elem != TOP) {
+        fprintf( m_outputfile, " popl $eax\n");
          fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
          return;
      }
@@ -378,6 +383,7 @@ public:
   {
     fprintf( m_outputfile, "#### DIVIDE\n");
     if (p -> m_attribute.m_lattice_elem != TOP) {
+        fprintf( m_outputfile, " popl $eax\n");
          fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
          return;
     }
@@ -393,6 +399,7 @@ public:
   {
   fprintf( m_outputfile, "#### NOT\n");
          if (p -> m_attribute.m_lattice_elem != TOP) {
+              fprintf( m_outputfile, " popl $eax\n");
               fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
               return;
          }
@@ -407,6 +414,7 @@ public:
   {
     fprintf( m_outputfile, "#### Uminus\n");
        if (p -> m_attribute.m_lattice_elem != TOP) {
+            fprintf( m_outputfile, " popl $eax\n");
             fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
             return;
        }
@@ -421,6 +429,7 @@ public:
   {
     fprintf( m_outputfile, "#### Magnitude\n");
            if (p -> m_attribute.m_lattice_elem != TOP) {
+                fprintf( m_outputfile, " popl $eax\n");
                 fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
                 return;
            }
