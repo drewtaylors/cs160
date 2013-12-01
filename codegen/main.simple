@@ -3,5 +3,7 @@ function test():int{
 }
 
 function Main() : int {
-    return test();
+    var a:int;
+    a=test();
+    return a;
 }
