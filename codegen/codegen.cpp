@@ -204,9 +204,8 @@ public:
         int counter=0;
         //push input params right to left
         list<Expr_ptr>::iterator iter;
-        printf("%i", p->m_attribute.m_lattice_elem.value);
          for(iter = p->m_expr_list->end(); iter != p->m_expr_list->begin(); iter--){
-            fprintf(m_outputfile, "pushl $%d\n", iter->m_attribute.m_lattice_elem.value);
+            fprintf(m_outputfile, "pushl $%d\n", &*iter->m_attribute.m_lattice_elem.value);
             counter+=4;
          }
         char *name = strdup(p -> m_symname_2 -> spelling());
