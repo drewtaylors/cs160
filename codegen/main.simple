@@ -1,11 +1,11 @@
-function test():int{
-    var a:int;
-    a = 10;
-    return a;
+function test( a:int, b:int):int{
+    var c : int;
+    c = a;
+    return b;
 }
 
 function Main() : int {
-    var a:int;
-    a=test();
-    return a;
+    var c:int;
+    c=test(50,100);
+    return c;
 }

@@ -148,7 +148,12 @@ public:
                 inMain(true);
                 fprintf( m_outputfile, ".global Main\n");
                 fprintf( m_outputfile, "Main:\n");
+                fprintf(m_outputfile, "push %%ebp\n");
+                fprintf(m_outputfile, "mov %%esp, %%ebp\n");
+                //sub esp, 4 Make room for 4-byte local variables
                 p->visit_children(this);
+                fprintf(m_outputfile, "mov %%ebp, %%esp \n");
+                fprintf(m_outputfile, "pop %%ebp\n");
                 fprintf( m_outputfile, "\tret\n");
                 inMain(false);
                 return;
@@ -174,6 +179,8 @@ public:
   void visitFunction_block(Function_block * p)
   {
     // WRITEME
+      fprintf(m_outputfile, "#### visitFuncBlock\n");
+    fprintf(m_outputfile,"sub $%i,%%esp\n",m_st->scopesize(p->m_attribute.m_scope));
     p->visit_children(this);
   }
   void visitNested_block(Nested_block * p)
@@ -185,7 +192,12 @@ public:
     p->visit_children(this);
     fprintf( m_outputfile, "#### ASSIGN\n");
     fprintf( m_outputfile, "popl %%eax\n");
-    fprintf( m_outputfile, "pushl $%d\n", p->m_expr->m_attribute.m_lattice_elem.value);
+//    if (p -> m_attribute.m_lattice_elem != TOP) {
+        fprintf( m_outputfile, "pushl $%d\n", p->m_expr->m_attribute.m_lattice_elem.value);
+//        return;
+//    }
+    //push that register value...
+//    fprintf( m_outputfile, " pushl %i\n", p->m_symbol);
 
   }
   void visitArrayAssignment(ArrayAssignment * p)
@@ -204,9 +216,14 @@ public:
         int counter=0;
         //push input params right to left
         list<Expr_ptr>::iterator iter;
-         for(iter = p->m_expr_list->end(); iter != p->m_expr_list->begin(); iter--){
-            fprintf(m_outputfile, "pushl $%d\n", (*iter)->m_attribute.m_lattice_elem.value);
+        for(iter = p->m_expr_list->end(); iter != p->m_expr_list->begin(); iter--){
             counter+=4;
+        }
+         for(iter = p->m_expr_list->end(); iter != p->m_expr_list->begin(); iter--){
+//            fprintf(m_outputfile, "pushl $%d\n", (*iter)->m_attribute.m_lattice_elem.value);
+//             fprintf(m_outputfile, "mov $%d, $%d(%%esp)\n", (*iter)->m_attribute.m_lattice_elem.value,counter);
+//             (*iter)->m_attribute.m_place=counter;
+             counter-=4;
          }
         char *name = strdup(p -> m_symname_2 -> spelling());
         //call func
@@ -241,15 +258,41 @@ public:
   // control flow
   void visitIfNoElse(IfNoElse * p)
   {// WRITEME
+      int label=new_label();
+      fprintf( m_outputfile, "#### IFNOELSE\n");
+      fprintf( m_outputfile, "popl %%eax\n");
+      fprintf( m_outputfile, "movl $0, %%ebx\n");
+      fprintf( m_outputfile, "cmp %%eax, %%ebx\n");
+      fprintf( m_outputfile, "je skip_if_%i\n",label);
+      p->visit_children(this);
+      fprintf( m_outputfile, "skip_if_%i:",label);
     
   }
   void visitIfWithElse(IfWithElse * p)
   {
     // WRITEME
+      int label=new_label();
+      fprintf( m_outputfile, "#### IFWITHELSE\n");
+      fprintf( m_outputfile, "popl %%eax\n");
+      fprintf( m_outputfile, "movl $0, %%ebx\n");
+      fprintf( m_outputfile, "cmp %%eax, %%ebx\n");
+      fprintf( m_outputfile, "je skip_if_%i\n",label);
+      p->m_nested_block_1->visit_children(this);
+      fprintf( m_outputfile, "skip_if_%i:",label);
+      p->m_nested_block_1->visit_children(this);
+
   }
   void visitForLoop(ForLoop * p)
   {
     // WRITEME
+    int label=new_label();
+    fprintf( m_outputfile, "#### IFWITHELSE\n");
+    fprintf( m_outputfile, "popl %%eax\n");
+    fprintf( m_outputfile, "movl $0, %%ebx\n");
+    fprintf( m_outputfile, "cmp %%eax, %%ebx\n");
+    fprintf( m_outputfile, "je skip_if_%i\n",label);
+    p->m_nested_block->visit_children(this);
+    fprintf( m_outputfile, "skip_if_%i:",label);
   }
 
   
@@ -268,9 +311,7 @@ public:
      for(iter = p->m_symname_list->begin(); iter != p->m_symname_list->end(); iter++){
          totalLocalVars++;
      }
-     totalLocalVars=totalLocalVars*4;
-     if(totalLocalVars > 0 && isMain==0)
-        fprintf(m_outputfile, "sub $%d, %%esp\n",totalLocalVars);
+    
   }
   void visitParam(Param *p)
   {
@@ -291,26 +332,102 @@ public:
   void visitCompare(Compare * p)
   {
     // WRITEME
+     int label=new_label();
+      if (p -> m_attribute.m_lattice_elem != TOP) {
+          fprintf( m_outputfile, " pushl $%d\n", m_attribute.m_lattice_elem.value);
+          return;
+      }
+      p -> visit_children(this);
+      fprintf( m_outputfile, "popl %%eab\n");
+      fprintf( m_outputfile, "popl %%eax\n");
+      fprintf( m_outputfile, "cmp %%eab,%%eax\n");
+      fprintf(m_otuputfile, "jne notEqual_%s\n", label);
+      fprintf( m_outputfile, " pushl %$eax\n");
+      fprintf( m_outputfile, "notEqual_%s:\n");
+      
+      
   }
   void visitNoteq(Noteq * p)
   {
     // WRITEME
+      int label=new_label();
+      if (p -> m_attribute.m_lattice_elem != TOP) {
+          fprintf( m_outputfile, " pushl $%d\n", m_attribute.m_lattice_elem.value);
+          return;
+      }
+      p -> visit_children(this);
+      fprintf( m_outputfile, "popl %%eab\n");
+      fprintf( m_outputfile, "popl %%eax\n");
+      fprintf( m_outputfile, "cmp %%eab,%%eax\n");
+      fprintf(m_otuputfile, "je notEqual_%s\n", label);
+      fprintf( m_outputfile, " pushl %$eax\n");
+      fprintf( m_outputfile, "notEqual_%s:\n");
   }
   void visitGt(Gt * p)
   {
     // WRITEME
+                  int label=new_label();
+      if (p -> m_attribute.m_lattice_elem != TOP) {
+          fprintf( m_outputfile, " pushl $%d\n", m_attribute.m_lattice_elem.value);
+          return;
+      }
+      p -> visit_children(this);
+      fprintf( m_outputfile, "popl %%eab\n");
+      fprintf( m_outputfile, "popl %%eax\n");
+      fprintf( m_outputfile, "cmp %%eab,%%eax\n");
+      fprintf(m_otuputfile, "jle notEqual_%s\n", label);
+      fprintf( m_outputfile, "pushl %$eax\n");
+      fprintf( m_outputfile, "notEqual_%s:\n");
+
   }
   void visitGteq(Gteq * p)
   {
     // WRITEME
+                  int label=new_label();
+      if (p -> m_attribute.m_lattice_elem != TOP) {
+          fprintf( m_outputfile, " pushl $%d\n", m_attribute.m_lattice_elem.value);
+          return;
+      }
+      p -> visit_children(this);
+      fprintf( m_outputfile, "popl %%eab\n");
+      fprintf( m_outputfile, "popl %%eax\n");
+      fprintf( m_outputfile, "cmp %%eab,%%eax\n");
+      fprintf(m_otuputfile, "jl notEqual_%s\n", label);
+      fprintf( m_outputfile, "pushl %$eax\n");
+      fprintf( m_outputfile, "notEqual_%s:\n");
   }
   void visitLt(Lt * p)
   {
     // WRITEME
+             int label=new_label();
+      if (p -> m_attribute.m_lattice_elem != TOP) {
+          fprintf( m_outputfile, " pushl $%d\n", m_attribute.m_lattice_elem.value);
+          return;
+      }
+      p -> visit_children(this);
+      fprintf( m_outputfile, "popl %%eab\n");
+      fprintf( m_outputfile, "popl %%eax\n");
+      fprintf( m_outputfile, "cmp %%eab,%%eax\n");
+      fprintf(m_otuputfile, "jge notEqual_%s\n", label);
+      fprintf( m_outputfile, "pushl %$eax\n");
+      fprintf( m_outputfile, "notEqual_%s:\n");
   }
   void visitLteq(Lteq * p)
   {
     // WRITEME
+                  int label=new_label();
+      if (p -> m_attribute.m_lattice_elem != TOP) {
+          fprintf( m_outputfile, " pushl $%d\n", m_attribute.m_lattice_elem.value);
+          return;
+      }
+      p -> visit_children(this);
+      fprintf( m_outputfile, "popl %%eab\n");
+      fprintf( m_outputfile, "popl %%eax\n");
+      fprintf( m_outputfile, "cmp %%eab,%%eax\n");
+      fprintf(m_otuputfile, "jg notEqual_%s\n", label);
+      fprintf( m_outputfile, "pushl %$eax\n");
+      fprintf( m_outputfile, "notEqual_%s:\n");
+      
   }
 
   // arithmetic and logic operations
