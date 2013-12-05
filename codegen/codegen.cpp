@@ -260,9 +260,15 @@ public:
   // control flow
   void visitIfNoElse(IfNoElse * p)
   {// WRITEME
-      p->visit_children(this);
+       fprintf( m_outputfile, "#### IFNOELSE\n");
+       if (p ->m_expr->m_attribute.m_lattice_elem != TOP ) {
+           if( p->m_expr->m_attribute.m_lattice_elem.value == 1)
+                p->m_nested_block->visit_children(this);
+          return;
+       }
+      
       int label=new_label();
-      fprintf( m_outputfile, "#### IFNOELSE\n");
+     
       fprintf( m_outputfile, "popl %%eax\n");
       fprintf( m_outputfile, "movl $0, %%ebx\n");
       fprintf( m_outputfile, "cmp %%eax, %%ebx\n");
