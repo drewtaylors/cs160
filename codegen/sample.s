@@ -3,10 +3,18 @@
 _foo: 
 push %ebp
 mov %esp, %ebp
-sub $0,%esp
+sub $8,%esp
+popl %eax
+mov %eax, -4(%ebp)
 #### visitFuncBlock
-#### Visit INT
-pushl $9
+#### VISIT Decl
+#### PLUS
+pushl $20
+#### ASSIGN
+popl %eax
+mov %eax, -8(%ebp)
+#### Visit ID
+pushl $20
 #### RETURN
 popl %eax
 mov %ebp, %esp 
@@ -20,6 +28,7 @@ mov %esp, %ebp
 #### visitFuncBlock
 #### VISIT Decl
 ####VISIT CALL
+pushl $10
 call _foo
 movl %eax, -4(%ebp)
 #### Visit ID
