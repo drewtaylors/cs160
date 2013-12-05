@@ -1,16 +1,9 @@
-function b():int{
-    return 5;
-}
-
-function test( a:int):int{
-    var c:int;
-    a=5;
-    c=10;
-    a=b();
-    c=b();
-    return 5;
+function foo():int{
+    return 9;
 }
 
 function Main() : int {
-    return 1;
+    var a:int;
+    a=foo();
+    return a;
 }

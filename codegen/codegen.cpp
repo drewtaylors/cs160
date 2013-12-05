@@ -151,6 +151,8 @@ public:
                 fprintf(m_outputfile, "push %%ebp\n");
                 fprintf(m_outputfile, "mov %%esp, %%ebp\n");
                 //sub esp, 4 Make room for 4-byte local variables
+//                fprintf(m_outputfile,"sub $%i,%%esp\n",m_st->scopesize(p->m_function_block->m_attribute.m_scope));
+
                 p->visit_children(this);
                 fprintf(m_outputfile, "mov %%ebp, %%esp \n");
                 fprintf(m_outputfile, "pop %%ebp\n");
@@ -209,8 +211,8 @@ public:
     fprintf( m_outputfile, "#### ASSIGN\n");
     Symbol *s=m_st->lookup(p->m_attribute.m_scope,strdup(p->m_symname->spelling()));
     int offset=4+s->get_offset();
-//    fprintf( m_outputfile, "popl -$%d(%%ebp)\n", offset);
-    fprintf( m_outputfile, "popl $%d(%%ebp)\n", offset);
+    fprintf( m_outputfile, "popl %%eax\n", offset);
+    fprintf( m_outputfile, "mov %%eax, -%d(%%ebp)\n", offset);
   }
   void visitArrayAssignment(ArrayAssignment * p)
   {
@@ -240,7 +242,7 @@ public:
         int offset=4+s->get_offset();
         int offset2=m_st->scopesize(p->m_attribute.m_scope);
         //we have to see if it is a local var or arg
-        fprintf(m_outputfile, "movl $eax, $%d(%%ebp)\n",offset);
+        fprintf(m_outputfile, "movl %%eax, -%d(%%ebp)\n",offset);
   }
   void visitArrayCall(ArrayCall *p)
   {
@@ -252,16 +254,6 @@ public:
     fprintf( m_outputfile, "#### RETURN\n");
     fprintf( m_outputfile, "popl %%eax\n");
     
-//     else
-//       fprintf( m_outputfile, "popl %%eax\n");
-//       fprintf( m_outputfile, "pushl $%d\n", p->m_expr_2->m_attribute.m_lattice_elem.value);
-
-         
-    
-    
-
-//    fprintf( m_outputfile, "movl $%d, %%eax\n",p -> m_attribute.m_lattice_elem.value);
-//    fprintf( m_outputfile, "\tret\n");
 
   }
 
@@ -584,10 +576,16 @@ public:
   // variable and constant access
   void visitIdent(Ident * p)
   {
-    p -> visit_children(this);
+   
     fprintf( m_outputfile, "#### Visit ID\n");
-//    fprintf( m_outputfile, "popl %%eax\n");
-//    fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+    if (p -> m_attribute.m_lattice_elem != TOP) {
+        fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+        return;
+    }
+    p -> visit_children(this);
+    Symbol *s=m_st->lookup(p->m_attribute.m_scope,strdup(p->m_symname->spelling()));
+    int offset=4+s->get_offset();
+    fprintf( m_outputfile, "pushl -%d(%%ebp)\n",offset );
   }
   void visitIntLit(IntLit * p)
   {

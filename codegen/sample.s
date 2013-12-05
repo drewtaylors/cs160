@@ -1,15 +1,12 @@
 .text
 
-_test: 
+_foo: 
 push %ebp
 mov %esp, %ebp
-arg: a
-arg: b
+sub $0,%esp
 #### visitFuncBlock
-sub $12,%esp
-#### VISIT Decl
 #### Visit INT
-pushl $5
+pushl $9
 #### RETURN
 popl %eax
 mov %ebp, %esp 
@@ -21,18 +18,12 @@ Main:
 push %ebp
 mov %esp, %ebp
 #### visitFuncBlock
-sub $4,%esp
 #### VISIT Decl
 ####VISIT CALL
-#### Visit INT
-pushl $50
-#### Visit INT
-pushl $100
-pushl $100
-pushl $50
-call _test
-pushl %eax
+call _foo
+movl %eax, -4(%ebp)
 #### Visit ID
+pushl -4(%ebp)
 #### RETURN
 popl %eax
 mov %ebp, %esp 
