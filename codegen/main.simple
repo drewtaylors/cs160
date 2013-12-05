@@ -1,11 +1,9 @@
-function foo(a:int):int{
-    var b:int;
-    b=7+13;
-    return b;
-}
-
 function Main() : int {
     var a:int;
-    a=foo(10);
+    a=0;
+    if(4 > 5){
+        a =5;
+    }
+    a=a+1;
     return a;
 }

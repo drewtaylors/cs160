@@ -260,14 +260,15 @@ public:
   // control flow
   void visitIfNoElse(IfNoElse * p)
   {// WRITEME
+      p->visit_children(this);
       int label=new_label();
       fprintf( m_outputfile, "#### IFNOELSE\n");
       fprintf( m_outputfile, "popl %%eax\n");
       fprintf( m_outputfile, "movl $0, %%ebx\n");
       fprintf( m_outputfile, "cmp %%eax, %%ebx\n");
       fprintf( m_outputfile, "je skip_if_%i\n",label);
-      p->visit_children(this);
-      fprintf( m_outputfile, "skip_if_%i:",label);
+      p->m_nested_block->visit_children(this);
+      fprintf( m_outputfile, "skip_if_%i:\n",label);
     
   }
   void visitIfWithElse(IfWithElse * p)
@@ -368,7 +369,8 @@ public:
   void visitGt(Gt * p)
   {
     // WRITEME
-                  int label=new_label();
+     fprintf( m_outputfile, "#### GREATER Than\n");
+      int label=new_label();
       if (p -> m_attribute.m_lattice_elem != TOP) {
           fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
           return;
@@ -578,11 +580,12 @@ public:
   {
    
     fprintf( m_outputfile, "#### Visit ID\n");
+    p -> visit_children(this);
     if (p -> m_attribute.m_lattice_elem != TOP) {
         fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
         return;
     }
-    p -> visit_children(this);
+    
     Symbol *s=m_st->lookup(p->m_attribute.m_scope,strdup(p->m_symname->spelling()));
     int offset=4+s->get_offset();
     fprintf( m_outputfile, "pushl -%d(%%ebp)\n",offset );
