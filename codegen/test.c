@@ -1,13 +1,8 @@
-
-
-int main(){
-  int a;
-  a=5;
-  if(a==5){
-    a=6;
+int Main(){
+  int a,b;
+  b=0;
+  for(a=0;a<=5;a++){
+     b++; 
   }
-  else{
-    a=9;
-  }
-   return 0;
+   return b;
 }

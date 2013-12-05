@@ -11,16 +11,9 @@ pushl $0
 #### ASSIGN
 popl %eax
 mov %eax, -4(%ebp)
-#### IFNOELSE
-#### PLUS
-#### Visit ID
-pushl -4(%ebp)
+#### IF WITH ELSE
 #### Visit INT
-pushl $1
-popl %ebx
-popl %eax
-addl %ebx, %eax
-pushl %eax
+pushl $7
 #### ASSIGN
 popl %eax
 mov %eax, -4(%ebp)

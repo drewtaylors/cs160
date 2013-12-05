@@ -1,9 +1,15 @@
 function Main() : int {
     var a:int;
     a=0;
-    if(4 > 5){
-        a =5;
+   [$ for (a=10; (a > 0) i = i - 1;) {
+        a =a+1;
+    }$]
+
+    if(3>4){
+        a=10;
     }
-    a=a+1;
+    else{
+        a=7;
+    }
     return a;
 }

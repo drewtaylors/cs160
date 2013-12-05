@@ -268,7 +268,7 @@ public:
        }
       
       int label=new_label();
-     
+      p ->m_expr->visit_children(this);
       fprintf( m_outputfile, "popl %%eax\n");
       fprintf( m_outputfile, "movl $0, %%ebx\n");
       fprintf( m_outputfile, "cmp %%eax, %%ebx\n");
@@ -279,8 +279,17 @@ public:
   }
   void visitIfWithElse(IfWithElse * p)
   {
-    // WRITEME
+    fprintf( m_outputfile, "#### IF WITH ELSE\n");
+       if (p ->m_expr->m_attribute.m_lattice_elem != TOP ) {
+           if( p->m_expr->m_attribute.m_lattice_elem.value == 1)
+                p->m_nested_block_1->visit_children(this);
+           else
+               p->m_nested_block_2->visit_children(this);
+          return;
+       }
+    
       int label=new_label();
+      p ->m_expr->visit_children(this);
       fprintf( m_outputfile, "#### IFWITHELSE\n");
       fprintf( m_outputfile, "popl %%eax\n");
       fprintf( m_outputfile, "movl $0, %%ebx\n");
