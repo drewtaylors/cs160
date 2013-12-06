@@ -216,11 +216,12 @@ public:
   }
   void visitArrayAssignment(ArrayAssignment * p)
   {
-       //IDK IF THIS IS WRITE??
-       p->visit_children(this);
-       fprintf( m_outputfile, "#### ARRAY ASSIGN\n");
-       fprintf( m_outputfile, "popl %%eax\n");
-       fprintf( m_outputfile, "pushl $%d\n", p->m_expr_2->m_attribute.m_lattice_elem.value);
+    p->m_expr_2->accept(this);
+    fprintf( m_outputfile, "#### ARRAY ASSIGN\n");
+    Symbol *s=m_st->lookup(p->m_attribute.m_scope,strdup(p->m_symname->spelling()));
+    int offset=s->get_offset()+4*p->m_expr_1->m_attribute.m_lattice_elem.value;
+    fprintf( m_outputfile, "popl %%eax\n", offset);
+    fprintf( m_outputfile, "mov %%eax, -%d(%%ebp)\n", offset);
 
   }
   void visitCall(Call * p)
@@ -248,7 +249,26 @@ public:
   }
   void visitArrayCall(ArrayCall *p)
   {
-    // WRITEME
+      fprintf(m_outputfile, "####VISIT ARRAY CALL\n");
+        if(p -> m_attribute.m_lattice_elem == TOP)
+             p -> visit_children(this);
+        list<Expr_ptr>::reverse_iterator iter = p->m_expr_list_2->rbegin();
+         for(; iter != p->m_expr_list_2->rend(); ++iter){
+             (*iter)->accept(this);
+//             fprintf(m_outputfile, "pushl $%d\n", (*iter)->m_attribute.m_lattice_elem.value);
+         }
+       
+        char *name = strdup(p -> m_symname_2 -> spelling());
+        //call func
+       
+        fprintf(m_outputfile, "call _%s\n", name);
+        //add esp, offset
+        //result stored in %eax
+        Symbol *s=m_st->lookup(p->m_attribute.m_scope,strdup(p->m_symname_1->spelling()));
+        int offset=4+s->get_offset();
+        int offset2=m_st->scopesize(p->m_attribute.m_scope);
+        //we have to see if it is a local var or arg
+        fprintf(m_outputfile, "movl %%eax, -%d(%%ebp)\n",offset);
   }
   void visitReturn(Return * p)
   {
@@ -638,7 +658,15 @@ public:
   }
   void visitArrayAccess(ArrayAccess * p)
   {
-    // WRITEME
+      fprintf( m_outputfile, "#### Visit ArrayAccess\n");
+      p->m_expr->accept(this);
+      Symbol *s=m_st->lookup(p->m_attribute.m_scope,strdup(p->m_symname->spelling()));
+      int offset=4+s->get_offset();
+      fprintf( m_outputfile, "pop %%eax\n");
+//      fprintf( m_outputfile, "mov -%d(ebp), %%ebx\n",offset);
+      fprintf( m_outputfile, "push -%d(%%ebp)\n",offset);
+      
+      
   }
 
   // special cases
