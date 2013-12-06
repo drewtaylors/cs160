@@ -588,9 +588,10 @@ public:
     // If it's TOP, then we cannot know anything about this expression; it should be TOP as well
     if (le == TOP)
 	    p->m_attribute.m_lattice_elem = TOP;
-    else
+    else{
 	    // Otherwise, it contains the value
 	    p->m_attribute.m_lattice_elem = le.value;
+    }
     return in;
   }
 

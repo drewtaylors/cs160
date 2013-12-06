@@ -1,10 +1,9 @@
-function Main() : int {
-    var a,b:int;
-    a=0;
-    for(b=15; (b != 0) b=b-1;){
-        a=a+1;
-    }
-    
+function foo(a:int):int{
+    return a;
+}
 
+function Main() : int {
+    var a:int;
+    a=foo(100);
     return a;
 }
