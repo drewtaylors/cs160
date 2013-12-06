@@ -1,6 +1,6 @@
 
 function Main() : int {
     var a:int;
-    a=10/5;
+    a=|-5+-10|;
     return a;
 }

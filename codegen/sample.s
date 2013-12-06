@@ -7,15 +7,27 @@ mov %esp, %ebp
 sub $4,%esp
 #### visitFuncBlock
 #### VISIT Decl
-#### DIVIDE
-#### Visit INT
-pushl $10
+#### PLUS
+#### Uminus
 #### Visit INT
 pushl $5
- popl %ebx
  popl %eax
- cdq
- idivl %ebx
+ negl %eax
+ pushl %eax
+#### Uminus
+#### Visit INT
+pushl $10
+ popl %eax
+ negl %eax
+ pushl %eax
+popl %ebx
+popl %eax
+addl %ebx, %eax
+pushl %eax
+ popl %eax
+cdq
+xorl %edx, %eax
+ subl %edx, %eax
  pushl %eax
 #### ASSIGN
 popl %eax

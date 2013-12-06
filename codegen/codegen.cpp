@@ -584,10 +584,10 @@ public:
   void visitNot(Not * p)
   {
   fprintf( m_outputfile, "#### NOT\n");
-         if (p -> m_attribute.m_lattice_elem != TOP) {
-              fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
-              return;
-         }
+//         if (p -> m_attribute.m_lattice_elem != TOP) {
+//              fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+//              return;
+//         }
 
           p -> visit_children(this);
 
@@ -598,10 +598,10 @@ public:
   void visitUminus(Uminus * p)
   {
     fprintf( m_outputfile, "#### Uminus\n");
-       if (p -> m_attribute.m_lattice_elem != TOP) {
-            fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
-            return;
-       }
+//       if (p -> m_attribute.m_lattice_elem != TOP) {
+//            fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+//            return;
+//       }
 
         p -> visit_children(this);
 
@@ -611,23 +611,19 @@ public:
   }
   void visitMagnitude(Magnitude * p)
   {
-    fprintf( m_outputfile, "#### Magnitude\n");
-           if (p -> m_attribute.m_lattice_elem != TOP) {
-                fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
-                return;
-           }
+//    fprintf( m_outputfile, "#### Magnitude\n");
+//           if (p -> m_attribute.m_lattice_elem != TOP) {
+//                fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+//                return;
+//           }
 
             p -> visit_children(this);
 
-//            cdq               // Expand sign of %eax into all of %edx
-//             xorl %edx, %eax;
-//             subl %edx, %eax;
-
-            fprintf( m_outputfile, " popl %%ebx\n");
+            fprintf( m_outputfile, " popl %%eax\n");
             fprintf( m_outputfile, "cdq\n");
-            fprintf( m_outputfile, "xor %%ebx, %%eax\n");
-            fprintf( m_outputfile, " subl %%eax, %%ebx\n");
-            fprintf( m_outputfile, " pushl %%ebx\n");
+            fprintf( m_outputfile, "xorl %%edx, %%eax\n");
+            fprintf( m_outputfile, " subl %%edx, %%eax\n");
+            fprintf( m_outputfile, " pushl %%eax\n");
   }
 
   // variable and constant access
