@@ -1,8 +1,8 @@
 int Main(){
-  int a,b;
-  b=0;
-  for(a=0;a<=5;a++){
-     b++; 
-  }
-   return b;
+  int a,b,c;
+  a=10;
+  b=2;
+  c=a/b;
+  
+   return a;
 }

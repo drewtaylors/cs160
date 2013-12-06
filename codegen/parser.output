@@ -131,14 +131,14 @@ ILLEGAL (282)
 TRUE (283) 61
 FALSE (284) 62
 ASSIGN (285) 33 34 35 36
-OP_LE (286) 52
-OP_LT (287) 51
-OP_GE (288) 50
-OP_GT (289) 49
-OP_EQ (290) 48
-OP_NE (291) 47
-OP_AND (292) 45
-OP_OR (293) 46
+OP_OR (286) 46
+OP_AND (287) 45
+OP_EQ (288) 48
+OP_NE (289) 47
+OP_LE (290) 52
+OP_LT (291) 51
+OP_GE (292) 50
+OP_GT (293) 49
 MINUS (294) 42 54
 PLUS (295) 41
 DIV (296) 44
@@ -790,14 +790,14 @@ state 59
    52     | expr . OP_LE expr
 
     SEMI    shift, and go to state 75
-    OP_LE   shift, and go to state 76
-    OP_LT   shift, and go to state 77
-    OP_GE   shift, and go to state 78
-    OP_GT   shift, and go to state 79
-    OP_EQ   shift, and go to state 80
-    OP_NE   shift, and go to state 81
-    OP_AND  shift, and go to state 82
-    OP_OR   shift, and go to state 83
+    OP_OR   shift, and go to state 76
+    OP_AND  shift, and go to state 77
+    OP_EQ   shift, and go to state 78
+    OP_NE   shift, and go to state 79
+    OP_LE   shift, and go to state 80
+    OP_LT   shift, and go to state 81
+    OP_GE   shift, and go to state 82
+    OP_GT   shift, and go to state 83
     MINUS   shift, and go to state 84
     PLUS    shift, and go to state 85
     DIV     shift, and go to state 86
@@ -899,14 +899,14 @@ state 66
    52     | expr . OP_LE expr
 
     PAREN_C  shift, and go to state 92
-    OP_LE    shift, and go to state 76
-    OP_LT    shift, and go to state 77
-    OP_GE    shift, and go to state 78
-    OP_GT    shift, and go to state 79
-    OP_EQ    shift, and go to state 80
-    OP_NE    shift, and go to state 81
-    OP_AND   shift, and go to state 82
-    OP_OR    shift, and go to state 83
+    OP_OR    shift, and go to state 76
+    OP_AND   shift, and go to state 77
+    OP_EQ    shift, and go to state 78
+    OP_NE    shift, and go to state 79
+    OP_LE    shift, and go to state 80
+    OP_LT    shift, and go to state 81
+    OP_GE    shift, and go to state 82
+    OP_GT    shift, and go to state 83
     MINUS    shift, and go to state 84
     PLUS     shift, and go to state 85
     DIV      shift, and go to state 86
@@ -953,14 +953,14 @@ state 70
    58     | PAREN_O expr . PAREN_C
 
     PAREN_C  shift, and go to state 96
-    OP_LE    shift, and go to state 76
-    OP_LT    shift, and go to state 77
-    OP_GE    shift, and go to state 78
-    OP_GT    shift, and go to state 79
-    OP_EQ    shift, and go to state 80
-    OP_NE    shift, and go to state 81
-    OP_AND   shift, and go to state 82
-    OP_OR    shift, and go to state 83
+    OP_OR    shift, and go to state 76
+    OP_AND   shift, and go to state 77
+    OP_EQ    shift, and go to state 78
+    OP_NE    shift, and go to state 79
+    OP_LE    shift, and go to state 80
+    OP_LT    shift, and go to state 81
+    OP_GE    shift, and go to state 82
+    OP_GT    shift, and go to state 83
     MINUS    shift, and go to state 84
     PLUS     shift, and go to state 85
     DIV      shift, and go to state 86
@@ -984,14 +984,14 @@ state 71
    59     | BAR expr . BAR
 
     BAR     shift, and go to state 97
-    OP_LE   shift, and go to state 76
-    OP_LT   shift, and go to state 77
-    OP_GE   shift, and go to state 78
-    OP_GT   shift, and go to state 79
-    OP_EQ   shift, and go to state 80
-    OP_NE   shift, and go to state 81
-    OP_AND  shift, and go to state 82
-    OP_OR   shift, and go to state 83
+    OP_OR   shift, and go to state 76
+    OP_AND  shift, and go to state 77
+    OP_EQ   shift, and go to state 78
+    OP_NE   shift, and go to state 79
+    OP_LE   shift, and go to state 80
+    OP_LT   shift, and go to state 81
+    OP_GE   shift, and go to state 82
+    OP_GT   shift, and go to state 83
     MINUS   shift, and go to state 84
     PLUS    shift, and go to state 85
     DIV     shift, and go to state 86
@@ -1066,7 +1066,7 @@ state 75
 
 state 76
 
-   52 expr: expr OP_LE . expr
+   46 expr: expr OP_OR . expr
 
     PAREN_O  shift, and go to state 48
     BAR      shift, and go to state 49
@@ -1087,7 +1087,7 @@ state 76
 
 state 77
 
-   51 expr: expr OP_LT . expr
+   45 expr: expr OP_AND . expr
 
     PAREN_O  shift, and go to state 48
     BAR      shift, and go to state 49
@@ -1108,7 +1108,7 @@ state 77
 
 state 78
 
-   50 expr: expr OP_GE . expr
+   48 expr: expr OP_EQ . expr
 
     PAREN_O  shift, and go to state 48
     BAR      shift, and go to state 49
@@ -1129,7 +1129,7 @@ state 78
 
 state 79
 
-   49 expr: expr OP_GT . expr
+   47 expr: expr OP_NE . expr
 
     PAREN_O  shift, and go to state 48
     BAR      shift, and go to state 49
@@ -1150,7 +1150,7 @@ state 79
 
 state 80
 
-   48 expr: expr OP_EQ . expr
+   52 expr: expr OP_LE . expr
 
     PAREN_O  shift, and go to state 48
     BAR      shift, and go to state 49
@@ -1171,7 +1171,7 @@ state 80
 
 state 81
 
-   47 expr: expr OP_NE . expr
+   51 expr: expr OP_LT . expr
 
     PAREN_O  shift, and go to state 48
     BAR      shift, and go to state 49
@@ -1192,7 +1192,7 @@ state 81
 
 state 82
 
-   45 expr: expr OP_AND . expr
+   50 expr: expr OP_GE . expr
 
     PAREN_O  shift, and go to state 48
     BAR      shift, and go to state 49
@@ -1213,7 +1213,7 @@ state 82
 
 state 83
 
-   46 expr: expr OP_OR . expr
+   49 expr: expr OP_GT . expr
 
     PAREN_O  shift, and go to state 48
     BAR      shift, and go to state 49
@@ -1334,14 +1334,14 @@ state 88
    52     | expr . OP_LE expr
 
     ANGLE_C  shift, and go to state 111
-    OP_LE    shift, and go to state 76
-    OP_LT    shift, and go to state 77
-    OP_GE    shift, and go to state 78
-    OP_GT    shift, and go to state 79
-    OP_EQ    shift, and go to state 80
-    OP_NE    shift, and go to state 81
-    OP_AND   shift, and go to state 82
-    OP_OR    shift, and go to state 83
+    OP_OR    shift, and go to state 76
+    OP_AND   shift, and go to state 77
+    OP_EQ    shift, and go to state 78
+    OP_NE    shift, and go to state 79
+    OP_LE    shift, and go to state 80
+    OP_LT    shift, and go to state 81
+    OP_GE    shift, and go to state 82
+    OP_GT    shift, and go to state 83
     MINUS    shift, and go to state 84
     PLUS     shift, and go to state 85
     DIV      shift, and go to state 86
@@ -1377,14 +1377,14 @@ state 90
    52     | expr . OP_LE expr
 
     SEMI    shift, and go to state 113
-    OP_LE   shift, and go to state 76
-    OP_LT   shift, and go to state 77
-    OP_GE   shift, and go to state 78
-    OP_GT   shift, and go to state 79
-    OP_EQ   shift, and go to state 80
-    OP_NE   shift, and go to state 81
-    OP_AND  shift, and go to state 82
-    OP_OR   shift, and go to state 83
+    OP_OR   shift, and go to state 76
+    OP_AND  shift, and go to state 77
+    OP_EQ   shift, and go to state 78
+    OP_NE   shift, and go to state 79
+    OP_LE   shift, and go to state 80
+    OP_LT   shift, and go to state 81
+    OP_GE   shift, and go to state 82
+    OP_GT   shift, and go to state 83
     MINUS   shift, and go to state 84
     PLUS    shift, and go to state 85
     DIV     shift, and go to state 86
@@ -1500,14 +1500,14 @@ state 98
    57     | IDENT ANGLE_O expr . ANGLE_C
 
     ANGLE_C  shift, and go to state 118
-    OP_LE    shift, and go to state 76
-    OP_LT    shift, and go to state 77
-    OP_GE    shift, and go to state 78
-    OP_GT    shift, and go to state 79
-    OP_EQ    shift, and go to state 80
-    OP_NE    shift, and go to state 81
-    OP_AND   shift, and go to state 82
-    OP_OR    shift, and go to state 83
+    OP_OR    shift, and go to state 76
+    OP_AND   shift, and go to state 77
+    OP_EQ    shift, and go to state 78
+    OP_NE    shift, and go to state 79
+    OP_LE    shift, and go to state 80
+    OP_LT    shift, and go to state 81
+    OP_GE    shift, and go to state 82
+    OP_GT    shift, and go to state 83
     MINUS    shift, and go to state 84
     PLUS     shift, and go to state 85
     DIV      shift, and go to state 86
@@ -1515,6 +1515,123 @@ state 98
 
 
 state 99
+
+   41 expr: expr . PLUS expr
+   42     | expr . MINUS expr
+   43     | expr . MULT expr
+   44     | expr . DIV expr
+   45     | expr . OP_AND expr
+   46     | expr . OP_OR expr
+   46     | expr OP_OR expr .
+   47     | expr . OP_NE expr
+   48     | expr . OP_EQ expr
+   49     | expr . OP_GT expr
+   50     | expr . OP_GE expr
+   51     | expr . OP_LT expr
+   52     | expr . OP_LE expr
+
+    OP_AND  shift, and go to state 77
+    OP_EQ   shift, and go to state 78
+    OP_NE   shift, and go to state 79
+    OP_LE   shift, and go to state 80
+    OP_LT   shift, and go to state 81
+    OP_GE   shift, and go to state 82
+    OP_GT   shift, and go to state 83
+    MINUS   shift, and go to state 84
+    PLUS    shift, and go to state 85
+    DIV     shift, and go to state 86
+    MULT    shift, and go to state 87
+
+    $default  reduce using rule 46 (expr)
+
+
+state 100
+
+   41 expr: expr . PLUS expr
+   42     | expr . MINUS expr
+   43     | expr . MULT expr
+   44     | expr . DIV expr
+   45     | expr . OP_AND expr
+   45     | expr OP_AND expr .
+   46     | expr . OP_OR expr
+   47     | expr . OP_NE expr
+   48     | expr . OP_EQ expr
+   49     | expr . OP_GT expr
+   50     | expr . OP_GE expr
+   51     | expr . OP_LT expr
+   52     | expr . OP_LE expr
+
+    OP_EQ  shift, and go to state 78
+    OP_NE  shift, and go to state 79
+    OP_LE  shift, and go to state 80
+    OP_LT  shift, and go to state 81
+    OP_GE  shift, and go to state 82
+    OP_GT  shift, and go to state 83
+    MINUS  shift, and go to state 84
+    PLUS   shift, and go to state 85
+    DIV    shift, and go to state 86
+    MULT   shift, and go to state 87
+
+    $default  reduce using rule 45 (expr)
+
+
+state 101
+
+   41 expr: expr . PLUS expr
+   42     | expr . MINUS expr
+   43     | expr . MULT expr
+   44     | expr . DIV expr
+   45     | expr . OP_AND expr
+   46     | expr . OP_OR expr
+   47     | expr . OP_NE expr
+   48     | expr . OP_EQ expr
+   48     | expr OP_EQ expr .
+   49     | expr . OP_GT expr
+   50     | expr . OP_GE expr
+   51     | expr . OP_LT expr
+   52     | expr . OP_LE expr
+
+    OP_LE  shift, and go to state 80
+    OP_LT  shift, and go to state 81
+    OP_GE  shift, and go to state 82
+    OP_GT  shift, and go to state 83
+    MINUS  shift, and go to state 84
+    PLUS   shift, and go to state 85
+    DIV    shift, and go to state 86
+    MULT   shift, and go to state 87
+
+    $default  reduce using rule 48 (expr)
+
+
+state 102
+
+   41 expr: expr . PLUS expr
+   42     | expr . MINUS expr
+   43     | expr . MULT expr
+   44     | expr . DIV expr
+   45     | expr . OP_AND expr
+   46     | expr . OP_OR expr
+   47     | expr . OP_NE expr
+   47     | expr OP_NE expr .
+   48     | expr . OP_EQ expr
+   49     | expr . OP_GT expr
+   50     | expr . OP_GE expr
+   51     | expr . OP_LT expr
+   52     | expr . OP_LE expr
+
+    OP_LE  shift, and go to state 80
+    OP_LT  shift, and go to state 81
+    OP_GE  shift, and go to state 82
+    OP_GT  shift, and go to state 83
+    MINUS  shift, and go to state 84
+    PLUS   shift, and go to state 85
+    DIV    shift, and go to state 86
+    MULT   shift, and go to state 87
+
+    $default  reduce using rule 47 (expr)
+
+
+state 103
 
    41 expr: expr . PLUS expr
    42     | expr . MINUS expr
@@ -1538,7 +1655,7 @@ state 99
     $default  reduce using rule 52 (expr)
 
 
-state 100
+state 104
 
    41 expr: expr . PLUS expr
    42     | expr . MINUS expr
@@ -1562,7 +1679,7 @@ state 100
     $default  reduce using rule 51 (expr)
 
 
-state 101
+state 105
 
    41 expr: expr . PLUS expr
    42     | expr . MINUS expr
@@ -1586,7 +1703,7 @@ state 101
     $default  reduce using rule 50 (expr)
 
 
-state 102
+state 106
 
    41 expr: expr . PLUS expr
    42     | expr . MINUS expr
@@ -1608,102 +1725,6 @@ state 102
     MULT   shift, and go to state 87
 
     $default  reduce using rule 49 (expr)
-
-
-state 103
-
-   41 expr: expr . PLUS expr
-   42     | expr . MINUS expr
-   43     | expr . MULT expr
-   44     | expr . DIV expr
-   45     | expr . OP_AND expr
-   46     | expr . OP_OR expr
-   47     | expr . OP_NE expr
-   48     | expr . OP_EQ expr
-   48     | expr OP_EQ expr .
-   49     | expr . OP_GT expr
-   50     | expr . OP_GE expr
-   51     | expr . OP_LT expr
-   52     | expr . OP_LE expr
-
-    MINUS  shift, and go to state 84
-    PLUS   shift, and go to state 85
-    DIV    shift, and go to state 86
-    MULT   shift, and go to state 87
-
-    $default  reduce using rule 48 (expr)
-
-
-state 104
-
-   41 expr: expr . PLUS expr
-   42     | expr . MINUS expr
-   43     | expr . MULT expr
-   44     | expr . DIV expr
-   45     | expr . OP_AND expr
-   46     | expr . OP_OR expr
-   47     | expr . OP_NE expr
-   47     | expr OP_NE expr .
-   48     | expr . OP_EQ expr
-   49     | expr . OP_GT expr
-   50     | expr . OP_GE expr
-   51     | expr . OP_LT expr
-   52     | expr . OP_LE expr
-
-    MINUS  shift, and go to state 84
-    PLUS   shift, and go to state 85
-    DIV    shift, and go to state 86
-    MULT   shift, and go to state 87
-
-    $default  reduce using rule 47 (expr)
-
-
-state 105
-
-   41 expr: expr . PLUS expr
-   42     | expr . MINUS expr
-   43     | expr . MULT expr
-   44     | expr . DIV expr
-   45     | expr . OP_AND expr
-   45     | expr OP_AND expr .
-   46     | expr . OP_OR expr
-   47     | expr . OP_NE expr
-   48     | expr . OP_EQ expr
-   49     | expr . OP_GT expr
-   50     | expr . OP_GE expr
-   51     | expr . OP_LT expr
-   52     | expr . OP_LE expr
-
-    MINUS  shift, and go to state 84
-    PLUS   shift, and go to state 85
-    DIV    shift, and go to state 86
-    MULT   shift, and go to state 87
-
-    $default  reduce using rule 45 (expr)
-
-
-state 106
-
-   41 expr: expr . PLUS expr
-   42     | expr . MINUS expr
-   43     | expr . MULT expr
-   44     | expr . DIV expr
-   45     | expr . OP_AND expr
-   46     | expr . OP_OR expr
-   46     | expr OP_OR expr .
-   47     | expr . OP_NE expr
-   48     | expr . OP_EQ expr
-   49     | expr . OP_GT expr
-   50     | expr . OP_GE expr
-   51     | expr . OP_LT expr
-   52     | expr . OP_LE expr
-
-    MINUS  shift, and go to state 84
-    PLUS   shift, and go to state 85
-    DIV    shift, and go to state 86
-    MULT   shift, and go to state 87
-
-    $default  reduce using rule 46 (expr)
 
 
 state 107
@@ -1849,14 +1870,14 @@ state 116
    52     | expr . OP_LE expr
 
     ANGLE_C  shift, and go to state 124
-    OP_LE    shift, and go to state 76
-    OP_LT    shift, and go to state 77
-    OP_GE    shift, and go to state 78
-    OP_GT    shift, and go to state 79
-    OP_EQ    shift, and go to state 80
-    OP_NE    shift, and go to state 81
-    OP_AND   shift, and go to state 82
-    OP_OR    shift, and go to state 83
+    OP_OR    shift, and go to state 76
+    OP_AND   shift, and go to state 77
+    OP_EQ    shift, and go to state 78
+    OP_NE    shift, and go to state 79
+    OP_LE    shift, and go to state 80
+    OP_LT    shift, and go to state 81
+    OP_GE    shift, and go to state 82
+    OP_GT    shift, and go to state 83
     MINUS    shift, and go to state 84
     PLUS     shift, and go to state 85
     DIV      shift, and go to state 86
@@ -1880,14 +1901,14 @@ state 117
    52     | expr . OP_LE expr
 
     PAREN_C  shift, and go to state 125
-    OP_LE    shift, and go to state 76
-    OP_LT    shift, and go to state 77
-    OP_GE    shift, and go to state 78
-    OP_GT    shift, and go to state 79
-    OP_EQ    shift, and go to state 80
-    OP_NE    shift, and go to state 81
-    OP_AND   shift, and go to state 82
-    OP_OR    shift, and go to state 83
+    OP_OR    shift, and go to state 76
+    OP_AND   shift, and go to state 77
+    OP_EQ    shift, and go to state 78
+    OP_NE    shift, and go to state 79
+    OP_LE    shift, and go to state 80
+    OP_LT    shift, and go to state 81
+    OP_GE    shift, and go to state 82
+    OP_GT    shift, and go to state 83
     MINUS    shift, and go to state 84
     PLUS     shift, and go to state 85
     DIV      shift, and go to state 86
@@ -2024,14 +2045,14 @@ state 127
    52     | expr . OP_LE expr
 
     SEMI    shift, and go to state 134
-    OP_LE   shift, and go to state 76
-    OP_LT   shift, and go to state 77
-    OP_GE   shift, and go to state 78
-    OP_GT   shift, and go to state 79
-    OP_EQ   shift, and go to state 80
-    OP_NE   shift, and go to state 81
-    OP_AND  shift, and go to state 82
-    OP_OR   shift, and go to state 83
+    OP_OR   shift, and go to state 76
+    OP_AND  shift, and go to state 77
+    OP_EQ   shift, and go to state 78
+    OP_NE   shift, and go to state 79
+    OP_LE   shift, and go to state 80
+    OP_LT   shift, and go to state 81
+    OP_GE   shift, and go to state 82
+    OP_GT   shift, and go to state 83
     MINUS   shift, and go to state 84
     PLUS    shift, and go to state 85
     DIV     shift, and go to state 86
@@ -2063,14 +2084,14 @@ state 129
    52     | expr . OP_LE expr
 
     COMMA   shift, and go to state 136
-    OP_LE   shift, and go to state 76
-    OP_LT   shift, and go to state 77
-    OP_GE   shift, and go to state 78
-    OP_GT   shift, and go to state 79
-    OP_EQ   shift, and go to state 80
-    OP_NE   shift, and go to state 81
-    OP_AND  shift, and go to state 82
-    OP_OR   shift, and go to state 83
+    OP_OR   shift, and go to state 76
+    OP_AND  shift, and go to state 77
+    OP_EQ   shift, and go to state 78
+    OP_NE   shift, and go to state 79
+    OP_LE   shift, and go to state 80
+    OP_LT   shift, and go to state 81
+    OP_GE   shift, and go to state 82
+    OP_GT   shift, and go to state 83
     MINUS   shift, and go to state 84
     PLUS    shift, and go to state 85
     DIV     shift, and go to state 86

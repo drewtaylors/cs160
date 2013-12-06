@@ -22,7 +22,10 @@
 %token INT OCT HEX BIN IDENT ILLEGAL TRUE FALSE
 
 %right ASSIGN 
-%left  OP_OR OP_AND OP_NE OP_EQ OP_GT OP_GE OP_LT OP_LE 
+%left  OP_OR
+%left  OP_AND
+%left  OP_NE OP_EQ
+%left  OP_GT OP_GE OP_LT OP_LE 
 %left  PLUS MINUS
 %left  MULT DIV
 %right  OP_NOT

@@ -522,10 +522,10 @@ public:
   void visitMinus(Minus * p)
   {
    fprintf( m_outputfile, "#### MINUS\n");
-   if (p -> m_attribute.m_lattice_elem != TOP) {
-       fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
-       return;
-   }
+//   if (p -> m_attribute.m_lattice_elem != TOP) {
+//       fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+//       return;
+//   }
 
    p -> visit_children(this);
 
@@ -537,10 +537,10 @@ public:
   void visitPlus(Plus * p)
   {
      fprintf( m_outputfile, "#### PLUS\n");
-     if (p -> m_attribute.m_lattice_elem != TOP) {
-         fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
-         return;
-     }
+//     if (p -> m_attribute.m_lattice_elem != TOP) {
+//         fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+//         return;
+//     }
 
      p -> visit_children(this);
 
@@ -553,10 +553,10 @@ public:
   void visitTimes(Times * p)
   {
      fprintf( m_outputfile, "#### TIMES\n");
-     if (p -> m_attribute.m_lattice_elem != TOP) {
-         fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
-         return;
-     }
+//     if (p -> m_attribute.m_lattice_elem != TOP) {
+//         fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+//         return;
+//     }
 
      p -> visit_children(this);
 
@@ -568,16 +568,17 @@ public:
   void visitDiv(Div * p)
   {
     fprintf( m_outputfile, "#### DIVIDE\n");
-    if (p -> m_attribute.m_lattice_elem != TOP) {
-         fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
-         return;
-    }
+//    if (p -> m_attribute.m_lattice_elem != TOP) {
+//         fprintf( m_outputfile, " pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
+//         return;
+//    }
 
      p -> visit_children(this);
 
-     fprintf( m_outputfile, " popl %%ebx\n");
      fprintf( m_outputfile, " popl %%eax\n");
-     fprintf( m_outputfile, " idivl %%ebx, %%eax\n");
+     fprintf( m_outputfile, " popl %%edx\n");
+//     fprintf( m_outputfile, " cdq\n");
+     fprintf( m_outputfile, " idivl %%eax\n");
      fprintf( m_outputfile, " pushl %%eax\n");
   }
   void visitNot(Not * p)
