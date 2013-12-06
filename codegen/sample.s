@@ -47,11 +47,11 @@ compare_expr0:
 #### Visit ID
 pushl -4(%ebp)
 #### Visit INT
-pushl $10
+pushl $5
 popl %ebx
 popl %eax
 cmp %ebx,%eax
-jl equal1
+jle equal1
 pushl $0
 jmp end1
 equal1:

@@ -471,7 +471,7 @@ public:
     fprintf( m_outputfile, "popl %%ebx\n");
       fprintf( m_outputfile, "popl %%eax\n");
       fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
-      fprintf(m_outputfile, "jne equal%d\n", lbl);
+      fprintf(m_outputfile, "jge equal%d\n", lbl);
       
       fprintf(m_outputfile, "pushl $0\n");
       fprintf(m_outputfile, "jmp end%d\n", lbl);
