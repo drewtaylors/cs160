@@ -151,7 +151,7 @@ public:
                 fprintf(m_outputfile, "push %%ebp\n");
                 fprintf(m_outputfile, "mov %%esp, %%ebp\n");
                 //sub esp, 4 Make room for 4-byte local variables
-//                fprintf(m_outputfile,"sub $%i,%%esp\n",m_st->scopesize(p->m_function_block->m_attribute.m_scope));
+                fprintf(m_outputfile,"sub $%i,%%esp\n",m_st->scopesize(p->m_function_block->m_attribute.m_scope));
 
                 p->visit_children(this);
                 fprintf(m_outputfile, "mov %%ebp, %%esp \n");
@@ -302,15 +302,32 @@ public:
   }
   void visitForLoop(ForLoop * p)
   {
-    // WRITEME
+    fprintf( m_outputfile, "#### VISIT FOR LOOP\n");
+    p->m_stat_1->accept(this);
     int label=new_label();
-    fprintf( m_outputfile, "#### IFWITHELSE\n");
-    fprintf( m_outputfile, "popl %%eax\n");
-    fprintf( m_outputfile, "movl $0, %%ebx\n");
-    fprintf( m_outputfile, "cmp %%eax, %%ebx\n");
-    fprintf( m_outputfile, "je skip_if_%i\n",label);
-    p->m_nested_block->visit_children(this);
-    fprintf( m_outputfile, "skip_if_%i:",label);
+    fprintf( m_outputfile, "jmp compare_expr%i\n",label);
+    fprintf( m_outputfile, "compare_expr%i:\n",label);
+    p->m_expr->accept(this);
+//    if(p->m_expr->m_attribute.m_lattice_elem != TOP){
+//        if(p->m_expr->m_attribute.m_lattice_elem.value == 1){
+            
+            fprintf( m_outputfile, "jne check_for_expr%i\n",label);
+                
+            fprintf( m_outputfile, "check_for_expr%i:\n",label);
+//        }
+        
+//    }
+    
+      
+    // WRITEME
+    
+//    fprintf( m_outputfile, "popl %%eax\n");
+//    fprintf( m_outputfile, "movl $0, %%ebx\n");
+//    fprintf( m_outputfile, "cmp %%eax, %%ebx\n");
+//    fprintf( m_outputfile, "je skip_if_%i\n",label);
+//    p->m_nested_block->visit_children(this);
+//    fprintf( m_outputfile, "skip_if_%i:",label);
+     fprintf( m_outputfile, "#### END FOR LOOP\n");
   }
 
   
@@ -349,6 +366,7 @@ public:
   // comparison operations
   void visitCompare(Compare * p)
   {
+    fprintf( m_outputfile, "#### Compare ==\n");
     // WRITEME
      int label=new_label();
       if (p -> m_attribute.m_lattice_elem != TOP) {
@@ -368,18 +386,19 @@ public:
   void visitNoteq(Noteq * p)
   {
     // WRITEME
+      fprintf( m_outputfile, "#### NOTEQ !=\n");
       int label=new_label();
       if (p -> m_attribute.m_lattice_elem != TOP) {
           fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
           return;
       }
       p -> visit_children(this);
-      fprintf( m_outputfile, "popl %%eab\n");
+      fprintf( m_outputfile, "popl %%ebx\n");
       fprintf( m_outputfile, "popl %%eax\n");
-      fprintf( m_outputfile, "cmp %%eab,%%eax\n");
-      fprintf(m_outputfile, "je notEqual_%s\n", label);
-      fprintf( m_outputfile, " pushl %$eax\n");
-      fprintf( m_outputfile, "notEqual_%s:\n");
+      fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
+//      fprintf(m_outputfile, "je notEqual_%s\n", label);
+//      fprintf( m_outputfile, " pushl %$eax\n");
+//      fprintf( m_outputfile, "notEqual_%s:\n");
   }
   void visitGt(Gt * p)
   {
@@ -596,7 +615,7 @@ public:
    
     fprintf( m_outputfile, "#### Visit ID\n");
     p -> visit_children(this);
-    if (p -> m_attribute.m_lattice_elem != TOP) {
+    if (p->m_attribute.m_lattice_elem != TOP) {
         fprintf( m_outputfile, "pushl $%d\n", p -> m_attribute.m_lattice_elem.value);
         return;
     }

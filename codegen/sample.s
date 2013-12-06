@@ -4,6 +4,7 @@
 Main:
 push %ebp
 mov %esp, %ebp
+sub $8,%esp
 #### visitFuncBlock
 #### VISIT Decl
 #### Visit INT
@@ -11,12 +12,25 @@ pushl $0
 #### ASSIGN
 popl %eax
 mov %eax, -4(%ebp)
-#### IF WITH ELSE
+#### VISIT FOR LOOP
 #### Visit INT
-pushl $7
+pushl $15
 #### ASSIGN
 popl %eax
-mov %eax, -4(%ebp)
+mov %eax, -8(%ebp)
+jmp compare_expr0
+compare_expr0:
+#### NOTEQ !=
+#### Visit ID
+pushl -8(%ebp)
+#### Visit INT
+pushl $0
+popl %ebx
+popl %eax
+cmp %ebx,%eax
+jne check_for_expr0
+check_for_expr0:
+#### END FOR LOOP
 #### Visit ID
 pushl -4(%ebp)
 #### RETURN
