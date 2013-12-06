@@ -265,7 +265,7 @@ public:
         //add esp, offset
         //result stored in %eax
         Symbol *s=m_st->lookup(p->m_attribute.m_scope,strdup(p->m_symname_1->spelling()));
-        int offset=s->get_offset()+4*p->m_expr_1->m_attribute.m_lattice_elem.value-4;
+        int offset=s->get_offset()+4*p->m_expr_1->m_attribute.m_lattice_elem.value;
         int offset2=m_st->scopesize(p->m_attribute.m_scope);
         //we have to see if it is a local var or arg
         fprintf(m_outputfile, "movl %%eax, -%d(%%ebp)\n",offset);
@@ -698,15 +698,16 @@ public:
   }
   void visitArrayAccess(ArrayAccess * p)
   {
-      fprintf( m_outputfile, "#### Visit ArrayAccess\n");
+      fprintf( m_outputfile, "#### Visit ArrayAccess Children\n");
       p->m_expr->accept(this);
+      fprintf( m_outputfile, "#### Visit ArrayAccess \n");
       Symbol *s=m_st->lookup(p->m_attribute.m_scope,strdup(p->m_symname->spelling()));
       int offset=s->get_offset()+4*p->m_expr->m_attribute.m_lattice_elem.value;
       fprintf( m_outputfile, "pop %%eax\n");
+      
 //      fprintf( m_outputfile, "mov -%d(ebp), %%ebx\n",offset);
-      fprintf( m_outputfile, "push -%d(%%ebp)\n",offset);
-      
-      
+      fprintf( m_outputfile, "movl %%eax, -%d(%%ebp)\n",offset);
+      fprintf( m_outputfile, "pushl -%d(%%ebp)\n",offset);
   }
 
   // special cases

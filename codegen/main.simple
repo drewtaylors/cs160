@@ -4,9 +4,13 @@ function test(a:int):int{
 
 
 function Main() : int {
-    var f:intarray[5];
-    f[3]=100;
-   
-
-    return f[3];
+      var e,c:int;
+    var a,b,f:intarray[5];
+    e=3;
+    if(e<=1){
+        f[3]=test(100);
+    }else{
+        f[3]=test(50);
+    }
+    return f[e];
 }

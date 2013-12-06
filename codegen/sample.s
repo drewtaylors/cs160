@@ -21,18 +21,26 @@ pop %ebp
 Main:
 push %ebp
 mov %esp, %ebp
-sub $20,%esp
+sub $68,%esp
 #### visitFuncBlock
 #### Visit INT
-pushl $100
-#### ARRAY ASSIGN
-popl %eax
-mov %eax, -12(%ebp)
-#### Visit ArrayAccess
-#### Visit INT
 pushl $3
+#### ASSIGN
+popl %eax
+mov %eax, -4(%ebp)
+#### IF WITH ELSE
+####VISIT ARRAY CALL
+#### Visit INT
+pushl $50
+call _test
+movl %eax, -60(%ebp)
+#### Visit ArrayAccess Children
+#### Visit ID
+pushl -4(%ebp)
+#### Visit ArrayAccess 
 pop %eax
-push -12(%ebp)
+movl %eax, -44(%ebp)
+pushl -44(%ebp)
 #### RETURN
 popl %eax
 mov %ebp, %esp 
