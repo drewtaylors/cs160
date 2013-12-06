@@ -12,9 +12,10 @@ sub $4,%esp
 pushl $10
 #### Visit INT
 pushl $5
+ popl %ebx
  popl %eax
- popl %edx
- idivl %eax
+ cdq
+ idivl %ebx
  pushl %eax
 #### ASSIGN
 popl %eax

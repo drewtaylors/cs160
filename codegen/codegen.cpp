@@ -575,10 +575,10 @@ public:
 
      p -> visit_children(this);
 
+     fprintf( m_outputfile, " popl %%ebx\n");
      fprintf( m_outputfile, " popl %%eax\n");
-     fprintf( m_outputfile, " popl %%edx\n");
-//     fprintf( m_outputfile, " cdq\n");
-     fprintf( m_outputfile, " idivl %%eax\n");
+     fprintf( m_outputfile, " cdq\n");
+     fprintf( m_outputfile, " idivl %%ebx\n");
      fprintf( m_outputfile, " pushl %%eax\n");
   }
   void visitNot(Not * p)
