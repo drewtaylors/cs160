@@ -1,9 +1,12 @@
+function foo():int{
+   return 5;
+}
+
 
 function Main() : int {
-    var a,b: int;
-    b=5;
-    for( a=0;(a<=5)a=a+1;){
-        b=b+1;
-    }
-    return b;
+    var e,f:int;
+    var a,b,c,d: intarray[10];
+   
+    d[2]=foo();
+    return d[2];
 }
