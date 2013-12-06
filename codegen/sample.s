@@ -19,6 +19,19 @@ pushl $15
 popl %eax
 mov %eax, -8(%ebp)
 jmp compare_expr0
+func_body0:
+#### PLUS
+#### Visit ID
+pushl -4(%ebp)
+#### Visit INT
+pushl $1
+popl %ebx
+popl %eax
+addl %ebx, %eax
+pushl %eax
+#### ASSIGN
+popl %eax
+mov %eax, -4(%ebp)
 compare_expr0:
 #### NOTEQ !=
 #### Visit ID
@@ -28,8 +41,7 @@ pushl $0
 popl %ebx
 popl %eax
 cmp %ebx,%eax
-jne check_for_expr0
-check_for_expr0:
+jne func_body0
 #### END FOR LOOP
 #### Visit ID
 pushl -4(%ebp)

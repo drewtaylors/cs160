@@ -306,14 +306,14 @@ public:
     p->m_stat_1->accept(this);
     int label=new_label();
     fprintf( m_outputfile, "jmp compare_expr%i\n",label);
+    fprintf( m_outputfile, "func_body%i:\n",label);
+    p->m_nested_block->accept(this);
     fprintf( m_outputfile, "compare_expr%i:\n",label);
     p->m_expr->accept(this);
 //    if(p->m_expr->m_attribute.m_lattice_elem != TOP){
 //        if(p->m_expr->m_attribute.m_lattice_elem.value == 1){
             
-            fprintf( m_outputfile, "jne check_for_expr%i\n",label);
-                
-            fprintf( m_outputfile, "check_for_expr%i:\n",label);
+            fprintf( m_outputfile, "func_body%i\n",label);
 //        }
         
 //    }
@@ -396,7 +396,7 @@ public:
       fprintf( m_outputfile, "popl %%ebx\n");
       fprintf( m_outputfile, "popl %%eax\n");
       fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
-//      fprintf(m_outputfile, "je notEqual_%s\n", label);
+      fprintf(m_outputfile, "jne ");
 //      fprintf( m_outputfile, " pushl %$eax\n");
 //      fprintf( m_outputfile, "notEqual_%s:\n");
   }
