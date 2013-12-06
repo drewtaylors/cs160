@@ -701,7 +701,7 @@ public:
       fprintf( m_outputfile, "#### Visit ArrayAccess\n");
       p->m_expr->accept(this);
       Symbol *s=m_st->lookup(p->m_attribute.m_scope,strdup(p->m_symname->spelling()));
-      int offset=4+s->get_offset();
+      int offset=s->get_offset()+4*p->m_expr->m_attribute.m_lattice_elem.value;
       fprintf( m_outputfile, "pop %%eax\n");
 //      fprintf( m_outputfile, "mov -%d(ebp), %%ebx\n",offset);
       fprintf( m_outputfile, "push -%d(%%ebp)\n",offset);

@@ -1,12 +1,12 @@
-function foo():int{
-   return 5;
+function test(a:int):int{
+    return a;
 }
 
 
 function Main() : int {
-    var e,f:int;
-    var a,b,c,d: intarray[10];
+    var f:intarray[5];
+    f[3]=100;
    
-    d[2]=foo();
-    return d[2];
+
+    return f[3];
 }

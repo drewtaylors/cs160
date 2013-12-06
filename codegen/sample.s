@@ -1,13 +1,16 @@
 .text
 
 ####INSIDE FUNCTION
-_foo: 
+_test: 
 push %ebp
 mov %esp, %ebp
-sub $0,%esp
+sub $4,%esp
+#### Param Visited
+mov 8(%ebp), %eax
+mov %eax, -4(%ebp)
 #### visitFuncBlock
-#### Visit INT
-pushl $5
+#### Visit ID
+pushl -4(%ebp)
 #### RETURN
 popl %eax
 mov %ebp, %esp 
@@ -18,16 +21,18 @@ pop %ebp
 Main:
 push %ebp
 mov %esp, %ebp
-sub $168,%esp
+sub $20,%esp
 #### visitFuncBlock
-####VISIT ARRAY CALL
-call _foo
-movl %eax, -132(%ebp)
+#### Visit INT
+pushl $100
+#### ARRAY ASSIGN
+popl %eax
+mov %eax, -12(%ebp)
 #### Visit ArrayAccess
 #### Visit INT
-pushl $2
+pushl $3
 pop %eax
-push -132(%ebp)
+push -12(%ebp)
 #### RETURN
 popl %eax
 mov %ebp, %esp 
