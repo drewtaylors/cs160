@@ -32,6 +32,18 @@ pushl %eax
 #### ASSIGN
 popl %eax
 mov %eax, -4(%ebp)
+#### MINUS
+#### Visit ID
+pushl -8(%ebp)
+#### Visit INT
+pushl $1
+ popl %ebx
+ popl %eax
+ subl %ebx, %eax
+ pushl %eax
+#### ASSIGN
+popl %eax
+mov %eax, -8(%ebp)
 compare_expr0:
 #### NOTEQ !=
 #### Visit ID

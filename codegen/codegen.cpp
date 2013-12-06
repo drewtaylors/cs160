@@ -308,6 +308,7 @@ public:
     fprintf( m_outputfile, "jmp compare_expr%i\n",label);
     fprintf( m_outputfile, "func_body%i:\n",label);
     p->m_nested_block->accept(this);
+    p->m_stat_2->accept(this);
     fprintf( m_outputfile, "compare_expr%i:\n",label);
     p->m_expr->accept(this);
 //    if(p->m_expr->m_attribute.m_lattice_elem != TOP){
