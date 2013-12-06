@@ -363,7 +363,7 @@ public:
   void visitDecl(Decl * p)
   {
      p -> visit_children(this);
-     fprintf( m_outputfile, "#### VISIT Decl\n");
+//     fprintf( m_outputfile, "#### VISIT Decl\n");
      int totalLocalVars=0;
      list<SymName_ptr>::iterator iter;
      for(iter = p->m_symname_list->begin(); iter != p->m_symname_list->end(); iter++){
@@ -398,16 +398,26 @@ public:
   {
     fprintf( m_outputfile, "#### Compare ==\n");
     // WRITEME
-     int label=new_label();
-      if (p -> m_attribute.m_lattice_elem != TOP) {
-          fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
-          return;
-      }
+//     int label=new_label();
+//      if (p -> m_attribute.m_lattice_elem != TOP) {
+//          fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
+//          return;
+//      }
+    int lbl=new_label();
       p -> visit_children(this);
       fprintf( m_outputfile, "popl %%ebx\n");
       fprintf( m_outputfile, "popl %%eax\n");
       fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
-      fprintf(m_outputfile, "je ");
+      fprintf(m_outputfile, "je equal$d\n", lbl);
+      
+      fprintf(m_outputfile, "pushl $0\n");
+      fprintf(m_outputfile, "jmp end$d\n", lbl);
+      
+      fprintf(m_outputfile, "equal$d:\n", lbl);
+      fprintf(m_outputfile, "pushl $1\n");
+      
+      fprintf(m_outputfile, "end$d:\n", lbl);
+      
       
       
   }
@@ -424,9 +434,16 @@ public:
       fprintf( m_outputfile, "popl %%ebx\n");
       fprintf( m_outputfile, "popl %%eax\n");
       fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
-      fprintf(m_outputfile, "jne ");
-//      fprintf( m_outputfile, " pushl %$eax\n");
-//      fprintf( m_outputfile, "notEqual_%s:\n");
+      int lbl=new_label();
+      fprintf(m_outputfile, "jne equal$d\n", lbl);
+      
+      fprintf(m_outputfile, "pushl $0\n");
+      fprintf(m_outputfile, "jmp end$d\n", lbl);
+      
+      fprintf(m_outputfile, "equal$d:\n", lbl);
+      fprintf(m_outputfile, "pushl $1\n");
+      
+      fprintf(m_outputfile, "end$d:\n", lbl);
   }
   void visitGt(Gt * p)
   {
@@ -438,10 +455,16 @@ public:
           return;
       }
       p -> visit_children(this);
-      fprintf( m_outputfile, "popl %%ebx\n");
-      fprintf( m_outputfile, "popl %%eax\n");
-      fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
-      fprintf(m_outputfile, "jg ");
+      int lbl=new_label();
+      fprintf(m_outputfile, "jne equal$d\n", lbl);
+      
+      fprintf(m_outputfile, "pushl $0\n");
+      fprintf(m_outputfile, "jg end$d\n", lbl);
+      
+      fprintf(m_outputfile, "equal$d:\n", lbl);
+      fprintf(m_outputfile, "pushl $1\n");
+      
+      fprintf(m_outputfile, "end$d:\n", lbl);
 
   }
   void visitGteq(Gteq * p)
@@ -453,10 +476,17 @@ public:
           return;
       }
       p -> visit_children(this);
-      fprintf( m_outputfile, "popl %%ebx\n");
-      fprintf( m_outputfile, "popl %%eax\n");
-      fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
-      fprintf(m_outputfile, "jge ");
+   int lbl=new_label();
+      fprintf(m_outputfile, "jne equal$d\n", lbl);
+      
+      fprintf(m_outputfile, "pushl $0\n");
+      fprintf(m_outputfile, "jge end$d\n", lbl);
+      
+      fprintf(m_outputfile, "equal$d:\n", lbl);
+      fprintf(m_outputfile, "pushl $1\n");
+      
+      fprintf(m_outputfile, "end$d:\n", lbl);
+
   }
   void visitLt(Lt * p)
   {
@@ -467,10 +497,17 @@ public:
           return;
       }
       p -> visit_children(this);
-      fprintf( m_outputfile, "popl %%ebx\n");
-      fprintf( m_outputfile, "popl %%eax\n");
-      fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
-      fprintf(m_outputfile, "jlt ");
+      int lbl=new_label();
+      fprintf(m_outputfile, "jne equal$d\n", lbl);
+      
+      fprintf(m_outputfile, "pushl $0\n");
+      fprintf(m_outputfile, "jlt end$d\n", lbl);
+      
+      fprintf(m_outputfile, "equal$d:\n", lbl);
+      fprintf(m_outputfile, "pushl $1\n");
+      
+      fprintf(m_outputfile, "end$d:\n", lbl);
+
   }
   void visitLteq(Lteq * p)
   {
@@ -481,11 +518,17 @@ public:
           return;
       }
       p -> visit_children(this);
-      fprintf( m_outputfile, "popl %%ebx\n");
-      fprintf( m_outputfile, "popl %%eax\n");
-      fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
-      fprintf(m_outputfile, "jle ");
+ int lbl=new_label();
+      fprintf(m_outputfile, "jne equal$d\n", lbl);
       
+      fprintf(m_outputfile, "pushl $0\n");
+      fprintf(m_outputfile, "jle end$d\n", lbl);
+      
+      fprintf(m_outputfile, "equal$d:\n", lbl);
+      fprintf(m_outputfile, "pushl $1\n");
+      
+      fprintf(m_outputfile, "end$d:\n", lbl);
+
   }
 
   // arithmetic and logic operations

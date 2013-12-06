@@ -1,6 +1,6 @@
 
-function Main() : int {
-    var a:int;
-    a=|-5+-10|;
-    return a;
+function Main() : bool {
+    var b: bool;
+    b=false || false;
+    return b;
 }
