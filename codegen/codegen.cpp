@@ -168,7 +168,7 @@ public:
         fprintf(m_outputfile, "mov %%esp, %%ebp\n");
         //sub esp, 4   ; Make room for one 4-byte local variable.
         fprintf(m_outputfile,"sub $%i,%%esp\n",m_st->scopesize(p->m_function_block->m_attribute.m_scope));
-        fprintf(m_outputfile, "pop %%ebx\n");
+//        fprintf(m_outputfile, "pop %%ebx\n");
 //        list<Param_ptr>::iterator iter;
 //        for (iter = p->m_param_list->begin(); iter != p->m_param_list->end(); iter++) {
 //            Symbol *s=m_st->lookup((*iter)->m_attribute.m_scope,strdup((*iter)->m_symname->spelling()));
@@ -176,7 +176,7 @@ public:
 //            fprintf(m_outputfile, "popl %%eax\n");
 //            fprintf(m_outputfile, "mov %%eax, -%d(%%ebp)\n", offset);
 //        }
-        fprintf(m_outputfile, "push %%ebx\n");
+//        fprintf(m_outputfile, "push %%ebx\n");
         p->visit_children(this);
         //epilogue
         fprintf(m_outputfile, "mov %%ebp, %%esp \n");
@@ -377,7 +377,8 @@ public:
       p->visit_children(this);
             Symbol *s=m_st->lookup(p->m_attribute.m_scope,strdup(p->m_symname->spelling()));
             int offset=4+s->get_offset();
-            fprintf(m_outputfile, "popl %%eax\n");
+            int offset2=8+s->get_offset();
+            fprintf(m_outputfile, "mov %d(%%ebp), %%eax\n",offset2);
             fprintf(m_outputfile, "mov %%eax, -%d(%%ebp)\n", offset);
   }
   

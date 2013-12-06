@@ -1,5 +1,9 @@
+function foo(a:int,b:int):int{
+    return a+b;
+}
+
 function Main() : int {
-    var a : intarray[100];
-    a[1]=10;
-    return a[1];
+    var a:int;
+    a=foo(100,111);
+    return a;
 }
