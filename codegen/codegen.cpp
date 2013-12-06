@@ -333,23 +333,11 @@ public:
     p->m_stat_2->accept(this);
     fprintf( m_outputfile, "compare_expr%i:\n",label);
     p->m_expr->accept(this);
-//    if(p->m_expr->m_attribute.m_lattice_elem != TOP){
-//        if(p->m_expr->m_attribute.m_lattice_elem.value == 1){
-            
-            fprintf( m_outputfile, "func_body%i\n",label);
-//        }
-        
-//    }
+    fprintf( m_outputfile, "pop %%ebx\n");
+    fprintf( m_outputfile, "mov $1, %%eax\n");
+    fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
+    fprintf( m_outputfile, "je func_body%i\n",label);
     
-      
-    // WRITEME
-    
-//    fprintf( m_outputfile, "popl %%eax\n");
-//    fprintf( m_outputfile, "movl $0, %%ebx\n");
-//    fprintf( m_outputfile, "cmp %%eax, %%ebx\n");
-//    fprintf( m_outputfile, "je skip_if_%i\n",label);
-//    p->m_nested_block->visit_children(this);
-//    fprintf( m_outputfile, "skip_if_%i:",label);
      fprintf( m_outputfile, "#### END FOR LOOP\n");
   }
 
@@ -408,15 +396,15 @@ public:
       fprintf( m_outputfile, "popl %%ebx\n");
       fprintf( m_outputfile, "popl %%eax\n");
       fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
-      fprintf(m_outputfile, "je equal$d\n", lbl);
+      fprintf(m_outputfile, "je equal%d\n", lbl);
       
       fprintf(m_outputfile, "pushl $0\n");
-      fprintf(m_outputfile, "jmp end$d\n", lbl);
+      fprintf(m_outputfile, "jmp end%d\n", lbl);
       
-      fprintf(m_outputfile, "equal$d:\n", lbl);
+      fprintf(m_outputfile, "equal%d:\n", lbl);
       fprintf(m_outputfile, "pushl $1\n");
       
-      fprintf(m_outputfile, "end$d:\n", lbl);
+      fprintf(m_outputfile, "end%d:\n", lbl);
       
       
       
@@ -424,111 +412,122 @@ public:
   void visitNoteq(Noteq * p)
   {
     // WRITEME
-      fprintf( m_outputfile, "#### NOTEQ !=\n");
-      int label=new_label();
-      if (p -> m_attribute.m_lattice_elem != TOP) {
-          fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
-          return;
-      }
+//      fprintf( m_outputfile, "#### NOTEQ !=\n");
+//      int label=new_label();
+//      if (p -> m_attribute.m_lattice_elem != TOP) {
+//          fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
+//          return;
+//      }
       p -> visit_children(this);
       fprintf( m_outputfile, "popl %%ebx\n");
       fprintf( m_outputfile, "popl %%eax\n");
       fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
       int lbl=new_label();
-      fprintf(m_outputfile, "jne equal$d\n", lbl);
+      fprintf(m_outputfile, "jne equal%d\n", lbl);
       
-      fprintf(m_outputfile, "pushl $0\n");
-      fprintf(m_outputfile, "jmp end$d\n", lbl);
+    fprintf(m_outputfile, "pushl $0\n");
+      fprintf(m_outputfile, "jmp end%d\n", lbl);
       
-      fprintf(m_outputfile, "equal$d:\n", lbl);
+      fprintf(m_outputfile, "equal%d:\n", lbl);
       fprintf(m_outputfile, "pushl $1\n");
       
-      fprintf(m_outputfile, "end$d:\n", lbl);
+      fprintf(m_outputfile, "end%d:\n", lbl);
   }
   void visitGt(Gt * p)
   {
     // WRITEME
-     fprintf( m_outputfile, "#### GREATER Than\n");
-      int label=new_label();
-      if (p -> m_attribute.m_lattice_elem != TOP) {
-          fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
-          return;
-      }
+//     fprintf( m_outputfile, "#### GREATER Than\n");
+//      int label=new_label();
+//      if (p -> m_attribute.m_lattice_elem != TOP) {
+//          fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
+//          return;
+//      }
       p -> visit_children(this);
       int lbl=new_label();
-      fprintf(m_outputfile, "jne equal$d\n", lbl);
+       fprintf( m_outputfile, "popl %%ebx\n");
+      fprintf( m_outputfile, "popl %%eax\n");
+      fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
+      fprintf(m_outputfile, "jne equal%d\n", lbl);
       
-      fprintf(m_outputfile, "pushl $0\n");
-      fprintf(m_outputfile, "jg end$d\n", lbl);
+     fprintf(m_outputfile, "pushl $0\n");
+      fprintf(m_outputfile, "jmp end%d\n", lbl);
       
-      fprintf(m_outputfile, "equal$d:\n", lbl);
+      fprintf(m_outputfile, "equal%d:\n", lbl);
       fprintf(m_outputfile, "pushl $1\n");
       
-      fprintf(m_outputfile, "end$d:\n", lbl);
+      fprintf(m_outputfile, "end%d:\n", lbl);
 
   }
   void visitGteq(Gteq * p)
   {
     // WRITEME
-                  int label=new_label();
-      if (p -> m_attribute.m_lattice_elem != TOP) {
-          fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
-          return;
-      }
+//                  int label=new_label();
+//      if (p -> m_attribute.m_lattice_elem != TOP) {
+//          fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
+//          return;
+//      }
       p -> visit_children(this);
    int lbl=new_label();
-      fprintf(m_outputfile, "jne equal$d\n", lbl);
+    fprintf( m_outputfile, "popl %%ebx\n");
+      fprintf( m_outputfile, "popl %%eax\n");
+      fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
+      fprintf(m_outputfile, "jne equal%d\n", lbl);
       
       fprintf(m_outputfile, "pushl $0\n");
-      fprintf(m_outputfile, "jge end$d\n", lbl);
+      fprintf(m_outputfile, "jmp end%d\n", lbl);
       
-      fprintf(m_outputfile, "equal$d:\n", lbl);
+      fprintf(m_outputfile, "equal%d:\n", lbl);
       fprintf(m_outputfile, "pushl $1\n");
       
-      fprintf(m_outputfile, "end$d:\n", lbl);
+      fprintf(m_outputfile, "end%d:\n", lbl);
 
   }
   void visitLt(Lt * p)
   {
     // WRITEME
-             int label=new_label();
-      if (p -> m_attribute.m_lattice_elem != TOP) {
-          fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
-          return;
-      }
+//             int label=new_label();
+//      if (p -> m_attribute.m_lattice_elem != TOP) {
+//          fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
+//          return;
+//      }
       p -> visit_children(this);
       int lbl=new_label();
-      fprintf(m_outputfile, "jne equal$d\n", lbl);
+       fprintf( m_outputfile, "popl %%ebx\n");
+      fprintf( m_outputfile, "popl %%eax\n");
+      fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
+      fprintf(m_outputfile, "jl equal%d\n", lbl);
       
-      fprintf(m_outputfile, "pushl $0\n");
-      fprintf(m_outputfile, "jlt end$d\n", lbl);
+     fprintf(m_outputfile, "pushl $0\n");
+      fprintf(m_outputfile, "jmp end%d\n", lbl);
       
-      fprintf(m_outputfile, "equal$d:\n", lbl);
+      fprintf(m_outputfile, "equal%d:\n", lbl);
       fprintf(m_outputfile, "pushl $1\n");
       
-      fprintf(m_outputfile, "end$d:\n", lbl);
+      fprintf(m_outputfile, "end%d:\n", lbl);
 
   }
   void visitLteq(Lteq * p)
   {
     // WRITEME
-                  int label=new_label();
-      if (p -> m_attribute.m_lattice_elem != TOP) {
-          fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
-          return;
-      }
+//                  int label=new_label();
+//      if (p -> m_attribute.m_lattice_elem != TOP) {
+//          fprintf( m_outputfile, " pushl $%d\n", p->m_attribute.m_lattice_elem.value);
+//          return;
+//      }
       p -> visit_children(this);
  int lbl=new_label();
-      fprintf(m_outputfile, "jne equal$d\n", lbl);
+      fprintf( m_outputfile, "popl %%ebx\n");
+      fprintf( m_outputfile, "popl %%eax\n");
+      fprintf( m_outputfile, "cmp %%ebx,%%eax\n");
+      fprintf(m_outputfile, "jle equal%d\n", lbl);
       
-      fprintf(m_outputfile, "pushl $0\n");
-      fprintf(m_outputfile, "jle end$d\n", lbl);
+     fprintf(m_outputfile, "pushl $0\n");
+      fprintf(m_outputfile, "jmp end%d\n", lbl);
       
-      fprintf(m_outputfile, "equal$d:\n", lbl);
+      fprintf(m_outputfile, "equal%d:\n", lbl);
       fprintf(m_outputfile, "pushl $1\n");
       
-      fprintf(m_outputfile, "end$d:\n", lbl);
-
+      fprintf(m_outputfile, "end%d:\n", lbl);
   }
 
   // arithmetic and logic operations

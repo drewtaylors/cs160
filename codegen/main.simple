@@ -1,6 +1,9 @@
 
-function Main() : bool {
-    var b: bool;
-    b=false || false;
+function Main() : int {
+    var a,b: int;
+    b=5;
+    for( a=0;(a<10)a=a+1;){
+        b=b+1;
+    }
     return b;
 }
